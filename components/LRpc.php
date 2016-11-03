@@ -8,17 +8,21 @@
 
 namespace app\components;
 
+use app\consts\ErrorCode;
+use app\exception\RequestException;
+use app\exception\RpcException;
+use Yii;
 
-class LCurl
+class LRpc
 {
     private $post;
     private $retry = 0;
     private $custom = array();
     private $option = array(
-        'CURLOPT_HEADER'         => 0,
-        'CURLOPT_TIMEOUT'        => 30,
-        'CURLOPT_ENCODING'       => '',
-        'CURLOPT_IPRESOLVE'      => 1,
+        'CURLOPT_HEADER' => 0,
+        'CURLOPT_TIMEOUT' => 30,
+        'CURLOPT_ENCODING' => '',
+        'CURLOPT_IPRESOLVE' => 1,
         'CURLOPT_RETURNTRANSFER' => true,
         'CURLOPT_SSL_VERIFYPEER' => false,
         'CURLOPT_CONNECTTIMEOUT' => 10,
@@ -28,12 +32,13 @@ class LCurl
     private $data;
     private $error;
     private $message;
+    private $result;
 
     private static $instance;
 
     /**
      * Instance
-     * @return self
+     * @return LRpc
      */
     public static function init()
     {
@@ -43,45 +48,11 @@ class LCurl
         return self::$instance;
     }
 
-    /**
-     * Task info
-     *
-     * @return array
-     */
-    public function info()
+    public function result()
     {
-        return $this->info;
+        return $this->result;
     }
 
-    /**
-     * Result Data
-     *
-     * @return string
-     */
-    public function data()
-    {
-        return $this->data;
-    }
-
-    /**
-     * Error status
-     *
-     * @return boolean
-     */
-    public function error()
-    {
-        return $this->error;
-    }
-
-    /**
-     * Error message
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return $this->message;
-    }
 
     /**
      * Set POST data
@@ -152,12 +123,8 @@ class LCurl
      */
     public function url($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
-            return $this->set('CURLOPT_URL', $url)->process();
-        } else {
-            $this->error = true;
-            $this->message = 'Target URL is required.';
-        }
+        $url = RPCURL . $url;
+        return $this->set('CURLOPT_URL', $url)->process();
     }
 
     /**
@@ -210,7 +177,7 @@ class LCurl
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $this->build_array($this->post));
         }
-
+        Yii::info('RPC: url| params|');
         $this->data = (string)curl_exec($ch);
         $this->info = curl_getinfo($ch);
         $this->error = curl_errno($ch) > 0;
@@ -221,6 +188,8 @@ class LCurl
         if ($this->error && $retry < $this->retry) {
             $this->process($retry + 1);
         }
+
+        $this->processResult();
 
         $this->post = array();
         $this->retry = 0;
@@ -249,5 +218,25 @@ class LCurl
             return $output;
         }
         return $input;
+    }
+
+    private function processResult()
+    {
+        if ($this->error) {
+            Yii::error($this->message);
+            throw new RpcException($this->message, ErrorCode::SYSTEM_ERROR);
+        } else {
+            $res = json_decode($this->data);
+            if ($res['ret'] == 1) {
+                $this->result = $res['data'];
+            } else {
+                if ($res['data']['code'] >= ErrorCode::ACTION_ERROR) {
+                    Yii::error('RPC_ERR: ' . $res['data']['msg']);
+                } else {
+
+                }
+                throw new RpcException('', ErrorCode::ACTION_ERROR);
+            }
+        }
     }
 }
