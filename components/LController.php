@@ -15,6 +15,7 @@ class LController extends Controller
 {
     protected $params;
     protected $response_status;
+    protected $error_msg;
     public $layout = 'admin';
 
     public function init()
@@ -29,14 +30,13 @@ class LController extends Controller
     /**
      * ajax错误信息
      *
-     * @param $msg
      * @param $redirect
      * @return mixed
      */
-    public function error($msg = '', $redirect = '')
+    public function error($redirect = '')
     {
-        $this->response_status = 1;
-        return $this->output($msg, $redirect);
+        $this->response_status = 0;
+        return $this->output($this->error_msg, $redirect);
     }
 
     /**
@@ -56,14 +56,23 @@ class LController extends Controller
     {
         header("Content-type:application/json;charset=utf-8");
         $res = ['status' => $this->response_status];
-        if (empty($msg)) {
+        if (!empty($msg)) {
             $res['msg'] = $msg;
         }
-        if (empty($msg)) {
+        if (!empty($redirect)) {
             $res['redirect'] = $redirect;
         }
         return json_encode($res, JSON_UNESCAPED_UNICODE);
     }
 
+    protected function hasError($res)
+    {
+        if ($res['code']) {
+            $this->error_msg = $res['msg'];
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

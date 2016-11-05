@@ -9,6 +9,7 @@
 namespace app\components;
 
 use app\consts\ErrorCode;
+use app\consts\MsgConst;
 use app\exception\RequestException;
 use app\exception\RpcException;
 use Yii;
@@ -19,10 +20,10 @@ class LRpc
     private $retry = 0;
     private $custom = array();
     private $option = array(
-        'CURLOPT_HEADER' => 0,
-        'CURLOPT_TIMEOUT' => 30,
-        'CURLOPT_ENCODING' => '',
-        'CURLOPT_IPRESOLVE' => 1,
+        'CURLOPT_HEADER'         => 0,
+        'CURLOPT_TIMEOUT'        => 30,
+        'CURLOPT_ENCODING'       => '',
+        'CURLOPT_IPRESOLVE'      => 1,
         'CURLOPT_RETURNTRANSFER' => true,
         'CURLOPT_SSL_VERIFYPEER' => false,
         'CURLOPT_CONNECTTIMEOUT' => 10,
@@ -30,9 +31,10 @@ class LRpc
 
     private $info;
     private $data;
-    private $error;
-    private $message;
+    private $has_error;
+    private $error_message;
     private $result;
+    private $url;
 
     private static $instance;
 
@@ -97,11 +99,11 @@ class LRpc
      */
     public function save($path)
     {
-        if (!$this->error) {
+        if (!$this->has_error) {
             $fp = @fopen($path, 'w');
             if ($fp === false) {
-                $this->error = true;
-                $this->message = "The path {$path} is not writable.";
+                $this->has_error = true;
+                $this->error_message = "The path {$path} is not writable.";
             } else {
                 fwrite($fp, $this->data);
                 fclose($fp);
@@ -117,8 +119,8 @@ class LRpc
      */
     public function url($url)
     {
-        $url = RPC_URL . $url;
-        return $this->set('CURLOPT_URL', $url)->process();
+        $this->url = RPC_URL . $url;
+        return $this->set('CURLOPT_URL', $this->url)->process();
     }
 
     /**
@@ -171,15 +173,17 @@ class LRpc
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $this->build_array($this->post));
         }
-        Yii::info('RPC: url| params|');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers = array('Content-Type:application/json;charset=UTF-8', 'User-Agent:' . USER_AGENT));
+
+        Yii::info(sprintf('RPC: 【url】| %s ; 【params】| %s ', $this->url, json_encode($this->post)));
         $this->data = (string)curl_exec($ch);
         $this->info = curl_getinfo($ch);
-        $this->error = curl_errno($ch) > 0;
-        $this->message = $this->error ? curl_error($ch) : '';
+        $this->has_error = curl_errno($ch) > 0;
+        $this->error_message = $this->has_error ? curl_error($ch) : '';
 
         curl_close($ch);
 
-        if ($this->error && $retry < $this->retry) {
+        if ($this->has_error && $retry < $this->retry) {
             $this->process($retry + 1);
         }
 
@@ -188,7 +192,7 @@ class LRpc
         $this->post = array();
         $this->retry = 0;
 
-        return $this;
+        return $this->result;
     }
 
     /**
@@ -216,21 +220,23 @@ class LRpc
 
     private function processResult()
     {
-        if ($this->error) {
-            Yii::error($this->message);
-            throw new RpcException($this->message, ErrorCode::SYSTEM_ERROR);
+        if ($this->has_error) {
+            $this->rpcErrorLog($this->error_message);
+            $this->result = ['code' => ErrorCode::SYSTEM_ERROR, 'msg' => MsgConst::FAILED_MSG];
         } else {
             $res = json_decode($this->data);
-            if ($res['ret'] == 1) {
-                $this->result = $res['data'];
-            } else {
-                if ($res['data']['code'] >= ErrorCode::ACTION_ERROR) {
-                    Yii::error('RPC_ERR: ' . $res['data']['msg']);
-                } else {
-
-                }
-                throw new RpcException('', ErrorCode::ACTION_ERROR);
+            $this->result = $res['data'];
+            if ($res['ret'] == 0 && $res['data']['code'] < ErrorCode::ACTION_ERROR) {
+                $this->rpcErrorLog($res['data']['msg']);
+                $this->result = ['code' => ErrorCode::SYSTEM_ERROR, 'msg' => MsgConst::FAILED_MSG];
             }
         }
+    }
+
+    private function rpcErrorLog($msg)
+    {
+        $error_msg = sprintf('【RPC_ERR】: msg | %s ; url | %s ; params | %s ',
+            $msg, $this->url, json_encode($this->post, JSON_UNESCAPED_UNICODE));
+        Yii::error($error_msg);
     }
 }

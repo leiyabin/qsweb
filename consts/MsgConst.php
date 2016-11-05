@@ -10,6 +10,5 @@ namespace app\consts;
 
 class MsgConst
 {
-    const DO_SUCCESS = '操作成功！';
-    const DO_FAILED = '操作失败！';
+    const FAILED_MSG = '系统错误，请联系客服！';
 }

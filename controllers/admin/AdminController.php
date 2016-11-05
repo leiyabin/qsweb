@@ -28,12 +28,16 @@ class AdminController extends LController
     public function actionIndex()
     {
         $list = $this->admin_manager->getList();
-        $pages = new Pagination(['totalCount' => $list['total'], 'defaultPageSize' => $list['per_page']]);
-        $list = $list['admin'];
-        return $this->render('index', [
-            'list'  => &$list,
-            'pages' => $pages
-        ]);
+        if ($this->hasError($list)) {
+            return $this->error();
+        } else {
+            $pages = new Pagination(['totalCount' => $list['total'], 'defaultPageSize' => $list['per_page']]);
+            $list = $list['admin'];
+            return $this->render('index', [
+                'list'  => &$list,
+                'pages' => $pages
+            ]);
+        }
     }
 
     //添加
