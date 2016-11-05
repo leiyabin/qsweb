@@ -1,17 +1,17 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?= Html::csrfMetaTags() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>登录</title>
-    <link href="<?=Url::to('/static/admin/css/style.default.css');?>" rel="stylesheet">
+    <link href="<?= Url::to('/static/admin/css/style.default.css'); ?>" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="<?=Url::to('/static/admin/js/html5shiv.js');?>"></script>
@@ -48,13 +48,13 @@ use yii\helpers\Html;
             </div><!-- col-sm-7 -->
 
             <div class="col-md-5">
-                <?=Html::beginForm('','post',['id'=>'form1']);?>
-                    <h4 class="nomargin">用户登录</h4>
-                    <p class="mt5 mb20 text-danger" id="message"></p>
-                    <input type="text" class="form-control uname" name="username" placeholder="用户名" />
-                    <input type="password" class="form-control pword" name="password" placeholder="密码" />
-                    <button type="submit" class="btn btn-success btn-block">登 录</button>
-                <?=Html::endForm();?>
+                <?= Html::beginForm('', 'post', ['id' => 'form1']); ?>
+                <h4 class="nomargin">用户登录</h4>
+                <p class="mt5 mb20 text-danger" id="message"></p>
+                <input type="text" class="form-control uname" name="username" placeholder="用户名"/>
+                <input type="password" class="form-control pword" name="password" placeholder="密码"/>
+                <button type="submit" class="btn btn-success btn-block">登 录</button>
+                <?= Html::endForm(); ?>
             </div><!-- col-sm-5 -->
 
         </div><!-- row -->
@@ -64,7 +64,7 @@ use yii\helpers\Html;
                 &copy; 2016. All Rights Reserved.
             </div>
             <div class="pull-right">
-                Created By: <a href="http://www.woyoo.com/" target="_blank">南京沃游</a>
+                Created By: <a>雷尔工作室</a>
             </div>
         </div>
 
@@ -72,39 +72,38 @@ use yii\helpers\Html;
 
 </section>
 
-<script src="<?=Url::to('/static/admin/js/jquery-1.10.2.min.js');?>"></script>
-<script src="<?=Url::to('/static/admin/js/jquery-migrate-1.2.1.min.js');?>"></script>
-<script src="<?=Url::to('/static/admin/js/bootstrap.min.js');?>"></script>
-<script src="<?=Url::to('/static/admin/js/modernizr.min.js');?>"></script>
-<script src="<?=Url::to('/static/admin/js/retina.min.js');?>"></script>
+<script src="<?= Url::to('/static/admin/js/jquery-1.10.2.min.js'); ?>"></script>
+<script src="<?= Url::to('/static/admin/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
+<script src="<?= Url::to('/static/admin/js/bootstrap.min.js'); ?>"></script>
+<script src="<?= Url::to('/static/admin/js/modernizr.min.js'); ?>"></script>
+<script src="<?= Url::to('/static/admin/js/retina.min.js'); ?>"></script>
 
 <script>
-    jQuery(window).load(function() {
+    jQuery(window).load(function () {
         // Page Preloader
         jQuery('#status').fadeOut();
-        jQuery('#preloader').delay(350).fadeOut(function(){
-            jQuery('body').delay(350).css({'overflow':'visible'});
+        jQuery('#preloader').delay(350).fadeOut(function () {
+            jQuery('body').delay(350).css({'overflow': 'visible'});
         });
     });
     //submit form
-    $("#form1").submit(function(){
+    $("#form1").submit(function () {
         var formdata = $(this).serialize();
         var url = $(this).attr('action') || '';
         var method = $(this).attr('method') || 'get';
         $.ajax({
-            url:url,
-            method:method,
-            dataType:'json',
-            data:formdata,
-            error:function(){
+            url: url,
+            method: method,
+            dataType: 'json',
+            data: formdata,
+            error: function () {
                 alert("请求失败,请重试")
             },
-            success:function(res){
+            success: function (res) {
                 if (typeof res == 'object') {
                     if (!res.status && res.error) {
                         $("#message").html(res.error);
                     } else {
-//                        console.log(res);
                         var redirect = res.redirect || '/';
                         window.location.href = redirect;
                     }
@@ -112,7 +111,7 @@ use yii\helpers\Html;
                     alert(res);
                 }
             }
-        })
+        });
         return false;
     })
 </script>

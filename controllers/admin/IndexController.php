@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers\admin;
 
+use app\components\LController;
 use Yii;
 
 /**
@@ -8,7 +9,7 @@ use Yii;
  * @author keepeye <carlton.cheng@foxmail>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
-class IndexController extends ControllerBase
+class IndexController extends LController
 {
     public function behaviors()
     {

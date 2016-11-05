@@ -48,12 +48,6 @@ class LRpc
         return self::$instance;
     }
 
-    public function result()
-    {
-        return $this->result;
-    }
-
-
     /**
      * Set POST data
      * @param array|string $data
@@ -123,7 +117,7 @@ class LRpc
      */
     public function url($url)
     {
-        $url = RPCURL . $url;
+        $url = RPC_URL . $url;
         return $this->set('CURLOPT_URL', $url)->process();
     }
 

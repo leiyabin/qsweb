@@ -13,7 +13,7 @@ use yii\base\UserException;
 
 class RequestException extends UserException
 {
-    public function __construct($message, $code)
+    public function __construct($message, $code = 0)
     {
         parent::__construct($message, $code);
     }

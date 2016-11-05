@@ -1,5 +1,7 @@
 <?php
 
+require(__DIR__ . '/define.php');
+
 $params = require(__DIR__ . '/params.php');
 
 $config = [
@@ -45,7 +47,7 @@ $config = [
             'targets'    => [
                 [
                     'class'  => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'info'],
                 ],
             ],
         ],

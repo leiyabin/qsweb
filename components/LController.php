@@ -8,16 +8,14 @@
 
 namespace app\components;
 
-
-use app\consts\ErrorCode;
-use app\consts\MsgConst;
 use yii\web\Controller;
 use Yii;
-use app\components\Utils;
 
 class LController extends Controller
 {
     protected $params;
+    protected $response_status;
+    public $layout = 'admin';
 
     public function init()
     {
@@ -32,49 +30,40 @@ class LController extends Controller
      * ajax错误信息
      *
      * @param $msg
-     * @param $code
+     * @param $redirect
      * @return mixed
      */
-    public function error($msg = MsgConst::DO_FAILED, $code = ErrorCode::SYSTEM_ERROR)
+    public function error($msg = '', $redirect = '')
     {
-        header("Content-type:application/json;charset=utf-8");
-        $res = [
-            'ret'  => 0,
-            'data' => [
-                'code' => $code,
-                'msg'  => $msg
-            ]
-        ];
-        return json_encode($res, JSON_UNESCAPED_UNICODE);
+        $this->response_status = 1;
+        return $this->output($msg, $redirect);
     }
 
     /**
      * ajax成功信息
      *
-     * @param mixed $data
+     * @param mixed $msg
+     * @param mixed $redirect
      * @return mixed
      */
-    public function success($data = MsgConst::DO_SUCCESS)
+    public function success($msg = '', $redirect = '')
+    {
+        $this->response_status = 1;
+        return $this->output($msg, $redirect);
+    }
+
+    public function output($msg = '', $redirect = '')
     {
         header("Content-type:application/json;charset=utf-8");
-        $res = ['ret' => 1, 'data' => $data];
+        $res = ['status' => $this->response_status];
+        if (empty($msg)) {
+            $res['msg'] = $msg;
+        }
+        if (empty($msg)) {
+            $res['redirect'] = $redirect;
+        }
         return json_encode($res, JSON_UNESCAPED_UNICODE);
     }
 
-    public function renderPage($data, $page_info)
-    {
-        $data['total_pages'] = empty($data['total']) ? 0 : ceil($data['total'] / $page_info['per_page']);
-        $data['per_page'] = $page_info['per_page'];
-        $data['page'] = $page_info['page'];
-        return $this->success($data);
-    }
 
-    public function pageInfo()
-    {
-        $info['per_page'] = max(1, (int)Utils::getDefault($this->params, 'per_page', 20));
-        $info['page'] = max(1, (int)Utils::getDefault($this->params, 'page', 1));
-        $info['offset'] = ($info['page'] - 1) * $info['per_page'];
-        $info['limit'] = $info['per_page'];
-        return $info;
-    }
 }

@@ -1,2 +1,4 @@
 <?php
-define('RPCURL', 'http://qsapi.lyb.com/api');
+
+define('RPC_URL', 'http://qsapi.com/api');
+define('USER_AGENT', 'qsmanager');

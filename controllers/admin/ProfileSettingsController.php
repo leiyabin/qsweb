@@ -7,9 +7,10 @@
 
 namespace app\controllers\admin;
 
+use app\components\LController;
 use Yii;
 
-class ProfileSettingsController extends ControllerBase
+class ProfileSettingsController extends LController
 {
     public function behaviors()
     {

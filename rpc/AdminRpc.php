@@ -16,7 +16,7 @@ class AdminRpc extends LRpc
     public function getList()
     {
         $params = [
-            'page' => 1,
+            'page'     => 1,
             'per_page' => 999,
         ];
         return LRpc::init()->post($params)->url('/admin/list');
@@ -25,19 +25,19 @@ class AdminRpc extends LRpc
     public function add($admin)
     {
         $params = $admin;
-        LRpc::init()->post($params)->url('/admin/add');
+        return LRpc::init()->post($params)->url('/admin/add');
     }
 
     public function edit($admin)
     {
         $params = $admin;
-        LRpc::init()->post($params)->url('/admin/edit');
+        return LRpc::init()->post($params)->url('/admin/edit');
     }
 
     public function del($id)
     {
         $params = ['id' => $id];
-        LRpc::init()->post($params)->url('/admin/del');
+        return LRpc::init()->post($params)->url('/admin/del');
     }
 
     public function getOne($id)
