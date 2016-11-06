@@ -5,27 +5,29 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 use yii\helpers\Url;
+
 ?>
 
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
-<div class="pageheader">
-    <h2><i class="fa fa-home"></i> 系统用户管理 <span>用户列表</span></h2>
+<div class="pageheader" style="height: 50px;padding-top: 10px">
+    <h2><span style="font-style: normal">系统用户管理</span>
+        <span style="font-style: normal">用户列表</span></h2>
 </div>
 <?php $this->endBlock(); ?>
 
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
     //全选
-    $("#selectAll").click(function(){
-        $("input[name='ids[]']").prop('checked',$(this).prop('checked'));
+    $("#selectAll").click(function () {
+        $("input[name='ids[]']").prop('checked', $(this).prop('checked'));
     });
     //批量删除
-    $("#batchDel").click(function(){
+    $("#batchDel").click(function () {
         var ids = [];
-        $("input[name='ids[]']:checked").each(function(){
+        $("input[name='ids[]']:checked").each(function () {
             ids.push($(this).val());
         });
-        if (!window.confirm('确定要删除id为['+ids+']的这些用户吗?')) {
+        if (!window.confirm('确定要删除id为[' + ids + ']的这些用户吗?')) {
             return false;
         }
         $.ajax({
@@ -47,21 +49,15 @@ use yii\helpers\Url;
                 }
             }
         })
-    })
+    });
+
 </script>
 <?php $this->endBlock(); ?>
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="toolbar">
-            <a href="<?=Url::to(['add']);?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> 新增</a>
-            <div style="display: inline-block;margin-left:15px;">
-                <form class="form-inline" method='get' action="">
-                    <div class="form-group">
-                        <input type="text" name="search[refurl]" class="form-control" value="<?=isset($_GET['search']['refurl'])?$_GET['search']['refurl']:'';?>" placeholder="请输入关键词">
-                    </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
-                </form>
-            </div>
+            <a href="<?= Url::to(['add']); ?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i>
+                新增</a>
         </div>
         <h4>系统用户列表</h4>
     </div>
@@ -80,27 +76,27 @@ use yii\helpers\Url;
             </tr>
             </thead>
             <tbody>
-            <?php foreach($list as $item): ?>
+            <?php foreach ($list as $item): ?>
                 <tr>
-                    <th><input type="checkbox" name="ids[]" value="<?=$item->id;?>"></th>
-                    <th><?=$item->id;?></th>
-                    <th><?=$item->username;?></th>
-                    <th><?=$item->name;?></th>
-                    <th><?=$item->email;?></th>
-                    <th><?=$item->phone;?></th>
-                    <th><?=$item->c_t;?></th>
+                    <th><input type="checkbox" name="ids[]" value="<?= $item->id; ?>"></th>
+                    <th><?= $item->id; ?></th>
+                    <th><?= $item->username; ?></th>
+                    <th><?= $item->name; ?></th>
+                    <th><?= $item->email; ?></th>
+                    <th><?= $item->phone; ?></th>
+                    <th><?= \app\components\Utils::formatDateTime($item->c_t); ?></th>
                     <th>
                     <td class="table-action">
-                        <a href="<?=Url::to(['edit','id'=>$item->id]);?>"><i class="fa fa-pencil"></i></a>
-                        <a href="<?=Url::to(['delete','ids'=>$item->id]);?>" onclick="return confirm('确定删除?')"><i class="fa fa-trash-o"></i></a>
+                        <a href="<?= Url::to(['edit', 'id' => $item->id]); ?>"><i class="fa fa-pencil"></i></a>
+                        <a href=""  onclick=""><i class="fa fa-trash-o"></i></a>
                     </td>
                     </th>
                 </tr>
-            <?php endforeach;?>
+            <?php endforeach; ?>
             </tbody>
         </table>
         <div>
-            <?=\yii\widgets\LinkPager::widget(['pagination' => $pages]);?>
+            <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
         </div>
         <button class="btn btn-primary btn-sm" id="batchDel">批量删除</button>
     </div>

@@ -6,19 +6,22 @@
  */
 use yii\helpers\Url;
 use yii\helpers\Html;
+
 ?>
 
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
-<div class="pageheader">
-    <h2><i class="fa fa-home"></i> 系统用户管理 <span>修改用户</span></h2>
+<div class="pageheader" style="height: 50px;padding-top: 10px">
+    <h2><span style="font-style: normal">系统用户管理</span>
+        <span style="font-style: normal">修改用户</span></h2>
 </div>
+
 <?php $this->endBlock(); ?>
 
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
     $("#_form1").ajaxForm({
-        dataType:'json',
-        success:function(res){
+        dataType: 'json',
+        success: function (res) {
             if (typeof res == 'object') {
                 if (!res.status) {
                     alert(res.message || '表单提交失败,返回数据格式错误')
@@ -35,13 +38,13 @@ use yii\helpers\Html;
 <?php $this->endBlock(); ?>
 
 <div class="panel panel-default">
-    <?=Html::beginForm('','post',['class'=>'form-horizontal form-bordered','id'=>'_form1']);?>
-    <input type="hidden" name="id" value="<?=$model->id;?>">
+    <?= Html::beginForm('', 'post', ['class' => 'form-horizontal form-bordered', 'id' => '_form1']); ?>
+    <input type="hidden" name="id" value="<?= $model->id; ?>">
     <div class="panel-body">
         <div class="form-group">
             <label class="col-sm-3 control-label">用户名</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="username" value="<?=$model->username;?>" required>
+                <input type="text" class="form-control" name="username" value="<?= $model->username; ?>" required>
             </div>
         </div>
         <div class="form-group">
@@ -54,19 +57,19 @@ use yii\helpers\Html;
         <div class="form-group">
             <label class="col-sm-3 control-label">姓名</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="name" value="<?=$model->name;?>" required>
+                <input type="text" class="form-control" name="name" value="<?= $model->name; ?>" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">邮箱</label>
             <div class="col-sm-6">
-                <input type="email" class="form-control" name="email" value="<?=$model->email;?>">
+                <input type="email" class="form-control" name="email" value="<?= $model->email; ?>">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">电话</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="phone" value="<?=$model->phone;?>">
+                <input type="text" class="form-control" name="phone" value="<?= $model->phone; ?>">
             </div>
         </div>
     </div>
@@ -77,5 +80,5 @@ use yii\helpers\Html;
             </div>
         </div>
     </div>
-    <?=Html::endForm();?>
+    <?= Html::endForm(); ?>
 </div>

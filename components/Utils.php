@@ -30,4 +30,29 @@ class Utils
     {
         return mb_strlen($value, 'utf-8');
     }
+
+    public static function formatDateTime($timestamp)
+    {
+        return date('Y-m-d H:i:s', $timestamp);
+    }
+
+    public static function validPhone($phone)
+    {
+        return preg_match('/^1\d{10}$/', $phone);
+    }
+
+    public static function validVal($val, $required, $minLength, $maxLength)
+    {
+        if ($required && empty($val)) {
+            return false;
+        }
+        if (!empty($val) && $minLength && Utils::getLength($val) < $minLength) {
+            return false;
+        }
+        if (!empty($val) && $maxLength && Utils::getLength($val) > $maxLength) {
+            return false;
+        }
+        return true;
+    }
+
 }

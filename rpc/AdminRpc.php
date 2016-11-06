@@ -13,11 +13,11 @@ use app\components\LRpc;
 
 class AdminRpc extends LRpc
 {
-    public function getList()
+    public function getList($page)
     {
         $params = [
-            'page'     => 1,
-            'per_page' => 999,
+            'page'     => intval($page),
+            'per_page' => 20,
         ];
         return LRpc::init()->post($params)->url('/admin/list');
     }

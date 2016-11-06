@@ -15,7 +15,8 @@ class LController extends Controller
 {
     protected $params;
     protected $response_status;
-    protected $error_msg;
+    protected $error_msg = '';
+    protected $default_page = 1;
     public $layout = 'admin';
 
     public function init()
@@ -30,11 +31,13 @@ class LController extends Controller
     /**
      * ajax错误信息
      *
+     * @param $error_msg
      * @param $redirect
      * @return mixed
      */
-    public function error($redirect = '')
+    public function error($error_msg = '', $redirect = '')
     {
+        $this->error_msg .= $error_msg;
         $this->response_status = 0;
         return $this->output($this->error_msg, $redirect);
     }
@@ -67,8 +70,8 @@ class LController extends Controller
 
     protected function hasError($res)
     {
-        if ($res['code']) {
-            $this->error_msg = $res['msg'];
+        if (isset($res->code)) {
+            $this->error_msg .= $res->msg;
             return true;
         } else {
             return false;

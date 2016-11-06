@@ -31,8 +31,8 @@ use yii\helpers\Url;
 
         <div class="leftpanel">
 
-            <div class="logopanel">
-                <h1><span>[</span> 后台管理 <span>]</span></h1>
+            <div class="logopanel" style="text-align: center;height: 50px;line-height: 34px">
+                <span style="font-size: medium">千氏地产网站管理后台</span>
             </div><!-- LOGO -->
 
             <div class="leftpanelinner">
@@ -127,6 +127,7 @@ use yii\helpers\Url;
     <script src="<?= Url::to('/static/admin/js/jquery.cookies.js'); ?>"></script>
     <script src="<?= Url::to('/static/jquery-form/jquery.form.min.js'); ?>"></script>
     <script src="<?= Url::to('/static/admin/js/custom.js'); ?>"></script>
+    <script src="<?= Url::to('/static/admin/js/common.js'); ?>"></script>
 
     <script>
         //菜单状态管理

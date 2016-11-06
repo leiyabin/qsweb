@@ -20,12 +20,13 @@ class LRpc
     private $custom = array();
     private $option = array(
         'CURLOPT_HEADER'         => 0,
-        'CURLOPT_TIMEOUT'        => 30,
+        'CURLOPT_TIMEOUT'        => 5,
         'CURLOPT_ENCODING'       => '',
         'CURLOPT_IPRESOLVE'      => 1,
         'CURLOPT_RETURNTRANSFER' => true,
         'CURLOPT_SSL_VERIFYPEER' => false,
-        'CURLOPT_CONNECTTIMEOUT' => 10,
+        'CURLOPT_CONNECTTIMEOUT' => 3,
+        'CURLOPT_POST'           => true,
     );
     private $post;
     private $info;
@@ -84,7 +85,7 @@ class LRpc
     {
         $name = basename($name);
         if (class_exists('CURLFile')) {
-            $this->set('CURLOPT_SAFE_UPLOAD', true);
+            $this->setOption('CURLOPT_SAFE_UPLOAD', true);
             $file = curl_file_create($path, $type, $name);
         } else {
             $file = "@{$path};type={$type};filename={$name}";
@@ -120,7 +121,7 @@ class LRpc
     public function url($url)
     {
         $this->url = RPC_URL . $url;
-        return $this->set('CURLOPT_URL', $this->url)->process();
+        return $this->setOption('CURLOPT_URL', $this->url)->process();
     }
 
     /**
@@ -129,7 +130,7 @@ class LRpc
      * @param null|string $value
      * @return self
      */
-    public function set($item, $value = null)
+    public function setOption($item, $value = null)
     {
         if (is_array($item)) {
             foreach ($item as $key => $val) {
@@ -150,6 +151,14 @@ class LRpc
     {
         $ch = curl_init();
 
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers = array(
+            'Content-Type:application/json;charset=UTF-8',
+            'User-Agent:' . USER_AGENT
+        ));
+        if ($this->post) {
+            $this->setOption('CURLOPT_POST', true);
+            $this->setOption('CURLOPT_POSTFIELDS', json_encode($this->post, JSON_UNESCAPED_UNICODE));
+        }
         $option = array_merge($this->option, $this->custom);
         foreach ($option as $key => $val) {
             if (is_string($key)) {
@@ -158,18 +167,10 @@ class LRpc
             curl_setopt($ch, $key, $val);
         }
 
-        if ($this->post) {
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $this->build_array($this->post));
-        }
-//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers = array('Content-Type:application/json;charset=UTF-8', 'User-Agent:' . USER_AGENT));
-
-        Yii::info(sprintf('RPC: 【url】| %s ; 【params】| %s ', $this->url, json_encode($this->post)));
+        Yii::info(sprintf('RPC_REQUEST: 【url】| %s ; 【params】| %s ', $this->url, json_encode($this->post, JSON_UNESCAPED_UNICODE)));
         $this->data = (string)curl_exec($ch);
-
         $this->info = curl_getinfo($ch);
         $this->http_code = $this->info['http_code'];
-
         $this->has_error = curl_errno($ch) > 0;
         $this->error_message = curl_error($ch);
 
@@ -178,6 +179,7 @@ class LRpc
         $this->processResult();
 
         $this->post = array();
+        Yii::info(sprintf('RPC_RESPONSE: 【result】 | %s ', json_encode($this->result, JSON_UNESCAPED_UNICODE)));
         return $this->result;
     }
 
@@ -214,10 +216,10 @@ class LRpc
             $this->rpcError($this->error_message);
         } else {
             $res = json_decode($this->data);
-            if ($res['ret'] == 0 && $res['data']['code'] < ErrorCode::ACTION_ERROR) {
-                $this->rpcError($res['data']['msg']);
+            if ($res->ret == 0 && $res->data->code < ErrorCode::ACTION_ERROR) {
+                $this->rpcError($res->data->msg);
             } else {
-                $this->result = $res['data'];
+                $this->result = $res->data;
             }
         }
     }
@@ -227,6 +229,9 @@ class LRpc
         $error_msg = sprintf('【RPC_ERR】: msg | %s ; url | %s ; params | %s ',
             $msg, $this->url, json_encode($this->post, JSON_UNESCAPED_UNICODE));
         Yii::error($error_msg);
-        $this->result = ['code' => ErrorCode::SYSTEM_ERROR, 'msg' => MsgConst::FAILED_MSG];
+        $result = new \stdClass();
+        $result->code = ErrorCode::SYSTEM_ERROR;
+        $result->msg = MsgConst::FAILED_MSG;
+        $this->result = $result;
     }
 }

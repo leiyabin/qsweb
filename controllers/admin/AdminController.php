@@ -8,9 +8,11 @@
 namespace app\controllers\admin;
 
 use app\components\LController;
+use app\components\Utils;
 use Yii;
 use app\manager\AdminManager;
 use yii\data\Pagination;
+use yii\validators\EmailValidator;
 
 class AdminController extends LController
 {
@@ -27,17 +29,19 @@ class AdminController extends LController
 
     public function actionIndex()
     {
-        $list = $this->admin_manager->getList();
-        if ($this->hasError($list)) {
-            return $this->error();
+        $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
+        $res = $this->admin_manager->getList($page);
+        if ($this->hasError($res)) {
+            $list = [];
+            $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => 20]);
         } else {
-            $pages = new Pagination(['totalCount' => $list['total'], 'defaultPageSize' => $list['per_page']]);
-            $list = $list['admin'];
-            return $this->render('index', [
-                'list'  => &$list,
-                'pages' => $pages
-            ]);
+            $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
+            $list = $res->admin;
         }
+        return $this->render('index', [
+            'list'  => $list,
+            'pages' => $pages
+        ]);
     }
 
     //添加
@@ -47,6 +51,22 @@ class AdminController extends LController
         if (!$request->isPost) {
             return $this->render('add');
         } else {
+            if (empty($this->params['username']) || Utils::getLength($this->params['username']) > 20) {
+                return $this->error('请输入不大于20位的用户名！');
+            }
+            if (empty($this->params['password'])) {
+                return $this->error('密码不能为空！');
+            }
+            if (empty($this->params['name']) || Utils::getLength($this->params['name']) > 10) {
+                return $this->error('请输入不大于10位的姓名！');
+            }
+            $email_validator = new EmailValidator();
+            if (empty($this->params['email']) || !$email_validator->validate($this->params['email'])) {
+                return $this->error('email格式不正确！');
+            }
+            if (Utils::validPhone($this->params['phone'])) {
+                return $this->error('phone格式不正确！');
+            }
         }
     }
 
@@ -59,7 +79,7 @@ class AdminController extends LController
 
         }
         if (!$request->isPost) {
-
+            return $this->render('edit');
         } else {
 
         }

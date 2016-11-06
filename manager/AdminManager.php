@@ -18,9 +18,9 @@ class AdminManager
         $this->admin_rpc = new AdminRpc();
     }
 
-    public function getList()
+    public function getList($page)
     {
-        return $this->admin_rpc->getList();
+        return $this->admin_rpc->getList($page);
     }
 
     public function add($admin)
