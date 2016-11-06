@@ -16,8 +16,7 @@ use Yii;
 
 class LRpc
 {
-    private $post;
-    private $retry = 0;
+
     private $custom = array();
     private $option = array(
         'CURLOPT_HEADER'         => 0,
@@ -28,9 +27,10 @@ class LRpc
         'CURLOPT_SSL_VERIFYPEER' => false,
         'CURLOPT_CONNECTTIMEOUT' => 10,
     );
-
+    private $post;
     private $info;
     private $data;
+    private $http_code;
     private $has_error;
     private $error_message;
     private $result;
@@ -142,22 +142,11 @@ class LRpc
     }
 
     /**
-     * Set retry times
-     * @param int $times
-     * @return self
-     */
-    public function retry($times = 0)
-    {
-        $this->retry = $times;
-        return $this;
-    }
-
-    /**
      * Task process
      * @param int $retry
      * @return self
      */
-    private function process($retry = 0)
+    private function process()
     {
         $ch = curl_init();
 
@@ -173,25 +162,22 @@ class LRpc
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $this->build_array($this->post));
         }
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers = array('Content-Type:application/json;charset=UTF-8', 'User-Agent:' . USER_AGENT));
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers = array('Content-Type:application/json;charset=UTF-8', 'User-Agent:' . USER_AGENT));
 
         Yii::info(sprintf('RPC: 【url】| %s ; 【params】| %s ', $this->url, json_encode($this->post)));
         $this->data = (string)curl_exec($ch);
+
         $this->info = curl_getinfo($ch);
+        $this->http_code = $this->info['http_code'];
+
         $this->has_error = curl_errno($ch) > 0;
-        $this->error_message = $this->has_error ? curl_error($ch) : '';
+        $this->error_message = curl_error($ch);
 
         curl_close($ch);
-
-        if ($this->has_error && $retry < $this->retry) {
-            $this->process($retry + 1);
-        }
 
         $this->processResult();
 
         $this->post = array();
-        $this->retry = 0;
-
         return $this->result;
     }
 
@@ -220,23 +206,27 @@ class LRpc
 
     private function processResult()
     {
-        if ($this->has_error) {
-            $this->rpcErrorLog($this->error_message);
-            $this->result = ['code' => ErrorCode::SYSTEM_ERROR, 'msg' => MsgConst::FAILED_MSG];
+        if ($this->http_code != 200) {
+            $http_error = sprintf('http错误 ：http_code | %d ；error_msg | %s ; info | %s ',
+                $this->http_code, $this->error_message, json_encode($this->info, JSON_UNESCAPED_UNICODE));
+            $this->rpcError($http_error);
+        } elseif ($this->has_error) {
+            $this->rpcError($this->error_message);
         } else {
             $res = json_decode($this->data);
-            $this->result = $res['data'];
             if ($res['ret'] == 0 && $res['data']['code'] < ErrorCode::ACTION_ERROR) {
-                $this->rpcErrorLog($res['data']['msg']);
-                $this->result = ['code' => ErrorCode::SYSTEM_ERROR, 'msg' => MsgConst::FAILED_MSG];
+                $this->rpcError($res['data']['msg']);
+            } else {
+                $this->result = $res['data'];
             }
         }
     }
 
-    private function rpcErrorLog($msg)
+    private function rpcError($msg)
     {
         $error_msg = sprintf('【RPC_ERR】: msg | %s ; url | %s ; params | %s ',
             $msg, $this->url, json_encode($this->post, JSON_UNESCAPED_UNICODE));
         Yii::error($error_msg);
+        $this->result = ['code' => ErrorCode::SYSTEM_ERROR, 'msg' => MsgConst::FAILED_MSG];
     }
 }
