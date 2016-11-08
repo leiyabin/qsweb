@@ -12,7 +12,6 @@ use app\components\Utils;
 use Yii;
 use app\manager\AdminManager;
 use yii\data\Pagination;
-use yii\validators\EmailValidator;
 
 class AdminController extends LController
 {
@@ -51,21 +50,33 @@ class AdminController extends LController
         if (!$request->isPost) {
             return $this->render('add');
         } else {
-            if (empty($this->params['username']) || Utils::getLength($this->params['username']) > 20) {
+            if (!Utils::validVal($this->getRequestParam('username'), true, 0, 20)) {
                 return $this->error('请输入不大于20位的用户名！');
             }
-            if (empty($this->params['password'])) {
+            if (!Utils::validVal($this->getRequestParam('password'), true)) {
                 return $this->error('密码不能为空！');
             }
-            if (empty($this->params['name']) || Utils::getLength($this->params['name']) > 10) {
+            if (!Utils::validVal($this->getRequestParam('name'), true, 0, 10)) {
                 return $this->error('请输入不大于10位的姓名！');
             }
-            $email_validator = new EmailValidator();
-            if (empty($this->params['email']) || !$email_validator->validate($this->params['email'])) {
+            if (!Utils::validEmail($this->params['email'])) {
                 return $this->error('email格式不正确！');
             }
-            if (Utils::validPhone($this->params['phone'])) {
+            if (!Utils::validPhone($this->params['phone'])) {
                 return $this->error('phone格式不正确！');
+            }
+            $admin = [
+                'username' => $this->params['username'],
+                'password' => $this->params['password'],
+                'name'     => $this->params['name'],
+                'email'    => $this->params['email'],
+                'phone'    => $this->params['phone'],
+            ];
+            $res = $this->admin_manager->add($admin);
+            if ($this->hasError($res)) {
+                return $this->error('添加用户失败！');
+            } else {
+               return $this->success();
             }
         }
     }

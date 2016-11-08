@@ -60,11 +60,11 @@ use yii\helpers\Html;
     <script>
         $(function () {
             $("#add_button").click(function () {
-                $username = $('input[name=username]').val().trim();
-                $password = $('input[name=password]').val().trim();
-                $name = $('input[name=name]').val().trim();
-                $email = $('input[name=email]').val().trim();
-                $phone = $('input[name=phone]').val().trim();
+                var $username = $('input[name=username]').val().trim();
+                var $password = $('input[name=password]').val().trim();
+                var $name = $('input[name=name]').val().trim();
+                var $email = $('input[name=email]').val().trim();
+                var $phone = $('input[name=phone]').val().trim();
                 if (!checkVal($username, '用户名', true, 0, 20)) {
                     return;
                 }
@@ -84,12 +84,12 @@ use yii\helpers\Html;
                     url: '/admin/admin/add',
                     type: 'post',
                     dataType: 'json',
-                    data: {username: $username, password: $password, email: $email, phone: $phone, name: $name}
-                    success: function (data) {
-                        if (data.status = 1) {
+                    data: {username: $username, password: $password, email: $email, phone: $phone, name: $name},
+                    success: function (res) {
+                        if (res.status == 1) {
                             alert('添加成功!');
                         } else {
-                            alert(data.msg);
+                            alert(res.msg);
                         }
                     },
                     error: function () {

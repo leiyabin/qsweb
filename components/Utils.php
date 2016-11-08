@@ -41,7 +41,12 @@ class Utils
         return preg_match('/^1\d{10}$/', $phone);
     }
 
-    public static function validVal($val, $required, $minLength, $maxLength)
+    public static function validEmail($email)
+    {
+        return preg_match('/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/', $email);
+    }
+
+    public static function validVal($val, $required, $minLength = 0, $maxLength = false)
     {
         if ($required && empty($val)) {
             return false;

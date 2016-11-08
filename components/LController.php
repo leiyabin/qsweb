@@ -49,7 +49,7 @@ class LController extends Controller
      * @param mixed $redirect
      * @return mixed
      */
-    public function success($msg = '', $redirect = '')
+    public function success($msg = '操作成功！', $redirect = '')
     {
         $this->response_status = 1;
         return $this->output($msg, $redirect);
@@ -76,6 +76,14 @@ class LController extends Controller
         } else {
             return false;
         }
+    }
+
+    protected function getRequestParam($field, $default = null)
+    {
+        if (empty($this->params[$field])) {
+            return $default;
+        }
+        return $this->params[$field];
     }
 
 }
