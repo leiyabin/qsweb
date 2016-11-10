@@ -43,6 +43,6 @@ class AdminRpc extends LRpc
     public function getOne($id)
     {
         $params = ['id' => $id];
-        return LRpc::init()->post($params)->url('/admin/add');
+        return LRpc::init()->post($params)->url('/admin/get');
     }
 }

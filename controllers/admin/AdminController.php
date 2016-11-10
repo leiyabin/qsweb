@@ -76,7 +76,7 @@ class AdminController extends LController
             if ($this->hasError($res)) {
                 return $this->error('添加用户失败！');
             } else {
-               return $this->success();
+                return $this->success();
             }
         }
     }
@@ -86,13 +86,44 @@ class AdminController extends LController
     {
         $request = Yii::$app->request;
         $id = (int)$request->get('id', $request->post('id'));
-        if (!$id) {
-
+        if (empty($id)) {
+            return $this->render('add');
         }
+        var_dump($request->isPost);die;
         if (!$request->isPost) {
-            return $this->render('edit');
+            $admin = $this->admin_manager->get($id);
+            if (empty($admin)) {
+                return $this->render('add');
+            } else {
+                return $this->render('edit', ['model' => $admin]);
+            }
         } else {
-
+            if (!Utils::validVal($this->getRequestParam('name'), true, 0, 10)) {
+                return $this->error('请输入不大于10位的姓名！');
+            }
+            if (!Utils::validEmail($this->params['email'])) {
+                return $this->error('email格式不正确！');
+            }
+            if (!Utils::validPhone($this->params['phone'])) {
+                return $this->error('phone格式不正确！');
+            }
+            $admin = [
+                'name'  => $this->params['name'],
+                'email' => $this->params['email'],
+                'phone' => $this->params['phone'],
+                'id'    => $id
+            ];
+            if (Utils::validVal($this->getRequestParam('password'), true)) {
+                $admin['password'] = $this->params['password'];
+            }
+            var_dump($admin);die;
+            $res = $this->admin_manager->edit($admin);
+            var_dump($res);die;
+            if ($this->hasError($res)) {
+                return $this->error('修改用户失败！');
+            } else {
+                return $this->success();
+            }
         }
     }
 

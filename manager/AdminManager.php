@@ -7,6 +7,7 @@
  */
 
 namespace app\manager;
+
 use app\rpc\AdminRpc;
 
 class AdminManager
@@ -36,5 +37,10 @@ class AdminManager
     public function del($id)
     {
         return $this->admin_rpc->del($id);
+    }
+
+    public function get($id)
+    {
+        return $this->admin_rpc->getOne($id);
     }
 }
