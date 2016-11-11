@@ -24,6 +24,7 @@ use yii\helpers\Html;
             var $name = $('input[name=name]').val().trim();
             var $email = $('input[name=email]').val().trim();
             var $phone = $('input[name=phone]').val().trim();
+            var $id = $('input[name=id]').val().trim();
             if (!checkVal($password, '密码', false, 6)) {
                 return;
             }
@@ -40,7 +41,7 @@ use yii\helpers\Html;
                 url: '/admin/admin/edit',
                 type: 'post',
                 dataType: 'json',
-                data: {password: $password, email: $email, phone: $phone, name: $name},
+                data: {id: $id, password: $password, email: $email, phone: $phone, name: $name},
                 success: function (res) {
                     if (res.status == 1) {
                         alert('修改成功!');
@@ -70,7 +71,7 @@ use yii\helpers\Html;
         <div class="form-group">
             <label class="col-sm-3 control-label">密码</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="password" value="">
+                <input type="password" class="form-control" name="password" value="">
                 <p class="help-block">留空则密码保持不变</p>
             </div>
         </div>

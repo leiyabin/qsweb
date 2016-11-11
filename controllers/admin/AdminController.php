@@ -43,7 +43,6 @@ class AdminController extends LController
         ]);
     }
 
-    //添加
     public function actionAdd()
     {
         $request = Yii::$app->request;
@@ -81,7 +80,43 @@ class AdminController extends LController
         }
     }
 
-    //修改
+    public function actionSetpwd()
+    {
+        $request = Yii::$app->request;
+        $id = (int)$request->get('id', $request->post('id'));
+        if (empty($id)) {
+            //todo 跳转到错误页面
+            return $this->render('index');
+        }
+        if (!$request->isPost) {
+            return $this->render('setpwd');
+        } else {
+            if (!Utils::validVal($this->getRequestParam('old_password'), true, 6)) {
+                return $this->error('请输入正确的密码！');
+            }
+            if (!Utils::validVal($this->getRequestParam('password'), true, 6)) {
+                return $this->error('请输入正确的密码！');
+            }
+            if ($this->getRequestParam('password') != $this->getRequestParam('password')) {
+                return $this->error('两次密码不一致');
+            }
+            $admin = [
+                'name'  => $this->params['name'],
+                'email' => $this->params['email'],
+                'phone' => $this->params['phone'],
+            ];
+            if (Utils::validVal($this->getRequestParam('password'), true)) {
+                $admin['password'] = $this->params['password'];
+            }
+            $res = $this->admin_manager->edit($admin);
+            if ($this->hasError($res)) {
+                return $this->error('修改用户失败！');
+            } else {
+                return $this->success();
+            }
+        }
+    }
+
     public function actionEdit()
     {
         $request = Yii::$app->request;
@@ -89,7 +124,6 @@ class AdminController extends LController
         if (empty($id)) {
             return $this->render('add');
         }
-        var_dump($request->isPost);die;
         if (!$request->isPost) {
             $admin = $this->admin_manager->get($id);
             if (empty($admin)) {
@@ -116,9 +150,7 @@ class AdminController extends LController
             if (Utils::validVal($this->getRequestParam('password'), true)) {
                 $admin['password'] = $this->params['password'];
             }
-            var_dump($admin);die;
             $res = $this->admin_manager->edit($admin);
-            var_dump($res);die;
             if ($this->hasError($res)) {
                 return $this->error('修改用户失败！');
             } else {

@@ -1,4 +1,4 @@
 <?php
 
-define('RPC_URL', '101.201.155.65:880/api');
+define('RPC_URL', 'http://qsapi.com/api');
 define('USER_AGENT', 'qsmanager');
