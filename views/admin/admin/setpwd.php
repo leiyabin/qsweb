@@ -8,14 +8,15 @@ use yii\helpers\Html;
 
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
-    $("#setpwd_button").submit(function () {
-        var $old_password = $('input[name=oldpassword]').val().trim();
+    $("#setpwd_button").click(function () {
+        var $old_password = $('input[name=old_password]').val().trim();
         var $password = $('input[name=password]').val().trim();
         var $repeat_password = $('input[name=repeat_password]').val().trim();
-        if (!checkVal($old_password, '密码', false, 6)) {
+        var $id = $('input[name=admin_id]').val().trim();
+        if (!checkVal($old_password, '原密码', true, 6)) {
             return;
         }
-        if (!checkVal($password, '密码', false, 6)) {
+        if (!checkVal($password, '新密码', true, 6)) {
             return;
         }
         if ($repeat_password != $password) {
@@ -26,7 +27,7 @@ use yii\helpers\Html;
             url: '/admin/admin/setpwd',
             method: 'post',
             dataType: 'json',
-            data: {old_password: $old_password, password: $password, repeat_password: $repeat_password},
+            data: {id: $id, old_password: $old_password, password: $password, repeat_password: $repeat_password},
             success: function (res) {
                 if (res.status == 1) {
                     alert('修改成功!');
@@ -49,7 +50,8 @@ use yii\helpers\Html;
 
         <p>在这里可以修改你的登录密码</p>
     </div>
-    <div class="panel-body panel-body-nopadding">
+    <div class="panel-body panel-body-nopadding" style="margin-top: 20px;margin-left: 20px">
+        <input type="hidden" name="admin_id" value="1">
         <div class="form-group">
             <label class="col-sm-3 control-label">原密码</label>
 

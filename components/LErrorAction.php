@@ -27,6 +27,9 @@ class LErrorAction extends ErrorAction
         } else {
             $code = $exception->getCode();
         }
+        if($code == 404){
+            return \Yii::$app->view->renderFile('@app/views/admin/error/404.php');
+        }
         if ($exception instanceof UserException) {
             $message = $exception->getMessage();
         } else {

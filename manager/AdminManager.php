@@ -43,4 +43,9 @@ class AdminManager
     {
         return $this->admin_rpc->getOne($id);
     }
+
+    public function setPwd($id, $old_password, $new_password)
+    {
+        return $this->admin_rpc->setPwd($id, $old_password, $new_password);
+    }
 }

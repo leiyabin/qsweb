@@ -97,7 +97,7 @@ use yii\helpers\Url;
                                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right" style="min-width: 100px; ">
                                     <li style="width:100px"><a href="<?= Url::to(['admin/admin/setpwd']); ?>"><i
                                                 class="glyphicon glyphicon-cog"></i>修改密码</a></li>
-                                    <li style="width:100px"><a href="<?= Url::toRoute(['admin/admin/logout']); ?>"><i
+                                    <li style="width:100px"><a href="<?= Url::toRoute(['admin/auth/logout']); ?>"><i
                                                 class="glyphicon glyphicon-log-out"></i> 注销</a></li>
                                 </ul>
                             </div>

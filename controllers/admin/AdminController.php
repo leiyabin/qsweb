@@ -12,6 +12,7 @@ use app\components\Utils;
 use Yii;
 use app\manager\AdminManager;
 use yii\data\Pagination;
+use yii\web\HttpException;
 
 class AdminController extends LController
 {
@@ -83,34 +84,23 @@ class AdminController extends LController
     public function actionSetpwd()
     {
         $request = Yii::$app->request;
-        $id = (int)$request->get('id', $request->post('id'));
-        if (empty($id)) {
-            //todo 跳转到错误页面
-            return $this->render('index');
-        }
+        //todo 获取身份验证
+        $id = 1;
         if (!$request->isPost) {
             return $this->render('setpwd');
         } else {
             if (!Utils::validVal($this->getRequestParam('old_password'), true, 6)) {
-                return $this->error('请输入正确的密码！');
+                return $this->error('请输入正确的原密码！');
             }
             if (!Utils::validVal($this->getRequestParam('password'), true, 6)) {
-                return $this->error('请输入正确的密码！');
+                return $this->error('请输入正确的新密码！');
             }
-            if ($this->getRequestParam('password') != $this->getRequestParam('password')) {
+            if ($this->getRequestParam('password') != $this->getRequestParam('repeat_password')) {
                 return $this->error('两次密码不一致');
             }
-            $admin = [
-                'name'  => $this->params['name'],
-                'email' => $this->params['email'],
-                'phone' => $this->params['phone'],
-            ];
-            if (Utils::validVal($this->getRequestParam('password'), true)) {
-                $admin['password'] = $this->params['password'];
-            }
-            $res = $this->admin_manager->edit($admin);
+            $res = $this->admin_manager->setPwd($id, $this->params['old_password'], $this->params['password']);
             if ($this->hasError($res)) {
-                return $this->error('修改用户失败！');
+                return $this->error('重置密码失败！');
             } else {
                 return $this->success();
             }
