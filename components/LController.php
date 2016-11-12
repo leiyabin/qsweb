@@ -17,13 +17,16 @@ class LController extends Controller
     protected $response_status;
     protected $error_msg = '';
     protected $default_page = 1;
+    protected $is_post ;
     public $layout = 'admin';
+
 
     public function init()
     {
         $getParams = Yii::$app->request->get();
         $postParams = Yii::$app->request->post();
         $this->params = array_merge($getParams, $postParams);
+        $this->is_post = Yii::$app->request->isPost;
     }
 
     public $enableCsrfValidation = false;

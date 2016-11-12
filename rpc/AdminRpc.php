@@ -34,10 +34,10 @@ class AdminRpc extends LRpc
         return LRpc::init()->post($params)->url('/admin/edit');
     }
 
-    public function del($id)
+    public function batchDel($ids)
     {
-        $params = ['id' => $id];
-        return LRpc::init()->post($params)->url('/admin/del');
+        $params = ['ids' => $ids];
+        return LRpc::init()->post($params)->url('/admin/batchdel');
     }
 
     public function getOne($id)

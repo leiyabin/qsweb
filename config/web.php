@@ -13,7 +13,7 @@ $config = [
         'request'       => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'bdZT_oJ1cjlVep23SLGkoAUASxJS1Mgk',
-            'parsers'    => [
+            'parsers'             => [
                 'application/json' => 'yii\web\JsonParser',
                 'text/json'        => 'yii\web\JsonParser',
             ]
@@ -52,8 +52,8 @@ $config = [
             ],
         ],
         'db'            => require(__DIR__ . '/db.php'),
-
-        'urlManager' => [
+        'redis'         => require(__DIR__ . '/redis.php'),
+        'urlManager'    => [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => [

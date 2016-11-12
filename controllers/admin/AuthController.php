@@ -33,12 +33,13 @@ class AuthController extends LController
         if (!$request->isPost) {
             return $this->render('login');
         } else {
-            if (empty($this->params['username']) || Utils::getLength($this->params['username']) > 20) {
+            if (!Utils::validVal($this->getRequestParam('username'), true)) {
                 return $this->error('请输入正确的用户名！');
             }
-            if (empty($this->params['password'])) {
+            if (!Utils::validVal($this->getRequestParam('password'), true)) {
                 return $this->error('请输入正确的密码！');
             }
+
         }
     }
 

@@ -21,34 +21,39 @@ use yii\helpers\Url;
     $("#selectAll").click(function () {
         $("input[name='ids[]']").prop('checked', $(this).prop('checked'));
     });
+    function doDelete(ids) {
+        if (!window.confirm('确定要删除id为[' + ids + ']的这些用户吗?')) {
+            return false;
+        }
+        $.ajax({
+            url: '/admin/admin/batchdel',
+            dataType: 'json',
+            data: {"ids": ids.join(',')},
+            error: function (res) {
+                alert('系统错误，请联系客服人员！');
+            },
+            success: function (res) {
+                if (res.status == 1) {
+                    alert('删除成功!');
+                    location.reload(true);
+                } else {
+                    alert(res.msg);
+                }
+            }
+        });
+    }
+    $(".fa-trash-o").click(function () {
+        var ids = $(this).attr('tag');
+        ids = [ids];
+        doDelete(ids);
+    });
     //批量删除
     $("#batchDel").click(function () {
         var ids = [];
         $("input[name='ids[]']:checked").each(function () {
             ids.push($(this).val());
         });
-        if (!window.confirm('确定要删除id为[' + ids + ']的这些用户吗?')) {
-            return false;
-        }
-        $.ajax({
-            url: '<?=Url::to(['delete']);?>',
-            dataType: 'json',
-            data: {"ids": ids.join(',')},
-            error: function (res) {
-                alert('发送请求失败,请重试');
-            },
-            success: function (res) {
-                if (typeof(res) != 'object') {
-                    alert(res);
-                } else {
-                    if (res.status == 1) {
-                        window.location.reload();
-                    } else {
-                        alert(res.message || '删除失败');
-                    }
-                }
-            }
-        })
+        doDelete(ids);
     });
 
 </script>
@@ -88,7 +93,7 @@ use yii\helpers\Url;
                     <th>
                     <td class="table-action">
                         <a href="<?= Url::to(['edit', 'id' => $item->id]); ?>"><i class="fa fa-pencil"></i></a>
-                        <a href=""  onclick=""><i class="fa fa-trash-o"></i></a>
+                        <i class="fa fa-trash-o"  tag="<?=$item->id?>"></i>
                     </td>
                     </th>
                 </tr>

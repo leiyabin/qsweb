@@ -12,7 +12,6 @@ use app\components\Utils;
 use Yii;
 use app\manager\AdminManager;
 use yii\data\Pagination;
-use yii\web\HttpException;
 
 class AdminController extends LController
 {
@@ -46,8 +45,7 @@ class AdminController extends LController
 
     public function actionAdd()
     {
-        $request = Yii::$app->request;
-        if (!$request->isPost) {
+        if (!$this->is_post) {
             return $this->render('add');
         } else {
             if (!Utils::validVal($this->getRequestParam('username'), true, 0, 20)) {
@@ -83,10 +81,9 @@ class AdminController extends LController
 
     public function actionSetpwd()
     {
-        $request = Yii::$app->request;
         //todo 获取身份验证
         $id = 1;
-        if (!$request->isPost) {
+        if (!$this->is_post) {
             return $this->render('setpwd');
         } else {
             if (!Utils::validVal($this->getRequestParam('old_password'), true, 6)) {
@@ -109,12 +106,11 @@ class AdminController extends LController
 
     public function actionEdit()
     {
-        $request = Yii::$app->request;
-        $id = (int)$request->get('id', $request->post('id'));
+        $id = $this->getRequestParam('id');
         if (empty($id)) {
             return $this->render('add');
         }
-        if (!$request->isPost) {
+        if (!$this->is_post) {
             $admin = $this->admin_manager->get($id);
             if (empty($admin)) {
                 return $this->render('add');
@@ -149,16 +145,9 @@ class AdminController extends LController
         }
     }
 
-    /**
-     * 删除用户,支持批量删除
-     * @return array
-     * @throws \Exception
-     * @throws \yii\db\Exception
-     */
-    public function actionDelete()
+    public function actionBatchdel()
     {
-        $request = Yii::$app->request;
-        $ids = $request->get('ids');
+        $ids = $this->getRequestParam('ids');
         if (!$ids) {
             return $this->error('请选中至少一个');
         }
@@ -166,25 +155,11 @@ class AdminController extends LController
         if (empty($ids)) {
             return $this->error('ids参数不合法');
         }
-    }
-
-    //登录日志
-    public function actionLogs()
-    {
-//        $query = AdministratorLogin::find();
-//        //搜索
-//        $searchConditions = Yii::$app->request->get('search');
-//        if (!empty($searchConditions)) {
-//            if (!empty($searchConditions['username'])) {
-//                $query->where('username like :username',[':username'=>'%'.$searchConditions['username'].'%']);
-//            }
-//        }
-//        $countQuery = clone $query;
-//        $pages = new Pagination(['totalCount'=>$countQuery->count(),'defaultPageSize'=>20]);
-//        $list = $query->offset($pages->offset)->limit($pages->limit)->orderBy('id desc')->all();
-//        return $this->render('logs',[
-//            'list' => &$list,
-//            'pages' => $pages
-//        ]);
+        $res = $this->admin_manager->batchDel($ids);
+        if ($this->hasError($res)) {
+            return $this->error('删除用户失败！');
+        } else {
+            return $this->success();
+        }
     }
 }

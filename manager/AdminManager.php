@@ -34,9 +34,9 @@ class AdminManager
         return $this->admin_rpc->edit($admin);
     }
 
-    public function del($id)
+    public function batchDel($ids)
     {
-        return $this->admin_rpc->del($id);
+        return $this->admin_rpc->batchDel($ids);
     }
 
     public function get($id)
