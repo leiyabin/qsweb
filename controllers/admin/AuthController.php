@@ -17,29 +17,23 @@ class AuthController extends LController
 {
     public $layout = false;
 
-    public function init()
-    {
-        $eventHandler = new AdminAuthEvent();
-        Yii::$app->administrator->on(User::EVENT_AFTER_LOGIN, array($eventHandler, 'onLogin'));
-        Yii::$app->administrator->on(User::EVENT_AFTER_LOGOUT, array($eventHandler, 'onLogout'));
-    }
-
     /**
      * 登录
      */
     public function actionLogin()
     {
-        $request = Yii::$app->request;
-        if (!$request->isPost) {
+        var_dump($this->params);die;
+        if (!$this->is_post) {
             return $this->render('login');
         } else {
+            var_dump($this->params);die;
             if (!Utils::validVal($this->getRequestParam('username'), true)) {
                 return $this->error('请输入正确的用户名！');
             }
             if (!Utils::validVal($this->getRequestParam('password'), true)) {
                 return $this->error('请输入正确的密码！');
             }
-
+            
         }
     }
 

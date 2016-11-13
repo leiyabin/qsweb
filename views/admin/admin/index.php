@@ -91,10 +91,8 @@ use yii\helpers\Url;
                     <th><?= $item->phone; ?></th>
                     <th><?= \app\components\Utils::formatDateTime($item->c_t); ?></th>
                     <th>
-                    <td class="table-action">
                         <a href="<?= Url::to(['edit', 'id' => $item->id]); ?>"><i class="fa fa-pencil"></i></a>
-                        <i class="fa fa-trash-o"  tag="<?=$item->id?>"></i>
-                    </td>
+                        <i class="fa fa-trash-o" tag="<?= $item->id ?>"></i>
                     </th>
                 </tr>
             <?php endforeach; ?>

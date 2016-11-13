@@ -27,7 +27,7 @@ class LErrorAction extends ErrorAction
         } else {
             $code = $exception->getCode();
         }
-        if($code == 404){
+        if ($code == 404) {
             return \Yii::$app->view->renderFile('@app/views/admin/error/404.php');
         }
         if ($exception instanceof UserException) {
@@ -43,6 +43,11 @@ class LErrorAction extends ErrorAction
                 'msg'  => $message
             ]
         ];
-        return json_encode($res, JSON_UNESCAPED_UNICODE);
+        $res_json = json_encode($res, JSON_UNESCAPED_UNICODE);
+        $response = sprintf('【RESPONSE】 method: %s url: %s ; params: %s ; result: %s ',
+            Yii::$app->request->getMethod(), Yii::$app->request->getUrl(),
+            json_encode($this->params, JSON_UNESCAPED_UNICODE), $res_json);
+        Yii::info($response);
+        return $res_json;
     }
 }

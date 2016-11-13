@@ -17,7 +17,7 @@ class LController extends Controller
     protected $response_status;
     protected $error_msg = '';
     protected $default_page = 1;
-    protected $is_post ;
+    protected $is_post;
     public $layout = 'admin';
 
 
@@ -87,6 +87,14 @@ class LController extends Controller
             return $default;
         }
         return $this->params[$field];
+    }
+
+    public function beforeAction($action)
+    {
+        $request = sprintf('【REQUEST】 method: %s url: %s ; params: %s',
+            Yii::$app->request->getMethod(), Yii::$app->request->getUrl(), json_encode($this->params, JSON_UNESCAPED_UNICODE));
+        Yii::info($request);
+        return parent::beforeAction($action);
     }
 
 }

@@ -48,13 +48,11 @@ use yii\helpers\Html;
             </div><!-- col-sm-7 -->
 
             <div class="col-md-5">
-                <?= Html::beginForm('', 'post', ['id' => 'form1']); ?>
                 <h4 class="nomargin">用户登录</h4>
                 <p class="mt5 mb20 text-danger" id="message"></p>
                 <input type="text" class="form-control uname" name="username" placeholder="用户名"/>
                 <input type="password" class="form-control pword" name="password" placeholder="密码"/>
-                <button type="submit" class="btn btn-success btn-block">登 录</button>
-                <?= Html::endForm(); ?>
+                <button type="submit" id="login_button" class="btn btn-success btn-block">登 录</button>
             </div><!-- col-sm-5 -->
 
         </div><!-- row -->
@@ -77,6 +75,7 @@ use yii\helpers\Html;
 <script src="<?= Url::to('/static/admin/js/bootstrap.min.js'); ?>"></script>
 <script src="<?= Url::to('/static/admin/js/modernizr.min.js'); ?>"></script>
 <script src="<?= Url::to('/static/admin/js/retina.min.js'); ?>"></script>
+<script src="<?=Url::to('/static/admin/js/common.js'); ?>"></script>
 
 <script>
     jQuery(window).load(function () {
@@ -86,34 +85,35 @@ use yii\helpers\Html;
             jQuery('body').delay(350).css({'overflow': 'visible'});
         });
     });
-    //submit form
-    $("#form1").submit(function () {
-        var formdata = $(this).serialize();
-        var url = $(this).attr('action') || '';
-        var method = $(this).attr('method') || 'get';
-        $.ajax({
-            url: url,
-            method: method,
-            dataType: 'json',
-            data: formdata,
-            error: function () {
-                alert("请求失败,请重试")
-            },
-            success: function (res) {
-                if (typeof res == 'object') {
-                    if (!res.status && res.error) {
-                        $("#message").html(res.error);
-                    } else {
-                        var redirect = res.redirect || '/';
-                        window.location.href = redirect;
-                    }
-                } else {
-                    alert(res);
-                }
+
+    $(function () {
+        $("#login_button").click(function () {
+            var $username = $('input[name=username]').val().trim();
+            var $password = $('input[name=password]').val().trim();
+            if (!checkVal($username, '用户名', true, 0, 20)) {
+                return;
             }
+            if (!checkVal($password, '密码', true, 6)) {
+                return;
+            }
+            $.ajax({
+                url: '/admin/auth/login',
+                type: 'post',
+                dataType: 'json',
+                data: {username: $username, password: $password},
+                success: function (res) {
+                    if (res.status == 1) {
+                        location.href = '/admin/admin/index'
+                    } else {
+                        alert(res.msg);
+                    }
+                },
+                error: function () {
+                    alert('系统错误，请联系客服人员！');
+                }
+            })
         });
-        return false;
-    })
+    });
 </script>
 </body>
 </html>

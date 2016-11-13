@@ -9,5 +9,4 @@ return [
     'class'        => 'app\components\LSession',
     'session_name' => 'QSDC_ADMIN',
     'module'       => 'redis',
-    ''
 ];
