@@ -8,15 +8,29 @@
 
 namespace app\components;
 
-use app\components\LSessionHandler;
+use Yii;
 
 class LSession
 {
-    public function start()
+    public static function set($key, $value, $session_name)
     {
-        session_write_close();
-        $handler = new LSessionHandler();
-        session_set_save_handler($handler, true);
-        session_start();
+        $session = Yii::$app->session;
+        $session->setName($session_name);
+        $session[$key] = $value;
+    }
+
+    public static function get($key, $session_name)
+    {
+        $session = Yii::$app->session;
+        $session->setName($session_name);
+        $value = $session[$key];
+        return $value;
+    }
+
+    public static function destroy($key, $session_name)
+    {
+        $session = Yii::$app->session;
+        $session->setName($session_name);
+        unset($session[$key]);
     }
 }

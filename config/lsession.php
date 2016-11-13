@@ -7,6 +7,6 @@
  */
 return [
     'class'        => 'app\components\LSession',
-    'session_name' => 'QSDC_ADMIN',
-    'module'       => 'redis',
+    'session_name' => 'QS_ADMIN_SESSION',
+    'timeout'      => 1800,
 ];

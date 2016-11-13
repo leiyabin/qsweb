@@ -7,33 +7,45 @@
 
 namespace app\controllers\admin;
 
-use yii\web\User;
 use Yii;
 use app\components\LController;
 use app\components\Utils;
-use app\events\AdminAuthEvent;
+use app\manager\AdminManager;
 
 class AuthController extends LController
 {
     public $layout = false;
+    /**
+     * @var AdminManager
+     */
+    public $admin_manager;
+
+    public function init()
+    {
+        parent::init();
+        $this->admin_manager = new AdminManager();
+    }
 
     /**
      * 登录
      */
     public function actionLogin()
     {
-        var_dump($this->params);die;
         if (!$this->is_post) {
             return $this->render('login');
         } else {
-            var_dump($this->params);die;
             if (!Utils::validVal($this->getRequestParam('username'), true)) {
                 return $this->error('请输入正确的用户名！');
             }
             if (!Utils::validVal($this->getRequestParam('password'), true)) {
                 return $this->error('请输入正确的密码！');
             }
-            
+        }
+        $res = $this->admin_manager->login($this->params['username'], $this->params['password']);
+        if ($this->hasError($res)) {
+            return $this->error('登录失败！');
+        } else {
+            return $this->success('登录成功');
         }
     }
 
@@ -42,7 +54,7 @@ class AuthController extends LController
      */
     public function actionLogout()
     {
-        Yii::$app->administrator->logout();
+        AdminManager::destroy();
         return $this->redirect(['login']);
     }
 }

@@ -8,6 +8,8 @@
 
 namespace app\components;
 
+use app\consts\ErrorCode;
+use app\consts\LogConst;
 use Yii;
 use yii\web\HttpException;
 use yii\web\ErrorAction;
@@ -27,8 +29,11 @@ class LErrorAction extends ErrorAction
         } else {
             $code = $exception->getCode();
         }
-        if ($code == 404) {
+        if ($code == ErrorCode::NOT_FOUND) {
             return \Yii::$app->view->renderFile('@app/views/admin/error/404.php');
+        }
+        if ($code == ErrorCode::FORBIDDEN) {
+            return \Yii::$app->view->renderFile('@app/views/admin/auth/login.php');
         }
         if ($exception instanceof UserException) {
             $message = $exception->getMessage();
@@ -47,7 +52,7 @@ class LErrorAction extends ErrorAction
         $response = sprintf('【RESPONSE】 method: %s url: %s ; params: %s ; result: %s ',
             Yii::$app->request->getMethod(), Yii::$app->request->getUrl(),
             json_encode($this->params, JSON_UNESCAPED_UNICODE), $res_json);
-        Yii::info($response);
+        Yii::info($response, LogConst::RESPONSE);
         return $res_json;
     }
 }

@@ -55,4 +55,13 @@ class AdminRpc extends LRpc
         ];
         return LRpc::init()->post($params)->url('/admin/setpwd');
     }
+
+    public function login($username, $password)
+    {
+        $params = [
+            'username'     => $username,
+            'password'     => $password,
+        ];
+        return LRpc::init()->post($params)->url('/admin/login');
+    }
 }

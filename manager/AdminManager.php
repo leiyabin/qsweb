@@ -9,9 +9,12 @@
 namespace app\manager;
 
 use app\rpc\AdminRpc;
+use Yii;
+use app\components\LSession;
 
 class AdminManager
 {
+    const ADMIN_INFO_SESSION = 'admin_info';
     public $admin_rpc;
 
     public function __construct()
@@ -47,5 +50,24 @@ class AdminManager
     public function setPwd($id, $old_password, $new_password)
     {
         return $this->admin_rpc->setPwd($id, $old_password, $new_password);
+    }
+
+    public function login($username, $password)
+    {
+        $res = $this->admin_rpc->login($username, $password);
+        if (!isset($res->code)) {
+            LSession::set(self::ADMIN_INFO_SESSION, $res, 'QS_ADMIN_SESSION');
+        }
+        return $res;
+    }
+
+    public static function auth()
+    {
+        return LSession::get(self::ADMIN_INFO_SESSION, 'QS_ADMIN_SESSION');
+    }
+
+    public static function destroy()
+    {
+        return LSession::destroy(self::ADMIN_INFO_SESSION, 'QS_ADMIN_SESSION');
     }
 }

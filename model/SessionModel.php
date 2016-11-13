@@ -39,7 +39,7 @@ class SessionModel extends LModel
     public function write($id, $data)
     {
         $expires = SESSION_LIFE_TIME + time();
-        $sql = sprintf(' REPLACE INTO t_session SET id = %s, expires = %d ,`data` = %s ', $id, $expires, $data);
+        $sql = sprintf(' REPLACE INTO t_session SET id=%s,expires =%d,`data`=%s', $id, $expires, $data);
         $res = SessionModel::getDb()->createCommand($sql)->execute();
         return $res;
     }

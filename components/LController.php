@@ -8,6 +8,10 @@
 
 namespace app\components;
 
+use app\consts\ErrorCode;
+use app\consts\LogConst;
+use app\exception\RequestException;
+use app\manager\AdminManager;
 use yii\web\Controller;
 use Yii;
 
@@ -18,6 +22,8 @@ class LController extends Controller
     protected $error_msg = '';
     protected $default_page = 1;
     protected $is_post;
+    protected $user_info;
+    private static $auth_controllers = ['admin'];
     public $layout = 'admin';
 
 
@@ -68,7 +74,12 @@ class LController extends Controller
         if (!empty($redirect)) {
             $res['redirect'] = $redirect;
         }
-        return json_encode($res, JSON_UNESCAPED_UNICODE);
+        $res_json = json_encode($res, JSON_UNESCAPED_UNICODE);
+        $response = sprintf('【RESPONSE】 method: %s url: %s ; params: %s ; result: %s ',
+            Yii::$app->request->getMethod(), Yii::$app->request->getUrl(),
+            json_encode($this->params, JSON_UNESCAPED_UNICODE), $res_json);
+        Yii::info($response, LogConst::RESPONSE);
+        return $res_json;
     }
 
     protected function hasError($res)
@@ -93,7 +104,16 @@ class LController extends Controller
     {
         $request = sprintf('【REQUEST】 method: %s url: %s ; params: %s',
             Yii::$app->request->getMethod(), Yii::$app->request->getUrl(), json_encode($this->params, JSON_UNESCAPED_UNICODE));
-        Yii::info($request);
+        Yii::info($request, LogConst::REQUEST);
+        $controller_name = end(explode('/', $this->id));
+        if (in_array($controller_name, self::$auth_controllers)) {
+            $user_info = AdminManager::auth();
+            if (empty($user_info)) {
+                throw new RequestException('请先登录！', ErrorCode::FORBIDDEN);
+            } else {
+                $this->user_info = $user_info;
+            }
+        }
         return parent::beforeAction($action);
     }
 

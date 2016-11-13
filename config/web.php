@@ -18,6 +18,13 @@ $config = [
                 'text/json'        => 'yii\web\JsonParser',
             ]
         ],
+        'response'      => [
+            'class'         => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                $response->statusCode = 200;
+            },
+        ],
         'cache'         => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -37,13 +44,16 @@ $config = [
         ],
         'mailer'        => [
             'class'            => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
         'log'           => require(__DIR__ . '/log.php'),
         'db'            => require(__DIR__ . '/db.php'),
+        'lsession'       => require(__DIR__ . '/lsession.php'),
+        'session'       => [
+            'class'        => 'yii\web\DbSession',
+            'db'           => 'db',
+            'sessionTable' => 't_session',
+        ],
         'urlManager'    => [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,

@@ -11,7 +11,11 @@ namespace app\consts;
 
 class ErrorCode
 {
-    //1000 http request error
+    //http error code
+    const FORBIDDEN = 403;
+    const NOT_FOUND = 404;
+
+    //request error
     const INVALID_PARAM = 1000;
     const SYSTEM_ERROR = 2000;
     const ACTION_ERROR = 3000;
