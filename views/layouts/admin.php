@@ -44,8 +44,6 @@ use yii\helpers\Url;
                         <ul class="children">
                             <li><a href="<?= Url::to(['/admin/admin/index']); ?>"><i
                                         class="fa fa-caret-right"></i> 用户列表</a></li>
-                            <li><a href="<?= Url::to(['/admin/admin/logs']); ?>"><i
-                                        class="fa fa-caret-right"></i> 登录日志</a></li>
                         </ul>
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>二手房</span></a>
@@ -76,6 +74,12 @@ use yii\helpers\Url;
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>海外</span></a>
                         <ul class="children">
                             <li><a href="#"><i class="fa fa-caret-right"></i>案例列表</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>基础信息设置</span></a>
+                        <ul class="children">
+                            <li><a href="/admin/base/class"><i class="fa fa-caret-right"></i>分类列表</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>信息列表</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -9,7 +9,6 @@
 namespace app\manager;
 
 use app\rpc\AdminRpc;
-use Yii;
 use app\components\LSession;
 
 class AdminManager

@@ -54,8 +54,8 @@ class AdminController extends LController
             if (!Utils::validVal($this->getRequestParam('password'), true)) {
                 return $this->error('密码不能为空！');
             }
-            if (!Utils::validVal($this->getRequestParam('name'), true, 0, 10)) {
-                return $this->error('请输入不大于10位的姓名！');
+            if (!Utils::validVal($this->getRequestParam('name'), true, 0, 20)) {
+                return $this->error('请输入不大于20位的姓名！');
             }
             if (!Utils::validEmail($this->params['email'])) {
                 return $this->error('email格式不正确！');
@@ -81,8 +81,7 @@ class AdminController extends LController
 
     public function actionSetpwd()
     {
-        //todo 获取身份验证
-        $id = 1;
+        $id = $this->user_info['id'];
         if (!$this->is_post) {
             return $this->render('setpwd');
         } else {
@@ -118,8 +117,8 @@ class AdminController extends LController
                 return $this->render('edit', ['model' => $admin]);
             }
         } else {
-            if (!Utils::validVal($this->getRequestParam('name'), true, 0, 10)) {
-                return $this->error('请输入不大于10位的姓名！');
+            if (!Utils::validVal($this->getRequestParam('name'), true, 0, 20)) {
+                return $this->error('请输入不大于20位的姓名！');
             }
             if (!Utils::validEmail($this->params['email'])) {
                 return $this->error('email格式不正确！');
