@@ -9,7 +9,7 @@
 namespace app\manager;
 
 
-use app\rpc\ConfigRpC;
+use app\rpc\ConfigRpc;
 
 class ConfigManager
 {
@@ -17,7 +17,7 @@ class ConfigManager
 
     public function __construct()
     {
-        $this->config_rpc = new ConfigRpC();
+        $this->config_rpc = new ConfigRpc();
     }
 
     public function getClassList($page)

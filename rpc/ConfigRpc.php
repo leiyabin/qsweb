@@ -10,7 +10,7 @@ namespace app\rpc;
 
 use app\components\LRpc;
 
-class ConfigRpC extends LRpc
+class ConfigRpc extends LRpc
 {
     public function getClassList($page)
     {
