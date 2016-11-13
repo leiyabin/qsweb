@@ -23,7 +23,7 @@ class LController extends Controller
     protected $default_page = 1;
     protected $is_post;
     protected $user_info;
-    private static $auth_controllers = ['admin'];
+    private static $auth_controllers = ['admin', 'config'];
     public $layout = 'admin';
 
 
@@ -102,9 +102,11 @@ class LController extends Controller
 
     public function beforeAction($action)
     {
+
         $request = sprintf('【REQUEST】 method: %s url: %s ; params: %s',
             Yii::$app->request->getMethod(), Yii::$app->request->getUrl(), json_encode($this->params, JSON_UNESCAPED_UNICODE));
         Yii::info($request, LogConst::REQUEST);
+
         $controller_name = end(explode('/', $this->id));
         if (in_array($controller_name, self::$auth_controllers)) {
             $user_info = AdminManager::auth();

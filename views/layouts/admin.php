@@ -76,10 +76,10 @@ use yii\helpers\Url;
                             <li><a href="#"><i class="fa fa-caret-right"></i>案例列表</a></li>
                         </ul>
                     </li>
-                    <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>基础信息设置</span></a>
+                    <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>配置信息设置</span></a>
                         <ul class="children">
-                            <li><a href="/admin/base/class"><i class="fa fa-caret-right"></i>分类列表</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>信息列表</a></li>
+                            <li><a href="/admin/config/class"><i class="fa fa-caret-right"></i>分类列表</a></li>
+                            <li><a href="/admin/config/info"><i class="fa fa-caret-right"></i>配置列表</a></li>
                         </ul>
                     </li>
                 </ul>

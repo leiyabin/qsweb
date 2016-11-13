@@ -37,16 +37,16 @@ class ConfigController extends LController
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
             $list = $res->class;
         }
-        return $this->render('index', [
+        return $this->render('class', [
             'list'  => $list,
             'pages' => $pages
         ]);
     }
 
-    public function actionClassadd()
+    public function actionAddclass()
     {
         if (!$this->is_post) {
-            return $this->render('add');
+            return $this->render('addclass');
         } else {
             if (!Utils::validVal($this->getRequestParam('name'), true, 0, 20)) {
                 return $this->error('请输入不大于20位的类别名称！');
@@ -66,14 +66,14 @@ class ConfigController extends LController
     {
         $id = $this->getRequestParam('id');
         if (empty($id)) {
-            return $this->render('add');
+            return $this->render('addclass');
         }
         if (!$this->is_post) {
             $class = $this->config_manager->getClass($id);
             if (empty($class)) {
                 return $this->render('add');
             } else {
-                return $this->render('edit', ['model' => $class]);
+                return $this->render('editclass', ['model' => $class]);
             }
         } else {
             if (!Utils::validVal($this->getRequestParam('name'), true, 0, 20)) {
@@ -103,16 +103,16 @@ class ConfigController extends LController
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
             $list = $res->class_info;
         }
-        return $this->render('index', [
+        return $this->render('info', [
             'list'  => $list,
             'pages' => $pages
         ]);
     }
 
-    public function actionInfoadd()
+    public function actionAddinfo()
     {
         if (!$this->is_post) {
-            return $this->render('add');
+            return $this->render('addinfo');
         } else {
             if (!Utils::validVal($this->getRequestParam('value'), true, 0, 50)) {
                 return $this->error('请输入不大于50位的信息名称！');
@@ -138,14 +138,14 @@ class ConfigController extends LController
     {
         $id = $this->getRequestParam('id');
         if (empty($id)) {
-            return $this->render('add');
+            return $this->render('addinfo');
         }
         if (!$this->is_post) {
             $info = $this->config_manager->getInfo($id);
             if (empty($info)) {
-                return $this->render('add');
+                return $this->render('addinfo');
             } else {
-                return $this->render('edit', ['model' => $info]);
+                return $this->render('editinfo', ['model' => $info]);
             }
         } else {
             if (!Utils::validVal($this->getRequestParam('value'), true, 0, 50)) {
