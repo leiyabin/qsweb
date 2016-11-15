@@ -208,7 +208,7 @@ class LRpc
 
     private function processResult()
     {
-        if ($this->http_code != 200) {
+        if ($this->http_code != ErrorCode::SUCCESS) {
             $http_error = sprintf('http错误 ：http_code | %d ；error_msg | %s ; info | %s ',
                 $this->http_code, $this->error_message, json_encode($this->info, JSON_UNESCAPED_UNICODE));
             $this->rpcError($http_error);

@@ -19,18 +19,37 @@ use yii\helpers\Html;
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
     $(function () {
+        var id = $('input[name=id]').val().trim();
+        var class_id = $('#dropdownMenu1').attr('tag');
+        var lis = $('.li_on_click');
+        lis.each(function () {
+            if ($(this).attr('tag') == class_id) {
+                var class_name = $(this).find('a').html();
+                $('#dropdownMenu1').html(class_name);
+                return false;
+            }
+        });
+        lis.click(function () {
+            var class_id = $(this).attr('tag');
+            var class_name = $(this).find('a').html();
+            $('#dropdownMenu1').attr('tag', class_id).html(class_name);
+
+        });
         $("#edit_button").click(function () {
-            var $class_id = $('input[name=password]').val().trim();
-            var $name = $('input[name=name]').val().trim();
-            var $id = $('input[name=id]').val().trim();
-            if (!checkVal($name, '配置', true, 0, 50)) {
+            var $class_id = $('#dropdownMenu1').attr('tag');
+            var $value = $('input[name=value]').val().trim();
+            if ($class_id == 0) {
+                alert('请选择分类！');
+                return;
+            }
+            if (!checkVal($value, '配置', true, 0, 50)) {
                 return;
             }
             $.ajax({
                 url: '/admin/config/editinfo',
                 type: 'post',
                 dataType: 'json',
-                data: {id: $id, name: $name, class_id: $class_id},
+                data: {id: id, value: $value, class_id: $class_id},
                 success: function (res) {
                     if (res.status == 1) {
                         alert('修改成功!');
@@ -48,19 +67,30 @@ use yii\helpers\Html;
 <?php $this->endBlock(); ?>
 
 <div class="panel panel-default">
-    <input type="hidden" name="id" value="<?= $model->id; ?>">
+    <input type="hidden" name="id" value="<?= $info->id; ?>">
     <div class="panel-body">
         <div class="form-group">
             <label class="col-sm-3 control-label">分类</label>
-            <div class="col-sm-6">
-                <input type="text" disabled class="form-control" name="username" value="<?= $model->class_id; ?>"
-                       required>
+            <div class="col-sm-6 dropdown">
+                <button style="width: 200px;" class="btn btn-default dropdown-toggle" type="button"
+                        tag="<?= $info->class_id; ?>"
+                        id="dropdownMenu1"
+                        data-toggle="dropdown">
+                    请选择分类
+                </button>
+                <ul style="margin-left: 10px" class="dropdown-menu" role="menu">
+                    <?php foreach ($class_list as $item): ?>
+                        <li class="li_on_click" role="presentation" tag="<?= $item->id; ?>">
+                            <a role="menuitem" tabindex="-1" href="#"><?= $item->name; ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">配置</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="name" value="<?= $model->name; ?>">
+                <input type="text" class="form-control" name="value" value="<?= $info->value; ?>">
             </div>
         </div>
     </div>

@@ -20,23 +20,24 @@ use yii\helpers\Html;
             <div class="form-group">
                 <label class="col-sm-3 control-label">分类</label>
                 <div class="col-sm-6 dropdown">
-                    <button style="width: 200px;" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                    <button style="width: 200px;" class="btn btn-default dropdown-toggle" type="button" tag="0"
+                            id="dropdownMenu1"
                             data-toggle="dropdown">
-                        Dropdown
-                        <span class="caret"></span>
+                        请选择分类
                     </button>
-                    <ul style="margin-left: 10px" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                    <ul style="margin-left: 10px" class="dropdown-menu" role="menu">
+                        <?php foreach ($list as $item): ?>
+                            <li class="li_on_click" role="presentation" tag="<?= $item->id; ?>">
+                                <a role="menuitem" tabindex="-1"  href="#"><?= $item->name; ?></a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">配置</label>
                 <div class="col-sm-6">
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="value" class="form-control">
                 </div>
             </div>
         </div>
@@ -51,17 +52,27 @@ use yii\helpers\Html;
 <?php $this->beginBlock('footer');//尾部附加 ?>
     <script>
         $(function () {
+            $(".li_on_click").click(function () {
+                var class_id = $(this).attr('tag');
+                var class_name = $(this).find('a').html();
+                $('#dropdownMenu1').attr('tag', class_id).html(class_name);
+
+            });
             $("#add_button").click(function () {
-                var $class_id = $('input[name=password]').val().trim();
-                var $name = $('input[name=name]').val().trim();
-                if (!checkVal($name, '配置', true, 0, 50)) {
+                var $class_id = $('#dropdownMenu1').attr('tag');
+                var $value = $('input[name=value]').val().trim();
+                if($class_id == 0){
+                    alert('请选择分类！');
+                    return;
+                }
+                if (!checkVal($value, '配置', true, 0, 50)) {
                     return;
                 }
                 $.ajax({
                     url: '/admin/config/addinfo',
                     type: 'post',
                     dataType: 'json',
-                    data: {name: $name, class_id: $class_id},
+                    data: {value: $value, class_id: $class_id},
                     success: function (res) {
                         if (res.status == 1) {
                             alert('添加成功!');

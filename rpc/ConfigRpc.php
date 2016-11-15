@@ -12,11 +12,11 @@ use app\components\LRpc;
 
 class ConfigRpc extends LRpc
 {
-    public function getClassList($page)
+    public function getClassList($page = 1, $per_page = 20)
     {
         $params = [
             'page'     => intval($page),
-            'per_page' => 20,
+            'per_page' => intval($per_page),
         ];
         return LRpc::init()->post($params)->url('/config/classlist');
     }
@@ -39,30 +39,30 @@ class ConfigRpc extends LRpc
         return LRpc::init()->post($params)->url('/config/getclass');
     }
 
-    public function getInfoList($page)
+    public function getInfoList($page = 1, $per_page = 20)
     {
         $params = [
             'page'     => intval($page),
-            'per_page' => 20,
+            'per_page' => intval($per_page),
         ];
-        return LRpc::init()->post($params)->url('/config/infolist');
+        return LRpc::init()->post($params)->url('/config/valuelist');
     }
 
     public function addInfo($info)
     {
         $params = $info;
-        return LRpc::init()->post($params)->url('/config/infoadd');
+        return LRpc::init()->post($params)->url('/config/valueadd');
     }
 
     public function editInfo($info)
     {
         $params = $info;
-        return LRpc::init()->post($params)->url('/config/infoedit');
+        return LRpc::init()->post($params)->url('/config/valueedit');
     }
 
     public function getInfo($id)
     {
         $params = ['id' => $id];
-        return LRpc::init()->post($params)->url('/config/getinfo');
+        return LRpc::init()->post($params)->url('/config/getvalue');
     }
 }

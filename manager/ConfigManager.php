@@ -20,9 +20,9 @@ class ConfigManager
         $this->config_rpc = new ConfigRpc();
     }
 
-    public function getClassList($page)
+    public function getClassList($page = 1, $pre_page = 20)
     {
-        return $this->config_rpc->getClassList($page);
+        return $this->config_rpc->getClassList($page, $pre_page);
     }
 
     public function addClass($class)
@@ -40,9 +40,9 @@ class ConfigManager
         return $this->config_rpc->getClass($id);
     }
 
-    public function getInfoList($page)
+    public function getInfoList($page = 1, $per_page = 20)
     {
-        return $this->config_rpc->getInfoList($page);
+        return $this->config_rpc->getInfoList($page, $per_page);
     }
 
     public function addInfo($info)

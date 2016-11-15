@@ -35,7 +35,7 @@ class ConfigController extends LController
             $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => 20]);
         } else {
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
-            $list = $res->class;
+            $list = $res->class_list;
         }
         return $this->render('class', [
             'list'  => $list,
@@ -94,25 +94,41 @@ class ConfigController extends LController
 
     public function actionInfo()
     {
+        $info_list = [];
+        $class_list = [];
         $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
+        $search_params = $_GET;
+
         $res = $this->config_manager->getInfoList($page);
-        if ($this->hasError($res)) {
-            $list = [];
-            $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => 20]);
-        } else {
+        $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => 20]);
+        if (!$this->hasError($res)) {
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
-            $list = $res->class_info;
+            $info_list = $res->value_list;
+        }
+        $res = $this->config_manager->getClassList(1, 9999);
+        if (!$this->hasError($res)) {
+            $class_list = $res->class_list;
         }
         return $this->render('info', [
-            'list'  => $list,
-            'pages' => $pages
+            'info_list'     => $info_list,
+            'class_list'    => $class_list,
+            'pages'         => $pages,
+            'search_params' => $search_params
         ]);
     }
 
     public function actionAddinfo()
     {
         if (!$this->is_post) {
-            return $this->render('addinfo');
+            $res = $this->config_manager->getClassList(1, 9999);
+            if ($this->hasError($res)) {
+                $list = [];
+            } else {
+                $list = $res->class_list;
+            }
+            return $this->render('addinfo', [
+                'list' => $list,
+            ]);
         } else {
             if (!Utils::validVal($this->getRequestParam('value'), true, 0, 50)) {
                 return $this->error('请输入不大于50位的信息名称！');
@@ -145,7 +161,13 @@ class ConfigController extends LController
             if (empty($info)) {
                 return $this->render('addinfo');
             } else {
-                return $this->render('editinfo', ['model' => $info]);
+                $class_list = [];
+                $res = $this->config_manager->getClassList(1, 9999);
+                if (!$this->hasError($res)) {
+                    $class_list = $res->class_list;
+                }
+                $data = ['class_list' => $class_list, 'info' => $info];
+                return $this->render('editinfo', $data);
             }
         } else {
             if (!Utils::validVal($this->getRequestParam('value'), true, 0, 50)) {

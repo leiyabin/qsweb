@@ -12,6 +12,7 @@ namespace app\consts;
 class ErrorCode
 {
     //http error code
+    const SUCCESS = 200;
     const FORBIDDEN = 403;
     const NOT_FOUND = 404;
 
