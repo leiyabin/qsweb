@@ -96,12 +96,12 @@ class ConfigController extends LController
     {
         $info_list = [];
         $class_list = [];
-        $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
+        $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => $this->page_size]);
         $class_id = $this->getRequestParam('class_id', 0);
         $value = $this->getRequestParam('value', '');
+        $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
         $page_info = ['page' => $page, 'pre_page' => $this->page_size];
-        $res = $this->config_manager->getInfoList($page_info, $class_id, $page_info);
-        $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => $this->page_size]);
+        $res = $this->config_manager->getInfoList($page_info, $class_id, $value);
         if (!$this->hasError($res)) {
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
             $info_list = $res->value_list;
@@ -136,7 +136,7 @@ class ConfigController extends LController
                 return $this->error('请输入不大于50位的信息名称！');
             }
             if (!Utils::validVal($this->getRequestParam('class_id'), true)) {
-                return $this->error('请输入选择类别id！');
+                return $this->error('请选择类别！');
             }
             $info = [
                 'class_id' => $this->params['class_id'],

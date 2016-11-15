@@ -40,7 +40,7 @@ class ConfigManager
         return $this->config_rpc->getClass($id);
     }
 
-    public function getInfoList($page_info , $class_id = 0, $value = 0)
+    public function getInfoList($page_info , $class_id = 0, $value = '')
     {
         return $this->config_rpc->getInfoList($page_info, $class_id, $value);
     }

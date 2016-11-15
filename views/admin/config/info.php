@@ -42,6 +42,15 @@ use yii\helpers\Url;
         }
         location.href = url;
     });
+    var class_id = $('#dropdownMenu1').attr('tag');
+    if(class_id != ''){
+        $('.li_on_click').each(function () {
+            if($(this).attr('tag') == class_id) {
+                $(this).click();
+                return false;
+            }
+        })
+    }
 </script>
 <?php $this->endBlock(); ?>
 <div class="panel panel-default">
@@ -56,7 +65,7 @@ use yii\helpers\Url;
                         <div class="col-sm-6 dropdown">
                             <button style="width: 200px; height: 40px" class="btn btn-default dropdown-toggle"
                                     type="button"
-                                    tag="0"
+                                    tag="<?= $class_id?>"
                                     id="dropdownMenu1"
                                     data-toggle="dropdown">
                                 请选择分类
@@ -69,7 +78,7 @@ use yii\helpers\Url;
                                 <?php endforeach; ?>
                             </ul>
                         </div>
-                        <input style="margin-left: 32px" type="text" name="search" class="form-control" value=""
+                        <input style="margin-left: 32px" type="text" name="search" class="form-control" value="<?= $value ?>"
                                placeholder="请输入配置名称">
                     </div>
                     <button type="submit" id="search_button" class="btn btn-default">搜索</button>

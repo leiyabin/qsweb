@@ -24,7 +24,7 @@ class LController extends Controller
     protected $page_size = 20;
     protected $is_post;
     protected $user_info;
-    private static $auth_controllers = ['admin', 'config'];
+    private static $auth_controllers = ['admin', 'config', 'news'];
     public $layout = 'admin';
 
 

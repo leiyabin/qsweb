@@ -58,7 +58,7 @@ use yii\helpers\Url;
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>房产百科</span></a>
                         <ul class="children">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>百科列表</a></li>
+                            <li><a href="/admin/news/list/"><i class="fa fa-caret-right"></i>房产百科列表</a></li>
                         </ul>
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>经纪人</span></a>
@@ -68,12 +68,12 @@ use yii\helpers\Url;
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>千誉金融</span></a>
                         <ul class="children">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>百科列表</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>金融简介</a></li>
                         </ul>
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>海外</span></a>
                         <ul class="children">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>案例列表</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>案例</a></li>
                         </ul>
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>配置信息设置</span></a>
