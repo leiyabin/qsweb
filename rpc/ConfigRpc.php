@@ -39,11 +39,13 @@ class ConfigRpc extends LRpc
         return LRpc::init()->post($params)->url('/config/getclass');
     }
 
-    public function getInfoList($page = 1, $per_page = 20)
+    public function getInfoList($page_info, $class_id = 0, $value = 0)
     {
         $params = [
-            'page'     => intval($page),
-            'per_page' => intval($per_page),
+            'page'     => intval($page_info['page']),
+            'per_page' => intval($page_info['pre_page']),
+            'class_id' => $class_id,
+            'value'    => $value
         ];
         return LRpc::init()->post($params)->url('/config/valuelist');
     }

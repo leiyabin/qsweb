@@ -21,6 +21,7 @@ class LController extends Controller
     protected $response_status;
     protected $error_msg = '';
     protected $default_page = 1;
+    protected $page_size = 20;
     protected $is_post;
     protected $user_info;
     private static $auth_controllers = ['admin', 'config'];

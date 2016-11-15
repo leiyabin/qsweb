@@ -32,7 +32,7 @@ class AdminController extends LController
         $res = $this->admin_manager->getList($page);
         if ($this->hasError($res)) {
             $list = [];
-            $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => 20]);
+            $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => $this->page_size]);
         } else {
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
             $list = $res->admin;

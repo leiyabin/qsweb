@@ -32,7 +32,7 @@ class ConfigController extends LController
         $res = $this->config_manager->getClassList($page);
         if ($this->hasError($res)) {
             $list = [];
-            $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => 20]);
+            $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => $this->page_size]);
         } else {
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
             $list = $res->class_list;
@@ -97,10 +97,11 @@ class ConfigController extends LController
         $info_list = [];
         $class_list = [];
         $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
-        $search_params = $_GET;
-
-        $res = $this->config_manager->getInfoList($page);
-        $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => 20]);
+        $class_id = $this->getRequestParam('class_id', 0);
+        $value = $this->getRequestParam('value', '');
+        $page_info = ['page' => $page, 'pre_page' => $this->page_size];
+        $res = $this->config_manager->getInfoList($page_info, $class_id, $page_info);
+        $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => $this->page_size]);
         if (!$this->hasError($res)) {
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
             $info_list = $res->value_list;
@@ -110,10 +111,11 @@ class ConfigController extends LController
             $class_list = $res->class_list;
         }
         return $this->render('info', [
-            'info_list'     => $info_list,
-            'class_list'    => $class_list,
-            'pages'         => $pages,
-            'search_params' => $search_params
+            'info_list'  => $info_list,
+            'class_list' => $class_list,
+            'pages'      => $pages,
+            'class_id'   => $class_id,
+            'value'      => $value
         ]);
     }
 
