@@ -14,4 +14,4 @@
 
 <?php $this->endBlock(); ?>
 
-欢迎！
+欢迎！<?= $username ?>

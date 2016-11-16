@@ -24,7 +24,7 @@ class LController extends Controller
     protected $page_size = 20;
     protected $is_post;
     protected $user_info;
-    private static $auth_controllers = ['admin', 'config', 'news'];
+    private static $auth_controllers = ['admin', 'config', 'news', 'index'];
     public $layout = 'admin';
 
 
@@ -103,7 +103,6 @@ class LController extends Controller
 
     public function beforeAction($action)
     {
-
         $request = sprintf('【REQUEST】 method: %s url: %s ; params: %s',
             Yii::$app->request->getMethod(), Yii::$app->request->getUrl(), json_encode($this->params, JSON_UNESCAPED_UNICODE));
         Yii::info($request, LogConst::REQUEST);

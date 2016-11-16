@@ -62,7 +62,7 @@ use yii\helpers\Html;
     <input type="hidden" name="id" value="<?= $model->id; ?>">
     <div class="panel-body">
         <div class="form-group">
-            <label class="col-sm-3 control-label">用户名</label>
+            <label class="col-sm-3 control-label">用户名<fond style="color: red">*</fond></label>
             <div class="col-sm-6">
                 <input type="text" disabled class="form-control" name="username" value="<?= $model->username; ?>"
                        required>
@@ -76,19 +76,19 @@ use yii\helpers\Html;
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">姓名</label>
+            <label class="col-sm-3 control-label">姓名<fond style="color: red">*</fond></label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="name" value="<?= $model->name; ?>" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">邮箱</label>
+            <label class="col-sm-3 control-label">邮箱<fond style="color: red">*</fond></label>
             <div class="col-sm-6">
                 <input type="email" class="form-control" name="email" value="<?= $model->email; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">电话</label>
+            <label class="col-sm-3 control-label">电话<fond style="color: red">*</fond></label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="phone" value="<?= $model->phone; ?>">
             </div>

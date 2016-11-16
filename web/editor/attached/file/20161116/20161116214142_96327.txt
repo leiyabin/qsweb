@@ -1,0 +1,313 @@
+{
+    "ret": 1,
+    "data": {
+        "raw_goods_amount": 342.7,
+        "goods_amount": 342.7,
+        "ssu_num": 5,
+        "discount_amount": 0,
+        "package_amount": 0,
+        "total_amount": 342.7,
+        "snapshot_id": "",
+        "activity_list": [],
+        "full_gift_list": [],
+        "goods_list": [
+            {
+                "vendor_id": 1,
+                "vendor_name": "×ÔÓª",
+                "discount_amount": 0,
+                "sku_id": 1332,
+                "sku_name": "½ª(¸É)",
+                "status": 1,
+                "price_unit": "½ï",
+                "raw_goods_amount": 52.8,
+                "total_sku_num": 10,
+                "goods_amount": 52.8,
+                "package_amount": 0,
+                "pic": "http://img.yunshanmeicai.com/05a49fd3-54f4-450c-bbd5-cae15d819479.png",
+                "total_amount": 52.8,
+                "ssus": [
+                    {
+                        "sale_class1": 1,
+                        "price_unit": "½ï",
+                        "unit_price": 5.28,
+                        "num": 1,
+                        "pic": "http://img.yunshanmeicai.com/05a49fd3-54f4-450c-bbd5-cae15d819479.png",
+                        "ssu_format": "1´ü(10½ï)",
+                        "raw_goods_price": 52.8,
+                        "activity_id": 0,
+                        "goods_price": 52.8,
+                        "name": "½ª(¸É|½ï)",
+                        "buy_gift_list": [],
+                        "ssu_id": 279153,
+                        "virtual_id": null,
+                        "stock": -1,
+                        "activity_type": 0,
+                        "status": 1,
+                        "package_amount": 0,
+                        "packages": [],
+                        "message": {
+                            "msg": "",
+                            "code": 0
+                        },
+                        "total_amount": 52.8,
+                        "price_unit_assembly": "£¤ 5.28/½ï",
+                        "in_stock": -1,
+                        "limit_num": -1,
+                        "tip_num": false,
+                        "min_threshold_msg": "",
+                        "raw_ssu_id": 279153,
+                        "bi_id": 1117,
+                        "sale_class2_id": 13,
+                        "ssu_format_raw": "´ü(10½ï)"
+                    }
+                ]
+            },
+            {
+                "vendor_id": 1,
+                "vendor_name": "×ÔÓª",
+                "discount_amount": 0,
+                "sku_id": 1364,
+                "sku_name": "Àï¼¹(ÏÊ/Ò»¼¶)",
+                "status": 1,
+                "price_unit": "½ï",
+                "raw_goods_amount": 81,
+                "total_sku_num": 5,
+                "goods_amount": 81,
+                "package_amount": 0,
+                "pic": "http://img.yunshanmeicai.com/a517de7f-b961-4a5e-ac03-2ea6789cd7e5.png",
+                "total_amount": 81,
+                "ssus": [
+                    {
+                        "sale_class1": 3,
+                        "price_unit": "½ï",
+                        "unit_price": 16.2,
+                        "num": 1,
+                        "pic": "http://img.yunshanmeicai.com/a517de7f-b961-4a5e-ac03-2ea6789cd7e5.png",
+                        "ssu_format": "1´ü(5½ï)",
+                        "raw_goods_price": 81,
+                        "activity_id": 0,
+                        "goods_price": 81,
+                        "name": "Àï¼¹(ÏÊ/Ò»¼¶|500g)",
+                        "buy_gift_list": [],
+                        "ssu_id": 129032,
+                        "virtual_id": null,
+                        "stock": -1,
+                        "activity_type": 0,
+                        "status": 1,
+                        "package_amount": 0,
+                        "packages": [],
+                        "message": {
+                            "msg": "",
+                            "code": 0
+                        },
+                        "total_amount": 81,
+                        "price_unit_assembly": "£¤ 16.2/½ï",
+                        "in_stock": -1,
+                        "limit_num": -1,
+                        "tip_num": false,
+                        "min_threshold_msg": "",
+                        "raw_ssu_id": 129032,
+                        "bi_id": 1137,
+                        "sale_class2_id": 27,
+                        "ssu_format_raw": "´ü(5½ï)"
+                    }
+                ]
+            },
+            {
+                "vendor_id": 1,
+                "vendor_name": "×ÔÓª",
+                "discount_amount": 0,
+                "sku_id": 103172,
+                "sku_name": "Àï¼¹(ÎåÈâÁª|ÏÊ/Ò»¼¶)",
+                "status": 1,
+                "price_unit": "½ï",
+                "raw_goods_amount": 89.5,
+                "total_sku_num": 5,
+                "goods_amount": 89.5,
+                "package_amount": 0,
+                "pic": "http://img.yunshanmeicai.com/131fd524-3dca-4086-abc0-7ab5cfa3bf7a.png",
+                "total_amount": 89.5,
+                "ssus": [
+                    {
+                        "sale_class1": 3,
+                        "price_unit": "½ï",
+                        "unit_price": 17.9,
+                        "num": 1,
+                        "pic": "http://img.yunshanmeicai.com/131fd524-3dca-4086-abc0-7ab5cfa3bf7a.png",
+                        "ssu_format": "1´ü(5½ï)",
+                        "raw_goods_price": 89.5,
+                        "activity_id": 0,
+                        "goods_price": 89.5,
+                        "name": "ÎåÈâÁªÀï¼¹(ÏÊ/Ò»¼¶|½ï)",
+                        "buy_gift_list": [],
+                        "ssu_id": 221177,
+                        "virtual_id": null,
+                        "stock": -1,
+                        "activity_type": 0,
+                        "status": 1,
+                        "package_amount": 0,
+                        "packages": [],
+                        "message": {
+                            "msg": "",
+                            "code": 0
+                        },
+                        "total_amount": 89.5,
+                        "price_unit_assembly": "£¤ 17.9/½ï",
+                        "in_stock": -1,
+                        "limit_num": -1,
+                        "tip_num": false,
+                        "min_threshold_msg": "",
+                        "raw_ssu_id": 221177,
+                        "bi_id": 1137,
+                        "sale_class2_id": 27,
+                        "ssu_format_raw": "´ü(5½ï)"
+                    }
+                ]
+            },
+            {
+                "vendor_id": 1,
+                "vendor_name": "×ÔÓª",
+                "discount_amount": 0,
+                "sku_id": 1331,
+                "sku_name": "½ª(Êª)",
+                "status": 1,
+                "price_unit": "½ï",
+                "raw_goods_amount": 95.8,
+                "total_sku_num": 20,
+                "goods_amount": 95.8,
+                "package_amount": 0,
+                "pic": "http://img.yunshanmeicai.com/72a5cc40-84cf-4a6d-bd80-cbfeb8fd9230.png",
+                "total_amount": 95.8,
+                "ssus": [
+                    {
+                        "sale_class1": 1,
+                        "price_unit": "½ï",
+                        "unit_price": 4.79,
+                        "num": 2,
+                        "pic": "http://img.yunshanmeicai.com/72a5cc40-84cf-4a6d-bd80-cbfeb8fd9230.png",
+                        "ssu_format": "1´ü(10½ï)",
+                        "raw_goods_price": 47.9,
+                        "activity_id": 0,
+                        "goods_price": 47.9,
+                        "name": "½ª(Êª|½ï)",
+                        "buy_gift_list": [],
+                        "ssu_id": 279138,
+                        "virtual_id": null,
+                        "stock": -1,
+                        "activity_type": 0,
+                        "status": 1,
+                        "package_amount": 0,
+                        "packages": [],
+                        "message": {
+                            "msg": "",
+                            "code": 0
+                        },
+                        "total_amount": 47.9,
+                        "price_unit_assembly": "£¤ 4.79/½ï",
+                        "in_stock": -1,
+                        "limit_num": -1,
+                        "tip_num": false,
+                        "min_threshold_msg": "",
+                        "raw_ssu_id": 279138,
+                        "bi_id": 1117,
+                        "sale_class2_id": 13,
+                        "ssu_format_raw": "´ü(10½ï)"
+                    }
+                ]
+            },
+            {
+                "vendor_id": 1,
+                "vendor_name": "×ÔÓª",
+                "discount_amount": 0,
+                "sku_id": 2579,
+                "sku_name": "½ª(Ëé)",
+                "status": 1,
+                "price_unit": "½ï",
+                "raw_goods_amount": 23.6,
+                "total_sku_num": 8,
+                "goods_amount": 23.6,
+                "package_amount": 0,
+                "pic": "http://img.yunshanmeicai.com/7c236086fb16840cb6ac24b2b0d32cde.png",
+                "total_amount": 23.6,
+                "ssus": [
+                    {
+                        "sale_class1": 1,
+                        "price_unit": "½ï",
+                        "unit_price": 2.95,
+                        "num": 4,
+                        "pic": "http://img.yunshanmeicai.com/7c236086fb16840cb6ac24b2b0d32cde.png",
+                        "ssu_format": "1´ü(2½ï)",
+                        "raw_goods_price": 5.9,
+                        "activity_id": 0,
+                        "goods_price": 5.9,
+                        "name": "½ª(|Ëé/500g)",
+                        "buy_gift_list": [],
+                        "ssu_id": 4006,
+                        "virtual_id": null,
+                        "stock": -1,
+                        "activity_type": 0,
+                        "status": 1,
+                        "package_amount": 0,
+                        "packages": [],
+                        "message": {
+                            "msg": "",
+                            "code": 0
+                        },
+                        "total_amount": 5.9,
+                        "price_unit_assembly": "£¤ 2.95/½ï",
+                        "in_stock": -1,
+                        "limit_num": -1,
+                        "tip_num": false,
+                        "min_threshold_msg": "",
+                        "raw_ssu_id": 4006,
+                        "bi_id": 1117,
+                        "sale_class2_id": 13,
+                        "ssu_format_raw": "´ü(2½ï)"
+                    }
+                ]
+            }
+        ],
+        "order_limit": {
+            "city_limit": 100,
+            "today_price": 0
+        },
+        "smallestSsus_list": [
+            {
+                "activity_id": 0,
+                "num": 1,
+                "ssu_id": 279153,
+                "activity_type": 0
+            },
+            {
+                "activity_id": 0,
+                "num": 1,
+                "ssu_id": 129032,
+                "activity_type": 0
+            },
+            {
+                "activity_id": 0,
+                "num": 1,
+                "ssu_id": 221177,
+                "activity_type": 0
+            },
+            {
+                "activity_id": 0,
+                "num": 2,
+                "ssu_id": 279138,
+                "activity_type": 0
+            },
+            {
+                "activity_id": 0,
+                "num": 4,
+                "ssu_id": 4006,
+                "activity_type": 0
+            }
+        ],
+        "message": {
+            "code": 0,
+            "msg": "²Ù×÷³É¹¦"
+        },
+        "status": 1,
+        "non_effective_goods_list": []
+    }
+}

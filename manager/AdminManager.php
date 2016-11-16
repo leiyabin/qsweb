@@ -69,4 +69,5 @@ class AdminManager
     {
         return LSession::destroy(self::ADMIN_INFO_SESSION, 'QS_ADMIN_SESSION');
     }
+
 }

@@ -13,10 +13,13 @@ use yii\helpers\Url;
         <title>后台管理</title>
         <link href="<?= Url::to('/static/admin/css/style.default.css'); ?>" rel="stylesheet">
         <link href="<?= Url::to('/static/admin/css/custom.css'); ?>" rel="stylesheet">
+        <link rel="stylesheet" href="/editor/themes/default/default.css" />
+        <link rel="stylesheet" href="/editor/plugins/code/prettify.css" />
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="<?=Url::to('/static/admin/js/html5shiv.js');?>"></script>
         <script src="<?=Url::to('/static/admin/js/respond.min.js');?>"></script>
+
         <![endif]-->
         <?php if (isset($this->blocks['header'])): ?>
             <?= $this->blocks['header'] ?>

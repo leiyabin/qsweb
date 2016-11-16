@@ -74,17 +74,33 @@ class NewsController extends LController
                 'list' => $list,
             ]);
         } else {
-            //todo
-            if (!Utils::validVal($this->getRequestParam('title'), true, 0, 50)) {
-                return $this->error('请输入不大于50位的标题！');
-            }
             if (!Utils::validVal($this->getRequestParam('class_id'), true)) {
                 return $this->error('请选择类别！');
             }
+            if (!Utils::validVal($this->getRequestParam('title'), true, 0, 50)) {
+                return $this->error('请输入不大于50位的标题！');
+            }
+            if (!Utils::validVal($this->getRequestParam('news_content'), true)) {
+                return $this->error('请输入内容！');
+            }
+            //todo 保存图片，返回保存地址
+            $top_img = $this->getRequestParam('top_img');
+            $recommend_img = $this->getRequestParam('recommend_img');
+            $news_img = $this->getRequestParam('news_img');
             $news = [
                 'class_id' => $this->params['class_id'],
-                'value'    => $this->params['value']
+                'title'    => $this->params['title'],
+                'content'  => $this->params['news_content'],
             ];
+            if (!empty($top_img)){
+                $news['top_img'] = $top_img;
+            }
+            if (!empty($recommend_img)){
+                $news['recommend_img'] = $top_img;
+            }
+            if (!empty($news_img)){
+                $news['news_img'] = $top_img;
+            }
             $res = $this->news_manager->add($news);
             if ($this->hasError($res)) {
                 return $this->error('添加失败！');

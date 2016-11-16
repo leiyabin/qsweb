@@ -103,7 +103,7 @@ use yii\helpers\Html;
                 data: {username: $username, password: $password},
                 success: function (res) {
                     if (res.status == 1) {
-                        location.href = '/admin/admin/index'
+                        location.href = '/admin/index/index'
                     } else {
                         alert(res.msg);
                     }
