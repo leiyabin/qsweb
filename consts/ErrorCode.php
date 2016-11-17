@@ -20,4 +20,6 @@ class ErrorCode
     const INVALID_PARAM = 1000;
     const SYSTEM_ERROR = 2000;
     const ACTION_ERROR = 3000;
+
+
 }

@@ -60,4 +60,13 @@ class Utils
         return true;
     }
 
+    public static function getLowerFileExt($file_name)
+    {
+        $temp_arr = explode(".", $file_name);
+        $file_ext = array_pop($temp_arr);
+        $file_ext = trim($file_ext);
+        $file_ext = strtolower($file_ext);
+        return $file_ext;
+    }
+
 }

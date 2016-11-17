@@ -42,6 +42,7 @@ use yii\helpers\Html;
 
     <div class="panel panel-default">
         <div class="panel-body">
+            <form id="form_1">
             <div class="form-group">
                 <label class="col-sm-3 control-label" style="width: 10%">分类
                     <fond style="color: red">*</fond>
@@ -101,6 +102,7 @@ use yii\helpers\Html;
                           style="width:800px;height:600px;visibility:hidden;"></textarea>
                 </div>
             </div>
+            </form>
         </div>
         <div class="panel-footer">
             <div class="row">
@@ -150,14 +152,7 @@ use yii\helpers\Html;
                     url: '/admin/news/add',
                     type: 'post',
                     dataType: 'json',
-                    data: {
-                        class_id: $class_id,
-                        title: $title,
-                        hot_img: $hot_img,
-                        recommend_img: $recommend_img,
-                        news_img: $news_img,
-                        news_content:$news_content
-                    },
+                    data: $('#form_1').serialize(),
                     success: function (res) {
                         if (res.status == 1) {
                             alert('添加成功!');
