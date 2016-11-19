@@ -19,8 +19,18 @@ use yii\helpers\Url;
         <!--[if lt IE 9]>
         <script src="<?=Url::to('/static/admin/js/html5shiv.js');?>"></script>
         <script src="<?=Url::to('/static/admin/js/respond.min.js');?>"></script>
-
         <![endif]-->
+        <script src="<?= Url::to('/static/admin/js/jquery-1.10.2.min.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/bootstrap.min.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/modernizr.min.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/jquery.sparkline.min.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/toggles.min.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/retina.min.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/jquery.cookies.js'); ?>"></script>
+        <script src="<?= Url::to('/static/jquery-form/jquery.form.min.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/custom.js'); ?>"></script>
+        <script src="<?= Url::to('/static/admin/js/common.js'); ?>"></script>
         <?php if (isset($this->blocks['header'])): ?>
             <?= $this->blocks['header'] ?>
         <?php endif; ?>
@@ -123,18 +133,6 @@ use yii\helpers\Url;
             </div>
         </div><!-- 主面板 -->
     </section>
-
-    <script src="<?= Url::to('/static/admin/js/jquery-1.10.2.min.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/bootstrap.min.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/modernizr.min.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/jquery.sparkline.min.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/toggles.min.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/retina.min.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/jquery.cookies.js'); ?>"></script>
-    <script src="<?= Url::to('/static/jquery-form/jquery.form.min.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/custom.js'); ?>"></script>
-    <script src="<?= Url::to('/static/admin/js/common.js'); ?>"></script>
 
     <script>
         //菜单状态管理

@@ -13,7 +13,6 @@ use app\consts\LogConst;
 use Yii;
 use yii\web\HttpException;
 use yii\web\ErrorAction;
-use yii\base\Exception;
 use yii\base\UserException;
 
 class LErrorAction extends ErrorAction
@@ -42,11 +41,9 @@ class LErrorAction extends ErrorAction
         }
         header("Content-type:application/json;charset=utf-8");
         $res = [
-            'ret'  => 0,
-            'data' => [
-                'code' => $code,
-                'msg'  => $message
-            ]
+            'status' => 0,
+            'code'   => $code,
+            'msg'    => $message
         ];
         $res_json = json_encode($res, JSON_UNESCAPED_UNICODE);
         $response = sprintf('【RESPONSE】 method: %s url: %s ; params: %s ; result: %s ',

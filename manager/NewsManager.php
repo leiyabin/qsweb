@@ -22,7 +22,7 @@ class NewsManager
 
     public function getNewsList($page_info, $class_id = 0, $title = '')
     {
-        return '';
+        return $this->news_rpc->getList($page_info, $class_id, $title);
     }
 
     public function add($news)
@@ -34,13 +34,18 @@ class NewsManager
         return $this->news_rpc->add($news);
     }
 
-    public function editInfo($info)
+    public function edit($info)
     {
         return $this->news_rpc->edit($info);
     }
 
-    public function getInfo($id)
+    public function get($id)
     {
         return $this->news_rpc->getOne($id);
+    }
+
+    public function batchDel($ids)
+    {
+        return $this->news_rpc->batchDel($ids);
     }
 }

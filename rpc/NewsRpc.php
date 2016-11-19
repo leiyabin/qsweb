@@ -44,6 +44,6 @@ class NewsRpc extends LRpc
     public function getOne($id)
     {
         $params = ['id' => $id];
-        return LRpc::init()->post($params)->url('/admin/get');
+        return LRpc::init()->post($params)->url('/news/get');
     }
 }

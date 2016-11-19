@@ -40,18 +40,18 @@ class NewsController extends LController
         $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => $this->page_size]);
         $class_id = $this->getRequestParam('class_id', 0);
         $title = $this->getRequestParam('title', '');
-//        $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
-//        $page_info = ['page' => $page, 'pre_page' => $this->page_size];
-//        $res = $this->news_manager->getNewsList($page_info, $class_id, $title);
-//        if (!$this->hasError($res)) {
-//            $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
-//            $news_list = $res->news_list;
-//        }
-//        $class_page_info = ['page' => 1, 'pre_page' => 9999];
-//        $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::NEWS_CLASS_CONST);
-//        if (!$this->hasError($res)) {
-//            $class_list = $res->value_list;
-//        }
+        $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
+        $page_info = ['page' => $page, 'pre_page' => $this->page_size];
+        $res = $this->news_manager->getNewsList($page_info, $class_id, $title);
+        if (!$this->hasError($res)) {
+            $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
+            $news_list = $res->news_list;
+        }
+        $class_page_info = ['page' => 1, 'pre_page' => 9999];
+        $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::NEWS_CLASS_CONST);
+        if (!$this->hasError($res)) {
+            $class_list = $res->value_list;
+        }
         return $this->render('index', [
             'news_list'  => $news_list,
             'class_list' => $class_list,
@@ -83,23 +83,29 @@ class NewsController extends LController
             if (!Utils::validVal($this->getRequestParam('news_content'), true)) {
                 return $this->error('请输入内容！');
             }
-            //todo 保存图片，返回保存地址
-            $top_img = $this->getRequestParam('top_img');
+            $hot_img = $this->getRequestParam('hot_img');
             $recommend_img = $this->getRequestParam('recommend_img');
-            $news_img = $this->getRequestParam('news_img');
+            $img = $this->getRequestParam('img');
             $news = [
-                'class_id' => $this->params['class_id'],
-                'title'    => $this->params['title'],
-                'content'  => $this->params['news_content'],
+                'class_id'      => $this->params['class_id'],
+                'title'         => $this->params['title'],
+                'content'       => $this->params['news_content'],
+                'hot'           => 0,
+                'recommend'     => 0,
+                'hot_img'       => '',
+                'recommend_img' => '',
+                'img'           => '',
             ];
-            if (!empty($top_img)){
-                $news['top_img'] = $top_img;
+            if (!empty($hot_img)) {
+                $news['hot_img'] = $hot_img;
+                $news['hot'] = 1;
             }
-            if (!empty($recommend_img)){
-                $news['recommend_img'] = $top_img;
+            if (!empty($recommend_img)) {
+                $news['recommend_img'] = $recommend_img;
+                $news['recommend'] = 1;
             }
-            if (!empty($news_img)){
-                $news['news_img'] = $top_img;
+            if (!empty($img)) {
+                $news['img'] = $img;
             }
             $res = $this->news_manager->add($news);
             if ($this->hasError($res)) {
@@ -111,24 +117,25 @@ class NewsController extends LController
     }
 
 
-    public function actionEditinfo()
+    public function actionEdit()
     {
         $id = $this->getRequestParam('id');
         if (empty($id)) {
             return $this->render('add');
         }
         if (!$this->is_post) {
-            $info = $this->news_manager->get($id);
-            if (empty($info)) {
+            $news = $this->news_manager->get($id);
+            if (empty($news)) {
                 return $this->render('add');
             } else {
                 $class_list = [];
-                $res = $this->config_manager->getClassList(1, 9999);
+                $class_page_info = ['page' => 1, 'pre_page' => 9999];
+                $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::NEWS_CLASS_CONST);
                 if (!$this->hasError($res)) {
-                    $class_list = $res->class_list;
+                    $class_list = $res->value_list;
                 }
-                $data = ['class_list' => $class_list, 'info' => $info];
-                return $this->render('editinfo', $data);
+                $data = ['list' => $class_list, 'news' => $news];
+                return $this->render('edit', $data);
             }
         } else {
             if (!Utils::validVal($this->getRequestParam('value'), true, 0, 50)) {
@@ -148,6 +155,24 @@ class NewsController extends LController
             } else {
                 return $this->success();
             }
+        }
+    }
+
+    public function actionBatchdel()
+    {
+        $ids = $this->getRequestParam('ids');
+        if (!$ids) {
+            return $this->error('请选中至少一个');
+        }
+        $ids = array_filter(explode(',', $ids));
+        if (empty($ids)) {
+            return $this->error('ids参数不合法');
+        }
+        $res = $this->news_manager->batchDel($ids);
+        if ($this->hasError($res)) {
+            return $this->error('删除用户失败！');
+        } else {
+            return $this->success();
         }
     }
 }

@@ -17,35 +17,20 @@ use Yii;
 
 class FileController extends LController
 {
-    private $file_name;
     private $file_type = [
         'image' => ['png', 'jpg', 'jpeg', 'gif', 'bmp']
     ];
 
-    public function beforeAction($action)
-    {
-        if (empty($this->params['file_name'])) {
-            throw new RequestException('文件名称不能为空！', ErrorCode::ACTION_ERROR);
-        }
-        $this->file_name = $this->params['file_name'];
-        return parent::beforeAction($action);
-    }
-
     public function actionAddimg()
     {
-
-
-    }
-
-    public function checkImg()
-    {
-        $file_name = $this->file_name;
-        if (!$_FILES[$file_name]['name'] == '') {
+        if (count($_FILES) != 0) {
+            $file_name = key($_FILES);
             if ($_FILES[$file_name]['error'] > 0) {
                 $this->throwError($_FILES[$file_name]['error']);
             } else {
                 $file_ext = Utils::getLowerFileExt($_FILES[$file_name]['name']);
-
+                $new_file_name = $this->saveImg($file_ext, $_FILES[$file_name]['tmp_name']);
+                return $this->success($new_file_name);
             }
         } else {
             throw new RequestException('请上传文件！');
@@ -88,11 +73,11 @@ class FileController extends LController
         }
         $new_file_name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $file_ext;
 
-        $file_path = UPLOAD_IMG_PATH . $new_file_name;
+        $file_path = WEB_PATH . UPLOAD_IMG_PATH . $new_file_name;
         if (move_uploaded_file($tmp_name, $file_path) === false) {
             throw new UploadException('上传文件失败', ErrorCode::SYSTEM_ERROR);
         }
         @chmod($file_path, 0644);
-        return $file_path;
+        return ['file_name' => $new_file_name, 'file_path' => UPLOAD_IMG_PATH . $new_file_name];
     }
 }

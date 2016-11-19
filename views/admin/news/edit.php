@@ -7,11 +7,37 @@
 use yii\helpers\Html;
 
 ?>
-
+<script charset="utf-8" src="/editor/kindeditor.js"></script>
+<script charset="utf-8" src="/editor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="/editor/plugins/code/prettify.js"></script>
+<script charset="utf-8" src="/static/admin/js/ajaxfileupload.js"></script>
+<script>
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.create('textarea[name="news_content"]', {
+            cssPath: '/editor/plugins/code/prettify.css',
+            uploadJson: '/editor/php/upload_json.php',
+            fileManagerJson: '/editor/php/file_manager_json.php',
+            allowFileManager: true,
+            afterCreate: function () {
+                var self = this;
+                K.ctrl(document, 13, function () {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function () {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+            }
+        });
+        prettyPrint();
+    });
+</script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
-    <h2><span style="font-style: normal">系统用户管理</span>
-        <span style="font-style: normal">修改用户</span></h2>
+    <h2><span style="font-style: normal">房产百科</span>
+        <span style="font-style: normal">修改</span></h2>
 </div>
 
 <?php $this->endBlock(); ?>
@@ -19,32 +45,58 @@ use yii\helpers\Html;
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
     $(function () {
-        $("#edit_button").click(function () {
-            var $password = $('input[name=password]').val().trim();
-            var $name = $('input[name=name]').val().trim();
-            var $email = $('input[name=email]').val().trim();
-            var $phone = $('input[name=phone]').val().trim();
-            var $id = $('input[name=id]').val().trim();
-            if (!checkVal($password, '密码', false, 6)) {
+        $(".li_on_click").click(function () {
+            var class_id = $(this).attr('tag');
+            var class_name = $(this).find('a').html();
+            $('#dropdownMenu1').attr('tag', class_id).html(class_name);
+
+        });
+        $('.upload_file').click(function () {
+            var file_name = $(this).attr('tag');
+            ajaxFileUpload(file_name);
+        });
+        $("#add_button").click(function () {
+            var $class_id = $('#dropdownMenu1').attr('tag');
+            var $title = $('input[name=title]').val().trim();
+            var $hot_img = $('input[name=hot_img_url]').val().trim();
+            var $img = $('input[name=news_img_url]').val().trim();
+            var $recommend_img = $('input[name=recommend_img_url]').val().trim();
+            var $news_content = editor.html();
+            if ($class_id == 0) {
+                alert('请选择分类！');
                 return;
             }
-            if (!checkVal($name, '姓名', true, 0, 20)) {
+            if (!checkVal($title, '标题', true, 0, 50)) {
                 return;
             }
-            if (!checkType($email, 'email')) {
-                return;
+            if ($('input[name=hot_mark]').prop("checked")) {
+                if (!checkVal($hot_img, '热点图片', true)) {
+                    return;
+                }
             }
-            if (!checkType($phone, 'phone')) {
+            if ($('input[name=recommend_mark]').prop("checked")) {
+                if (!checkVal($recommend_img, '帮你买房图片', true)) {
+                    return;
+                }
+            }
+            if (!checkVal($news_content, '内容', true)) {
                 return;
             }
             $.ajax({
-                url: '/admin/admin/edit',
+                url: '/admin/news/add',
                 type: 'post',
                 dataType: 'json',
-                data: {id: $id, password: $password, email: $email, phone: $phone, name: $name},
+                data: {
+                    class_id: $class_id,
+                    title: $title,
+                    hot_img: $hot_img,
+                    recommend_img: $recommend_img,
+                    img: $img,
+                    news_content: $news_content
+                },
                 success: function (res) {
                     if (res.status == 1) {
-                        alert('修改成功!');
+                        alert('添加成功!');
                     } else {
                         alert(res.msg);
                     }
@@ -57,47 +109,82 @@ use yii\helpers\Html;
     });
 </script>
 <?php $this->endBlock(); ?>
-
 <div class="panel panel-default">
-    <input type="hidden" name="id" value="<?= $model->id; ?>">
+    <input type="hidden" name="id" value="">
     <div class="panel-body">
         <div class="form-group">
-            <label class="col-sm-3 control-label">用户名</label>
-            <div class="col-sm-6">
-                <input type="text" disabled class="form-control" name="username" value="<?= $model->username; ?>"
-                       required>
+            <label class="col-sm-3 control-label" style="width: 10%">分类
+                <fond style="color: red">*</fond>
+            </label>
+            <div class="col-sm-6 dropdown">
+                <button style="width: 200px;" class="btn btn-default dropdown-toggle" type="button" tag="0"
+                        id="dropdownMenu1"
+                        data-toggle="dropdown">
+                    请选择分类
+                </button>
+                <ul style="margin-left: 10px" class="dropdown-menu" role="menu">
+                    <?php foreach ($list as $item): ?>
+                        <li class="li_on_click" role="presentation" tag="<?= $item->id; ?>">
+                            <a role="menuitem" tabindex="-1" href="#"><?= $item->value; ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">密码</label>
+            <label class="col-sm-3 control-label" style="width: 10%">标题
+                <fond style="color: red">*</fond>
+            </label>
             <div class="col-sm-6">
-                <input type="password" class="form-control" name="password" value="">
-                <p class="help-block">留空则密码保持不变</p>
+                <input type="text" name="title" class="form-control" value="<?= $news->title; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">姓名</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="name" value="<?= $model->name; ?>" required>
+            <label class="col-sm-3 control-label" style="width: 10%">楼市热点</label>
+            <div class="col-sm-6" style="width: 700px;">
+                <input type="checkbox" name="hot_mark">
+                <label style="color: red">*选中之后将展示在首页【楼市热点】栏目中，请上传图片尺寸408*228（或是长:宽=9:5）</label>
+                <input type="file" id="hot_img" name="hot_img" style="display:inline">
+                <input type="hidden" name="hot_img_url" value="<?= $news->hot_img; ?>" >
+                <input type="button" tag="hot_img" value="上传" class="upload_file">
+                <label class="hot_img_upload_res"></label>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">邮箱</label>
-            <div class="col-sm-6">
-                <input type="email" class="form-control" name="email" value="<?= $model->email; ?>">
+            <label class="col-sm-3 control-label" style="width: 10%">帮你买房</label>
+            <div class="col-sm-6" style="width: 700px;">
+                <input type="checkbox" name="recommend_mark">
+                <label style="color: red">*选中之后将展示在首页【帮你买房】栏目中，请上传图片尺寸800*160（或是长:宽=5:1）</label>
+                <input type="file" id="recommend_img" name="recommend_img" style="display:inline">
+                <input type="hidden" name="recommend_img_url" value="<?= $news->recommend_img; ?>">
+                <input type="button" tag="recommend_img" value="上传" class="upload_file">
+                <label class="recommend_img_upload_res"></label>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">电话</label>
+            <label class="col-sm-3 control-label" style="width: 10%">图片</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="phone" value="<?= $model->phone; ?>">
+                <label style="color: blue;display: block;">*请上传图片尺寸455X163（或是长:宽=5:2）的图片</label>
+                <input type="file" id="news_img" name="news_img" style="display:inline">
+                <input type="hidden" name="news_img_url" value="<?= $news->img; ?>">
+                <input type="button" tag="news_img" value="上传" class="upload_file">
+                <label class="news_img_upload_res"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" style="width: 10%">内容
+                <fond style="color: red">*</fond>
+            </label>
+            <div class="col-sm-6">
+                <textarea name="news_content"
+                          style="width:800px;height:600px;visibility:hidden;"></textarea>
             </div>
         </div>
     </div>
     <div class="panel-footer">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
-                <button class="btn btn-primary" id="edit_button">提交</button>
+                <button id="add_button" class="btn btn-primary">提交</button>
             </div>
         </div>
     </div>

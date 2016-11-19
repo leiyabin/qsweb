@@ -45,7 +45,7 @@ class AuthController extends LController
         if ($this->hasError($res)) {
             return $this->error('登录失败！');
         } else {
-            return $this->success('登录成功');
+            return $this->success();
         }
     }
 

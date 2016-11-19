@@ -5,14 +5,17 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 ?>
     <script charset="utf-8" src="/editor/kindeditor.js"></script>
     <script charset="utf-8" src="/editor/lang/zh_CN.js"></script>
     <script charset="utf-8" src="/editor/plugins/code/prettify.js"></script>
+    <script charset="utf-8" src="/static/admin/js/ajaxfileupload.js"></script>
     <script>
+        var editor;
         KindEditor.ready(function (K) {
-            var editor1 = K.create('textarea[name="news_content"]', {
+            editor = K.create('textarea[name="news_content"]', {
                 cssPath: '/editor/plugins/code/prettify.css',
                 uploadJson: '/editor/php/upload_json.php',
                 fileManagerJson: '/editor/php/file_manager_json.php',
@@ -42,7 +45,6 @@ use yii\helpers\Html;
 
     <div class="panel panel-default">
         <div class="panel-body">
-            <form id="form_1">
             <div class="form-group">
                 <label class="col-sm-3 control-label" style="width: 10%">分类
                     <fond style="color: red">*</fond>
@@ -75,7 +77,9 @@ use yii\helpers\Html;
                 <div class="col-sm-6" style="width: 700px;">
                     <input type="checkbox" name="hot_mark">
                     <label style="color: red">*选中之后将展示在首页【楼市热点】栏目中，请上传图片尺寸408*228（或是长:宽=9:5）</label>
-                    <input type="file" name="hot_img">
+                    <input type="file" id="hot_img" name="hot_img" style="display:inline">
+                    <input type="button" tag="hot_img" value="上传" class="upload_file">
+                    <input type="hidden" name="hot_img_url">
                 </div>
             </div>
             <div class="form-group">
@@ -83,14 +87,18 @@ use yii\helpers\Html;
                 <div class="col-sm-6" style="width: 700px;">
                     <input type="checkbox" name="recommend_mark">
                     <label style="color: red">*选中之后将展示在首页【帮你买房】栏目中，请上传图片尺寸800*160（或是长:宽=5:1）</label>
-                    <input type="file" name="recommend_img">
+                    <input type="file" id="recommend_img" name="recommend_img" style="display:inline">
+                    <input type="button" tag="recommend_img" value="上传" class="upload_file">
+                    <input type="hidden" name="recommend_img_url">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label" style="width: 10%">图片</label>
                 <div class="col-sm-6">
-                    <label style="color: blue">*请上传图片尺寸455X163（或是长:宽=5:2）的图片</label>
-                    <input type="file" name="news_img">
+                    <label style="color: blue;display: block;">*请上传图片尺寸455X163（或是长:宽=5:2）的图片</label>
+                    <input type="file" id="news_img" name="news_img" style="display:inline">
+                    <input type="button" tag="news_img" value="上传" class="upload_file">
+                    <input type="hidden" name="news_img_url">
                 </div>
             </div>
             <div class="form-group">
@@ -102,7 +110,6 @@ use yii\helpers\Html;
                           style="width:800px;height:600px;visibility:hidden;"></textarea>
                 </div>
             </div>
-            </form>
         </div>
         <div class="panel-footer">
             <div class="row">
@@ -121,13 +128,17 @@ use yii\helpers\Html;
                 $('#dropdownMenu1').attr('tag', class_id).html(class_name);
 
             });
+            $('.upload_file').click(function () {
+                var file_name = $(this).attr('tag');
+                ajaxFileUpload(file_name);
+            });
             $("#add_button").click(function () {
                 var $class_id = $('#dropdownMenu1').attr('tag');
                 var $title = $('input[name=title]').val().trim();
-                var $hot_img = $('input[name=hot_img]').val().trim();
-                var $recommend_img = $('input[name=recommend_img]').val().trim();
-                var $news_img = $('input[name=news_img]').val().trim();
-                var $news_content = $('textarea[name=news_content]').html();
+                var $hot_img = $('input[name=hot_img_url]').val().trim();
+                var $img = $('input[name=news_img_url]').val().trim();
+                var $recommend_img = $('input[name=recommend_img_url]').val().trim();
+                var $news_content = editor.html();
                 if ($class_id == 0) {
                     alert('请选择分类！');
                     return;
@@ -152,7 +163,14 @@ use yii\helpers\Html;
                     url: '/admin/news/add',
                     type: 'post',
                     dataType: 'json',
-                    data: $('#form_1').serialize(),
+                    data: {
+                        class_id: $class_id,
+                        title: $title,
+                        hot_img: $hot_img,
+                        recommend_img: $recommend_img,
+                        img: $img,
+                        news_content: $news_content
+                    },
                     success: function (res) {
                         if (res.status == 1) {
                             alert('添加成功!');
