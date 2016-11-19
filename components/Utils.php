@@ -77,4 +77,23 @@ class Utils
         return '';
     }
 
+    public static function arrayToObject($e)
+    {
+        foreach ($e as $k => $v) {
+            if (gettype($v) == 'array' || getType($v) == 'object')
+                $e[$k] = (object)self::arrayToObject($v);
+        }
+        return (object)$e;
+    }
+
+    public static function objectToArray($e)
+    {
+        $e = (array)$e;
+        foreach ($e as $k => $v) {
+            if (gettype($v) == 'object' || gettype($v) == 'array')
+                $e[$k] = (array)self::objectToArray($v);
+        }
+        return $e;
+    }
+
 }

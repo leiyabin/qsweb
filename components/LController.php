@@ -24,7 +24,7 @@ class LController extends Controller
     protected $page_size = 20;
     protected $is_post;
     protected $user_info;
-    private static $auth_controllers = ['admin', 'config', 'news', 'index', 'file'];
+    private static $auth_controllers = ['admin', 'config', 'news', 'index', 'file', 'oversea'];
     public $layout = 'admin';
 
 
@@ -33,6 +33,7 @@ class LController extends Controller
         $getParams = Yii::$app->request->get();
         $postParams = Yii::$app->request->post();
         $this->params = array_merge($getParams, $postParams);
+        $this->params = $this->safeHtml($this->params);
         $this->is_post = Yii::$app->request->isPost;
     }
 
@@ -85,6 +86,7 @@ class LController extends Controller
             Yii::$app->request->getMethod(), Yii::$app->request->getUrl(),
             json_encode($this->params, JSON_UNESCAPED_UNICODE), $res_json);
         Yii::info($response, LogConst::RESPONSE);
+        $res_json = htmlspecialchars_decode($res_json, ENT_QUOTES);
         return $res_json;
     }
 
@@ -156,5 +158,35 @@ class LController extends Controller
         Yii::error($response, LogConst::RESPONSE);
         echo $res_json;
         exit ();
+    }
+
+    private function safeHtml($html)
+    {
+        if (is_array($html)) {
+            foreach ($html as $k => $v) {
+                $html[$k] = self::safeHtml($v);
+            }
+            return $html;
+        }
+        return htmlspecialchars($html, ENT_QUOTES, 'utf-8');
+    }
+
+    private function decodeHtml($html)
+    {
+        if (is_array($html)) {
+            foreach ($html as $k => $v) {
+                $html[$k] = self::decodeHtml($v);
+            }
+            return $html;
+        }
+        return htmlspecialchars_decode($html, ENT_QUOTES);
+    }
+
+    public function render($view, $params = [])
+    {
+        $params = Utils::objectToArray($params);
+        $params = $this->decodeHtml($params);
+        $params = Utils::arrayToObject($params);
+        return parent::render($view, $params);
     }
 }

@@ -13,8 +13,8 @@ use yii\helpers\Url;
         <title>后台管理</title>
         <link href="<?= Url::to('/static/admin/css/style.default.css'); ?>" rel="stylesheet">
         <link href="<?= Url::to('/static/admin/css/custom.css'); ?>" rel="stylesheet">
-        <link rel="stylesheet" href="/editor/themes/default/default.css" />
-        <link rel="stylesheet" href="/editor/plugins/code/prettify.css" />
+        <link rel="stylesheet" href="/editor/themes/default/default.css"/>
+        <link rel="stylesheet" href="/editor/plugins/code/prettify.css"/>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="<?=Url::to('/static/admin/js/html5shiv.js');?>"></script>
@@ -86,7 +86,7 @@ use yii\helpers\Url;
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>海外</span></a>
                         <ul class="children">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>案例</a></li>
+                            <li><a href="/admin/oversea/index/?id=1"><i class="fa fa-caret-right"></i>案例</a></li>
                         </ul>
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>配置信息设置</span></a>
