@@ -9,6 +9,7 @@
 namespace app\manager;
 
 
+use app\components\Utils;
 use app\rpc\NewsRpc;
 
 class NewsManager
@@ -28,24 +29,38 @@ class NewsManager
     public function add($news)
     {
         $content = $news['content'];
-        $summary = strip_tags($content);
-        $summary = substr($summary, 0, 150);
-        $news['summary'] = $summary;
+        $news['summary'] = $this->getSummary($content);
         return $this->news_rpc->add($news);
     }
 
-    public function edit($info)
+    public function edit($news)
     {
-        return $this->news_rpc->edit($info);
+        $content = $news['content'];
+        $news['summary'] = $this->getSummary($content);
+        return $this->news_rpc->edit($news);
     }
 
     public function get($id)
     {
-        return $this->news_rpc->getOne($id);
+        $res = $this->news_rpc->getOne($id);
+        if (!empty($res)) {
+            $res->img_url = Utils::getImgUrl($res->img);
+            $res->hot_img_url = Utils::getImgUrl($res->hot_img);
+            $res->recommend_img_url = Utils::getImgUrl($res->recommend_img);
+        }
+        return $res;
     }
+
 
     public function batchDel($ids)
     {
         return $this->news_rpc->batchDel($ids);
+    }
+
+    private function getSummary($content)
+    {
+        $summary = strip_tags($content);
+        $summary = substr($summary, 0, 150);
+        return $summary;
     }
 }

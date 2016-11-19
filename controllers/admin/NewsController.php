@@ -138,20 +138,43 @@ class NewsController extends LController
                 return $this->render('edit', $data);
             }
         } else {
-            if (!Utils::validVal($this->getRequestParam('value'), true, 0, 50)) {
-                return $this->error('请输入不大于50位的信息名称！');
-            }
             if (!Utils::validVal($this->getRequestParam('class_id'), true)) {
-                return $this->error('请输入选择类别id！');
+                return $this->error('请选择类别！');
             }
-            $info = [
-                'class_id' => $this->params['class_id'],
-                'value'    => $this->params['value'],
-                'id'       => $this->params['id'],
+            if (!Utils::validVal($this->getRequestParam('title'), true, 0, 50)) {
+                return $this->error('请输入不大于50位的标题！');
+            }
+            if (!Utils::validVal($this->getRequestParam('news_content'), true)) {
+                return $this->error('请输入内容！');
+            }
+            $hot_img = $this->getRequestParam('hot_img');
+            $recommend_img = $this->getRequestParam('recommend_img');
+            $img = $this->getRequestParam('img');
+            $news = [
+                'class_id'      => $this->params['class_id'],
+                'title'         => $this->params['title'],
+                'content'       => $this->params['news_content'],
+                'hot'           => 0,
+                'recommend'     => 0,
+                'hot_img'       => '',
+                'recommend_img' => '',
+                'img'           => '',
+                'id'            => $id
             ];
-            $res = $this->config_manager->editInfo($info);
+            if (!empty($hot_img)) {
+                $news['hot_img'] = $hot_img;
+                $news['hot'] = 1;
+            }
+            if (!empty($recommend_img)) {
+                $news['recommend_img'] = $recommend_img;
+                $news['recommend'] = 1;
+            }
+            if (!empty($img)) {
+                $news['img'] = $img;
+            }
+            $res = $this->news_manager->edit($news);
             if ($this->hasError($res)) {
-                return $this->error('修改信息失败！');
+                return $this->error('修改失败！');
             } else {
                 return $this->success();
             }

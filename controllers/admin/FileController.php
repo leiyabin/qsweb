@@ -73,11 +73,11 @@ class FileController extends LController
         }
         $new_file_name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $file_ext;
 
-        $file_path = WEB_PATH . UPLOAD_IMG_PATH . $new_file_name;
+        $file_path = TMP_UPLOAD_IMG_PATH . $new_file_name;
         if (move_uploaded_file($tmp_name, $file_path) === false) {
             throw new UploadException('上传文件失败', ErrorCode::SYSTEM_ERROR);
         }
         @chmod($file_path, 0644);
-        return ['file_name' => $new_file_name, 'file_path' => UPLOAD_IMG_PATH . $new_file_name];
+        return ['file_name' => $new_file_name, 'file_path' => IMG_HOST . $new_file_name];
     }
 }
