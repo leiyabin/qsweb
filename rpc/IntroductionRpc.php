@@ -38,7 +38,7 @@ class IntroductionRpc extends LRpc
             'per_page' => intval($page_info['pre_page']),
             'class_id' => $class_id,
         ];
-        return LRpc::init()->post($params)->url('/introduction/getlist');
+        return LRpc::init()->post($params)->url('/introduction/list');
     }
 
     public function batchDel($ids)

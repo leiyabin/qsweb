@@ -65,11 +65,14 @@ class FinancialController extends LController
                 return $this->render('add');
             } else {
                 $data = ['financial' => $financial];
-                return $this->render('index', $data);
+                return $this->render('edit', $data);
             }
         } else {
             if (!Utils::validVal($this->getRequestParam('title'), true, 0, 50)) {
                 return $this->error('请输入不大于50位的标题！');
+            }
+            if (!Utils::validVal($this->getRequestParam('img'), true)) {
+                return $this->error('请上传图片！');
             }
             if (!Utils::validVal($this->getRequestParam('content'), true)) {
                 return $this->error('请输入内容！');
@@ -78,7 +81,8 @@ class FinancialController extends LController
                 'class_id' => self::CLASS_ID,
                 'title'    => $this->params['title'],
                 'content'  => $this->params['content'],
-                'id'       => $id
+                'id'       => $id,
+                'img'      => $this->params['img'],
             ];
             $res = $this->introduction_manager->edit($financial);
             if ($this->hasError($res)) {
@@ -97,13 +101,17 @@ class FinancialController extends LController
             if (!Utils::validVal($this->getRequestParam('title'), true, 0, 50)) {
                 return $this->error('请输入不大于50位的标题！');
             }
+            if (!Utils::validVal($this->getRequestParam('img'), true)) {
+                return $this->error('请上传图片！');
+            }
             if (!Utils::validVal($this->getRequestParam('content'), true)) {
                 return $this->error('请输入内容！');
             }
             $financial = [
-                'class_id'      => self::CLASS_ID,
-                'title'         => $this->params['title'],
-                'content'       => $this->params['content'],
+                'class_id' => self::CLASS_ID,
+                'title'    => $this->params['title'],
+                'content'  => $this->params['content'],
+                'img'      => $this->params['img'],
             ];
             $res = $this->introduction_manager->add($financial);
             if ($this->hasError($res)) {
@@ -124,7 +132,7 @@ class FinancialController extends LController
         if (empty($ids)) {
             return $this->error('ids参数不合法');
         }
-        $res = $this->news_manager->batchDel($ids);
+        $res = $this->introduction_manager->batchDel($ids);
         if ($this->hasError($res)) {
             return $this->error('删除用户失败！');
         } else {

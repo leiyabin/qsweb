@@ -22,7 +22,11 @@ class IntroductionManager
 
     public function get($id)
     {
-        return $this->introduction_rpc->get($id);
+        $res = $this->introduction_rpc->get($id);
+        if (!empty($res)) {
+            $res->img_url = Utils::getImgUrl($res->img);
+        }
+        return $res;
     }
 
     public function getList($page_info, $class_id = 0)
@@ -34,6 +38,7 @@ class IntroductionManager
     {
         $content = $introduction['content'];
         $introduction['summary'] = Utils::getSummary($content, 150);
+        $introduction['content'] = Utils::safeHtml($content);
         return $this->introduction_rpc->add($introduction);
     }
 

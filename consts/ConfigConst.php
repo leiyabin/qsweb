@@ -12,4 +12,5 @@ namespace app\consts;
 class ConfigConst
 {
     const NEWS_CLASS_CONST = 3;
+    const AREA_CLASS_CONST = 9;
 }
