@@ -13,4 +13,5 @@ class ConfigConst
 {
     const NEWS_CLASS_CONST = 3;
     const AREA_CLASS_CONST = 9;
+    const BROKER_CLASS_CONST = 4;
 }
