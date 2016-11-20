@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 
 ?>
+    <script charset="utf-8" src="/static/admin/js/form.check.js"></script>
 
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
     <div class="pageheader" style="height: 50px;padding-top: 10px">
@@ -18,31 +19,41 @@ use yii\helpers\Html;
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="form-group">
-                <label class="col-sm-3 control-label">用户名<fond style="color: red">*</fond></label>
+                <label class="col-sm-3 control-label">用户名
+                    <fond style="color: red">*</fond>
+                </label>
                 <div class="col-sm-6">
                     <input type="text" name="username" class="form-control">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">密码<fond style="color: red">*</fond></label>
+                <label class="col-sm-3 control-label">密码
+                    <fond style="color: red">*</fond>
+                </label>
                 <div class="col-sm-6">
                     <input type="text" name="password" class="form-control" value="000000">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">姓名<fond style="color: red">*</fond></label>
+                <label class="col-sm-3 control-label">姓名
+                    <fond style="color: red">*</fond>
+                </label>
                 <div class="col-sm-6">
                     <input type="text" name="name" class="form-control">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">邮箱<fond style="color: red">*</fond></label>
+                <label class="col-sm-3 control-label">邮箱
+                    <fond style="color: red">*</fond>
+                </label>
                 <div class="col-sm-6">
                     <input type="email" name="email" class="form-control">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">手机号<fond style="color: red">*</fond></label>
+                <label class="col-sm-3 control-label">手机号
+                    <fond style="color: red">*</fond>
+                </label>
                 <div class="col-sm-6">
                     <input type="text" name="phone" class="form-control">
                 </div>

@@ -10,30 +10,11 @@ use yii\helpers\Html;
 <script charset="utf-8" src="/editor/kindeditor.js"></script>
 <script charset="utf-8" src="/editor/lang/zh_CN.js"></script>
 <script charset="utf-8" src="/editor/plugins/code/prettify.js"></script>
+<script charset="utf-8" src="/static/admin/js/editor.js"></script>
+<script charset="utf-8" src="/static/admin/js/form.check.js"></script>
 <script charset="utf-8" src="/static/admin/js/ajaxfileupload.js"></script>
-<script>
-    var editor;
-    KindEditor.ready(function (K) {
-        editor = K.create('textarea[name="news_content"]', {
-            cssPath: '/editor/plugins/code/prettify.css',
-            uploadJson: '/editor/php/upload_json.php',
-            fileManagerJson: '/editor/php/file_manager_json.php',
-            allowFileManager: true,
-            afterCreate: function () {
-                var self = this;
-                K.ctrl(document, 13, function () {
-                    self.sync();
-                    K('form[name=example]')[0].submit();
-                });
-                K.ctrl(self.edit.doc, 13, function () {
-                    self.sync();
-                    K('form[name=example]')[0].submit();
-                });
-            }
-        });
-        prettyPrint();
-    });
-</script>
+<script charset="utf-8" src="/static/admin/js/upload.js"></script>
+
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
     <h2><span style="font-style: normal">千誉金融</span>
@@ -45,10 +26,6 @@ use yii\helpers\Html;
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
     $(function () {
-        $('.upload_file').click(function () {
-            var file_name = $(this).attr('tag');
-            ajaxFileUpload(file_name);
-        });
         $("#add_button").click(function () {
             var $title = $('input[name=title]').val().trim();
             var $img = $('input[name=financial_img_url]').val().trim();

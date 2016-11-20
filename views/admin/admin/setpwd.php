@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 
 ?>
+<script charset="utf-8" src="/static/admin/js/form.check.js"></script>
 <?php $this->beginBlock('header');//头部附加 ?>
 
 <?php $this->endBlock(); ?>

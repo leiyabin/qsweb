@@ -7,7 +7,8 @@
 use yii\helpers\Url;
 
 ?>
-
+<script charset="utf-8" src="/static/admin/js/delete.all.js"></script>
+<script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
     <h2><span style="font-style: normal">配置信息设置</span>
@@ -18,15 +19,6 @@ use yii\helpers\Url;
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
     //全选
-    $("#selectAll").click(function () {
-        $("input[name='ids[]']").prop('checked', $(this).prop('checked'));
-    });
-    $(".li_on_click").click(function () {
-        var class_id = $(this).attr('tag');
-        var class_name = $(this).find('a').html();
-        $('#dropdownMenu1').attr('tag', class_id).html(class_name);
-
-    });
     $("#search_button").click(function () {
         var class_id = $('#dropdownMenu1').attr('tag');
         var value = $("input[name=search]").val().trim();
@@ -42,15 +34,6 @@ use yii\helpers\Url;
         }
         location.href = url;
     });
-    var class_id = $('#dropdownMenu1').attr('tag');
-    if(class_id != ''){
-        $('.li_on_click').each(function () {
-            if($(this).attr('tag') == class_id) {
-                $(this).click();
-                return false;
-            }
-        })
-    }
 </script>
 <?php $this->endBlock(); ?>
 <div class="panel panel-default">

@@ -30,7 +30,6 @@ use yii\helpers\Url;
         <script src="<?= Url::to('/static/admin/js/jquery.cookies.js'); ?>"></script>
         <script src="<?= Url::to('/static/jquery-form/jquery.form.min.js'); ?>"></script>
         <script src="<?= Url::to('/static/admin/js/custom.js'); ?>"></script>
-        <script src="<?= Url::to('/static/admin/js/common.js'); ?>"></script>
         <?php if (isset($this->blocks['header'])): ?>
             <?= $this->blocks['header'] ?>
         <?php endif; ?>
@@ -76,7 +75,7 @@ use yii\helpers\Url;
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>经纪人</span></a>
                         <ul class="children">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>经纪人列表</a></li>
+                            <li><a href="/admin/broker/index/"><i class="fa fa-caret-right"></i>经纪人列表</a></li>
                         </ul>
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>千誉金融</span></a>

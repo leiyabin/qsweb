@@ -7,7 +7,8 @@
 use yii\helpers\Url;
 
 ?>
-
+<script charset="utf-8" src="/static/admin/js/delete.all.js"></script>
+<script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
     <h2><span style="font-style: normal">房产百科</span>
@@ -17,10 +18,6 @@ use yii\helpers\Url;
 
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
-    //全选
-    $("#selectAll").click(function () {
-        $("input[name='ids[]']").prop('checked', $(this).prop('checked'));
-    });
     function doDelete(ids) {
         if (!window.confirm('确定要删除id为[' + ids + ']的这些记录吗?')) {
             return false;
@@ -42,25 +39,6 @@ use yii\helpers\Url;
             }
         });
     }
-    $(".fa-trash-o").click(function () {
-        var ids = $(this).attr('tag');
-        ids = [ids];
-        doDelete(ids);
-    });
-    //批量删除
-    $("#batchDel").click(function () {
-        var ids = [];
-        $("input[name='ids[]']:checked").each(function () {
-            ids.push($(this).val());
-        });
-        doDelete(ids);
-    });
-    $(".li_on_click").click(function () {
-        var class_id = $(this).attr('tag');
-        var class_name = $(this).find('a').html();
-        $('#dropdownMenu1').attr('tag', class_id).html(class_name);
-
-    });
     $("#search_button").click(function () {
         var class_id = $('#dropdownMenu1').attr('tag');
         var value = $("input[name=search]").val().trim();
@@ -76,15 +54,6 @@ use yii\helpers\Url;
         }
         location.href = url;
     });
-    var class_id = $('#dropdownMenu1').attr('tag');
-    if (class_id != '') {
-        $('.li_on_click').each(function () {
-            if ($(this).attr('tag') == class_id) {
-                $(this).click();
-                return false;
-            }
-        })
-    }
 
 </script>
 <?php $this->endBlock(); ?>

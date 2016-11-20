@@ -7,36 +7,14 @@
 use yii\helpers\Html;
 
 ?>
-<script charset="utf-8" src="/editor/kindeditor.js"></script>
-<script charset="utf-8" src="/editor/lang/zh_CN.js"></script>
-<script charset="utf-8" src="/editor/plugins/code/prettify.js"></script>
+
 <script charset="utf-8" src="/static/admin/js/ajaxfileupload.js"></script>
-<script>
-    var editor;
-    KindEditor.ready(function (K) {
-        editor = K.create('textarea[name="news_content"]', {
-            cssPath: '/editor/plugins/code/prettify.css',
-            uploadJson: '/editor/php/upload_json.php',
-            fileManagerJson: '/editor/php/file_manager_json.php',
-            allowFileManager: true,
-            afterCreate: function () {
-                var self = this;
-                K.ctrl(document, 13, function () {
-                    self.sync();
-                    K('form[name=example]')[0].submit();
-                });
-                K.ctrl(self.edit.doc, 13, function () {
-                    self.sync();
-                    K('form[name=example]')[0].submit();
-                });
-            }
-        });
-        prettyPrint();
-    });
-</script>
+<script charset="utf-8" src="/static/admin/js/upload.js"></script>
+<script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
+<script charset="utf-8" src="/static/admin/js/form.check.js"></script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
-    <h2><span style="font-style: normal">千誉金融</span>
+    <h2><span style="font-style: normal">经纪人</span>
         <span style="font-style: normal">修改</span></h2>
 </div>
 
@@ -45,33 +23,33 @@ use yii\helpers\Html;
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
     $(function () {
-        $('.upload_file').click(function () {
-            var file_name = $(this).attr('tag');
-            ajaxFileUpload(file_name);
-        });
         $("#add_button").click(function () {
-            var $title = $('input[name=title]').val().trim();
-            var $img = $('input[name=financial_img_url]').val().trim();
-            var $content = editor.html().trim();
+            var $name = $('input[name=broker_name]').val().trim();
+            var $phone = $('input[name=phone]').val().trim();
+            var $img = $('input[name=broker_img_url]').val().trim();
+            var $email = $('input[name=email]').val().trim();
+            var $class_id = $('#dropdownMenu1').attr('tag');
             var $id = $('input[name=id]').val();
-            if (!checkVal($title, '标题', true, 0, 50)) {
+            if (!checkVal($name, '姓名', true, 0, 10)) {
                 return;
             }
-            if (!checkVal($img, '图片', true)) {
+            if (!checkVal($phone, '联系方式', true, 0, 20)) {
                 return;
             }
-            if (!checkVal($content, '内容', true)) {
+            if ($email != '' && !checkType($email, 'email')) {
                 return;
             }
             $.ajax({
-                url: '/admin/financial/edit',
+                url: '/admin/broker/edit',
                 type: 'post',
                 dataType: 'json',
                 data: {
-                    title: $title,
+                    name: $name,
                     img: $img,
-                    id: $id,
-                    content: $content
+                    email: $email,
+                    phone: $phone,
+                    position_id: $class_id,
+                    id: $id
                 },
                 success: function (res) {
                     if (res.status == 1) {
@@ -89,37 +67,63 @@ use yii\helpers\Html;
 </script>
 <?php $this->endBlock(); ?>
 <div class="panel panel-default">
-    <input type="hidden" name="id" value="<?= $financial->id ?>">
+    <input type="hidden" name="id" value="<?= $broker->id ?>">
     <div class="panel-body">
         <div class="form-group">
-            <label class="col-sm-3 control-label" style="width: 10%">标题
+            <label class="col-sm-3 control-label" style="width: 10%">姓名
                 <fond style="color: red">*</fond>
             </label>
             <div class="col-sm-6">
-                <input type="text" name="title" class="form-control" value="<?= $financial->title; ?>">
+                <input type="text" name="broker_name" class="form-control"  value="<?= $broker->name; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label" style="width: 10%">图片</label>
+            <label class="col-sm-3 control-label" style="width: 10%">联系方式
+                <fond style="color: red">*</fond>
+            </label>
             <div class="col-sm-6">
-                <label style="color: red">*请上传图片尺寸400*220（或是长:宽=2:1）</label>
-                <input type="file" id="financial_img" name="financial_img" style="display:inline">
-                <input type="button" tag="financial_img" value="上传" class="upload_file">
-                <input type="hidden" name="financial_img_url" value="<?= $financial->img; ?>">
+                <input type="text" name="phone" class="form-control"  value="<?= $broker->phone; ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" style="width: 10%">职位
+                <fond style="color: red">*</fond>
+            </label>
+            <div class="col-sm-6 dropdown">
+                <button style="width: 200px;" class="btn btn-default dropdown-toggle" type="button" tag="<?= $broker->position_id; ?>"
+                        id="dropdownMenu1"
+                        data-toggle="dropdown">
+                    请选择职位
+                </button>
+                <ul style="margin-left: 10px" class="dropdown-menu" role="menu">
+                    <?php foreach ($list as $item): ?>
+                        <li class="li_on_click" role="presentation" tag="<?= $item->id; ?>">
+                            <a role="menuitem" tabindex="-1" href="#"><?= $item->value; ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" style="width: 10%">照片
+            </label>
+            <div class="col-sm-6">
+                <label style="color: red; width: 400px">*上传图片尺寸78*98</label>
+                <input type="file" id="broker_img" name="broker_img" style="display:inline">
+                <input type="button" tag="broker_img" value="上传" class="upload_file">
+                <input type="hidden" name="broker_img_url" value="<?= $broker->img; ?>">
                 <?php
-                if (!empty($financial->img_url)) {
-                    echo '<a target="_blank" class="upload_res" href="' . $financial->img_url . '">点击查看</a>';
+                if (!empty($broker->img_url)) {
+                    echo '<a target="_blank" class="upload_res" href="' . $broker->img_url . '">点击查看</a>';
                 }
                 ?>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label" style="width: 10%">内容
-                <fond style="color: red">*</fond>
+            <label class="col-sm-3 control-label" style="width: 10%">email
             </label>
             <div class="col-sm-6">
-                <textarea name="news_content"
-                          style="width:800px;height:600px;visibility:hidden;"><?php echo $financial->content; ?></textarea>
+                <input type="text" name="email" class="form-control" value="<?= $broker->email; ?>">
             </div>
         </div>
     </div>

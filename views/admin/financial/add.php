@@ -11,30 +11,10 @@ use yii\widgets\ActiveForm;
     <script charset="utf-8" src="/editor/kindeditor.js"></script>
     <script charset="utf-8" src="/editor/lang/zh_CN.js"></script>
     <script charset="utf-8" src="/editor/plugins/code/prettify.js"></script>
+    <script charset="utf-8" src="/static/admin/js/editor.js"></script>
+    <script charset="utf-8" src="/static/admin/js/form.check.js"></script>
     <script charset="utf-8" src="/static/admin/js/ajaxfileupload.js"></script>
-    <script>
-        var editor;
-        KindEditor.ready(function (K) {
-            editor = K.create('textarea[name="news_content"]', {
-                cssPath: '/editor/plugins/code/prettify.css',
-                uploadJson: '/editor/php/upload_json.php',
-                fileManagerJson: '/editor/php/file_manager_json.php',
-                allowFileManager: true,
-                afterCreate: function () {
-                    var self = this;
-                    K.ctrl(document, 13, function () {
-                        self.sync();
-                        K('form[name=example]')[0].submit();
-                    });
-                    K.ctrl(self.edit.doc, 13, function () {
-                        self.sync();
-                        K('form[name=example]')[0].submit();
-                    });
-                }
-            });
-            prettyPrint();
-        });
-    </script>
+    <script charset="utf-8" src="/static/admin/js/upload.js"></script>
 
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
     <div class="pageheader" style="height: 50px;padding-top: 10px">
@@ -57,8 +37,8 @@ use yii\widgets\ActiveForm;
                 <label class="col-sm-3 control-label" style="width: 10%">图片
                     <fond style="color: red">*</fond>
                 </label>
-                <div class="col-sm-6" style="width: 700px;">
-                    <label style="color: red">*请上传图片尺寸400*220（或是长:宽=2:1）</label>
+                <div class="col-sm-6">
+                    <label style="color: red;width: 400px">*请上传图片尺寸400*220（或是长:宽=2:1）</label>
                     <input type="file" id="financial_img" name="financial_img" style="display:inline">
                     <input type="button" tag="financial_img" value="上传" class="upload_file">
                     <input type="hidden" name="financial_img_url">
@@ -85,10 +65,6 @@ use yii\widgets\ActiveForm;
 <?php $this->beginBlock('footer');//尾部附加 ?>
     <script>
         $(function () {
-            $('.upload_file').click(function () {
-                var file_name = $(this).attr('tag');
-                ajaxFileUpload(file_name);
-            });
             $("#add_button").click(function () {
                 var $title = $('input[name=title]').val().trim();
                 var $img = $('input[name=financial_img_url]').val().trim();

@@ -7,6 +7,7 @@
 use yii\helpers\Url;
 
 ?>
+<script charset="utf-8" src="/static/admin/js/delete.all.js"></script>
 
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
@@ -16,11 +17,6 @@ use yii\helpers\Url;
 <?php $this->endBlock(); ?>
 
 <?php $this->beginBlock('footer');//尾部附加 ?>
-<script>
-    $("#selectAll").click(function () {
-        $("input[name='ids[]']").prop('checked', $(this).prop('checked'));
-    });
-</script>
 <?php $this->endBlock(); ?>
 <div class="panel panel-default">
     <div class="panel-heading">

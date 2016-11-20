@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 
 ?>
-
+<script charset="utf-8" src="/static/admin/js/form.check.js"></script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
     <h2><span style="font-style: normal">配置信息设置</span>

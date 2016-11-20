@@ -7,6 +7,7 @@
 use yii\helpers\Url;
 
 ?>
+<script charset="utf-8" src="/static/admin/js/delete.all.js"></script>
 
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
@@ -17,10 +18,6 @@ use yii\helpers\Url;
 
 <?php $this->beginBlock('footer');//尾部附加 ?>
 <script>
-    //全选
-    $("#selectAll").click(function () {
-        $("input[name='ids[]']").prop('checked', $(this).prop('checked'));
-    });
     function doDelete(ids) {
         if (!window.confirm('确定要删除id为[' + ids + ']的这些用户吗?')) {
             return false;
@@ -42,19 +39,6 @@ use yii\helpers\Url;
             }
         });
     }
-    $(".fa-trash-o").click(function () {
-        var ids = $(this).attr('tag');
-        ids = [ids];
-        doDelete(ids);
-    });
-    //批量删除
-    $("#batchDel").click(function () {
-        var ids = [];
-        $("input[name='ids[]']:checked").each(function () {
-            ids.push($(this).val());
-        });
-        doDelete(ids);
-    });
 
 </script>
 <?php $this->endBlock(); ?>

@@ -8,8 +8,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 ?>
-    <script charset="utf-8" src="/static/admin/js/ajaxfileupload.js"></script>
-
+    <script charset="utf-8" src="/static/admin/js/form.check.js"></script>
+    <script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
     <div class="pageheader" style="height: 50px;padding-top: 10px">
         <h2><span style="font-style: normal">片区管理</span>
@@ -59,16 +59,6 @@ use yii\widgets\ActiveForm;
         <?php $this->beginBlock('footer');//尾部附加 ?>
         <script>
             $(function () {
-                $(".li_on_click").click(function () {
-                    var class_id = $(this).attr('tag');
-                    var class_name = $(this).find('a').html();
-                    $('#dropdownMenu1').attr('tag', class_id).html(class_name);
-
-                });
-                $('.upload_file').click(function () {
-                    var file_name = $(this).attr('tag');
-                    ajaxFileUpload(file_name);
-                });
                 $("#add_button").click(function () {
                     var $class_id = $('#dropdownMenu1').attr('tag');
                     var $name = $('input[name=area_name]').val().trim();

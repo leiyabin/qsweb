@@ -37,7 +37,11 @@ class BrokerManager
 
     public function get($id)
     {
-        return $this->broker_rpc->getOne($id);
+        $res = $this->broker_rpc->getOne($id);
+        if (!empty($res)) {
+            $res->img_url = Utils::getImgUrl($res->img);
+        }
+        return $res;
     }
 
     public function batchDel($ids)

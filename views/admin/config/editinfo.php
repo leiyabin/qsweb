@@ -7,7 +7,8 @@
 use yii\helpers\Html;
 
 ?>
-
+<script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
+<script charset="utf-8" src="/static/admin/js/form.check.js"></script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
     <h2><span style="font-style: normal">配置信息设置</span>
@@ -20,21 +21,6 @@ use yii\helpers\Html;
 <script>
     $(function () {
         var id = $('input[name=id]').val().trim();
-        var class_id = $('#dropdownMenu1').attr('tag');
-        var lis = $('.li_on_click');
-        lis.each(function () {
-            if ($(this).attr('tag') == class_id) {
-                var class_name = $(this).find('a').html();
-                $('#dropdownMenu1').html(class_name);
-                return false;
-            }
-        });
-        lis.click(function () {
-            var class_id = $(this).attr('tag');
-            var class_name = $(this).find('a').html();
-            $('#dropdownMenu1').attr('tag', class_id).html(class_name);
-
-        });
         $("#edit_button").click(function () {
             var $class_id = $('#dropdownMenu1').attr('tag');
             var $value = $('input[name=value]').val().trim();

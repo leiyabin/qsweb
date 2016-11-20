@@ -33,7 +33,7 @@ class BrokerController extends LController
         $this->config_manager = new ConfigManager();
     }
 
-    public function actionList()
+    public function actionIndex()
     {
         $broker_list = [];
         $class_list = [];
@@ -88,6 +88,7 @@ class BrokerController extends LController
             $broker = [
                 'position_id' => $this->params['position_id'],
                 'name'        => $this->params['name'],
+                'phone'       => $this->params['phone'],
                 'img'         => $img,
                 'email'       => $email,
             ];
@@ -137,6 +138,7 @@ class BrokerController extends LController
                 'name'        => $this->params['name'],
                 'img'         => $img,
                 'email'       => $email,
+                'phone'       => $this->params['phone'],
                 'id'          => $id,
             ];
             $res = $this->broker_manager->edit($broker);
