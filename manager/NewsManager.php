@@ -28,15 +28,18 @@ class NewsManager
 
     public function add($news)
     {
+
         $content = $news['content'];
-        $news['summary'] = $this->getSummary($content);
+        $news['summary'] = Utils::getSummary($content, 150);
+        $news['content'] = Utils::safeHtml($content);
         return $this->news_rpc->add($news);
     }
 
     public function edit($news)
     {
         $content = $news['content'];
-        $news['summary'] = $this->getSummary($content);
+        $news['summary'] = Utils::getSummary($content, 150);
+        $news['content'] = Utils::safeHtml($content);
         return $this->news_rpc->edit($news);
     }
 
@@ -51,16 +54,9 @@ class NewsManager
         return $res;
     }
 
-
     public function batchDel($ids)
     {
         return $this->news_rpc->batchDel($ids);
     }
 
-    private function getSummary($content)
-    {
-        $summary = strip_tags($content);
-        $summary = substr($summary, 0, 150);
-        return $summary;
-    }
 }

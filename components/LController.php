@@ -24,7 +24,9 @@ class LController extends Controller
     protected $page_size = 20;
     protected $is_post;
     protected $user_info;
-    private static $auth_controllers = ['admin', 'config', 'news', 'index', 'file', 'oversea'];
+    private static $auth_controllers = [
+        'admin', 'config', 'news', 'index', 'file', 'oversea', 'financial'
+    ];
     public $layout = 'admin';
 
 
@@ -33,7 +35,7 @@ class LController extends Controller
         $getParams = Yii::$app->request->get();
         $postParams = Yii::$app->request->post();
         $this->params = array_merge($getParams, $postParams);
-        $this->params = $this->safeHtml($this->params);
+//        $this->params = $this->safeHtml($this->params);
         $this->is_post = Yii::$app->request->isPost;
     }
 
@@ -160,33 +162,4 @@ class LController extends Controller
         exit ();
     }
 
-    private function safeHtml($html)
-    {
-        if (is_array($html)) {
-            foreach ($html as $k => $v) {
-                $html[$k] = self::safeHtml($v);
-            }
-            return $html;
-        }
-        return htmlspecialchars($html, ENT_QUOTES, 'utf-8');
-    }
-
-    private function decodeHtml($html)
-    {
-        if (is_array($html)) {
-            foreach ($html as $k => $v) {
-                $html[$k] = self::decodeHtml($v);
-            }
-            return $html;
-        }
-        return htmlspecialchars_decode($html, ENT_QUOTES);
-    }
-
-    public function render($view, $params = [])
-    {
-        $params = Utils::objectToArray($params);
-        $params = $this->decodeHtml($params);
-        $params = Utils::arrayToObject($params);
-        return parent::render($view, $params);
-    }
 }

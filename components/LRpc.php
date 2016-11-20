@@ -166,7 +166,6 @@ class LRpc
             }
             curl_setopt($ch, $key, $val);
         }
-
         Yii::info(sprintf('RPC_REQUEST: 【url】| %s ; 【params】| %s ', $this->url, json_encode($this->post, JSON_UNESCAPED_UNICODE)));
         $this->data = (string)curl_exec($ch);
         $this->info = curl_getinfo($ch);

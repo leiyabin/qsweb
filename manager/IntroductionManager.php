@@ -8,6 +8,7 @@
 
 namespace app\manager;
 
+use app\components\Utils;
 use app\rpc\IntroductionRpc;
 
 class IntroductionManager
@@ -32,14 +33,15 @@ class IntroductionManager
     public function add($introduction)
     {
         $content = $introduction['content'];
-        $introduction['summary'] = $this->getSummary($content);
+        $introduction['summary'] = Utils::getSummary($content, 150);
         return $this->introduction_rpc->add($introduction);
     }
 
     public function edit($introduction)
     {
         $content = $introduction['content'];
-        $introduction['summary'] = $this->getSummary($content);
+        $introduction['summary'] = Utils::getSummary($content, 150);
+        $introduction['content'] = Utils::safeHtml($content);
         return $this->introduction_rpc->edit($introduction);
     }
 
@@ -48,11 +50,5 @@ class IntroductionManager
         return $this->introduction_rpc->batchDel($ids);
     }
 
-    private function getSummary($content)
-    {
-        $summary = strip_tags($content);
-        $summary = substr($summary, 0, 150);
-        return $summary;
-    }
 
 }

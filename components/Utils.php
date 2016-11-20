@@ -77,23 +77,23 @@ class Utils
         return '';
     }
 
-    public static function arrayToObject($e)
+    public static function safeHtml($html)
     {
-        foreach ($e as $k => $v) {
-            if (gettype($v) == 'array' || getType($v) == 'object')
-                $e[$k] = (object)self::arrayToObject($v);
+        if (is_array($html)) {
+            foreach ($html as $k => $v) {
+                $html[$k] = self::safeHtml($v);
+            }
+            return $html;
         }
-        return (object)$e;
+        return htmlspecialchars($html, ENT_QUOTES, 'utf-8');
     }
 
-    public static function objectToArray($e)
+    public static function getSummary($content, $length, $start = 0)
     {
-        $e = (array)$e;
-        foreach ($e as $k => $v) {
-            if (gettype($v) == 'object' || gettype($v) == 'array')
-                $e[$k] = (array)self::objectToArray($v);
-        }
-        return $e;
+        $content = strip_tags($content);
+        $content = preg_replace('/\s/', '', $content);
+        $summary = mb_substr($content, $start, $length, "utf-8");
+        return $summary;
     }
 
 }

@@ -130,6 +130,7 @@ use yii\helpers\Url;
                 <th>uid</th>
                 <th>类别</th>
                 <th>标题</th>
+                <th>摘要</th>
                 <th>创建时间</th>
                 <th>操作</th>
             </tr>
@@ -141,6 +142,7 @@ use yii\helpers\Url;
                     <th><?= $item->id; ?></th>
                     <th><?= $item->class_name; ?></th>
                     <th><?= $item->title; ?></th>
+                    <th><?= \app\components\Utils::getSummary($item->summary,25); ?></th>
                     <th><?= \app\components\Utils::formatDateTime($item->c_t); ?></th>
                     <th>
                         <a href="<?= Url::to(['edit', 'id' => $item->id]); ?>"><i class="fa fa-pencil"></i></a>

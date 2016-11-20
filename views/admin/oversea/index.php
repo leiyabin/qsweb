@@ -32,7 +32,6 @@ use yii\helpers\Html;
             }
         });
         prettyPrint();
-        editor.html('<?php echo $oversea->content; ?>');
     });
 </script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
@@ -101,7 +100,7 @@ use yii\helpers\Html;
             </label>
             <div class="col-sm-6">
                 <textarea name="news_content"
-                          style="width:800px;height:600px;visibility:hidden;"></textarea>
+                          style="width:800px;height:600px;visibility:hidden;"><?php echo $oversea->content; ?></textarea>
             </div>
         </div>
     </div>

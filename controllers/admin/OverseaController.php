@@ -26,6 +26,9 @@ class OverseaController extends LController
      */
     public $config_manager;
 
+    const CLASS_ID = 10;
+    const ID = 1;
+
     public function init()
     {
         parent::init();
@@ -35,10 +38,8 @@ class OverseaController extends LController
 
     public function actionIndex()
     {
-        $id = 1;
-        $class_id = 10;
         if (!$this->is_post) {
-            $oversea = $this->introduction_manager->get($id);
+            $oversea = $this->introduction_manager->get(self::ID);
             if (empty($oversea)) {
                 throw new RequestException('没有找到海外房产对应的信息', ErrorCode::NOT_FOUND);
             } else {
@@ -53,10 +54,10 @@ class OverseaController extends LController
                 return $this->error('请输入内容！');
             }
             $oversea = [
-                'class_id' => $class_id,
+                'class_id' => self::CLASS_ID,
                 'title'    => $this->params['title'],
                 'content'  => $this->params['content'],
-                'id'       => $id
+                'id'       => self::ID
             ];
             $res = $this->introduction_manager->edit($oversea);
             if ($this->hasError($res)) {
