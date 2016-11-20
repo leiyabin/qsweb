@@ -33,7 +33,7 @@ class AreaController extends LController
         $this->config_manager = new ConfigManager();
     }
 
-    public function actionList()
+    public function actionIndex()
     {
         $area_list = [];
         $class_list = [];
@@ -57,7 +57,7 @@ class AreaController extends LController
             'class_list' => $class_list,
             'pages'      => $pages,
             'class_id'   => $class_id,
-            'title'      => $name
+            'name'      => $name
         ]);
     }
 
@@ -109,7 +109,7 @@ class AreaController extends LController
                 $class_page_info = ['page' => 1, 'pre_page' => 9999];
                 $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::AREA_CLASS_CONST);
                 if (!$this->hasError($res)) {
-                    $class_list = $res->area_list;
+                    $class_list = $res->value_list;
                 }
                 $data = ['list' => $class_list, 'area' => $area];
                 return $this->render('edit', $data);
@@ -118,8 +118,8 @@ class AreaController extends LController
             if (!Utils::validVal($this->getRequestParam('class_id'), true)) {
                 return $this->error('请选择类别！');
             }
-            if (!Utils::validVal($this->getRequestParam('title'), true, 0, 50)) {
-                return $this->error('请输入不大于50位的标题！');
+            if (!Utils::validVal($this->getRequestParam('name'), true, 0, 50)) {
+                return $this->error('请输入不大于20位的名称！');
             }
             $area = [
                 'class_id'      => $this->params['class_id'],

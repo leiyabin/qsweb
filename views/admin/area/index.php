@@ -10,8 +10,8 @@ use yii\helpers\Url;
 
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
-    <h2><span style="font-style: normal">房产百科</span>
-        <span style="font-style: normal">房产百科列表</span></h2>
+    <h2><span style="font-style: normal">片区管理</span>
+        <span style="font-style: normal">片区列表</span></h2>
 </div>
 <?php $this->endBlock(); ?>
 
@@ -26,7 +26,7 @@ use yii\helpers\Url;
             return false;
         }
         $.ajax({
-            url: '/admin/news/batchdel',
+            url: '/admin/area/batchdel',
             dataType: 'json',
             data: {"ids": ids.join(',')},
             error: function (res) {
@@ -67,12 +67,12 @@ use yii\helpers\Url;
         if (class_id == 0 && value == '') {
             return;
         }
-        var url = '/admin/news/list?';
+        var url = '/admin/area/index?';
         if (class_id != 0) {
             url += 'class_id=' + class_id + '&';
         }
         if (value != '') {
-            url += 'title=' + value;
+            url += 'name=' + value;
         }
         location.href = url;
     });
@@ -102,7 +102,7 @@ use yii\helpers\Url;
                                     tag="<?= $class_id ?>"
                                     id="dropdownMenu1"
                                     data-toggle="dropdown">
-                                请选择分类
+                                请选择区县
                             </button>
                             <ul style="margin-left: 10px;" class="dropdown-menu" role="menu">
                                 <?php foreach ($class_list as $item): ?>
@@ -113,14 +113,14 @@ use yii\helpers\Url;
                             </ul>
                         </div>
                         <input style="margin-left: 32px" type="text" name="search" class="form-control"
-                               value="<?= $title ?>"
-                               placeholder="请输入文章名称">
+                               value="<?= $name ?>"
+                               placeholder="请输入区县名称">
                     </div>
                     <button type="submit" id="search_button" class="btn btn-default">搜索</button>
                 </div>
             </div>
         </div>
-        <h4>房产百科列表</h4>
+        <h4>片区列表</h4>
     </div>
     <div class="panel-body">
         <table class="table">
@@ -128,21 +128,19 @@ use yii\helpers\Url;
             <tr>
                 <th><input type="checkbox" id="selectAll"></th>
                 <th>uid</th>
-                <th>类别</th>
-                <th>标题</th>
-                <th>摘要</th>
+                <th>区县</th>
+                <th>名称</th>
                 <th>创建时间</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($news_list as $item): ?>
+            <?php foreach ($area_list as $item): ?>
                 <tr>
                     <th><input type="checkbox" name="ids[]" value="<?= $item->id; ?>"></th>
                     <th><?= $item->id; ?></th>
                     <th><?= $item->class_name; ?></th>
-                    <th><?= $item->title; ?></th>
-                    <th><?= \app\components\Utils::getSummary($item->summary,25); ?></th>
+                    <th><?= $item->name; ?></th>
                     <th><?= \app\components\Utils::formatDateTime($item->c_t); ?></th>
                     <th>
                         <a href="<?= Url::to(['edit', 'id' => $item->id]); ?>"><i class="fa fa-pencil"></i></a>
