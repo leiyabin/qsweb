@@ -9,6 +9,8 @@
 namespace app\components;
 
 
+use app\consts\UtilsConst;
+
 class Utils
 {
     public static function getDefault(array $array, $field, $default_value)
@@ -55,6 +57,20 @@ class Utils
             return false;
         }
         if (!empty($val) && $maxLength && Utils::getLength($val) > $maxLength) {
+            return false;
+        }
+        return true;
+    }
+
+    public static function validNum($val, $required, $min = 1, $max = UtilsConst::MAX_INT)
+    {
+        if ($required && empty($val)) {
+            return false;
+        }
+        if (!empty($val) && $min && Utils::getLength($val) < $min) {
+            return false;
+        }
+        if (!empty($val) && $max && Utils::getLength($val) > $max) {
             return false;
         }
         return true;

@@ -57,7 +57,7 @@ class AreaController extends LController
             'class_list' => $class_list,
             'pages'      => $pages,
             'class_id'   => $class_id,
-            'name'      => $name
+            'name'       => $name
         ]);
     }
 
@@ -81,8 +81,8 @@ class AreaController extends LController
                 return $this->error('请输入不大于50位的名称！');
             }
             $area = [
-                'class_id'      => $this->params['class_id'],
-                'name'         => $this->params['name'],
+                'class_id' => $this->params['class_id'],
+                'name'     => $this->params['name'],
             ];
             $res = $this->area_manager->add($area);
             if ($this->hasError($res)) {
@@ -122,9 +122,9 @@ class AreaController extends LController
                 return $this->error('请输入不大于20位的名称！');
             }
             $area = [
-                'class_id'      => $this->params['class_id'],
-                'name'         => $this->params['name'],
-                'id'            => $id
+                'class_id' => $this->params['class_id'],
+                'name'     => $this->params['name'],
+                'id'       => $id
             ];
             $res = $this->area_manager->edit($area);
             if ($this->hasError($res)) {
