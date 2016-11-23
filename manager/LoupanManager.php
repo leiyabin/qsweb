@@ -44,8 +44,28 @@ class LoupanManager
         return $res;
     }
 
-    public function batchDel($ids)
+    public function doorModelList($loupan_id)
     {
-        return $this->loupan_rpc->batchDel($ids);
+        return $this->loupan_rpc->doorModelList($loupan_id);
+    }
+
+    public function addDoorModel($door_model)
+    {
+        return $this->loupan_rpc->doorModelAdd($door_model);
+    }
+
+    public function editDoorModel($loupan)
+    {
+        return $this->loupan_rpc->doorModelEdit($loupan);
+    }
+
+    public function getDoorModel($id)
+    {
+        return $this->loupan_rpc->doorModelGet($id);
+    }
+
+    public function DoorModelBatchDel($id)
+    {
+        return $this->loupan_rpc->doorModelBatchDel($id);
     }
 }

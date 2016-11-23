@@ -78,10 +78,10 @@ class BrokerController extends LController
                 return $this->error('请选择职位！');
             }
             if (!Utils::validVal($this->getRequestParam('name'), true, 0, 10)) {
-                return $this->error('请输入不大于10的姓名！');
+                return $this->error('请输入不大于10字的姓名！');
             }
             if (!Utils::validVal($this->getRequestParam('phone'), true, 0, 20)) {
-                return $this->error('请输入不大于20的联系方式！');
+                return $this->error('请输入不大于20字的联系方式！');
             }
             $email = $this->getRequestParam('email');
             $img = $this->getRequestParam('img');
@@ -126,10 +126,10 @@ class BrokerController extends LController
                 return $this->error('请选择职位！');
             }
             if (!Utils::validVal($this->getRequestParam('name'), true, 0, 10)) {
-                return $this->error('请输入不大于10的姓名！');
+                return $this->error('请输入不大于10字的姓名！');
             }
             if (!Utils::validVal($this->getRequestParam('phone'), true, 0, 20)) {
-                return $this->error('请输入不大于20的联系方式！');
+                return $this->error('请输入不大于20字的联系方式！');
             }
             $email = $this->getRequestParam('email');
             $img = $this->getRequestParam('img');
