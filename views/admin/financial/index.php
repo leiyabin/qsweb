@@ -56,7 +56,7 @@ use yii\helpers\Url;
             <thead>
             <tr>
                 <th><input type="checkbox" id="selectAll"></th>
-                <th>uid</th>
+                <th>id</th>
                 <th>标题</th>
                 <th>摘要</th>
                 <th>创建时间</th>

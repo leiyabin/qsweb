@@ -10,6 +10,7 @@ namespace app\controllers\admin;
 
 use app\components\LController;
 use app\components\Utils;
+use app\consts\HouseConst;
 use yii\data\Pagination;
 use app\manager\LoupanManager;
 use app\manager\ConfigManager;
@@ -37,7 +38,6 @@ class LoupanController extends LController
     {
         //render_data
         $loupan_list = [];
-        $area_list = [];
         $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => $this->page_size]);
         //select_params
         $area_id = $this->getRequestParam('area_id', 0);
@@ -52,20 +52,13 @@ class LoupanController extends LController
             $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' => $res->per_page]);
             $loupan_list = $res->loupan_list;
         }
-        $class_page_info = ['page' => 1, 'pre_page' => 9999];
-        $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::AREA_CLASS_CONST);
-        if (!$this->hasError($res)) {
-            $area_list = $res->value_list;
-        }
+
         return $this->render('index', [
-            'loupan_list'      => $loupan_list,
-            'area_list'        => $area_list,
-            'pages'            => $pages,
-            'area_id'          => $area_id,
-            'name'             => $name,
-            'average_price'    => $average_price,
-            'property_type_id' => $property_type_id,
-            'sale_status'      => $sale_status,
+            'loupan_list'        => $loupan_list,
+            'property_type_list' => HouseConst::$property_type,
+            'name'               => $name,
+            'pages'              => $pages,
+            'property_type_id'   => $property_type_id,
         ]);
     }
 

@@ -10,10 +10,10 @@ namespace app\controllers\admin;
 
 use app\components\LController;
 use app\components\Utils;
-use yii\data\Pagination;
+use app\consts\ErrorCode;
+use app\exception\RequestException;
 use app\manager\LoupanManager;
 use app\manager\ConfigManager;
-use app\consts\ConfigConst;
 
 class DoormodelController extends LController
 {
@@ -36,30 +36,27 @@ class DoormodelController extends LController
     public function actionIndex()
     {
         $door_model_list = [];
+        $loupan_name = '';
         if (!empty($this->params['loupan_id'])) {
             $res = $this->loupan_manager->doorModelList($this->params['loupan_id']);
             if (!$this->hasError($res)) {
                 $door_model_list = $res;
-//                $
+                $res = $this->loupan_manager->getSimple($this->params['loupan_id']);
+                if (!$this->hasError($res)) {
+                    $loupan_name = $res['name'];
+                }
             }
         }
-        return $this->render('index', [
-            'door_model_list' => $door_model_list,
-        ]);
+        return $this->render('index', ['door_model_list' => $door_model_list, 'loupan' => $loupan_name]);
     }
 
     public function actionAdd()
     {
         if (!$this->is_post) {
-            $list = [];
-            $class_page_info = ['page' => 1, 'pre_page' => 9999];
-            $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::AREA_CLASS_CONST);
-            if (!$this->hasError($res)) {
-                $list = $res->value_list;
+            if (empty($this->params['loupan_id'])) {
+                throw new RequestException('404', ErrorCode::NOT_FOUND);
             }
-            return $this->render('add', [
-                'list' => $list,
-            ]);
+            return $this->render('add');
         } else {
             $error_msg = $this->checkLoupanParams();
             if ($error_msg) {
@@ -82,17 +79,11 @@ class DoormodelController extends LController
             return $this->render('add');
         }
         if (!$this->is_post) {
-            $loupan = $this->loupan_manager->get($id);
+            $loupan = $this->loupan_manager->getDoorModel($id);
             if (empty($loupan)) {
                 return $this->render('add');
             } else {
-                $class_list = [];
-                $class_page_info = ['page' => 1, 'pre_page' => 9999];
-                $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::AREA_CLASS_CONST);
-                if (!$this->hasError($res)) {
-                    $class_list = $res->value_list;
-                }
-                $data = ['list' => $class_list, 'loupan' => $loupan];
+                $data = ['loupan' => $loupan];
                 return $this->render('edit', $data);
             }
         } else {

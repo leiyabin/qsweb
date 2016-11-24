@@ -60,12 +60,12 @@ use yii\helpers\Url;
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>二手房</span></a>
                         <ul class="children">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>二手房列表</a></li>
+                            <li><a href="/admin/house/index/"><i class="fa fa-caret-right"></i>二手房列表</a></li>
                         </ul>
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>新房</span></a>
                         <ul class="children">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>新房列表</a></li>
+                            <li><a href="/admin/loupan/index/"><i class="fa fa-caret-right"></i>楼盘列表</a></li>
                         </ul>
                     </li>
                     <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>房产百科</span></a>

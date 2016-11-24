@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <script type="text/javascript" src="jedate/jedate.js"></script>
+</head>
+<body >
+
+<div class="warpbox fmy" style="min-height:500px;">
+    <input class="datainp" id="dateinfo" type="text" placeholder="请选择"  readonly><br/><br/>
+</div>
+
+<script type="text/javascript">
+    jeDate({
+        dateCell:"#dateinfo",
+        isinitVal:true,
+        isTime:true, //isClear:false,
+        minDate:"2014-09-19 00:00:00"
+    });
+</script>
+</body>
+</html>

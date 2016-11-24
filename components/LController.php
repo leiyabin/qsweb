@@ -25,7 +25,7 @@ class LController extends Controller
     protected $is_post;
     protected $user_info;
     private static $auth_controllers = [
-        'admin', 'config', 'news', 'index', 'file', 'oversea', 'financial', 'broker'
+        'admin', 'config', 'news', 'index', 'file', 'oversea', 'financial', 'broker', 'loupan', 'doormodel', 'house'
     ];
     public $layout = 'admin';
 
@@ -35,7 +35,6 @@ class LController extends Controller
         $getParams = Yii::$app->request->get();
         $postParams = Yii::$app->request->post();
         $this->params = array_merge($getParams, $postParams);
-//        $this->params = $this->safeHtml($this->params);
         $this->is_post = Yii::$app->request->isPost;
     }
 

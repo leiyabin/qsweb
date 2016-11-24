@@ -40,8 +40,14 @@ class LoupanManager
         $res = $this->loupan_rpc->getOne($id);
         if (!empty($res)) {
             $res->img_url = Utils::getImgUrl($res->img);
+            $res->banner_img_url = Utils::getImgUrl($res->banner_img);
         }
         return $res;
+    }
+
+    public function getSimple($id)
+    {
+        return $this->loupan_rpc->getOne($id);
     }
 
     public function doorModelList($loupan_id)
@@ -61,7 +67,11 @@ class LoupanManager
 
     public function getDoorModel($id)
     {
-        return $this->loupan_rpc->doorModelGet($id);
+        $res = $this->loupan_rpc->doorModelGet($id);
+        if (!empty($res)) {
+            $res->img_url = Utils::getImgUrl($res->img);
+        }
+        return $res;
     }
 
     public function DoorModelBatchDel($id)

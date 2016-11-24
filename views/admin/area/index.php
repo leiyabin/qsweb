@@ -97,7 +97,7 @@ use yii\helpers\Url;
             <thead>
             <tr>
                 <th><input type="checkbox" id="selectAll"></th>
-                <th>uid</th>
+                <th>id</th>
                 <th>区县</th>
                 <th>名称</th>
                 <th>创建时间</th>
