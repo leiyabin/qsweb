@@ -44,4 +44,10 @@ class AreaManager
     {
         return $this->area_rpc->batchDel($ids);
     }
+
+
+    public function getByClassId($class_id)
+    {
+        return $this->area_rpc->getByClassId($class_id);
+    }
 }

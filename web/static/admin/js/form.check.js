@@ -18,6 +18,7 @@ function checkVal(val, name, required, minlenght, maxlength) {
     return res;
 }
 
+
 function checkType(val, type) {
     if (type == 'email') {
         var re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;

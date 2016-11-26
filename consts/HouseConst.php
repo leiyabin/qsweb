@@ -103,4 +103,21 @@ class HouseConst
         self::AREA_INTERVAL_7 => '150平~200平',
         self::AREA_INTERVAL_8 => '200平以上'
     ];
+
+    //居室情况
+    const ROOM_NUM_1 = 1;
+    const ROOM_NUM_2 = 2;
+    const ROOM_NUM_3 = 3;
+    const ROOM_NUM_4 = 4;
+    const ROOM_NUM_5 = 5;
+    const ROOM_NUM_6 = 6;
+    public static $room_num = [
+        self::ROOM_NUM_1 => '一居室',
+        self::ROOM_NUM_2 => '二居室',
+        self::ROOM_NUM_3 => '三居室',
+        self::ROOM_NUM_4 => '四居室',
+        self::ROOM_NUM_5 => '五居室',
+        self::ROOM_NUM_6 => '五居室以上',
+    ];
+
 }

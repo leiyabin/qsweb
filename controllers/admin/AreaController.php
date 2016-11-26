@@ -102,7 +102,7 @@ class AreaController extends LController
         }
         if (!$this->is_post) {
             $area = $this->area_manager->get($id);
-            if (empty($area)) {
+            if (empty($area) || $this->hasError($area)) {
                 return $this->render('add');
             } else {
                 $class_list = [];
@@ -147,9 +147,25 @@ class AreaController extends LController
         }
         $res = $this->area_manager->batchDel($ids);
         if ($this->hasError($res)) {
-            return $this->error('删除用户失败！');
+            return $this->error('删除失败！');
         } else {
             return $this->success();
+        }
+    }
+
+    public function actionGetbyclassid()
+    {
+        $value_list = [];
+        if ($this->is_post && !empty($this->params['class_id'])) {
+            $info = $this->area_manager->Getbyclassid($this->params['class_id']);
+            if ($this->hasError($info)) {
+                return $this->error();
+            } else {
+                $value_list = $info;
+                return $this->success($value_list);
+            }
+        } else {
+            return $this->error();
         }
     }
 }

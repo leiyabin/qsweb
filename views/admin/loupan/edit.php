@@ -10,8 +10,11 @@ use yii\helpers\Html;
 
 <script charset="utf-8" src="/static/admin/js/ajaxfileupload.js"></script>
 <script charset="utf-8" src="/static/admin/js/upload.js"></script>
-<script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
 <script charset="utf-8" src="/static/admin/js/form.check.js"></script>
+<script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
+<script charset="utf-8" src="/static/admin/js/checkbox.js"></script>
+<script type="text/javascript" src="/datetime/jedate/jedate.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
 <div class="pageheader" style="height: 50px;padding-top: 10px">
     <h2><span style="font-style: normal">经纪人</span>

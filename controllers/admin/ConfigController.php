@@ -70,7 +70,7 @@ class ConfigController extends LController
         }
         if (!$this->is_post) {
             $class = $this->config_manager->getClass($id);
-            if (empty($class)) {
+            if (empty($class) || $this->hasError($class)) {
                 return $this->render('add');
             } else {
                 return $this->render('editclass', ['model' => $class]);
@@ -191,4 +191,6 @@ class ConfigController extends LController
             }
         }
     }
+
+
 }

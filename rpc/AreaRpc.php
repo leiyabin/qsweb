@@ -46,4 +46,10 @@ class AreaRpc extends LRpc
         $params = ['id' => $id];
         return LRpc::init()->post($params)->url('/area/get');
     }
+
+    public function getByClassId($class_id)
+    {
+        $params = ['class_id' => $class_id];
+        return LRpc::init()->post($params)->url('/area/getbyclassid');
+    }
 }

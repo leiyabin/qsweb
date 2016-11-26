@@ -1,12 +1,14 @@
 /**
  * Created by lx on 2016/11/20.
  */
+function li_on_click_fun($obj) {
+    var class_id = $obj.attr('tag');
+    var class_name = $obj.find('a').html();
+    $obj.parent().siblings('button').attr('tag', class_id).html(class_name);
+}
 $(function () {
     $(".li_on_click").click(function () {
-        var class_id = $(this).attr('tag');
-        var class_name = $(this).find('a').html();
-        $('#dropdownMenu1').attr('tag', class_id).html(class_name);
-
+        li_on_click_fun($(this));
     });
 
     var class_id = $('#dropdownMenu1').attr('tag');

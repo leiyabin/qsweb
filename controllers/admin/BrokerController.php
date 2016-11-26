@@ -109,7 +109,7 @@ class BrokerController extends LController
         }
         if (!$this->is_post) {
             $broker = $this->broker_manager->get($id);
-            if (empty($broker)) {
+            if (empty($broker) || $this->hasError($broker)) {
                 return $this->render('add');
             } else {
                 $class_list = [];

@@ -75,7 +75,7 @@ use yii\helpers\Html;
 <script src="<?= Url::to('/static/admin/js/bootstrap.min.js'); ?>"></script>
 <script src="<?= Url::to('/static/admin/js/modernizr.min.js'); ?>"></script>
 <script src="<?= Url::to('/static/admin/js/retina.min.js'); ?>"></script>
-<script src="<?=Url::to('/static/admin/js/common.js'); ?>"></script>
+<script charset="utf-8" src="/static/admin/js/form.check.js"></script>
 
 <script>
     jQuery(window).load(function () {
