@@ -229,7 +229,7 @@ class LRpc
             $msg, $this->url, json_encode($this->post, JSON_UNESCAPED_UNICODE));
         Yii::error($error_msg);
         $result = new \stdClass();
-        $result->code = ErrorCode::SYSTEM_ERROR;
+        $result->error_code = ErrorCode::SYSTEM_ERROR;
         $result->msg = MsgConst::FAILED_MSG;
         $this->result = $result;
     }

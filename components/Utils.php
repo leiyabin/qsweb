@@ -33,9 +33,9 @@ class Utils
         return mb_strlen($value, 'utf-8');
     }
 
-    public static function formatDateTime($timestamp)
+    public static function formatDateTime($timestamp, $format = 'Y-m-d H:i:s')
     {
-        return date('Y-m-d H:i:s', $timestamp);
+        return date($format, $timestamp);
     }
 
     public static function validPhone($phone)

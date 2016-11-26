@@ -9,6 +9,7 @@
 namespace app\manager;
 
 use app\components\Utils;
+use app\consts\HouseConst;
 use app\rpc\LoupanRpc;
 
 class LoupanManager
@@ -41,6 +42,15 @@ class LoupanManager
         if (!empty($res)) {
             $res->img_url = Utils::getImgUrl($res->img);
             $res->banner_img_url = Utils::getImgUrl($res->banner_img);
+            $res->img_1_url = Utils::getImgUrl($res->img_1);
+            $res->img_2_url = Utils::getImgUrl($res->img_2);
+            $res->img_3_url = Utils::getImgUrl($res->img_3);
+            $res->img_4_url = Utils::getImgUrl($res->img_4);
+            $res->img_5_url = Utils::getImgUrl($res->img_5);
+            $jiju_arr = explode(',', $res->jiju);
+            $res->jiju_arr = $jiju_arr;
+            $tag_arr = explode(',', $res->tag);
+            $res->tag_arr = $tag_arr;
         }
         return $res;
     }
@@ -74,8 +84,13 @@ class LoupanManager
         return $res;
     }
 
-    public function DoorModelBatchDel($id)
+    public function doorModelBatchDel($id)
     {
         return $this->loupan_rpc->doorModelBatchDel($id);
+    }
+
+    public function active($id, $active)
+    {
+        return $this->loupan_rpc->active($id, $active);
     }
 }

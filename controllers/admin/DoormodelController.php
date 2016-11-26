@@ -37,17 +37,20 @@ class DoormodelController extends LController
     {
         $door_model_list = [];
         $loupan_name = '';
+        $loupan_id = 0;
         if (!empty($this->params['loupan_id'])) {
-            $res = $this->loupan_manager->doorModelList($this->params['loupan_id']);
+            $loupan_id = $this->params['loupan_id'];
+            $res = $this->loupan_manager->doorModelList($loupan_id);
             if (!$this->hasError($res)) {
                 $door_model_list = $res;
-                $res = $this->loupan_manager->getSimple($this->params['loupan_id']);
-                if (!$this->hasError($res)) {
-                    $loupan_name = $res['name'];
+                $res = $this->loupan_manager->getSimple($loupan_id);
+                if (!$this->hasError($res) && !empty($res)) {
+                    $loupan_name = $res->name;
                 }
             }
         }
-        return $this->render('index', ['door_model_list' => $door_model_list, 'loupan' => $loupan_name]);
+        return $this->render('index',
+            ['door_model_list' => $door_model_list, 'loupan_name' => $loupan_name, 'loupan_id' => $loupan_id]);
     }
 
     public function actionAdd()
@@ -56,7 +59,7 @@ class DoormodelController extends LController
             if (empty($this->params['loupan_id'])) {
                 throw new RequestException('404', ErrorCode::NOT_FOUND);
             }
-            return $this->render('add');
+            return $this->render('add', ['loupan_id' => $this->params['loupan_id']]);
         } else {
             $error_msg = $this->checkLoupanParams();
             if ($error_msg) {
@@ -111,11 +114,56 @@ class DoormodelController extends LController
         if (empty($ids)) {
             return $this->error('ids参数不合法');
         }
-        $res = $this->loupan_manager->DoorModelBatchDel($ids);
+        $res = $this->loupan_manager->doorModelBatchDel($ids);
         if ($this->hasError($res)) {
             return $this->error('删除户型失败！');
         } else {
             return $this->success();
         }
+    }
+
+    private function getLoupan()
+    {
+        $loupan = [
+            'property_company'    => $this->params['property_company'],
+            'img'                 => $this->params['img'],
+            'banner_img'          => $this->params['banner_img'],
+            'right_time'          => $this->params['right_time'],
+            'remark'              => $this->params['remark'],
+            'tag'                 => $this->params['tag'],
+            'img_1'               => $this->params['img_1'],
+            'img_2'               => $this->params['img_2'],
+            'img_3'               => $this->params['img_3'],
+        ];
+        return $loupan;
+    }
+
+    private function checkLoupanParams()
+    {
+        if (!Utils::validNum($this->getRequestParam('min_square'), true)) {
+            return '请输入最小平米数！';
+        }
+        if (!Utils::validVal($this->getRequestParam('banner_img'), true)) {
+            return '请上传楼盘banner图片！';
+        }
+        if (!Utils::validNum($this->getRequestParam('right_time'), true)) {
+            return '请输入产权时间！';
+        }
+        if (!Utils::validVal($this->getRequestParam('img_2'), true, 0, 50)) {
+            return '请输入上传效果图2！';
+        }
+        if (!Utils::validVal($this->getRequestParam('img_3'), true, 0, 50)) {
+            return '请输入上传效果图3！';
+        }
+        if (!Utils::validVal($this->getRequestParam('tag'), true, 0, 50)) {
+            return '请选择楼盘标签！';
+        }
+        if (empty($this->params['remark'])) {
+            $this->params['remark'] = '';
+        }
+        if (empty($this->params['img_5'])) {
+            $this->params['img_5'] = '';
+        }
+        return '';
     }
 }

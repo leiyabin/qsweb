@@ -62,7 +62,7 @@ use yii\widgets\ActiveForm;
                 <label class="col-sm-3 control-label" style="width: 10%">照片
                 </label>
                 <div class="col-sm-6">
-                    <label style="color: red">*上传图片尺寸78*98</label>
+                    <label style="color: red;display: block;">*上传图片尺寸78*98</label>
                     <input type="file" id="broker_img" name="broker_img" style="display:inline">
                     <input type="button" tag="broker_img" value="上传" class="upload_file">
                     <input type="hidden" name="broker_img_url">

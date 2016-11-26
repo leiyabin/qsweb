@@ -3,7 +3,7 @@
  */
 function getCheckBoxStr($obj) {
     var arr = [];
-    $obj.each(function(i){
+    $obj.each(function (i) {
         arr.push($(this).val());
     });
     var str = arr.join(',');

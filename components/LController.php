@@ -93,7 +93,7 @@ class LController extends Controller
 
     protected function hasError($res)
     {
-        if (isset($res->code)) {
+        if (isset($res->error_code)) {
             $this->error_msg .= $res->msg;
             return true;
         } else {

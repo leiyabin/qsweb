@@ -10,11 +10,11 @@ namespace app\controllers\admin;
 
 use yii\web\Controller;
 
-
 class ErrorController extends Controller
 {
+    public $layout = false;
     public function action404()
     {
-        return $this->render('login');
+        return $this->render('404');
     }
 }

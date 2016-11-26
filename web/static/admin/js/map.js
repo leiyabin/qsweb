@@ -6,7 +6,13 @@ $(function () {
     map.setDefaultCursor("crosshair");
 
     map.enableScrollWheelZoom();
-    var point = new BMap.Point(116.40493, 39.914998);
+    if (typeof(honse_lon) == 'undefined') {
+        honse_lon = 116.404032;
+    }
+    if (typeof(honse_lat) == 'undefined') {
+        honse_lat = 39.915022;
+    }
+    var point = new BMap.Point(honse_lon, honse_lat);
     map.centerAndZoom(point, 13);
     var gc = new BMap.Geocoder();
 
@@ -61,7 +67,7 @@ $(function () {
     myCity.get(iploac);
     $('#but').click(function () {
         var local = new BMap.LocalSearch(map, {renderOptions: {map: map}});
-        local.search( $('#where').val());
+        local.search($('#where').val());
     })
 
 })

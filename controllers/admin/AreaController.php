@@ -155,17 +155,16 @@ class AreaController extends LController
 
     public function actionGetbyclassid()
     {
-        $value_list = [];
         if ($this->is_post && !empty($this->params['class_id'])) {
-            $info = $this->area_manager->Getbyclassid($this->params['class_id']);
+            $info = $this->area_manager->getByClassId($this->params['class_id']);
             if ($this->hasError($info)) {
                 return $this->error();
             } else {
-                $value_list = $info;
-                return $this->success($value_list);
+                return $this->success($info);
             }
         } else {
             return $this->error();
         }
     }
+
 }

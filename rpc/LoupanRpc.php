@@ -59,6 +59,12 @@ class LoupanRpc extends LRpc
         return LRpc::init()->post($params)->url('/loupan/getsimple');
     }
 
+    public function active($id, $active)
+    {
+        $params = ['id' => $id, 'active' => $active];
+        return LRpc::init()->post($params)->url('/loupan/active');
+    }
+
     public function doorModelList($loupan_id)
     {
         $params = ['loupan_id' => $loupan_id];

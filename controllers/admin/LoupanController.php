@@ -115,6 +115,7 @@ class LoupanController extends LController
                 return $this->error($error_msg);
             }
             $loupan = $this->getLoupan();
+            $loupan['id'] = $id;
             $res = $this->loupan_manager->edit($loupan);
             if ($this->hasError($res)) {
                 return $this->error('修改失败！');
@@ -159,73 +160,73 @@ class LoupanController extends LController
     private function checkLoupanParams()
     {
         if (!Utils::validVal($this->getRequestParam('name'), true, 0, 30)) {
-            return  '请输入不大于30字的名称！';
+            return '请输入不大于30字的名称！';
         }
         if (!Utils::validNum($this->getRequestParam('average_price'), true)) {
-            return  '请输入正确均价！';
+            return '请输入正确均价！';
         }
         if (!Utils::validVal($this->getRequestParam('address'), true, 0, 50)) {
-            return  '请输入不大于50字的楼盘地址！';
+            return '请输入不大于50字的楼盘地址！';
         }
         if (!Utils::validVal($this->getRequestParam('sale_office_address'), true, 0, 50)) {
-            return  '请输入不大于50字的售楼处地址！';
+            return '请输入不大于50字的售楼处地址！';
         }
         if (!Utils::validNum($this->getRequestParam('opening_time'), true)) {
-            return  '请选择开盘时间！';
+            return '请选择开盘时间！';
         }
         if (!Utils::validNum($this->getRequestParam('area_id'), true)) {
-            return  '请选择片区！';
+            return '请选择片区！';
         }
         if (!Utils::validNum($this->getRequestParam('property_type_id'), true)) {
-            return  '请选择物业类型！';
+            return '请选择物业类型！';
         }
         if (!Utils::validNum($this->getRequestParam('sale_status'), true)) {
-            return  '请选择售状态！';
+            return '请选择售状态！';
         }
         if (!Utils::validVal($this->getRequestParam('jiju'), true, 0, 30)) {
-            return  '请选择房屋居室情况！';
+            return '请选择房屋居室情况！';
         }
         if (!Utils::validNum($this->getRequestParam('min_square'), true)) {
-            return  '请输入最小平米数！';
+            return '请输入最小平米数！';
         }
         if (!Utils::validNum($this->getRequestParam('max_square'), true)) {
-            return  '请输入最大平米数！';
+            return '请输入最大平米数！';
         }
         if (empty($this->params['lon']) || empty($this->params['lat'])) {
-            return  '请选择楼盘经纬度！';
+            return '请选择楼盘经纬度！';
         }
         if (!Utils::validVal($this->getRequestParam('developers'), true)) {
-            return  '请输入不大于50字的开发商名称！';
+            return '请输入不大于50字的开发商名称！';
         }
         if (!Utils::validVal($this->getRequestParam('property_company'), true)) {
-            return  '请输入不大于50字的物业名称！';
+            return '请输入不大于50字的物业名称！';
         }
         if (!Utils::validVal($this->getRequestParam('img'), true)) {
-            return  '请上传楼盘封面图片！';
+            return '请上传楼盘封面图片！';
         }
         if (!Utils::validVal($this->getRequestParam('banner_img'), true)) {
-            return  '请上传楼盘banner图片！';
+            return '请上传楼盘banner图片！';
         }
         if (!Utils::validNum($this->getRequestParam('right_time'), true)) {
-            return  '请输入产权时间！';
+            return '请输入产权时间！';
         }
         if (!Utils::validVal($this->getRequestParam('remark'), false, 0, 15)) {
-            return  '请输入不大于15字备注！';
+            return '请输入不大于15字备注！';
         }
         if (!Utils::validVal($this->getRequestParam('img_1'), true, 0, 50)) {
-            return  '请输入上传效果图1！';
+            return '请输入上传效果图1！';
         }
         if (!Utils::validVal($this->getRequestParam('img_2'), true, 0, 50)) {
-            return  '请输入上传效果图2！';
+            return '请输入上传效果图2！';
         }
         if (!Utils::validVal($this->getRequestParam('img_3'), true, 0, 50)) {
-            return  '请输入上传效果图3！';
+            return '请输入上传效果图3！';
         }
         if (!Utils::validVal($this->getRequestParam('img_4'), true, 0, 50)) {
-            return  '请输入上传效果图4！';
+            return '请输入上传效果图4！';
         }
         if (!Utils::validVal($this->getRequestParam('img_5'), false, 0, 50)) {
-            return  '请输入上传效果图5！';
+            return '请输入上传效果图5！';
         }
         if (!Utils::validVal($this->getRequestParam('tag'), true, 0, 50)) {
             return '请选择楼盘标签！';
@@ -237,5 +238,19 @@ class LoupanController extends LController
             $this->params['img_5'] = '';
         }
         return '';
+    }
+
+    public function actionActive()
+    {
+        if ($this->is_post && !empty($this->params['id']) && !empty($this->params['active'])) {
+            $info = $this->loupan_manager->active($this->params['id'], $this->params['active']);
+            if ($this->hasError($info)) {
+                return $this->error();
+            } else {
+                return $this->success();
+            }
+        } else {
+            return $this->error();
+        }
     }
 }

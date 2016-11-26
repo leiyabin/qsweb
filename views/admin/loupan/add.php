@@ -378,7 +378,6 @@ use yii\widgets\ActiveForm;
                 var $tag = $('input:checkbox[name=tag]:checked');
                 $tag = getCheckBoxStr($tag);
                 var $remark = $('input[name=remark]').val().trim();
-                var $class_id = $('#dropdownMenu1').attr('tag');
                 if (!checkVal($name, '名称', true, 0, 30)) {
                     return;
                 }

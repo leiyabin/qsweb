@@ -78,8 +78,11 @@ use yii\helpers\Url;
                 <th><input type="checkbox" id="selectAll"></th>
                 <th>id</th>
                 <th>名称</th>
+                <th>物业类型</th>
                 <th>片区</th>
                 <th>地址</th>
+                <th>户型</th>
+                <th>创建时间</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -89,8 +92,10 @@ use yii\helpers\Url;
                     <th><input type="checkbox" name="ids[]" value="<?= $item->id; ?>"></th>
                     <th><?= $item->id; ?></th>
                     <th><?= $item->name; ?></th>
+                    <th><?= $item->property_type; ?></th>
                     <th><?= $item->area_name; ?></th>
                     <th><?= $item->address; ?></th>
+                    <th><a href="/admin/doormodel/index/?loupan_id=<?= $item->id; ?>">【查看】</a></th>
                     <th><?= \app\components\Utils::formatDateTime($item->c_t); ?></th>
                     <th>
                         <a href="<?= Url::to(['edit', 'id' => $item->id]); ?>"><i class="fa fa-pencil"></i></a>
