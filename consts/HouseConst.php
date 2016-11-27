@@ -17,11 +17,17 @@ class HouseConst
     const HOUSE_TYPE_OLD = 2;
 
     //装修情况
-    const DECORATION_FINE = 1;
+    const DECORATION_BLANK = 1;
     const DECORATION_SIMPLE = 2;
+    const DECORATION_GENERAL = 3;
+    const DECORATION_HARDCOVER = 4;
+    const DECORATION_LUXURY = 5;
     public static $decoration = [
-        self::DECORATION_FINE   => '精装修',
-        self::DECORATION_SIMPLE => '简装修',
+        self::DECORATION_BLANK     => '毛坯',
+        self::DECORATION_SIMPLE    => '简装',
+        self::DECORATION_GENERAL   => '中装',
+        self::DECORATION_HARDCOVER => '精装',
+        self::DECORATION_LUXURY    => '豪装',
     ];
 
     //楼盘销售状态
@@ -118,6 +124,18 @@ class HouseConst
         self::ROOM_NUM_4 => '四居室',
         self::ROOM_NUM_5 => '五居室',
         self::ROOM_NUM_6 => '五居室以上',
+    ];
+
+    //付款方式
+    const BUY_TYPE_ALL = 1;
+    const BUY_TYPE_BUSSINESS_LOAN = 2;
+    const BUY_TYPE_FUND_LOAN = 3;
+
+    public static $buy_type = [
+        self::BUY_TYPE_ALL            => '全款',
+        self::BUY_TYPE_BUSSINESS_LOAN => '商贷',
+        self::BUY_TYPE_BUSSINESS_LOAN => '公积金',
+
     ];
 
 }

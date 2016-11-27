@@ -283,7 +283,7 @@ use yii\widgets\ActiveForm;
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label" style="width: 12%">产权
+                <label class="col-sm-3 control-label" style="width: 12%">产权年限
                     <fond style="color: red">*</fond>
                 </label>
                 <div class="col-sm-6">
@@ -439,7 +439,7 @@ use yii\widgets\ActiveForm;
                     return;
                 }
                 if($right_time == 0){
-                    alert('请填写产权！');  return;
+                    alert('请填写产权年限！');  return;
                 }
                 if (!checkVal($tag, '楼盘特色', true)) {
                     return;
