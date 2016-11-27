@@ -12,7 +12,6 @@ use yii\widgets\ActiveForm;
     <script charset="utf-8" src="/static/admin/js/upload.js"></script>
     <script charset="utf-8" src="/static/admin/js/form.check.js"></script>
     <script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
-    <script charset="utf-8" src="/static/admin/js/checkbox.js"></script>
 <?php $this->beginBlock('breadcrumb');//面包屑导航 ?>
     <div class="pageheader" style="height: 50px;padding-top: 10px">
         <h2><span style="font-style: normal">楼盘</span>
@@ -21,6 +20,13 @@ use yii\widgets\ActiveForm;
 <?php $this->endBlock(); ?>
 
     <div class="panel panel-default">
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3" style="margin-left: 10px;">
+                    <button id="back_button" class="btn btn-success">返回</button>
+                </div>
+            </div>
+        </div>
         <div class="panel-body">
             <input type="hidden" name="loupan_id" value="<?= $loupan_id ?>">
             <div class="form-group">
@@ -182,8 +188,10 @@ use yii\widgets\ActiveForm;
                     }
                 })
             });
+            $('#back_button').click(function () {
+                location.href='/admin/doormodel/index/?loupan_id=<?=$loupan_id ?>'
+            })
         });
-
     </script>
 
 <?php $this->endBlock(); ?>

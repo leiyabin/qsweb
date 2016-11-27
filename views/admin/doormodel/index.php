@@ -10,6 +10,27 @@ use yii\helpers\Url;
 <script charset="utf-8" src="/static/admin/js/delete.all.js"></script>
 <script charset="utf-8" src="/static/admin/js/dropdown.js"></script>
 <script>
+    function doDelete(ids) {
+        if (!window.confirm('确定要删除id为[' + ids + ']的这些记录吗?')) {
+            return false;
+        }
+        $.ajax({
+            url: '/admin/doormodel/batchdel',
+            dataType: 'json',
+            data: {"ids": ids.join(',')},
+            error: function (res) {
+                alert('系统错误，请联系客服人员！');
+            },
+            success: function (res) {
+                if (res.status == 1) {
+                    alert('删除成功!');
+                    location.reload(true);
+                } else {
+                    alert(res.msg);
+                }
+            }
+        });
+    }
     $(function () {
         $("#search_button").click(function () {
             var class_id = $('#dropdownMenu1').attr('tag');
@@ -40,10 +61,11 @@ use yii\helpers\Url;
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="toolbar">
-            <a href="<?= Url::to(['add']); ?>?loupan_id=<?= $loupan_id?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i>
+            <a href="<?= Url::to(['add']); ?>?loupan_id=<?= $loupan_id ?>" class="btn btn-primary btn-sm"><i
+                    class="glyphicon glyphicon-plus"></i>
                 新增</a>
         </div>
-        <h4>【<?=$loupan_name?>】户型列表</h4>
+        <h4>【<?= $loupan_name ?>】户型列表</h4>
     </div>
     <div class="panel-body">
         <table class="table">
@@ -65,7 +87,7 @@ use yii\helpers\Url;
                 <tr>
                     <th><input type="checkbox" name="ids[]" value="<?= $item->id; ?>"></th>
                     <th><?= $item->id; ?></th>
-                    <th><?= $item->loupan_name; ?></th>
+                    <th><?= $loupan_name; ?></th>
                     <th><?= $item->face; ?></th>
                     <th><?= $item->shitinwei; ?></th>
                     <th><?= $item->build_area; ?></th>
@@ -73,6 +95,7 @@ use yii\helpers\Url;
                     <th><?= \app\components\Utils::formatDateTime($item->c_t); ?></th>
                     <th>
                         <a href="<?= Url::to(['edit', 'id' => $item->id]); ?>"><i class="fa fa-pencil"></i></a>
+                        <i class="fa fa-trash-o" style="margin-left: 10px;cursor: pointer" tag="<?= $item->id ?>"></i>
                     </th>
                 </tr>
             <?php endforeach; ?>

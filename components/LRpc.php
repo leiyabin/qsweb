@@ -215,7 +215,7 @@ class LRpc
             $this->rpcError($this->error_message);
         } else {
             $res = json_decode($this->data);
-            if ($res->ret == 0 && $res->data->code < ErrorCode::ACTION_ERROR) {
+            if ($res->ret == 0 && $res->data->error_code < ErrorCode::ACTION_ERROR) {
                 $this->rpcError($res->data->msg);
             } else {
                 $this->result = $res->data;

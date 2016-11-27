@@ -195,10 +195,10 @@ class LoupanController extends LController
         if (empty($this->params['lon']) || empty($this->params['lat'])) {
             return '请选择楼盘经纬度！';
         }
-        if (!Utils::validVal($this->getRequestParam('developers'), true)) {
+        if (!Utils::validVal($this->getRequestParam('developers'), true, 0, 50)) {
             return '请输入不大于50字的开发商名称！';
         }
-        if (!Utils::validVal($this->getRequestParam('property_company'), true)) {
+        if (!Utils::validVal($this->getRequestParam('property_company'), true, 0, 50)) {
             return '请输入不大于50字的物业名称！';
         }
         if (!Utils::validVal($this->getRequestParam('img'), true)) {
@@ -208,7 +208,7 @@ class LoupanController extends LController
             return '请上传楼盘banner图片！';
         }
         if (!Utils::validNum($this->getRequestParam('right_time'), true)) {
-            return '请输入产权时间！';
+            return '请输入产权年限！';
         }
         if (!Utils::validVal($this->getRequestParam('remark'), false, 0, 15)) {
             return '请输入不大于15字备注！';
