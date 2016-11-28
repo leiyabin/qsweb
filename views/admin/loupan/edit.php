@@ -138,9 +138,8 @@ use yii\helpers\Html;
                 <fond style="color: red">*</fond>
             </label>
             <div class="col-sm-6 dropdown">
-                <button style="width: 200px;" class="btn btn-default dropdown-toggle" type="button" tag="0"
-                        id="dropdownMenu4"
-                        data-toggle="dropdown">
+                <button style="width: 200px;" class="btn btn-default dropdown-toggle" type="button"
+                        tag="<?= $loupan->sale_status; ?>" id="dropdownMenu4"  data-toggle="dropdown">
                     <?= $loupan->sale_status_name; ?>
                 </button>
                 <ul style="margin-left: 10px" class="dropdown-menu" role="menu">
