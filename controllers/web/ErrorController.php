@@ -6,7 +6,7 @@
  * Time: 15:03
  */
 
-namespace app\controllers\admin;
+namespace app\controllers\web;
 
 use yii\web\Controller;
 

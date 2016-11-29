@@ -10,8 +10,7 @@ namespace app\components;
 
 use app\consts\ErrorCode;
 use app\consts\LogConst;
-use app\exception\RequestException;
-use app\manager\AdminManager;
+use yii\base\InvalidRouteException;
 use yii\web\Controller;
 use Yii;
 
@@ -118,6 +117,9 @@ class LController extends Controller
     {
         try {
             return parent::runAction($id, $params);
+        } catch (InvalidRouteException $e) {
+            Yii::error($e->getMessage(),LogConst::REQUEST);
+            $this->redirect('/web/error/404')->send();
         } catch (\Exception $e) {
             $error_string = sprintf('【error】 MSG:%s ;TRACE:%s ', $e->getMessage(), $e->getTraceAsString());
             Yii::error($error_string);
@@ -129,10 +131,7 @@ class LController extends Controller
     {
         //todo 修改
         if ($error_code == ErrorCode::NOT_FOUND) {
-            $this->redirect('/admin/error/404')->send();
-        }
-        if ($error_code == ErrorCode::FORBIDDEN) {
-            $this->redirect('/admin/auth/login')->send();
+            $this->redirect('/web/error/404')->send();
         }
         header("Content-type:application/json;charset=utf-8");
         $res = [

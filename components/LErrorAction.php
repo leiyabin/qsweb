@@ -29,10 +29,7 @@ class LErrorAction extends ErrorAction
             $code = $exception->getCode();
         }
         if ($code == ErrorCode::NOT_FOUND) {
-            return \Yii::$app->view->renderFile('@app/views/admin/error/404.php');
-        }
-        if ($code == ErrorCode::FORBIDDEN) {
-            return \Yii::$app->view->renderFile('@app/views/admin/auth/login.php');
+            return \Yii::$app->view->renderFile('@app/views/web/error/404.php');
         }
         if ($exception instanceof UserException) {
             $message = $exception->getMessage();

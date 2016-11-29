@@ -6,13 +6,20 @@
  * Time: 9:42
  */
 
-namespace app\controllers\admin;
+namespace app\controllers\web;
 use app\components\LController;
 
 class FinancialController extends LController
 {
     public function actionIndex()
     {
+        $this->getView()->title = '千誉金融';
         return $this->render('index');
+    }
+
+    public function actionDetail()
+    {
+        $this->getView()->title = '千誉金融';
+        return $this->render('detail');
     }
 }
