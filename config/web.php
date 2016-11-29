@@ -5,11 +5,12 @@ require(__DIR__ . '/define.php');
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id'         => 'basic',
-    'language'   => 'zh-CN',
-    'basePath'   => dirname(__DIR__),
-    'bootstrap'  => ['log'],
-    'components' => [
+    'id'           => 'basic',
+    'language'     => 'zh-CN',
+    'defaultRoute' => '/web/index/index',
+    'basePath'     => dirname(__DIR__),
+    'bootstrap'    => ['log'],
+    'components'   => [
         'request'       => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'bdZT_oJ1cjlVep23SLGkoAUASxJS1Mgk',
@@ -48,7 +49,7 @@ $config = [
         ],
         'log'           => require(__DIR__ . '/log.php'),
         'db'            => require(__DIR__ . '/db.php'),
-        'lsession'       => require(__DIR__ . '/lsession.php'),
+        'lsession'      => require(__DIR__ . '/lsession.php'),
         'session'       => [
             'class'        => 'yii\web\DbSession',
             'db'           => 'db',
@@ -61,7 +62,7 @@ $config = [
             ],
         ],
     ],
-    'params'     => $params,
+    'params'       => $params,
 ];
 
 if (YII_ENV_DEV) {
