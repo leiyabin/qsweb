@@ -20,7 +20,7 @@ class LController extends Controller
     protected $response_status;
     protected $error_msg = '';
     protected $default_page = 1;
-    protected $page_size = 20;
+    protected $page_size = 10;
     protected $is_post;
     protected $user_info;
     public $layout = 'web';
@@ -87,6 +87,13 @@ class LController extends Controller
         return $res_json;
     }
 
+    protected function getPage($total, $current)
+    {
+        $pre = ($current - 1 > 1) ? ($current - 1) : 1;
+        $next = ($current + 1 < $total) ? ($current + 1) : $total;
+        return ['pre' => $pre, 'next' => $next];
+    }
+
     protected function hasError($res)
     {
         if (isset($res->error_code)) {
@@ -118,7 +125,7 @@ class LController extends Controller
         try {
             return parent::runAction($id, $params);
         } catch (InvalidRouteException $e) {
-            Yii::error($e->getMessage(),LogConst::REQUEST);
+            Yii::error($e->getMessage(), LogConst::REQUEST);
             $this->redirect('/web/error/404')->send();
         } catch (\Exception $e) {
             $error_string = sprintf('【error】 MSG:%s ;TRACE:%s ', $e->getMessage(), $e->getTraceAsString());

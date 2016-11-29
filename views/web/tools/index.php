@@ -93,3 +93,6 @@
         </div>
     </div>
 </div>
+<script>
+    var menu = 'tool_menu';
+</script>

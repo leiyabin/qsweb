@@ -47,3 +47,6 @@
     </ul>
     <div class="page"><a href="" title="上一页" class="page-prev">上一页</a><a href="" class="page-this">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><a href="">···</a><a href="">28</a><a href="" title="下一页" class="page-next">下一页</a></div>
 </div>
+<script>
+    var menu = 'financial_menu';
+</script>

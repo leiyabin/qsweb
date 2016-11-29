@@ -60,3 +60,6 @@
         </ul>
     </div>
 </div>
+<script>
+    var menu = 'oversea_menu';
+</script>

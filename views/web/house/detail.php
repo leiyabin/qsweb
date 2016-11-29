@@ -308,3 +308,6 @@
         </ul>
     </div>
 </div>
+<script>
+    var menu = 'house_menu';
+</script>

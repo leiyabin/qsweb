@@ -138,3 +138,6 @@
         </li>
     </ul>
 </div>
+<script>
+    var menu = 'loupan_menu';
+</script>

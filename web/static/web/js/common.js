@@ -58,8 +58,8 @@ $(document).ready(function () {
     }
 
     //网站栏目的选中
-    if (typeof(menu) == 'undefined') {
-        honse_lon = 116.404032;
+    if (typeof(menu) != 'undefined') {
+        $('#' + menu).addClass('nav-current');
     }
 
 });

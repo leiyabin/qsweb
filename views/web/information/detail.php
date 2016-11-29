@@ -16,3 +16,6 @@
         </div>
     </div>
 </div>
+<script>
+    var menu = 'information_menu';
+</script>

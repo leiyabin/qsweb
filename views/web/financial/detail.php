@@ -16,3 +16,6 @@
         </div>
     </div>
 </div>
+<script>
+    var menu = 'financial_menu';
+</script>

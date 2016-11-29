@@ -140,3 +140,6 @@
         </li>
     </ul>
 </div>
+<script>
+    var menu = 'house_menu';
+</script>

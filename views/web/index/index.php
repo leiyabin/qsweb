@@ -156,3 +156,6 @@
     </span>
 </div>
 <!-- content end -->
+<script>
+    var menu = 'index_menu';
+</script>
