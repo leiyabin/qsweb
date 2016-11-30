@@ -3,13 +3,13 @@
     <div class="index-search">
         <p><span class="search-this">学区房</span><span>商铺</span><span>写字楼</span></p>
         <div class="index-search-con">
-            <input type="text" value="请输入学校名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
+            <input type="text" placeholder="请输入学校名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
         </div>
         <div class="index-search-con">
-            <input type="text" value="请输入商铺名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
+            <input type="text" placeholder="请输入商铺名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
         </div>
         <div class="index-search-con">
-            <input type="text" value="请输入写字楼名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
+            <input type="text" placeholder="请输入写字楼名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
             <h2 class="s18">房产问答</h2>
             <p class="c6">买房版十万个为什么，专家来为您解惑</p>
         </a>
-        <a href="" class="head-3">
+        <a href="/web/financial/" class="head-3">
             <h2 class="s18">千誉金融</h2>
             <p class="c6">年息6%，全程托管，资金更安全</p>
         </a>

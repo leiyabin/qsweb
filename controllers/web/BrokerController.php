@@ -7,12 +7,9 @@
  */
 
 namespace app\controllers\web;
+
 use app\components\LController;
-use app\components\Utils;
-use yii\data\Pagination;
 use app\manager\BrokerManager;
-use app\manager\ConfigManager;
-use app\consts\ConfigConst;
 
 class BrokerController extends LController
 {
@@ -29,22 +26,24 @@ class BrokerController extends LController
 
     public function actionIndex()
     {
-        //todo 分页不显示的情况
         $broker_list = [];
-        $pages = new Pagination(['totalCount' => 0, 'defaultPageSize' => $this->page_size]);
+        $pages = [];
         $position_id = $this->getRequestParam('position_id', 0);
         $name = $this->getRequestParam('name', '');
+        $total = 0;
         $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
         $page_info = ['page' => $page, 'pre_page' => $this->page_size];
         $res = $this->broker_manager->getList($page_info, $position_id, $name);
         if (!$this->hasError($res)) {
-            $pages = new Pagination(['totalCount' => $res->total, 'defaultPageSize' =>1]);
+            $total = $res->total;
+            $pages = $this->getPage($res->total, $page, $res->total_pages);
             $broker_list = $res->broker_list;
         }
         $this->getView()->title = '千氏地产-经纪人';
         return $this->render('index', [
             'broker_list' => $broker_list,
             'pages'       => $pages,
+            'total'       => $total,
             'position_id' => $position_id,
             'name'        => $name
         ]);

@@ -1,9 +1,10 @@
 <div class="bg1 inner-search">
-    <input type="text" placeholder="请输入经纪人姓名" value="<?= $name?>" class="search-text"><input type="button" value="搜索" class="search-btn">
+    <input type="text" placeholder="请输入经纪人姓名" value="<?= $name ?>" class="search-text">
+    <input type="button" value="搜索" class="search-btn">
 </div>
 <div class="bg1">
     <div class="con">
-        <h2 class="list-title s18 n">共有 <font class="orange">12345</font> 名经纪人</h2>
+        <h2 class="list-title s18 n">共有 <font class="orange"><?=$total?></font> 名经纪人</h2>
         <ul class="agent">
             <?php foreach ($broker_list as $item): ?>
                 <li>
@@ -23,12 +24,24 @@
                 </li>
             <?php endforeach; ?>
         </ul>
-        <div class="page">
-            <a href="/web/broker/index?page=1" title="上一页" class="page-prev">上一页</a>
-            <a href="/web/broker/index?page=2" title="下一页" class="page-next">下一页</a>
-        </div>
+        <?php
+        if(!empty($pages)){
+            echo '
+        <div class="page" >
+            <a href = "/web/broker/index?page='.$pages['pre'].'" title = "上一页" class="page-prev" > 上一页</a >
+            <a href = "/web/broker/index?page='.$pages['next'].'" title = "下一页" class="page-next" > 下一页</a >
+        </div > ';
+        } ?>
     </div>
 </div>
 <script>
     var menu = 'broker_menu';
+    $(".search-btn").click(function () {
+        var value = $(".search-text").val().trim();
+        var url = '/web/broker/index?';
+        if (value != '') {
+            url += 'name=' + value;
+        }
+        location.href = url;
+    });
 </script>

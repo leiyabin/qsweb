@@ -18,15 +18,7 @@ $(document).ready(function () {
 
     ser_t.css("color", "#999");
     ser_t.focus(function () {
-        if ($(this).val() == this.defaultValue) {
-            $(this).val("");
             $(this).css("color", "#333");
-        }
-    }).blur(function () {
-        if ($(this).val() == "") {
-            $(this).val(this.defaultValue);
-            $(this).css("color", "#999");
-        }
     });
 
 //select美化

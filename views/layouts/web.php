@@ -22,13 +22,13 @@
         <a href="/"><img src="/static/web/images/logo.png" class="logo"></a>
         <ul class="nav">
             <li id="index_menu"><a href="/">首页</a></li>
-            <li id="house_menu"><a href="/web/house/index/">二手房</a></li>
-            <li id="loupan_menu"><a href="/web/loupan/index/">新房</a></li>
-            <li id="oversea_menu"><a href="/web/oversea/index/">海外</a></li>
-            <li id="information_menu"><a href="/web/information/index/">百科</a></li>
-            <li id="broker_menu"><a href="/web/broker/index/">经纪人</a></li>
-            <li id="tool_menu"><a href="/web/tools/index/">工具</a></li>
-            <li id="financial_menu"><a href="/web/financial/index/">金融</a></li>
+            <li id="house_menu"><a href="/web/house/">二手房</a></li>
+            <li id="loupan_menu"><a href="/web/loupan/">新房</a></li>
+            <li id="oversea_menu"><a href="/web/oversea/">海外</a></li>
+            <li id="information_menu"><a href="/web/information/">百科</a></li>
+            <li id="broker_menu"><a href="/web/broker/">经纪人</a></li>
+            <li id="tool_menu"><a href="/web/tools/">工具</a></li>
+            <li id="financial_menu"><a href="/web/financial/">金融</a></li>
         </ul>
     </div>
     <!-- header end -->
