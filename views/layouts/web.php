@@ -14,6 +14,7 @@
         <!--[if lte IE 8]>
         <link rel="stylesheet" href="/static/web/css/ie8.css">
         <![endif]-->
+        <link rel="stylesheet" href="/static/web/css/jquery.fancybox.css">
     </head>
 
     <body>

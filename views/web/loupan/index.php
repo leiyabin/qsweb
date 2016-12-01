@@ -40,9 +40,9 @@
         <h2 class="list-title s18 n">共找到 <font class="orange">32461</font> 套北京新房源</h2>
         <ul class="house-list">
             <li>
-                <a href="新房-详情.html" title="万柳书院"><img src="/static/web/photo/img-5.jpg"></a>
+                <a href="/web/loupan/detail" title="万柳书院"><img src="/static/web/photo/img-5.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="新房-详情.html">万柳书院</a></h3>
+                    <h3 class="s18"><a href="/web/loupan/detail">万柳书院</a></h3>
                     <p>万柳区域巴沟路华联购物中心西侧</p>
                     <p>6居/5居/4居/3居 - 213～466平米</p>
                     <p>在售 / 普通住房</p>
@@ -54,9 +54,9 @@
                 </div>
             </li>
             <li>
-                <a href="新房-详情.html" title=""><img src="/static/web/photo/img-4.jpg"></a>
+                <a href="/web/loupan/detail" title=""><img src="/static/web/photo/img-4.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="新房-详情.html">中铁花溪渡</a></h3>
+                    <h3 class="s18"><a href="/web/loupan/detail">中铁花溪渡</a></h3>
                     <p>万柳区域巴沟路华联购物中心西侧</p>
                     <p>6居/5居/4居/3居 - 213～466平米</p>
                     <p>在售 / 商住两用</p>
@@ -68,9 +68,9 @@
                 </div>
             </li>
             <li>
-                <a href="新房-详情.html" title=""><img src="/static/web/photo/img-3.jpg"></a>
+                <a href="/web/loupan/detail" title=""><img src="/static/web/photo/img-3.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="新房-详情.html">万柳书院</a></h3>
+                    <h3 class="s18"><a href="/web/loupan/detail">万柳书院</a></h3>
                     <p>万柳区域巴沟路华联购物中心西侧</p>
                     <p>6居/5居/4居/3居 - 213～466平米</p>
                     <p>在售 / 普通住房</p>
@@ -82,9 +82,9 @@
                 </div>
             </li>
             <li>
-                <a href="新房-详情.html" title=""><img src="/static/web/photo/img-2.jpg"></a>
+                <a href="/web/loupan/detail" title=""><img src="/static/web/photo/img-2.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="新房-详情.html">中铁花溪渡</a></h3>
+                    <h3 class="s18"><a href="/web/loupan/detail">中铁花溪渡</a></h3>
                     <p>万柳区域巴沟路华联购物中心西侧</p>
                     <p>6居/5居/4居/3居 - 213～466平米</p>
                     <p>在售 / 商住两用</p>
@@ -96,9 +96,9 @@
                 </div>
             </li>
             <li>
-                <a href="新房-详情.html" title=""><img src="/static/web/photo/img-1.jpg"></a>
+                <a href="/web/loupan/detail" title=""><img src="/static/web/photo/img-1.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="新房-详情.html"></a>中铁花溪渡</h3>
+                    <h3 class="s18"><a href="/web/loupan/detail"></a>中铁花溪渡</h3>
                     <p>万柳区域巴沟路华联购物中心西侧</p>
                     <p>6居/5居/4居/3居 - 213～466平米</p>
                     <p>在售 / 商住两用</p>
@@ -110,7 +110,7 @@
                 </div>
             </li>
         </ul>
-        <div class="page"><a href="" title="上一页" class="page-prev">上一页</a><a href="" class="page-this">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><a href="">···</a><a href="">28</a><a href="" title="下一页" class="page-next">下一页</a></div>
+        <div class="page"><a href="" title="上一页" class="page-prev">上一页</a><a href="" title="下一页" class="page-next">下一页</a></div>
     </div>
 </div>
 <div class="con recommend">

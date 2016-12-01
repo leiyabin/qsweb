@@ -1,156 +1,153 @@
+<script src="/static/web/js/jquery-1.8.2.min.js"></script>
+<script  src="/static/web/js/jquery.fancybox.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.house-type a').fancybox();
+        $('.photo-show').fancybox();
+    });
+</script>
 <div class="bg1 detail">
-    <div class="con hiden">
-        <p class="location bd"><a href="">千氏网北京站</a> > <a href="">北京二手房</a> > <a href="">朝阳二手房</a> > <a href="">望京二手房</a> > <a href="">望京新城二手房</a> > <a href="">当前房源</a></p>
-        <h2 class="s18 detail-title mt10">新城经典东向大三居，高层观景 视野棒，满五唯一</h2>
-
-        <div class="fl detail-img">
-            <div class="detail-photo">
-                <img id="photo-box" src="/static/web/photo/sea-img-1.jpg">
+    <div class="con">
+        <p class="location"><a href="">千氏网北京站</a> > <a href="">北京二手房</a> > <a href="">朝阳二手房</a> > <a href="">望京二手房</a> > <a href="">望京新城二手房</a> > <a href="">当前房源</a></p>
+        <div class="new-banner hiden">
+            <div class="new-info fl tc">
+                <h2 class="cf s24">中铁花溪渡</h2>
+                <p class="list-mark s12"><span class="orange">精装修</span><span class="green">车位充足</span><span class="blue">地铁房</span><span class="yellow">老城区房</span></p>
+                <p>均价：<b class="s18">8650000</b>元/平</p>
+                <strong class="orange s30">010-5794236</strong>
+                <p>咨询电话</p>
             </div>
-
-            <div class="detail-nav">
-                <a class="photo-left" href="javascript:void(0);"><</a>
-                <div class="detail-nav-box">
-                    <ul class="photo-nav">
-                        <li id="tu_1"><a href="javascript:void(0);"><img src="/static/web/photo/img-1.jpg"></a></li>
-                        <li id="tu_2"><a href="javascript:void(0);"><img src="/static/web/photo/img-2.jpg"></a></li>
-                        <li id="tu_3"><a href="javascript:void(0);"><img src="/static/web/photo/img-3.jpg"></a></li>
-                        <li id="tu_4"><a href="javascript:void(0);"><img src="/static/web/photo/img-4.jpg"></a></li>
-                        <li id="tu_5"><a href="javascript:void(0);"><img src="/static/web/photo/img-5.jpg"></a></li>
-                        <li id="tu_6"><a href="javascript:void(0);"><img src="/static/web/photo/img-6.jpg"></a></li>
-                        <li id="tu_7"><a href="javascript:void(0);"><img src="/static/web/photo/sea-img-1.jpg"></a></li>
-                        <li id="tu_8"><a href="javascript:void(0);"><img src="/static/web/photo/sea-img-2.jpg"></a></li>
-                    </ul>
+        </div>
+        <h2 class="detail-title2">户型介绍</h2>
+        <ul class="house-type">
+            <li>
+                <img src="/static/web/photo/new-img.jpg" class="fl">
+                <div class="fl">
+                    <p><b class="s18">4室2厅3卫 153.00</b> ㎡（南,北朝向）</p>
+                    <p>户型解读：布局流畅，通风采光一流，宣扬健康理念</p>
+                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
                 </div>
-                <a class="photo-right" href="javascript:void(0);">></a>
-            </div>
-        </div>
+                <a href="#type-1" data-fancybox-group="gallery" class="fr">查看</a>
+            </li>
+            <li>
+                <img src="/static/web/photo/new-img.jpg" class="fl">
+                <div class="fl">
+                    <p><b class="s18">4室2厅3卫 153.00</b> ㎡（南,北朝向）</p>
+                    <p>户型解读：布局流畅，通风采光一流，宣扬健康理念</p>
+                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
+                </div>
+                <a href="#type-2" data-fancybox-group="gallery" class="fr">查看</a>
+            </li>
+            <li>
+                <img src="/static/web/photo/new-img.jpg" class="fl">
+                <div class="fl">
+                    <p><b class="s18">4室2厅3卫 153.00</b> ㎡（南,北朝向）</p>
+                    <p>户型解读：布局流畅，通风采光一流，宣扬健康理念</p>
+                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
+                </div>
+                <a href="#type-3" data-fancybox-group="gallery" class="fr">查看</a>
+            </li>
+        </ul>
 
-        <div class="fl detail-con">
-            <div class="detail-price bd"><span class="orange"><b>865</b>万</span><span class="c6">单价60520元/平米</span><span class="c6">首付346万</span><span class="c6">税费约25.95万</span></div>
-            <table class="bd">
-                <tr>
-                    <td>
-                        <b class="s24">3室2厅</b>
-                        <p class="c6">高楼层/共25层</p>
-                    </td>
-                    <td>
-                        <b class="s24">东南</b>
-                        <p class="c6">平层/精装</p>
-                    </td>
-                    <td>
-                        <b class="s24">142.93平米</b>
-                        <p class="c6">2000年建/板塔结合</p>
-                    </td>
-                </tr>
-            </table>
-            <ul>
-                <li>小区名称：望京新城</li>
-                <li>所在区域：朝阳 望京 四至五环 近15号线望京站</li>
-                <li>对口学校：白家庄小学望京校区</li>
-                <li>所在区域：朝阳 望京 四至五环 近15号线望京站</li>
-                <li>看房时间：提前预约随时可看</li>
-            </ul>
-            <div class="detail-agent hiden">
-                <img src="/static/web/images/agent.png" class="fl">
-                <p class="mt10"><b class="s18">王艺茹</b> <span class="c6">我和房主签的专属委托，获得房主信赖</span></p>
-                <strong class="orange s30">010-5792045</strong>
-            </div>
-        </div>
-        <div class="detail-info clear">
-            <h2 class="detail-title2">基本信息</h2>
-            <dl class="hiden">
-                <dt class="c6">基本属性</dt>
-                <dd>
+        <!--户型弹出内容start-->
+        <ul class="type-detail-ul">
+            <li id="type-1" class="type-detail">
+                <div class="fl bf"><img src="/static/web/photo/type-img.jpg"></div>
+                <div class="fr bg1">
+                    <h3 class="s18">万柳书院</h3>
+                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
                     <table>
                         <tr>
-                            <td>房屋户型：3室2厅1厨2卫</td>
-                            <td>所在楼层：高楼层 (共25层) 建筑面积142.93㎡</td>
-                            <td>户型结构：平层 套内面积115.03㎡</td>
+                            <td>房屋朝向： 南,北 </td>
+                            <td>居室： 3室2厅3卫</td>
                         </tr>
                         <tr>
-                            <td>建筑类型：板塔结合</td>
-                            <td>房屋朝向：东南</td>
-                            <td>建筑结构：钢混结构</td>
+                            <td>装修标准： 精装修</td>
+                            <td>建筑面积： 169㎡</td>
                         </tr>
                         <tr>
-                            <td>装修情况：精装</td>
-                            <td>梯户比例：两梯八户</td>
-                            <td>供暖方式：集中供暖 配备电梯有</td>
+                            <td>建筑面积： 169㎡ </td>
+                        </tr>
+                        <tr>
+                            <td>户型解读： 暂无</td>
                         </tr>
                     </table>
-                </dd>
-            </dl>
-            <dl class="hiden">
-                <dt class="c6">交易属性</dt>
-                <dd>
+                    <p class="tc mt20">联系电话</p>
+                    <p class="b tc orange s30 mt10">010-5967832</p>
+                </div>
+            </li>
+            <li id="type-2" class="type-detail">
+                <div class="fl bf"><img src="/static/web/photo/sea-img-1.jpg"></div>
+                <div class="fr bg1">
+                    <h3 class="s18">2万柳书院</h3>
+                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
                     <table>
                         <tr>
-                            <td>挂牌时间：2016-10-04</td>
-                            <td>交易权属：商品房</td>
-                            <td>上次交易：2003-12-15</td>
+                            <td>房屋朝向： 南,北 </td>
+                            <td>居室： 3室2厅3卫</td>
                         </tr>
                         <tr>
-                            <td>房屋用途：普通住宅</td>
-                            <td>房本年限：满五年</td>
-                            <td>产权所属：非共有</td>
+                            <td>装修标准： 精装修</td>
+                            <td>建筑面积： 169㎡</td>
                         </tr>
                         <tr>
-                            <td>是否唯一：唯一</td>
-                            <td>住宅小区：类型商品房</td>
-                            <td>抵押信息：无抵押</td>
+                            <td>建筑面积： 169㎡ </td>
                         </tr>
                         <tr>
-                            <td>房本备件：已上传房本照片</td>
+                            <td>户型解读： 暂无</td>
                         </tr>
                     </table>
-                </dd>
-            </dl>
-            <h2 class="detail-title2">房源特色</h2>
-            <dl class="hiden">
-                <dt class="c6">房源标签</dt>
-                <dd>
-                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span class="yellow">距离15号线望京站517米</span><span class="green">满五唯一</span><span class="blue">随时看房</span></p>
-                </dd>
-            </dl>
-            <dl class="hiden">
-                <dt class="c6">户型介绍</dt>
-                <dd>
-                    <p>此房位于望京新城410号楼，可直通地下车库，非常方便； 三室一厅一厨两卫户型，主卧带卫生间，整体东向，楼层比较高 没有任何遮挡，可远眺望京SOHO,视野很棒；户型进身短，采光面宽阳光充足，格局方正 居住非常舒服，适合一家三代人居住。</p>
-                </dd>
-            </dl>
-            <dl class="hiden">
-                <dt class="c6">税费解析</dt>
-                <dd>
-                    <p>此房满五年唯一，税费少，首套只有1.5%的契税和差额5.6%的增值税，很适合高贷款的客户。</p>
-                </dd>
-            </dl>
-            <dl class="hiden">
-                <dt class="c6">小区介绍</dt>
-                <dd>
-                    <p>望京新城位于整个望京最核心的位置，2000年左右建成，是第一批商品房示范点，建筑质量非常高，社区配套成熟，生活便利！</p>
-                </dd>
-            </dl>
-            <dl class="hiden">
-                <dt class="c6">教育配套</dt>
-                <dd>
-                    <p>望京新城幼儿园（公立，每月费用1200左右）、白家庄小学（朝阳区重点）和首师大附属中学；</p>
-                </dd>
-            </dl>
-            <dl class="hiden">
-                <dt class="c6">交通出行</dt>
-                <dd>
-                    <p>小区北门过马路就是地铁望京站（14、15号线）和南门不远处就是阜通站，双地铁小区；</p>
-                </dd>
-            </dl>
-        </div>
-        <div class="house-img hiden bd">
-            <h2 class="detail-title2 mb15">房源照片</h2>
-            <img src="/static/web/photo/img-1.jpg">
-            <img src="/static/web/photo/img-2.jpg">
-            <img src="/static/web/photo/img-3.jpg">
-            <img src="/static/web/photo/img-4.jpg">
-        </div>
+                    <p class="tc mt20">联系电话</p>
+                    <p class="b tc orange s30 mt10">010-5967832</p>
+                </div>
+            </li>
+            <li id="type-3" class="type-detail">
+                <div class="fl bf"><img src="/static/web/photo/sea-img-2.jpg"></div>
+                <div class="fr bg1">
+                    <h3 class="s18">3万柳书院</h3>
+                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
+                    <table>
+                        <tr>
+                            <td>房屋朝向： 南,北 </td>
+                            <td>居室： 3室2厅3卫</td>
+                        </tr>
+                        <tr>
+                            <td>装修标准： 精装修</td>
+                            <td>建筑面积： 169㎡</td>
+                        </tr>
+                        <tr>
+                            <td>建筑面积： 169㎡ </td>
+                        </tr>
+                        <tr>
+                            <td>户型解读： 暂无</td>
+                        </tr>
+                    </table>
+                    <p class="tc mt20">联系电话</p>
+                    <p class="b tc orange s30 mt10">010-5967832</p>
+                </div>
+            </li>
+        </ul>
+        <!--户型弹出内容end-->
+
+        <h2 class="detail-title2">楼盘相册</h2>
+        <ul class="house-photo mt20 hiden bd pb20">
+            <li>
+                <a class="photo-show" href="/static/web/photo/big-1.jpg" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
+                <p class="tc">效果图（1）</p>
+            </li>
+            <li>
+                <a class="photo-show" href="/static/web/photo/big-2.jpg" data-fancybox-group="gallery"><img src="/static/web/photo/img-2.jpg"></a>
+                <p class="tc">效果图（2）</p>
+            </li>
+            <li>
+                <a class="photo-show" href="/static/web/photo/big-1.jpg" data-fancybox-group="gallery"><img src="/static/web/photo/img-3.jpg"></a>
+                <p class="tc">效果图（3）</p>
+            </li>
+            <li>
+                <a class="photo-show" href="/static/web/photo/big-3.jpg" data-fancybox-group="gallery"><img src="/static/web/photo/img-4.jpg"></a>
+                <p class="tc">效果图（4）</p>
+            </li>
+        </ul>
         <div class="around bd">
             <h2 class="detail-title2">周边配套</h2>
             <p class="around-nav"><a href="#a" class="around-nav-t">公交</a><a href="#b">地铁</a><a href="">教育设施</a><a href="">医院</a><a href="">银行</a><a href="">休闲娱乐</a><a href="">购物</a><a href="">餐饮</a><a href="">运动健身</a></p>
@@ -173,141 +170,226 @@
                 </div>
             </div>
         </div>
-        <div class="school">
-            <h2 class="detail-title2">对口学校</h2>
-            <h3 class="s18 n mt15">北京市朝阳区白家庄小学望京新城分校</h3>
-            <div class="detail-info clear">
-                <dl class="hiden">
-                    <dt class="c6">交易属性</dt>
-                    <dd>
-                        <table>
-                            <tr>
-                                <td>办学性质：公立学校</td>
-                                <td>名额规定：无限制</td>
-                            </tr>
-                            <tr>
-                                <td>学区均价：43138元/平米 - 71178元/平米</td>
-                                <td>学校地址：北京市朝阳区望京西园四区408号楼</td>
-                            </tr>
-                        </table>
-                    </dd>
-                </dl>
-                <dl class="hiden">
-                    <dt class="c6">直升</dt>
-                    <dd>
-                        <p>首都师范大学附属实验学校望京新城校区</p>
-                    </dd>
-                </dl>
-            </div>
+        <div class="comment c6 bd">
+            <h2 class="detail-title2 c3">用户点评</h2>
+            <p class="c6 mt20">综合评分：3.9分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高于87.5%同类新盘</p>
+            <ul class="comment-star hiden">
+                <li>周边配套：<span class="star"><span style="width:80%"></span></span>4.0分</li>
+                <li>交通方便：<span class="star"><span style="width:50%"></span></span>2.5分</li>
+                <li>绿化环境：<span class="star"><span style="width:100%"></span></span>5.0分</li>
+            </ul>
+            <ul class="comment-con mt15">
+                <li>
+                    <div class="comment-img fl tc">
+                        <img src="/static/web/images/comment-1.png">
+                        <p class="mt5">千氏房友</p>
+                    </div>
+                    <div class="comment-box fl">
+                        <div class="comment-detail">
+                            <span class="star"><span style="width:50%"></span></span>配套：5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交通：4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;环境：3
+                            <p class="mt10">环境不错，比周边楼盘好一点，价格太高了</p>
+                            <i class="n">2016-10-18 09:38:55</i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="comment-img fl tc">
+                        <img src="/static/web/images/comment-1.png">
+                        <p class="mt5">千氏房友</p>
+                    </div>
+                    <div class="comment-box fl">
+                        <div class="comment-detail">
+                            <span class="star"><span style="width:80%"></span></span>配套：5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交通：4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;环境：4
+                            <p class="mt10">环境不错，比周边楼盘好一点，价格太高了</p>
+                            <i class="n">2016-10-18 09:38:55</i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="comment-img fl tc">
+                        <img src="/static/web/images/comment-1.png">
+                        <p class="mt5">111111111</p>
+                    </div>
+                    <div class="comment-box fl">
+                        <div class="comment-detail">
+                            <span class="star"><span style="width:100%"></span></span>配套：5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交通：5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;环境：5
+                            <p class="mt10">环境不错，比周边楼盘好一点</p>
+                            <i class="n">2016-10-18 09:38:55</i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="building bd">
+            <h2 class="detail-title2">楼盘详情</h2>
+            <table class="c6">
+                <tr>
+                    <td><span>项目地址：</span>新城白马路与通顺路交汇处向北1公里路西</td>
+                </tr>
+                <tr>
+                    <td><span>售楼处地址：</span>顺义新城白马路与通顺路交汇处向北1公里路西（接待时间 9:30 - 16:00）</td>
+                </tr>
+                <tr>
+                    <td><span>开发商：</span>北京中铁润丰房地产开发有限公司</td>
+                </tr>
+                <tr>
+                    <td><span>物业公司：</span>开元国际物业管理公司</td>
+                </tr>
+                <tr>
+                    <td><span>最新开盘：</span>2016年03月24日</td>
+                </tr>
+                <tr>
+                    <td><span>物业公司：</span>开元国际物业管理公司</td>
+                    <td><span>物业类型：</span>普通住宅</td>
+                </tr>
+                <tr>
+                    <td><span>最早交房：</span>待定</td>
+                    <td><span>容积率：</span>1.60</td>
+                </tr>
+                <tr>
+                    <td><span>产权年限：</span>70年</td>
+                    <td><span>绿化率：</span>33%</td>
+                </tr>
+                <tr>
+                    <td><span>规划户数：</span>1310</td>
+                    <td><span>物业费用：</span>2.8元/m²/月</td>
+                </tr>
+                <tr>
+                    <td><span>车位情况：</span>地上车位数495；地下车位数1100</td>
+                    <td><span>供暖方式：</span>集中供暖</td>
+                </tr>
+                <tr>
+                    <td><span>装修状况：</span>精装修</td>
+                    <td><span>水电燃气：</span>民水 民电</td>
+                </tr>
+                <tr>
+                    <td><span>建筑类型：</span>板楼</td>
+                    <td><span>嫌恶设施：</span>暂无</td>
+                </tr>
+                <tr>
+                    <td><span>占地面积：</span>精装修</td>
+                    <td><span>水电燃气：</span>民水 民电</td>
+                </tr>
+                <tr>
+                    <td><span>建筑类型：</span>101,646㎡</td>
+                    <td><span>建筑面积：</span>232,633㎡</td>
+                </tr>
+            </table>
         </div>
         <div class="calculator bd pb30">
-            <h2 class="detail-title2"><a href="" class="orange">税费计算器</a><a href="">房贷计算器</a></h2>
+            <h2 class="detail-title2"><span>房贷计算器</span></h2>
             <div class="calculator-con hiden">
                 <form class="fl">
                     <div>
-                        <span class="c6 cal-label">住宅类型：</span>
+                        <span class="c6 cal-label">选择户型：</span>
                         <div class="select_box">
-                            <span>普通住宅</span>
+                            <span>4室2厅3卫 153.00平</span>
                             <ul>
-                                <li>普通住宅</li>
-                                <li>商业住宅</li>
+                                <li>4室2厅3卫 153.00平</li>
+                                <li>4室2厅3卫</li>
                             </ul>
                         </div>
                     </div>
                     <div>
-                        <span class="c6 cal-label">卖房家庭唯一：</span>
+                        <span class="c6 cal-label">估算总价：</span>
+                        <div class="cal-text"><input type="text" placeholder="请输入房屋面积">平方米</div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label">首付成数：</span>
                         <div class="select_box">
-                            <span>唯一住宅</span>
+                            <span>7成</span>
                             <ul>
-                                <li>唯一住宅</li>
-                                <li>不唯一</li>
+                                <li>7成</li>
+                                <li>5成</li>
                             </ul>
                         </div>
                     </div>
                     <div>
-                        <span class="c6 cal-label">距上次交易：</span>
+                        <span class="c6 cal-label">贷款类别：</span>
                         <div class="select_box">
-                            <span>满五年</span>
+                            <span>公积金贷款</span>
                             <ul>
-                                <li>满五年</li>
-                                <li>满两年</li>
+                                <li>公积金贷款</li>
+                                <li>商业贷款</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label">贷款时间：</span>
+                        <div class="select_box">
+                            <span>30年（360期）</span>
+                            <ul>
+                                <li>30年（360期）</li>
+                                <li>20年</li>
                             </ul>
                         </div>
                     </div>
                     <div>
                         <span class="c6 cal-label">买房家庭首套：</span>
-                        <div class="select_box">
-                            <span>首套</span>
-                            <ul>
-                                <li>首套</li>
-                                <li>第二套</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">计征方式：</span>
-                        <div class="select_box">
-                            <span>总价</span>
-                            <ul>
-                                <li>总价</li>
-                                <li>每月</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">房屋面积：</span>
-                        <div class="cal-text"><input type="text" placeholder="请输入房屋面积">平方米</div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">房屋总价：</span>
-                        <div class="cal-text"><input type="text" placeholder="请输入房屋价格">万元</div>
+                        <i>
+                            <input type="radio" name="way" checked id="way1">
+                            <label for="way1"></label><font>等额本息</font>
+                        </i>
+                        <i>
+                            <input type="radio" name="way" id="way2">
+                            <label for="way2"></label><font>等额本金</font>
+                        </i>
                     </div>
                     <input type="button" value="开始计算" class="calculator-btn s16 cf">
                 </form>
-                <div class="calculator-result fr">
-                    <p class="s18">合计：<strong class="s24">259500</strong> 元</p>
-                    <p class="s16">契&nbsp;&nbsp;&nbsp;税： 259500 元</p>
-                    <p class="s16">营业税： 免征</p>
-                    <p class="s16">个&nbsp;&nbsp;&nbsp;税： 免征</p>
+                <div class="calculator-result2 fr">
+                    <h3 class="s18 tc cf">您的账单</h3>
+                    <table class="c6">
+                        <tr>
+                            <td>均价</td>
+                            <td class="tr">42000元／平米</td>
+                        </tr>
+                        <tr>
+                            <td>估算总价</td>
+                            <td class="tr">约500万</td>
+                        </tr>
+                        <tr>
+                            <td>首付</td>
+                            <td class="tr">350万 7成</td>
+                        </tr>
+                        <tr>
+                            <td>贷款金额</td>
+                            <td class="tr">150万</td>
+                        </tr>
+                        <tr>
+                            <td>偿还利息</td>
+                            <td class="tr">85万</td>
+                        </tr>
+                        <tr>
+                            <td>每月还款</td>
+                            <td class="tr"><strong class="s18">6528</strong> 万</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="house-area hiden bd pb30">
-            <h2 class="detail-title2">望京新城简介</h2>
-            <ul class="fl">
-                <li>小区均价：57618 元/m²</li>
-                <li>建筑年代：1997年</li>
-                <li>建筑类型：塔楼/板楼/塔板结合</li>
-                <li>楼栋总数：25栋</li>
-                <li>户型总数：82个</li>
-            </ul>
-            <img src="/static/web/photo/img-2.jpg" class="fl">
-        </div>
-        <h2 class="detail-title2">为您推荐</h2>
+        <h2 class="detail-title2">推荐楼盘</h2>
         <ul class="resource-list hiden">
             <li>
-                <a href="" title="兴都苑"><img src="/static/web/photo/img-1.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">兴都苑</a></b><span class="orange fr">380万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
+                <a href="" title="鲁能7号别墅"><img src="/static/web/photo/img-1.jpg"></a>
+                <p class="s18"><b class="fl"><a href="">鲁能7号别墅</a></b><span class="orange fr">1380万/套</span></p>
+                <p class="c6"><span class="fl">315㎡-458㎡</span></p>
             </li>
             <li>
                 <a href="" title=""><img src="/static/web/photo/img-2.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">华芳园</a></b><span class="orange fr">450万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
+                <p class="s18"><b class="fl"><a href="">鲁能7号别墅</a></b><span class="orange fr">1380万/套</span></p>
+                <p class="c6"><span class="fl">315㎡-458㎡</span></p>
             </li>
             <li>
                 <a href="" title=""><img src="/static/web/photo/img-3.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">朝阳公园西里北区</a></b><span class="orange fr">380万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
+                <p class="s18"><b class="fl"><a href="">鲁能7号别墅</a></b><span class="orange fr">1380万/套</span></p>
+                <p class="c6"><span class="fl">315㎡-458㎡</span></p>
             </li>
             <li>
                 <a href="" title=""><img src="/static/web/photo/img-4.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">天赐良园二期</a></b><span class="orange fr">580万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
+                <p class="s18"><b class="fl"><a href="">鲁能7号别墅</a></b><span class="orange fr">1380万/套</span></p>
+                <p class="c6"><span class="fl">315㎡-458㎡</span></p>
             </li>
         </ul>
     </div>
 </div>
-<script>
-    var menu = 'loupan_menu';
-</script>

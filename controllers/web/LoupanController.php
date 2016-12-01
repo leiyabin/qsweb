@@ -16,4 +16,10 @@ class LoupanController extends LController
         $this->getView()->title = '千氏地产-新房';
         return $this->render('index');
     }
+
+    public function actionDetail()
+    {
+        $this->getView()->title = '千氏地产-新房';
+        return $this->render('detail');
+    }
 }

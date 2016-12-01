@@ -9,7 +9,7 @@
             <?php foreach ($broker_list as $item): ?>
                 <li>
                     <div class="agent-img fl">
-                        <img src="/static/web/photo/agent-1.png" class="fl">
+                        <img src="<?= $item->img_url?>" class="fl">
                         <h3 class="s18 mt15"><?= $item->name; ?></h3>
                         <p class="mt20">职位：<?= $item->position_name; ?></p>
                     </div>

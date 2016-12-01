@@ -1,5 +1,5 @@
 <div class="bg1 inner-search">
-    <input type="text" value="请输入学校名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
+    <input type="text" placeholder="请输入楼盘名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
 </div>
 <div class="con filter">
     <div class="filter-1">
@@ -38,13 +38,13 @@
 </div>
 <div class="bg1 bt">
     <div class="con">
-        <div class="list-sort pt20"><a href="" class="sort-this">默认排序</a><a href="">最新发布</a><a href="">房屋总价</a><a href="">房屋单价</a><a href="">房屋面积</a><a href="">最近热门</a><a href="">地铁距离近</a></div>
+        <div class="list-sort pt20"><a href="#" class="sort-this">默认排序</a><a href="#">最新发布</a><a href="#">房屋总价</a><a href="#">房屋单价</a><a href="#">房屋面积</a><a href="#">最近热门</a><a href="#">地铁距离近</a></div>
         <h2 class="list-title s18 n">共找到 <font class="orange">32461</font> 套北京二手房</h2>
         <ul class="house-list">
             <li>
-                <a href="二手房-详情.html" title="新城经典东向大三"><img src="/static/web/photo/img-1.jpg"></a>
+                <a href="/web/house/detail/" title="新城经典东向大三"><img src="/static/web/photo/img-1.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="二手房-详情.html">新城经典东向大三居，高层观景 视野棒，满五唯一</a></h3>
+                    <h3 class="s18"><a href="/web/house/detail/">新城经典东向大三居，高层观景 视野棒，满五唯一</a></h3>
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
@@ -56,9 +56,9 @@
                 </div>
             </li>
             <li>
-                <a href="二手房-详情.html" title=""><img src="/static/web/photo/img-2.jpg"></a>
+                <a href="/web/house/detail/" title=""><img src="/static/web/photo/img-2.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="二手房-详情.html">稀缺南北通透复式三居室 业主靠谱 看房方便</a></h3>
+                    <h3 class="s18"><a href="/web/house/detail/">稀缺南北通透复式三居室 业主靠谱 看房方便</a></h3>
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
@@ -70,9 +70,9 @@
                 </div>
             </li>
             <li>
-                <a href="二手房-详情.html" title=""><img src="/static/web/photo/img-3.jpg"></a>
+                <a href="/web/house/detail/" title=""><img src="/static/web/photo/img-3.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="二手房-详情.html">新城经典东向大三居，高层观景 视野棒，满五唯一</a></h3>
+                    <h3 class="s18"><a href="/web/house/detail/">新城经典东向大三居，高层观景 视野棒，满五唯一</a></h3>
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
@@ -84,9 +84,9 @@
                 </div>
             </li>
             <li>
-                <a href="二手房-详情.html" title=""><img src="/static/web/photo/img-4.jpg"></a>
+                <a href="/web/house/detail/" title=""><img src="/static/web/photo/img-4.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="二手房-详情.html">稀缺南北通透复式三居室 业主靠谱 看房方便</a></h3>
+                    <h3 class="s18"><a href="/web/house/detail/">稀缺南北通透复式三居室 业主靠谱 看房方便</a></h3>
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
@@ -98,9 +98,9 @@
                 </div>
             </li>
             <li>
-                <a href="二手房-详情.html" title=""><img src="/static/web/photo/img-5.jpg"></a>
+                <a href="/web/house/detail/" title=""><img src="/static/web/photo/img-5.jpg"></a>
                 <div class="list-info fl">
-                    <h3 class="s18"><a href="二手房-详情.html">新城经典东向大三居，高层观景</a></h3>
+                    <h3 class="s18"><a href="/web/house/detail/">新城经典东向大三居，高层观景</a></h3>
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
@@ -112,29 +112,29 @@
                 </div>
             </li>
         </ul>
-        <div class="page"><a href="" title="上一页" class="page-prev">上一页</a><a href="" class="page-this">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><a href="">···</a><a href="">28</a><a href="" title="下一页" class="page-next">下一页</a></div>
+        <div class="page"><a href="" title="上一页" class="page-prev">上一页</a><a href="" title="下一页" class="page-next">下一页</a></div>
     </div>
 </div>
 <div class="con recommend">
     <div class="title bgf"><h2>推荐房源</h2><span></span></div>
     <ul class="resource-list hiden">
         <li>
-            <a href="" title="兴都苑"><img src="/static/web/photo/img-1.jpg"></a>
+            <a href="/web/loupan/detail/" title="兴都苑"><img src="/static/web/photo/img-1.jpg"></a>
             <p class="s18"><b class="fl"><a href="">兴都苑</a></b><span class="orange fr">380万</span></p>
             <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
         </li>
         <li>
-            <a href="" title=""><img src="/static/web/photo/img-2.jpg"></a>
+            <a href="/web/loupan/detail/" title=""><img src="/static/web/photo/img-2.jpg"></a>
             <p class="s18"><b class="fl"><a href="">华芳园</a></b><span class="orange fr">450万</span></p>
             <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
         </li>
         <li>
-            <a href="" title=""><img src="/static/web/photo/img-3.jpg"></a>
+            <a href="/web/loupan/detail/" title=""><img src="/static/web/photo/img-3.jpg"></a>
             <p class="s18"><b class="fl"><a href="">朝阳公园西里北区</a></b><span class="orange fr">380万</span></p>
             <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
         </li>
         <li>
-            <a href="" title=""><img src="/static/web/photo/img-4.jpg"></a>
+            <a href="/web/loupan/detail/" title=""><img src="/static/web/photo/img-4.jpg"></a>
             <p class="s18"><b class="fl"><a href="">天赐良园二期</a></b><span class="orange fr">580万</span></p>
             <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
         </li>
@@ -142,4 +142,10 @@
 </div>
 <script>
     var menu = 'house_menu';
+    $(function () {
+        $('.list-sort').find('a').click(function () {
+            $(this).siblings().removeClass('sort-this');
+            $(this).addClass('sort-this');
+        })
+    })
 </script>

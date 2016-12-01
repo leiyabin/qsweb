@@ -85,12 +85,12 @@ class Utils
         return $file_ext;
     }
 
-    public static function getImgUrl($img_name)
+    public static function getImgUrl($img_name, $default_img = '')
     {
         if (!empty($img_name)) {
             return IMG_HOST . $img_name;
         }
-        return '';
+        return $default_img;
     }
 
     public static function safeHtml($html)
