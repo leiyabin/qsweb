@@ -1,7 +1,7 @@
 <?php
 
 define('RPC_URL', 'http://qsapi.com/api');
-define('USER_AGENT', 'qsmanager');
+define('USER_AGENT', 'qsweb');
 define('SESSION_LIFE_TIME', 1200);
 define('APP_PATH', realpath(dirname(__FILE__) . '/../'));
 define('IMG_HOST', 'http://qsmanager.com/upload/img/');

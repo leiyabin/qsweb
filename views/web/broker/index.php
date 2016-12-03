@@ -4,12 +4,12 @@
 </div>
 <div class="bg1">
     <div class="con">
-        <h2 class="list-title s18 n">共有 <font class="orange"><?=$total?></font> 名经纪人</h2>
+        <h2 class="list-title s18 n">共有 <font class="orange"><?= $total ?></font> 名经纪人</h2>
         <ul class="agent">
             <?php foreach ($broker_list as $item): ?>
                 <li>
                     <div class="agent-img fl">
-                        <img src="<?= $item->img_url?>" class="fl">
+                        <img src="<?= $item->img_url ?>" class="fl">
                         <h3 class="s18 mt15"><?= $item->name; ?></h3>
                         <p class="mt20">职位：<?= $item->position_name; ?></p>
                     </div>
@@ -25,11 +25,11 @@
             <?php endforeach; ?>
         </ul>
         <?php
-        if(!empty($pages)){
+        if (!empty($pages)) {
             echo '
         <div class="page" >
-            <a href = "/web/broker/index?page='.$pages['pre'].'" title = "上一页" class="page-prev" > 上一页</a >
-            <a href = "/web/broker/index?page='.$pages['next'].'" title = "下一页" class="page-next" > 下一页</a >
+            <a href = "/web/broker/index?name=' . $name . '&page=' . $pages['pre'] . '" title = "上一页" class="page-prev" > 上一页</a >
+            <a href = "/web/broker/index?name=' . $name . '&page=' . $pages['next'] . '" title = "下一页" class="page-next" > 下一页</a >
         </div > ';
         } ?>
     </div>

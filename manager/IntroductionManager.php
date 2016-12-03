@@ -31,28 +31,13 @@ class IntroductionManager
 
     public function getList($page_info, $class_id = 0)
     {
-        return $this->introduction_rpc->getList($page_info, $class_id);
-    }
-
-    public function add($introduction)
-    {
-        $content = $introduction['content'];
-        $introduction['summary'] = Utils::getSummary($content, 150);
-        $introduction['content'] = Utils::safeHtml($content);
-        return $this->introduction_rpc->add($introduction);
-    }
-
-    public function edit($introduction)
-    {
-        $content = $introduction['content'];
-        $introduction['summary'] = Utils::getSummary($content, 150);
-        $introduction['content'] = Utils::safeHtml($content);
-        return $this->introduction_rpc->edit($introduction);
-    }
-
-    public function batchDel($ids)
-    {
-        return $this->introduction_rpc->batchDel($ids);
+        $list = $this->introduction_rpc->getList($page_info, $class_id);
+        if (!empty($list)) {
+            foreach ($list->introduction_list as $key => $broker) {
+                $list->introduction_list[$key]->img_url = Utils::getImgUrl($broker->img, '/static/web/images/default_house.jpg');
+            }
+        }
+        return $list;
     }
 
 

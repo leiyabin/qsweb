@@ -112,4 +112,15 @@ class Utils
         return $summary;
     }
 
+    public static function getValue($obj, $field, $default = '')
+    {
+        if (is_object($obj) && isset($obj->$field)) {
+            return $obj->$field;
+        }
+        if (is_array($obj) && isset($obj[$field])) {
+            return $obj[$field];
+        }
+        return $default;
+    }
+
 }

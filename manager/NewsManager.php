@@ -23,25 +23,18 @@ class NewsManager
 
     public function getNewsList($page_info, $class_id = 0, $title = '')
     {
-        return $this->news_rpc->getList($page_info, $class_id, $title);
+        $list = $this->news_rpc->getList($page_info, $class_id, $title);
+        if (!empty($list)) {
+            foreach ($list->news_list as $key => $item) {
+                $list->news_list[$key]->img_url = Utils::getImgUrl($item->img);
+                $list->news_list[$key]->hot_img_url = Utils::getImgUrl($item->hot_img);
+                $list->news_list[$key]->recommend_img_url = Utils::getImgUrl($item->recommend_img);
+            }
+
+        }
+        return $list;
     }
 
-    public function add($news)
-    {
-
-        $content = $news['content'];
-        $news['summary'] = Utils::getSummary($content, 150);
-        $news['content'] = Utils::safeHtml($content);
-        return $this->news_rpc->add($news);
-    }
-
-    public function edit($news)
-    {
-        $content = $news['content'];
-        $news['summary'] = Utils::getSummary($content, 150);
-        $news['content'] = Utils::safeHtml($content);
-        return $this->news_rpc->edit($news);
-    }
 
     public function get($id)
     {
@@ -52,11 +45,6 @@ class NewsManager
             $res->recommend_img_url = Utils::getImgUrl($res->recommend_img);
         }
         return $res;
-    }
-
-    public function batchDel($ids)
-    {
-        return $this->news_rpc->batchDel($ids);
     }
 
 }

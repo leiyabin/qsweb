@@ -87,13 +87,14 @@ class LController extends Controller
         return $res_json;
     }
 
-    protected function getPage($total, $current, $total_pages)
+    protected function getPage($current, $total_pages)
     {
         if ($total_pages <= 1) {
             return [];
         }
-        $pre = ($current - 1 > 1) ? ($current - 1) : 1;
-        $next = ($current + 1 < $total) ? ($current + 1) : $total;
+        $current = $current > $total_pages ? $total_pages : $current;
+        $pre = ($current - 1 >= 1) ? ($current - 1) : 1;
+        $next = ($current + 1 <= $total_pages) ? ($current + 1) : $total_pages;
         return ['pre' => $pre, 'next' => $next];
     }
 

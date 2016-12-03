@@ -1,18 +1,12 @@
+<?php
+use app\components\Utils;
+?>
 <div class="bg1 detail">
-    <p class="location con"><a href="">千氏网北京站</a> > <a href="">北京热点</a> > 正文</p>
+    <p class="location con"><a href="/">千氏地产</a> > <a href="/web/oversea/">海外</a> > 更多案例</p>
     <div class="con bf">
-        <h2 class="tc s24 pt20">购房置业｜自己房子值500万 如何换学区三居</h2>
-        <p class="tc c6 mt10">热点楼市&nbsp;&nbsp;|&nbsp;&nbsp;2016-10-14 11:50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;来源：北京商报</p>
+        <h2 class="tc s24 pt20"><?= Utils::getValue($oversea,'title');?></h2>
         <div class="article">
-            <!--文章正文start-->
-            <p style="font-size:16px; line-height:30px; text-indent:2em">大幅降汇，是释放中国房地产的过高压力的重要手段！众所周知，我国房地产由于上涨速度过快导致楼市泡沫越来越大，而中国人民币汇率却扔保持稳定。因此小禾智库认为，如果想要释放房地产过高的压力，总过近期应大幅降低汇率。这样才能保证房产泡沫不会在短期内被刺破，也保证在中国 加入SDR时，不会被“恶意”做空！</p>
-            <img src="/static/web/images/sea-banner.jpg" style="margin-top:10px">
-            <p style="font-size:16px; line-height:30px; text-indent:2em; margin-top:10px"> 1982年日本广场协议使得日元大幅升值，从而吸引了大量资金进场；日元大幅升值导致出口、经济出现问题，随后日本实施货币宽松政策；1987年美国股
-                市问题导致日本货币宽松继续加大；1986年至1991年由于日元升值、货币宽松等原因导致房地产大幅上升约1.7倍；随后日本意识到房地产严重泡沫，采取了主动政策，果断主动“刺破”房地产泡沫；1991年日本房地产出现大幅下跌。当时为了“刺破”日本房地产泡沫，日本采取紧缩的货币政策，从1989年开始连续加息，1990年利率达到6%，货币总量连续下跌；对房地产贷款和土地交易采取严厉管制；并大幅调整土地收益税。我们一直都说目前的中国的房地产，在很大程度上和日本国的房地产情况类似。但是，我们认为中国不太可能采取日本国主动刺破房地产泡沫的做法，因为
-                后果是我们不能承担的，有可能导致：</p>
-            <p style="font-size:16px; line-height:30px; text-indent:2em; margin-top:10px">房地产大幅下跌60%以上；中国所有银行将受到严重冲击，并出现严重的流动性问题；估计一半以上的银行会破产倒闭；三分之一的家庭可能受到严重冲击；估计60%的房地产企业会倒闭；估计一半以上的地方ZF出现财政困难，重新出现白条现象；估计一半以上的企业受到房地产影响，中国GDP会下跌到3%
-                以下；中国的股市会下跌30%以上。</p>
-            <!--文章正文end-->
+            <?php echo htmlspecialchars_decode(Utils::getValue($oversea,'content')); ?>
         </div>
     </div>
 </div>

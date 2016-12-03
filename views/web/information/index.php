@@ -1,7 +1,11 @@
+<?php
+use app\components\Utils;
+
+?>
 <!--热点切换-->
 <script src="/static/web/js/hot.js"></script>
 <script>
-    $(function(){
+    $(function () {
         $(".rslides").responsiveSlides({
             auto: true,
             pager: true,
@@ -15,75 +19,66 @@
     <div class="con hiden">
         <div class="hot-slide fl">
             <ul class="rslides">
-                <li><a href="/web/information/detail/"><p>因为它，<br>回龙观拥堵问题将大大缓解！</p><img src="/static/web/photo/img-5.jpg"></a></li>
-                <li><a href="/web/information/detail/"><p>自己房子值500万 如何换学区三居</p><img src="/static/web/photo/img-6.jpg"></a></li>
-                <li><a href="/web/information/detail/"><p>回龙观拥堵问题将大大缓解！</p><img src="/static/web/photo/img-4.jpg"></a></li>
+                <?php foreach ($left_img_list as $item): ?>
+                    <li><a href="/web/information/detail/?id=<?= $item->id ?>"><img title="<?= $item->title ?>"
+                                                                                    src="<?= $item->img_url ?>"></a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
         <div class="hot-news fl">
-            <a href="/web/information/detail/">
-                <div class="hover-img"><img src="/static/web/photo/sea-img-1.jpg"></div>
-                <p>选购楼层</p>
+            <a href="<?php if (!empty($news_4)) echo '/web/information/detail/?id=' . $news_4->id; else echo '#'; ?>">
+                <div class="hover-img"><img title="<?= Utils::getValue($news_4, 'title', ''); ?>"
+                                            src="<?= Utils::getValue($news_4, 'img_url', ''); ?>"></div>
             </a>
         </div>
         <div class="hot-news fl mt10">
-            <a href="/web/information/detail/">
-                <div class="hover-img"><img src="/static/web/photo/sea-img-2.jpg"></div>
-                <p>夫妻共同买房，谁做主贷人？</p>
+            <a href="<?php if (!empty($news_5)) echo '/web/information/detail/?id=' . $news_5->id; else echo '#'; ?>">
+                <div class="hover-img"><img title="<?= Utils::getValue($news_5, 'title', ''); ?>"
+                                            src="<?= Utils::getValue($news_5, 'img_url', ''); ?>"></div>
             </a>
         </div>
-        <div class="list-sort clear pt20"><a href="#" class="sort-this">全部文章</a><a href="#">购房须知</a><a href="#">最新政策</a><a href="#">选房攻略</a><a href="#">签约要点</a><a href="#">贷款指南</a><a href="#">缴税过户</a><a href="#">典型案例</a><a href="#">热点楼市</a></div>
+        <div class="list-sort clear pt20">
+            <a tag="0" href="/web/information/">全部文章</a>
+            <?php foreach ($class_list as $item): ?>
+                <a tag="<?= $item->id ?>" href="/web/information/?class_id=<?= $item->id ?>"><?= $item->value ?></a>
+            <?php endforeach; ?>
+        </div>
         <ul class="hot-news-list">
-            <li>
-                <a href="/web/information/detail/"><img src="/static/web/photo/img-1.jpg" class="fl"></a>
-                <div class="fl">
-                    <h3 class="s20"><a href="/web/information/detail/">自己房子值500万 如何换学区三居</a></h3>
-                    <p class="s16 c6">最近帮住姐收到很多类似的求“住”邮件，家里有了小孩，宝爸宝妈该如何顺利换套学区？帮住姐今天就以D先生为例，说说想卖掉自住的房子，换一套划片学校不错的房子该怎么选？</p>
-                    <span class="c9">购房须知 | 2016-10-24 10:11</span>
-                </div>
-            </li>
-            <li>
-                <a href="/web/information/detail/"><img src="/static/web/images/img-no.jpg" class="fl"></a>
-                <div class="fl">
-                    <h3 class="s20"><a href="/web/information/detail/">商业银行房贷审查趋严 接力贷等进入谨慎名单</a></h3>
-                    <p class="s16 c6">个人购房差异化信贷政策让不少家庭为了买房而假离婚。而近期部分银行开始对“假离婚”、“合力贷”、“接力贷”等方式加强审查力度，甚至对此类情况暂停放...</p>
-                    <span class="c9">热点楼市 | 2016-10-24 12:11</span>
-                </div>
-            </li>
-            <li>
-                <a href="/web/information/detail/"><img src="/static/web/photo/img-3.jpg" class="fl"></a>
-                <div class="fl">
-                    <h3 class="s20"><a href="/web/information/detail/">商业银行房贷审查趋严 接力贷等进入谨慎名单</a></h3>
-                    <p class="s16 c6">个人购房差异化信贷政策让不少家庭为了买房而假离婚</p>
-                    <span class="c9">热点楼市 | 2016-10-24 12:11</span>
-                </div>
-            </li>
-            <li>
-                <a href="/web/information/detail/"><img src="/static/web/photo/sea-img-1.jpg" class="fl"></a>
-                <div class="fl">
-                    <h3 class="s20"><a href="/web/information/detail/">夫妻共同买房，谁做主贷人？</a></h3>
-                    <p class="s16 c6">最近帮住姐收到很多类似的求“住”邮件，家里有了小孩，宝爸宝妈该如何顺利换套学区？帮住姐今天就以D先生为例，说说想卖掉自住的房子，换一套划片学校不错的房子该怎么选？个人购房差异化信贷政策让不少家庭为了买房而假离婚最近帮住姐收到很多类似的求“住”邮件，家里有了小</p>
-                    <span class="c9">热点楼市 | 2016-10-24 12:11</span>
-                </div>
-            </li>
-            <li>
-                <a href="/web/information/detail/"><img src="/static/web/photo/sea-img-2.jpg" class="fl"></a>
-                <div class="fl">
-                    <h3 class="s20"><a href="/web/information/detail/">商业银行房贷审查趋严 接力贷等进入谨慎名单</a></h3>
-                    <p class="s16 c6">个人购房差异化信贷政策让不少家庭为了买房而假离婚。而近期部分银行开始对“假离婚”、“合力贷”、“接力贷”等方式加强审查力度，甚至对此类情况暂停放...</p>
-                    <span class="c9">热点楼市 | 2016-10-24 12:11</span>
-                </div>
-            </li>
+            <?php foreach ($news_list as $item): ?>
+                <li>
+                    <a href="/web/information/detail/?id=<?= $item->id ?>"><img src="<?= $item->img_url ?>" class="fl"></a>
+                    <div class="fl">
+                        <h3 class="s20"><a href="/web/information/detail/?id=<?= $item->id ?>"><?= $item->title ?></a>
+                        </h3>
+                        <p class="s16 c6"><?= $item->summary ?>...</p>
+                        <span class="c9"><?= $item->class_name ?>
+                            | <?= Utils::formatDateTime($item->c_t, 'Y-m-d H:i') ?></span>
+                    </div>
+                </li>
+            <?php endforeach; ?>
         </ul>
-        <div class="page"><a href="" title="上一页" class="page-prev">上一页</a><a href="" title="下一页" class="page-next">下一页</a></div>
+        <?php
+        if (!empty($pages)) {
+            echo '
+        <div class="page" >
+            <a href = "/web/information/?class_id=' . $class_id . '&page=' . $pages['pre'] . '" title = "上一页" class="page-prev" > 上一页</a >
+            <a href = "/web/information/?class_id=' . $class_id . '&page=' . $pages['next'] . '" title = "下一页" class="page-next" > 下一页</a >
+        </div > ';
+        } ?>
     </div>
 </div>
 <script>
     var menu = 'information_menu';
     $(function () {
-        $('.list-sort').find('a').click(function () {
-            $(this).siblings().removeClass('sort-this');
-            $(this).addClass('sort-this');
+        $a_list = $('.list-sort').find('a');
+        var class_id = <?= $class_id ?>;
+        $a_list.each(function () {
+            if ($(this).attr('tag') == class_id) {
+                $(this).addClass('sort-this');
+                $(this).siblings('a').removeClass('sort-this');
+                return false;
+            }
         })
     })
 </script>

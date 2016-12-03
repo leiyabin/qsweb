@@ -36,7 +36,7 @@ class BrokerController extends LController
         $res = $this->broker_manager->getList($page_info, $position_id, $name);
         if (!$this->hasError($res)) {
             $total = $res->total;
-            $pages = $this->getPage($res->total, $page, $res->total_pages);
+            $pages = $this->getPage($page, $res->total_pages);
             $broker_list = $res->broker_list;
         }
         $this->getView()->title = '千氏地产-经纪人';
