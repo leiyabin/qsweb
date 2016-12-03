@@ -1,3 +1,6 @@
+<?php
+use app\components\Utils;
+?>
 <!-- content start -->
 <div class="index-search-wrap">
     <div class="index-search">
@@ -34,34 +37,28 @@
         <div class="hot-list">
             <div class="title bg1"><h2>楼市热点</h2><span></span></div>
             <div class="hot-list-img">
-                <a href="/web/information/detail/">
-                    <div class="hover-img"><img src="static/web/photo/img-1.jpg"></div>
-                    <p>北京930信贷政策最新解读</p>
+                <a href="<?php if(empty(!$top_hot_news)) echo '/web/information/detail/?id='.$top_hot_news->id; else echo '#';?>">
+                    <div class="hover-img"><img src="<?=Utils::getValue($top_hot_news,'hot_img_url','')?>"></div>
+                    <p><?=Utils::getValue($top_hot_news,'title','')?></p>
                 </a>
             </div>
-            <ul>
-                <li><span>热点</span><a href="/web/information/detail/">因为它，回龙观拥堵问题将大大缓解！</a></li>
-                <li><span>问答</span><a href="/web/information/detail/">继承房产怎么走流程？都有哪些费用？</a></li>
-                <li><span>热点</span><a href="/web/information/detail/">楼市压力过高 降汇可以解决问题么？</a></li>
-                <li><span>百科</span><a href="/web/information/detail/">买新房，我该怎么办房本？</a></li>
+                <ul>
+                <?php foreach ($news_hot_list as $item): ?>
+                <li><span><?=$item->class_name?></span><a href="/web/information/detail/?id=<?=$item->id?>"><?=$item->title?></a></li>
+                <?php endforeach; ?>
             </ul>
         </div>
         <div class="hot-img">
             <div class="title bg1"><h2>帮你买房</h2><span></span></div>
             <ul>
+                <?php foreach ($news_help_list as $item): ?>
                 <li>
-                    <a href="/web/information/detail/">
-                        <div class="hover-img"><img src="static/web/photo/img-5.jpg"></div>
-                        <p>通州和北三县统一管控 传言中的北三县有多火？</p>
+                    <a href="/web/information/detail/?id=<?=$item->id?>">
+                        <div class="hover-img"><img src="<?=$item->recommend_img_url?>"></div>
+                        <p><?=$item->title?></p>
                     </a>
                 </li>
-
-                <li>
-                    <a href="/web/information/detail/">
-                        <div class="hover-img"><img src="static/web/photo/img-6.jpg"></div>
-                        <p>735万买独栋别墅 开车50分钟能到西直门</p>
-                    </a>
-                </li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>

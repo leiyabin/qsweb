@@ -21,9 +21,9 @@ class NewsManager
         $this->news_rpc = new NewsRpc();
     }
 
-    public function getNewsList($page_info, $class_id = 0, $title = '')
+    public function getNewsList($page_info, $class_id = 0, $title = '', $tag = 0)
     {
-        $list = $this->news_rpc->getList($page_info, $class_id, $title);
+        $list = $this->news_rpc->getList($page_info, $class_id, $title,$tag);
         if (!empty($list)) {
             foreach ($list->news_list as $key => $item) {
                 $list->news_list[$key]->img_url = Utils::getImgUrl($item->img);

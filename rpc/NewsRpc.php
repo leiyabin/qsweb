@@ -12,13 +12,14 @@ use app\components\LRpc;
 
 class NewsRpc extends LRpc
 {
-    public function getList($page_info, $class_id = 0, $title = '')
+    public function getList($page_info, $class_id = 0, $title = '', $tag = 0)
     {
         $params = [
             'page'     => intval($page_info['page']),
             'per_page' => intval($page_info['pre_page']),
             'class_id' => $class_id,
-            'title'    => $title
+            'title'    => $title,
+            'tag'      => $tag
         ];
         return LRpc::init()->post($params)->url('/news/list');
     }
