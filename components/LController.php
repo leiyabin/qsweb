@@ -140,10 +140,10 @@ class LController extends Controller
 
     private function renderError($error_code, $error_msg)
     {
-        //todo 修改
         if ($error_code == ErrorCode::NOT_FOUND) {
             $this->redirect('/web/error/404')->send();
         }
+        //todo 统一错误跳转页面
         header("Content-type:application/json;charset=utf-8");
         $res = [
             'status' => 0,

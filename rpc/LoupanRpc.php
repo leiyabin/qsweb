@@ -21,7 +21,8 @@ class LoupanRpc extends LRpc
      * @param int $sale_status
      * @return LRpc
      */
-    public function getList($page_info, $area_id = 0, $name = '', $average_price = 0, $property_type_id = 0, $sale_status = 0)
+    public function getList($page_info, $area_id = 0, $name = '', $average_price = 0,
+                            $property_type_id = 0, $sale_status = 0, $recommend = 0)
     {
         $params = [
             'page'             => intval($page_info['page']),
@@ -30,7 +31,8 @@ class LoupanRpc extends LRpc
             'name'             => $name,
             'average_price'    => $average_price,
             'property_type_id' => $property_type_id,
-            'sale_status'      => $sale_status
+            'sale_status'      => $sale_status,
+            'recommend'        => $recommend
         ];
         return LRpc::init()->post($params)->url('/loupan/list');
     }

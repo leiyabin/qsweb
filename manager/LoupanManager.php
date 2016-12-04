@@ -21,9 +21,33 @@ class LoupanManager
         $this->loupan_rpc = new LoupanRpc();
     }
 
-    public function getList($page_info, $area_id = 0, $name = '', $average_price = 0, $property_type_id = 0, $sale_status = 0)
+    public function getList($page_info, $area_id = 0, $name = '', $average_price = 0,
+                            $property_type_id = 0, $sale_status = 0, $recommend = 0)
     {
-        return $this->loupan_rpc->getList($page_info, $area_id, $name, $average_price, $property_type_id, $sale_status);
+        $list = $this->loupan_rpc->getList($page_info, $area_id, $name, $average_price,
+            $property_type_id, $sale_status, $recommend);
+        if (isset($list->loupan_list)) {
+            foreach ($list->loupan_list as $key => $value) {
+                $list->loupan_list[$key]->img_url = Utils::getImgUrl($value->img, '');
+                $jiju_arr = explode(',', $value->jiju);
+                foreach ($jiju_arr as $key_ => $val) {
+                    $jiju_arr[$key_] = $val . '居';
+                }
+                $list->loupan_list[$key]->jiju = implode('/', $jiju_arr);
+                $list->loupan_list[$key]->tag = $this->getTag($value->tag);
+            }
+        }
+        return $list;
+    }
+
+    private function getTag($tags)
+    {
+        $tag_keys = explode(',', $tags);
+        $tag_vals = [];
+        foreach ($tag_keys as $val) {
+            $tag_vals[] = HouseConst::$feature[$val];
+        }
+        return $tag_vals;
     }
 
     public function add($loupan)
@@ -39,7 +63,7 @@ class LoupanManager
     public function get($id)
     {
         $res = $this->loupan_rpc->getOne($id);
-        if (!empty($res)) {
+        if (!empty($res->id)) {
             $res->img_url = Utils::getImgUrl($res->img);
             $res->banner_img_url = Utils::getImgUrl($res->banner_img);
             $res->img_1_url = Utils::getImgUrl($res->img_1);
@@ -51,8 +75,10 @@ class LoupanManager
             $res->jiju_arr = $jiju_arr;
             $tag_arr = explode(',', $res->tag);
             $res->tag_arr = $tag_arr;
+            $res->tag = $this->getTag($res->tag);
+            return $res;
         }
-        return $res;
+        return [];
     }
 
     public function getSimple($id)

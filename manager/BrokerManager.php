@@ -23,21 +23,14 @@ class BrokerManager
     public function getList($page_info, $position_id = 0, $name = '')
     {
         $list = $this->broker_rpc->getList($page_info, $position_id, $name);
-        foreach ($list->broker_list as $key => $broker) {
-            $list->broker_list[$key]->img_url = Utils::getImgUrl($broker->img, '/static/web/images/default_man.jpg');
+        if(isset($list->broker_list)){
+            foreach ($list->broker_list as $key => $broker) {
+                $list->broker_list[$key]->img_url = Utils::getImgUrl($broker->img, '/static/web/images/default_man.jpg');
+            }
         }
         return $list;
     }
 
-    public function add($broker)
-    {
-        return $this->broker_rpc->add($broker);
-    }
-
-    public function edit($broker)
-    {
-        return $this->broker_rpc->edit($broker);
-    }
 
     public function get($id)
     {

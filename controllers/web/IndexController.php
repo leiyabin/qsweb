@@ -10,11 +10,7 @@ namespace app\controllers\web;
 
 use app\components\LController;
 use app\manager\NewsManager;
-use app\manager\ConfigManager;
-use app\consts\ConfigConst;
-use app\exception\RequestException;
-use app\consts\ErrorCode;
-use app\model\SessionModel;
+use app\manager\LoupanManager;
 
 class IndexController extends LController
 {
@@ -24,11 +20,16 @@ class IndexController extends LController
      * @var NewsManager
      */
     public $news_manager;
+    /**
+     * @var LoupanManager
+     */
+    public $loupan_manager;
 
     public function init()
     {
         parent::init();
         $this->news_manager = new NewsManager();
+        $this->loupan_manager = new LoupanManager();
     }
 
     public function actionIndex()
@@ -43,10 +44,14 @@ class IndexController extends LController
         }
         //帮你买房
         $news_help_list = $this->getInformation(self::NEWS_TAG_RECOMMEND, 2);
+        //get recommend_list
+        $recommend_list = $this->getRecommend();
         $data = [
             'news_hot_list'  => $news_hot_list,
             'news_help_list' => $news_help_list,
-            'top_hot_news'   => $top_hot_news];
+            'top_hot_news'   => $top_hot_news,
+            'recommend_list' => $recommend_list,
+        ];
         $this->getView()->title = '千氏地产';
         return $this->render('index', $data);
     }
@@ -55,10 +60,24 @@ class IndexController extends LController
     {
         $page_info = ['page' => 1, 'pre_page' => $size];
         $list = $this->news_manager->getNewsList($page_info, 0, '', $tag);
-        if (!empty($list)) {
-            return $list->news_list;
+        if (!$this->hasError($list)) {
+            $list = $list->news_list;
+        } else {
+            $list = [];
         }
-        return [];
+        return $list;
+    }
+
+    private function getRecommend()
+    {
+        $page_info = ['page' => 1, 'pre_page' => 2];
+        $list = $this->loupan_manager->getList($page_info, 0, '', 0, 0, 0, 1);
+        if (!$this->hasError($list)) {
+            $list = $list->loupan_list;
+        } else {
+            $list = [];
+        }
+        return $list;
     }
 
 }

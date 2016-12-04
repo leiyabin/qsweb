@@ -8,12 +8,16 @@
 </script>
 <div class="bg1 detail">
     <div class="con">
-        <p class="location"><a href="">千氏网北京站</a> > <a href="">北京二手房</a> > <a href="">朝阳二手房</a> > <a href="">望京二手房</a> > <a href="">望京新城二手房</a> > <a href="">当前房源</a></p>
+        <p class="location"><a href="/">千氏地产</a> > <a href="/web/loupan/">新房</a> > <a href="#"><?=$loupan->name?></a>  </p>
         <div class="new-banner hiden">
             <div class="new-info fl tc">
-                <h2 class="cf s24">中铁花溪渡</h2>
-                <p class="list-mark s12"><span class="orange">精装修</span><span class="green">车位充足</span><span class="blue">地铁房</span><span class="yellow">老城区房</span></p>
-                <p>均价：<b class="s18">8650000</b>元/平</p>
+                <h2 class="cf s24"><?=$loupan->name?></h2>
+                <p class="list-mark s12">
+                    <?php foreach ($loupan->tag as $tag): ?>
+                        <span class="<?= $tag['color'] ?>"><?= $tag['name'] ?></span>
+                    <?php endforeach; ?>
+                </p>
+                <p>均价：<b class="s18"><?=$loupan->average_price?></b>元/平</p>
                 <strong class="orange s30">010-5794236</strong>
                 <p>咨询电话</p>
             </div>
@@ -370,26 +374,13 @@
         </div>
         <h2 class="detail-title2">推荐楼盘</h2>
         <ul class="resource-list hiden">
+            <?php foreach ($recommend_list as $item): ?>
             <li>
-                <a href="" title="鲁能7号别墅"><img src="/static/web/photo/img-1.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">鲁能7号别墅</a></b><span class="orange fr">1380万/套</span></p>
-                <p class="c6"><span class="fl">315㎡-458㎡</span></p>
+                <a href="/web/loupan/detail?id=<?=$item->id?>" title="<?=$item->name?>"><img src="<?=$item->img_url?>"></a>
+                <p class="s18"><b class="fl"><a href=""><?=$item->name?></a></b><span class="orange fr">><?=$item->average_price?>万/套</span></p>
+                <p class="c6"><span class="fl">><?=$item->min_square?>㎡-><?=$item->max_square?>㎡</span></p>
             </li>
-            <li>
-                <a href="" title=""><img src="/static/web/photo/img-2.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">鲁能7号别墅</a></b><span class="orange fr">1380万/套</span></p>
-                <p class="c6"><span class="fl">315㎡-458㎡</span></p>
-            </li>
-            <li>
-                <a href="" title=""><img src="/static/web/photo/img-3.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">鲁能7号别墅</a></b><span class="orange fr">1380万/套</span></p>
-                <p class="c6"><span class="fl">315㎡-458㎡</span></p>
-            </li>
-            <li>
-                <a href="" title=""><img src="/static/web/photo/img-4.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">鲁能7号别墅</a></b><span class="orange fr">1380万/套</span></p>
-                <p class="c6"><span class="fl">315㎡-458㎡</span></p>
-            </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>

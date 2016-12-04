@@ -23,10 +23,11 @@ class IntroductionManager
     public function get($id)
     {
         $res = $this->introduction_rpc->get($id);
-        if (!empty($res)) {
+        if (!empty($res->id)) {
             $res->img_url = Utils::getImgUrl($res->img);
+            return $res;
         }
-        return $res;
+        return [];
     }
 
     public function getList($page_info, $class_id = 0)

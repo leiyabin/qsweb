@@ -39,12 +39,13 @@ class NewsManager
     public function get($id)
     {
         $res = $this->news_rpc->getOne($id);
-        if (!empty($res)) {
+        if (!empty($res->id)) {
             $res->img_url = Utils::getImgUrl($res->img);
             $res->hot_img_url = Utils::getImgUrl($res->hot_img);
             $res->recommend_img_url = Utils::getImgUrl($res->recommend_img);
+            return $res;
         }
-        return $res;
+        return [];
     }
 
 }

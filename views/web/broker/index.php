@@ -28,8 +28,8 @@
         if (!empty($pages)) {
             echo '
         <div class="page" >
-            <a href = "/web/broker/index?name=' . $name . '&page=' . $pages['pre'] . '" title = "上一页" class="page-prev" > 上一页</a >
-            <a href = "/web/broker/index?name=' . $name . '&page=' . $pages['next'] . '" title = "下一页" class="page-next" > 下一页</a >
+            <a href = "/web/broker/?name=' . $name . '&page=' . $pages['pre'] . '" title = "上一页" class="page-prev" > 上一页</a >
+            <a href = "/web/broker/?name=' . $name . '&page=' . $pages['next'] . '" title = "下一页" class="page-next" > 下一页</a >
         </div > ';
         } ?>
     </div>

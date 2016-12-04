@@ -17,12 +17,14 @@ class HouseConst
     const HOUSE_TYPE_OLD = 2;
 
     //装修情况
+    const DECORATION_ALL = 0;
     const DECORATION_BLANK = 1;
     const DECORATION_SIMPLE = 2;
     const DECORATION_GENERAL = 3;
     const DECORATION_HARDCOVER = 4;
     const DECORATION_LUXURY = 5;
     public static $decoration = [
+        self::DECORATION_ALL       => '不限',
         self::DECORATION_BLANK     => '毛坯',
         self::DECORATION_SIMPLE    => '简装',
         self::DECORATION_GENERAL   => '中装',
@@ -31,11 +33,13 @@ class HouseConst
     ];
 
     //楼盘销售状态
+    const SALE_STATUS_ALL = 0;
     const SALE_STATUS_WAIT = 1;
     const SALE_STATUS_QUEUE = 2;
     const SALE_STATUS_SALING = 3;
     const SALE_STATUS_OVER = 4;
     public static $sale_status = [
+        self::SALE_STATUS_ALL    => '不限',
         self::SALE_STATUS_WAIT   => '待售',
         self::SALE_STATUS_QUEUE  => '排卡中',
         self::SALE_STATUS_SALING => '在售',
@@ -43,6 +47,7 @@ class HouseConst
     ];
 
     //物业类型
+    const PROPERTY_TYPE_ALL = 0;
     const PROPERTY_TYPE_HOUSE = 1;
     const PROPERTY_TYPE_SHOP = 2;
     const PROPERTY_TYPE_OFFICE = 3;
@@ -50,6 +55,7 @@ class HouseConst
     const PROPERTY_TYPE_FACTORY = 5;
     const PROPERTY_TYPE_OTHER = 6;
     public static $property_type = [
+        self::PROPERTY_TYPE_ALL     => '不限',
         self::PROPERTY_TYPE_HOUSE   => '住宅',
         self::PROPERTY_TYPE_SHOP    => '商用',
         self::PROPERTY_TYPE_OFFICE  => '写字楼',
@@ -64,12 +70,11 @@ class HouseConst
     const FEATURE_3_CODE = 3;
     const FEATURE_4_CODE = 4;
     public static $feature = [
-        self::FEATURE_1_CODE => '精装修',
-        self::FEATURE_2_CODE => '离地铁近',
-        self::FEATURE_3_CODE => '车位充足',
-        self::FEATURE_4_CODE => '老城区房',
+        self::FEATURE_1_CODE => ['name' => '精装修', 'color' => 'orange'],
+        self::FEATURE_2_CODE => ['name' => '离地铁近', 'color' => 'green'],
+        self::FEATURE_3_CODE => ['name' => '车位充足', 'color' => 'blue'],
+        self::FEATURE_4_CODE => ['name' => '老城区房', 'color' => 'yellow']
     ];
-
     //售价区间
     const PRICE_INTERVAL_1 = 1;
     const PRICE_INTERVAL_2 = 2;

@@ -1,18 +1,22 @@
 <?php
 use app\components\Utils;
+
 ?>
 <!-- content start -->
 <div class="index-search-wrap">
     <div class="index-search">
         <p><span class="search-this">学区房</span><span>商铺</span><span>写字楼</span></p>
         <div class="index-search-con">
-            <input type="text" placeholder="请输入学校名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
+            <input type="text" placeholder="请输入学校名称" class="search-text"><input type="button" value="开始找房"
+                                                                                class="search-btn">
         </div>
         <div class="index-search-con">
-            <input type="text" placeholder="请输入商铺名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
+            <input type="text" placeholder="请输入商铺名称" class="search-text"><input type="button" value="开始找房"
+                                                                                class="search-btn">
         </div>
         <div class="index-search-con">
-            <input type="text" placeholder="请输入写字楼名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
+            <input type="text" placeholder="请输入写字楼名称" class="search-text"><input type="button" value="开始找房"
+                                                                                 class="search-btn">
         </div>
     </div>
 </div>
@@ -37,14 +41,15 @@ use app\components\Utils;
         <div class="hot-list">
             <div class="title bg1"><h2>楼市热点</h2><span></span></div>
             <div class="hot-list-img">
-                <a href="<?php if(empty(!$top_hot_news)) echo '/web/information/detail/?id='.$top_hot_news->id; else echo '#';?>">
-                    <div class="hover-img"><img src="<?=Utils::getValue($top_hot_news,'hot_img_url','')?>"></div>
-                    <p><?=Utils::getValue($top_hot_news,'title','')?></p>
+                <a href="<?php if (empty(!$top_hot_news)) echo '/web/information/detail/?id=' . $top_hot_news->id; else echo '#'; ?>">
+                    <div class="hover-img"><img src="<?= Utils::getValue($top_hot_news, 'hot_img_url', '') ?>"></div>
+                    <p><?= Utils::getValue($top_hot_news, 'title', '') ?></p>
                 </a>
             </div>
-                <ul>
+            <ul>
                 <?php foreach ($news_hot_list as $item): ?>
-                <li><span><?=$item->class_name?></span><a href="/web/information/detail/?id=<?=$item->id?>"><?=$item->title?></a></li>
+                    <li><span><?= $item->class_name ?></span><a
+                            href="/web/information/detail/?id=<?= $item->id ?>"><?= $item->title ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -52,12 +57,12 @@ use app\components\Utils;
             <div class="title bg1"><h2>帮你买房</h2><span></span></div>
             <ul>
                 <?php foreach ($news_help_list as $item): ?>
-                <li>
-                    <a href="/web/information/detail/?id=<?=$item->id?>">
-                        <div class="hover-img"><img src="<?=$item->recommend_img_url?>"></div>
-                        <p><?=$item->title?></p>
-                    </a>
-                </li>
+                    <li>
+                        <a href="/web/information/detail/?id=<?= $item->id ?>">
+                            <div class="hover-img"><img src="<?= $item->recommend_img_url ?>"></div>
+                            <p><?= $item->title ?></p>
+                        </a>
+                    </li>
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -91,20 +96,15 @@ use app\components\Utils;
 <div class="resource bg1">
     <div class="con hiden">
         <div class="title bg1"><h2>新房源</h2><span></span><a href="/web/loupan/">Read More</a></div>
-        <div class="resource-new bgf fl">
-            <a href="/web/loupan/" title="泰禾西府大院"><img src="static/web/photo/img-2.jpg" class="fl"></a>
-            <h3 class="s18"><a href="">泰禾西府大院</a></h3>
-            <p>均价：<font class="s18 orange">待定</font></p>
-            <p>项目地址：西三环丽泽桥西北角</p>
-            <p>最新开盘：2016年09月30日</p>
-        </div>
-        <div class="resource-new bgf fr">
-            <a href="/web/loupan/" title="流星花园三区"><img src="static/web/photo/img-3.jpg" class="fl"></a>
-            <h3 class="s18"><a href="">流星花园三区</a></h3>
-            <p>均价：<font class="s18 orange">2000万/套</font></p>
-            <p>项目地址：西育知路地铁站对面</p>
-            <p>最新开盘：2016年09月30日</p>
-        </div>
+        <?php foreach ($recommend_list as $item): ?>
+            <div class="resource-new bgf fl">
+                <a href="/web/loupan/detail?id=<?=$item->id?>" title="<?=$item->name?>"><img src="<?=$item->img_url?>" class="fl"></a>
+                <h3 class="s18"><a href="/web/loupan/detail?id=<?=$item->id?>"><?=$item->name?></a></h3>
+                <p>均价：<font class="s18 orange"><?=$item->average_price?></font></p>
+                <p>项目地址：<?=$item->address?></p>
+                <p>最新开盘：<?=Utils::formatDateTime($item->opening_time,'Y年m月d日')?></p>
+            </div>
+        <?php endforeach; ?>
         <div class="title bg1 clear"><h2>二手房</h2><span></span><a href="/web/house/">Read More</a></div>
         <ul class="resource-list hiden">
             <li>
@@ -157,7 +157,7 @@ use app\components\Utils;
     var menu = 'index_menu';
     $(function () {
         $('.search-btn').click(function () {
-            location.href='/web/house';
+            location.href = '/web/house';
         })
     })
 </script>
