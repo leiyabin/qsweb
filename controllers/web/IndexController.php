@@ -72,7 +72,7 @@ class IndexController extends LController
     {
         $page_info = ['page' => 1, 'pre_page' => 2];
         $list = $this->loupan_manager->getList($page_info, 0, '', 0, 0, 0, 1);
-        if (!$this->hasError($list)) {
+        if (!empty($list)) {
             $list = $list->loupan_list;
         } else {
             $list = [];

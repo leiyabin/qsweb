@@ -36,8 +36,9 @@ class LoupanManager
                 $list->loupan_list[$key]->jiju = implode('/', $jiju_arr);
                 $list->loupan_list[$key]->tag = $this->getTag($value->tag);
             }
+            return $list;
         }
-        return $list;
+        return [];
     }
 
     private function getTag($tags)

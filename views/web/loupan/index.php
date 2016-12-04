@@ -27,10 +27,10 @@ use app\components\Utils;
     </div>
     <div class="filter-2 bb bt">
         <div class="area">
-            <?php foreach ($area_list as $key => $val): ?>
+            <?php foreach ($area_list as $val): ?>
                 <a href="javascript:return false"
-                    <?php if ($area_id == $key) echo 'class="orange"'; ?>
-                   tag="<?= $key ?>"><?= $val->name ?></a>
+                    <?php if ($area_id == $val->id) echo 'class="orange"'; ?>
+                   tag="<?= $val->id ?>"><?= $val->name ?></a>
             <?php endforeach; ?>
         </div>
     </div>
@@ -133,7 +133,6 @@ use app\components\Utils;
         $('.sale_price').click(function () {
             var price_interval_checkbox = $(this).find('input:checkbox[name=price_interval]:checked');
             var tag = getCheckBoxStr(price_interval_checkbox);
-            console.log(tag);
             filter_form.find('input[name=price_interval]').val(tag);
             getList();
         });

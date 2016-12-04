@@ -1,25 +1,26 @@
+<?php
+use app\components\Utils;
+
+?>
 <div class="bg1 detail">
     <div class="con hiden">
-        <p class="location bd"><a href="">千氏网北京站</a> > <a href="">北京二手房</a> > <a href="">朝阳二手房</a> > <a href="">望京二手房</a> > <a href="">望京新城二手房</a> > <a href="">当前房源</a></p>
-        <h2 class="s18 detail-title mt10">新城经典东向大三居，高层观景 视野棒，满五唯一</h2>
-
+        <p class="location bd"><a href="">千氏地产</a> > <a href="">二手房</a> > <a href="">朝阳二手房</a></p>
+        <h2 class="s18 detail-title mt10"><?= $house->address ?> <?= $house->jishi ?>室
+            <?= $house->jitin ?>厅 <?= $house->total_price ?>万</h2>
         <div class="fl detail-img">
             <div class="detail-photo">
-                <img id="photo-box" src="/static/web/photo/sea-img-1.jpg">
+                <img id="photo-box" src=" <?= Utils::getValue($house, 'img_1', ''); ?>">
             </div>
 
             <div class="detail-nav">
                 <a class="photo-left" href="javascript:void(0);"><</a>
                 <div class="detail-nav-box">
                     <ul class="photo-nav">
-                        <li id="tu_1"><a href="javascript:void(0);"><img src="/static/web/photo/img-1.jpg"></a></li>
-                        <li id="tu_2"><a href="javascript:void(0);"><img src="/static/web/photo/img-2.jpg"></a></li>
-                        <li id="tu_3"><a href="javascript:void(0);"><img src="/static/web/photo/img-3.jpg"></a></li>
-                        <li id="tu_4"><a href="javascript:void(0);"><img src="/static/web/photo/img-4.jpg"></a></li>
-                        <li id="tu_5"><a href="javascript:void(0);"><img src="/static/web/photo/img-5.jpg"></a></li>
-                        <li id="tu_6"><a href="javascript:void(0);"><img src="/static/web/photo/img-6.jpg"></a></li>
-                        <li id="tu_7"><a href="javascript:void(0);"><img src="/static/web/photo/sea-img-1.jpg"></a></li>
-                        <li id="tu_8"><a href="javascript:void(0);"><img src="/static/web/photo/sea-img-2.jpg"></a></li>
+                        <?php if (!empty($house->img_1)) echo '<li id="tu_1"><a href="javascript:void(0);"><img src="' . $house->img_1 . '"></a></li>' ?>
+                        <?php if (!empty($house->img_2)) echo '<li id="tu_2"><a href="javascript:void(0);"><img src="' . $house->img_2 . '"></a></li>' ?>
+                        <?php if (!empty($house->img_3)) echo '<li id="tu_3"><a href="javascript:void(0);"><img src="' . $house->img_3 . '"></a></li>' ?>
+                        <?php if (!empty($house->img_4)) echo '<li id="tu_4"><a href="javascript:void(0);"><img src="' . $house->img_4 . '"></a></li>' ?>
+                        <?php if (!empty($house->img_5)) echo '<li id="tu_5"><a href="javascript:void(0);"><img src="' . $house->img_5 . '"></a></li>' ?>
                     </ul>
                 </div>
                 <a class="photo-right" href="javascript:void(0);">></a>
@@ -27,26 +28,29 @@
         </div>
 
         <div class="fl detail-con">
-            <div class="detail-price bd"><span class="orange"><b>865</b>万</span><span class="c6">单价60520元/平米</span><span class="c6">首付346万</span><span class="c6">税费约25.95万</span></div>
+            <div class="detail-price bd">
+                <span class="orange"><b><?= $house->total_price ?></b>万</span>
+                <span class="c6">单价<?=$house->unit_price?>元/平米</span>
+            </div>
             <table class="bd">
                 <tr>
                     <td>
-                        <b class="s24">3室2厅</b>
-                        <p class="c6">高楼层/共25层</p>
+                        <b class="s24"><?=$house->jishi?>室<?=$house->jitin?>厅</b>
+                        <p class="c6">位于<?=$house->in_floor?>层/共<?=$house->total_floor?>层</p>
                     </td>
                     <td>
-                        <b class="s24">东南</b>
-                        <p class="c6">平层/精装</p>
+                        <b class="s24"><?=$house->face?></b>
+                        <p class="c6">平层/<?=$house->decoration_name?></p>
                     </td>
                     <td>
-                        <b class="s24">142.93平米</b>
-                        <p class="c6">2000年建/板塔结合</p>
+                        <b class="s24"><?=$house->build_area?>平米</b>
+                        <p class="c6"><?php if(!empty($house->house_age)) echo $house->house_age.'年建'?></p>
                     </td>
                 </tr>
             </table>
             <ul>
-                <li>小区名称：望京新城</li>
-                <li>所在区域：朝阳 望京 四至五环 近15号线望京站</li>
+                <li>小区名称：<?=$house->property_company?></li>
+                <li>所在区域：<?=$house->property_company?> <?=$house->property_company?></li>
                 <li>对口学校：白家庄小学望京校区</li>
                 <li>所在区域：朝阳 望京 四至五环 近15号线望京站</li>
                 <li>看房时间：提前预约随时可看</li>
@@ -110,13 +114,16 @@
             <dl class="hiden">
                 <dt class="c6">房源标签</dt>
                 <dd>
-                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span class="yellow">距离15号线望京站517米</span><span class="green">满五唯一</span><span class="blue">随时看房</span></p>
+                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span
+                            class="yellow">距离15号线望京站517米</span><span class="green">满五唯一</span><span
+                            class="blue">随时看房</span></p>
                 </dd>
             </dl>
             <dl class="hiden">
                 <dt class="c6">户型介绍</dt>
                 <dd>
-                    <p>此房位于望京新城410号楼，可直通地下车库，非常方便； 三室一厅一厨两卫户型，主卧带卫生间，整体东向，楼层比较高 没有任何遮挡，可远眺望京SOHO,视野很棒；户型进身短，采光面宽阳光充足，格局方正 居住非常舒服，适合一家三代人居住。</p>
+                    <p>此房位于望京新城410号楼，可直通地下车库，非常方便； 三室一厅一厨两卫户型，主卧带卫生间，整体东向，楼层比较高
+                        没有任何遮挡，可远眺望京SOHO,视野很棒；户型进身短，采光面宽阳光充足，格局方正 居住非常舒服，适合一家三代人居住。</p>
                 </dd>
             </dl>
             <dl class="hiden">
@@ -153,9 +160,12 @@
         </div>
         <div class="around bd">
             <h2 class="detail-title2">周边配套</h2>
-            <p class="around-nav"><a href="#a" class="around-nav-t">公交</a><a href="#b">地铁</a><a href="">教育设施</a><a href="">医院</a><a href="">银行</a><a href="">休闲娱乐</a><a href="">购物</a><a href="">餐饮</a><a href="">运动健身</a></p>
+            <p class="around-nav"><a href="#a" class="around-nav-t">公交</a><a href="#b">地铁</a><a href="">教育设施</a><a
+                    href="">医院</a><a href="">银行</a><a href="">休闲娱乐</a><a href="">购物</a><a href="">餐饮</a><a
+                    href="">运动健身</a></p>
             <div class="around-box" id="a">
-                <!--地图--><div class="around-map"><img src="/static/web/photo/map.jpg"></div>
+                <!--地图-->
+                <div class="around-map"><img src="/static/web/photo/map.jpg"></div>
                 <div class="around-con">
                     <h3 class="s18 n cf tc">公 交</h3>
                     <ul class="s12">
@@ -310,4 +320,41 @@
 </div>
 <script>
     var menu = 'house_menu';
+    var selectKey = "1";
+    <?php
+    $pic_list = [];
+    if (!empty($house->img_1)) {
+        $pic_list[] = [
+            'picPos' => 1,
+            'bigPic' => $house->img_1
+        ];
+    }
+    if (!empty($house->img_2)) {
+        $pic_list[] = [
+            'picPos' => 2,
+            'bigPic' => $house->img_2
+        ];
+    }
+    if (!empty($house->img_3)) {
+        $pic_list[] = [
+            'picPos' => 3,
+            'bigPic' => $house->img_3
+        ];
+    }
+    if (!empty($house->img_4)) {
+        $pic_list[] = [
+            'picPos' => 4,
+            'bigPic' => $house->img_4
+        ];
+    }
+    if (!empty($house->img_5)) {
+        $pic_list[] = [
+            'picPos' => 5,
+            'bigPic' => $house->img_5
+        ];
+    }
+    json_encode($pic_list);
+    ?>
+    var picList = eval(<?=json_encode($pic_list, JSON_UNESCAPED_UNICODE)?>);
 </script>
+<script src="/static/web/js/picture.js"></script>

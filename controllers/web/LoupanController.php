@@ -66,6 +66,8 @@ class LoupanController extends LController
             $total = $loupan_list->total;
             $pages = $this->getPage($page, $loupan_list->total_pages);
             $loupan_list = $loupan_list->loupan_list;
+        } else {
+            $loupan_list = [];
         }
         $data = [
             'total'            => $total,
@@ -89,7 +91,7 @@ class LoupanController extends LController
     {
         $page_info = ['page' => 1, 'pre_page' => 4];
         $list = $this->loupan_manager->getList($page_info, 0, '', 0, 0, 0, 1);
-        if (!$this->hasError($list)) {
+        if (!empty($list)) {
             $list = $list->loupan_list;
         } else {
             $list = [];
