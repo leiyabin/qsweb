@@ -19,7 +19,7 @@ use app\components\Utils;
         <b class="fl">区域：</b>
         <div class="fl filter-area">
             <?php foreach ($quxian_list as $item): ?>
-                <a href="#"
+                <a href="javascript:return false"
                     <?php if ($quxian_id == $item->id) echo 'class="orange"'; ?>
                    tag="<?= $item->id ?>"><?= $item->value ?></a>
             <?php endforeach; ?>
@@ -28,7 +28,7 @@ use app\components\Utils;
     <div class="filter-2 bb bt">
         <div class="area">
             <?php foreach ($area_list as $key => $val): ?>
-                <a href="#"
+                <a href="javascript:return false"
                     <?php if ($area_id == $key) echo 'class="orange"'; ?>
                    tag="<?= $key ?>"><?= $val->name ?></a>
             <?php endforeach; ?>
@@ -53,7 +53,7 @@ use app\components\Utils;
     <div class="filter-1 property_type">
         <b class="fl">类型：</b>
         <?php foreach (HouseConst::$property_type as $key => $val): ?>
-            <a href="#"
+            <a href="javascript:return false"
                 <?php if ($property_type_id == $key) echo 'class="orange"'; ?>
                tag="<?= $key ?>"><?= $val ?></a>
         <?php endforeach; ?>
@@ -61,7 +61,7 @@ use app\components\Utils;
     <div class="filter-1 sale_status">
         <b class="fl">状态：</b>
         <?php foreach (HouseConst::$sale_status as $key => $val): ?>
-            <a href="#"
+            <a href="javascript:return false"
                 <?php if ($sale_status == $key) echo 'class="orange"'; ?>
                tag="<?= $key ?>"><?= $val ?></a>
         <?php endforeach; ?>

@@ -1,44 +1,80 @@
+<?php
+use app\consts\HouseConst;
+
+?>
 <div class="bg1 inner-search">
     <input type="text" placeholder="请输入楼盘名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
 </div>
 <div class="con filter">
+    <form id="filter_form">
+        <input type="hidden" name="quxian_id" value="<?= $quxian_id ?>">
+        <input type="hidden" name="area_id" value="<?= $area_id ?>">
+        <input type="hidden" name="price_interval" value="<?= implode(',', $price_interval) ?>">
+        <input type="hidden" name="area_interval" value="<?= implode(',', $area_interval) ?>">
+    </form>
     <div class="filter-1">
-        <b class="fl">区域：</b><div class="fl filter-area"><a href="">不限</a><a href="">东城</a><a href="">西城</a><a href="">朝阳</a><a href="">海淀</a><a href="">丰台</a><a href="">石景山</a><a href="" class="orange">通州</a><a href="">昌平</a><a href="">大兴</a><a href="">顺义</a><a href="">房山</a><a href="">亦庄开发区</a></div>
+        <b class="fl">区域：</b>
+        <div class="fl filter-area">
+            <?php foreach ($quxian_list as $item): ?>
+                <a href="javascript:return false"
+                    <?php if ($quxian_id == $item->id) echo 'class="orange"'; ?>
+                   tag="<?= $item->id ?>"><?= $item->value ?></a>
+            <?php endforeach; ?>
+        </div>
     </div>
-    <div class="filter-2 bb bt">
+    <div class="filter-2 bb bt area">
         <div>
-            <a href="" class="orange">全部</a><a href="">北关</a><a href="">大兴其它</a><a href="">果园管庄</a><a href="">九棵树(家乐福)</a><a href="">潞苑</a><a href="">梨园</a><a href="">李桥</a><a href="">临河里</a><a href="">马驹桥</a><a href="">乔庄</a><a href="">首都机场</a><a href="">顺义其它</a><a href="">通州北苑</a><a href="">通州其它</a><a href="">武夷花园</a><a href="">新华大街</a><a href="">亦庄</a><a href="">玉桥亦庄开发区</a><a href="">其它</a>
+            <?php foreach ($area_list as $key => $val): ?>
+                <a href="javascript:return false"
+                    <?php if ($area_id == $key) echo 'class="orange"'; ?>
+                   tag="<?= $key ?>"><?= $val->name ?></a>
+            <?php endforeach; ?>
         </div>
     </div>
     <div class="filter-1 bb">
         <b class="fl">售价：</b>
-        <div class="fl filter-radio">
-            <span><input type="checkbox" id="radio_11" name="radio_1" checked><label for="radio_11"></label><em>200万以下</em></span>
-            <span><input type="checkbox" id="radio_12" name="radio_1"><label for="radio_12"></label><em>200万~250万</em></span>
-            <span><input type="checkbox" id="radio_13" name="radio_1"><label for="radio_13"></label><em>250万~350万</em></span>
-            <span><input type="checkbox" id="radio_14" name="radio_1"><label for="radio_14"></label><em>300万~450万</em></span>
-            <span><input type="checkbox" id="radio_15" name="radio_1"><label for="radio_15"></label><em>400万~550万</em></span>
-            <span><input type="checkbox" id="radio_16" name="radio_1"><label for="radio_16"></label><em>500万~650万</em></span>
-            <span><input type="checkbox" id="radio_17" name="radio_1"><label for="radio_17"></label><em>600万~750万</em></span>
+        <div class="fl filter-radio sale_price">
+            <?php foreach (HouseConst::$price_interval as $key => $val): ?>
+                <span>
+                    <input value="<?= $key ?>" type="checkbox" id="price_interval_<?= $key ?>"
+                        <?php
+                        if (in_array($key, $price_interval)) {
+                            echo 'checked';
+                        }
+                        ?>
+                           name="price_interval">
+                    <label for="price_interval_<?= $key ?>"></label><em><?= $val ?></em></span>
+            <?php endforeach; ?>
         </div>
     </div>
     <div class="filter-1">
         <b class="fl">面积：</b>
-        <div class="fl filter-radio">
-            <span><input type="checkbox" id="radio_21" name="radio_2" checked><label for="radio_21"></label><em>50平以下</em></span>
-            <span><input type="checkbox" id="radio_22" name="radio_2"><label for="radio_22"></label><em>50平~70平</em></span>
-            <span><input type="checkbox" id="radio_23" name="radio_2"><label for="radio_23"></label><em>70平~90平</em></span>
-            <span><input type="checkbox" id="radio_24" name="radio_2"><label for="radio_24"></label><em>90平~110平</em></span>
-            <span><input type="checkbox" id="radio_25" name="radio_2"><label for="radio_25"></label><em>110平~130平</em></span>
-            <span><input type="checkbox" id="radio_26" name="radio_2"><label for="radio_26"></label><em>130平~150平</em></span>
-            <span><input type="checkbox" id="radio_27" name="radio_2"><label for="radio_27"></label><em>150平~200平</em></span>
-            <span><input type="checkbox" id="radio_28" name="radio_2"><label for="radio_28"></label><em>200平以上</em></span>
+        <div class="fl filter-radio place_area">
+            <?php foreach (HouseConst::$area_interval as $key => $val): ?>
+                <span>
+                    <input value="<?= $key ?>" type="checkbox" id="area_interval_<?= $key ?>"
+                        <?php
+                        if (in_array($key, $area_interval)) {
+                            echo 'checked';
+                        }
+                        ?>
+                           name="area_interval">
+                    <label for="area_interval_<?= $key ?>"></label><em><?= $val ?></em></span>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
 <div class="bg1 bt">
     <div class="con">
-        <div class="list-sort pt20"><a href="#" class="sort-this">默认排序</a><a href="#">最新发布</a><a href="#">房屋总价</a><a href="#">房屋单价</a><a href="#">房屋面积</a><a href="#">最近热门</a><a href="#">地铁距离近</a></div>
+        <div class="list-sort pt20">
+            <a href="javascript:return false" class="sort-this">默认排序</a>
+            <a href="javascript:return false">最新发布</a>
+            <a href="javascript:return false">房屋总价</a>
+            <a href="javascript:return false">房屋单价</a>
+            <a href="javascript:return false">房屋面积</a>
+            <a href="javascript:return false">最近热门</a>
+            <a href="javascript:return false">地铁距离近</a>
+        </div>
         <h2 class="list-title s18 n">共找到 <font class="orange">32461</font> 套北京二手房</h2>
         <ul class="house-list">
             <li>
@@ -48,7 +84,10 @@
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
-                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span class="yellow">距离15号线望京站517米</span><span class="green">满五唯一</span><span class="blue">随时看房</span></p>
+                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span
+                            class="yellow">距离15号线望京站517米</span><span class="green">满五唯一</span><span
+                            class="blue">随时看房</span>
+                    </p>
                 </div>
                 <div class="list-price fr">
                     <span class="orange"><b>865</b>万</span>
@@ -62,7 +101,8 @@
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
-                    <p class="list-mark s12"><span class="yellow">距离15号线望京站517米</span><span class="green">满五唯一</span><span class="blue">随时看房</span></p>
+                    <p class="list-mark s12"><span class="yellow">距离15号线望京站517米</span><span
+                            class="green">满五唯一</span><span class="blue">随时看房</span></p>
                 </div>
                 <div class="list-price fr">
                     <span class="orange"><b>265</b>万</span>
@@ -76,7 +116,8 @@
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
-                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span class="green">满五唯一</span><span class="blue">随时看房</span></p>
+                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span
+                            class="green">满五唯一</span><span class="blue">随时看房</span></p>
                 </div>
                 <div class="list-price fr">
                     <span class="orange"><b>865</b>万</span>
@@ -90,7 +131,8 @@
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
-                    <p class="list-mark s12"><span class="yellow">距离15号线望京站517米</span><span class="green">满五唯一</span></p>
+                    <p class="list-mark s12"><span class="yellow">距离15号线望京站517米</span><span
+                            class="green">满五唯一</span></p>
                 </div>
                 <div class="list-price fr">
                     <span class="orange"><b>265</b>万</span>
@@ -104,7 +146,8 @@
                     <p>望京新城 | 3室2厅 | 142.93平米 | 东南 | 精装 | 有电梯</p>
                     <p>高楼层(共25层) 2000年建板塔结合 - 望京</p>
                     <p>98人关注 / 共27次带看 / 14天以前发布</p>
-                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span class="yellow">距离5号线望京站17米</span><span class="blue">随时看房</span></p>
+                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span
+                            class="yellow">距离5号线望京站17米</span><span class="blue">随时看房</span></p>
                 </div>
                 <div class="list-price fr">
                     <span class="orange"><b>123865</b>万</span>
@@ -112,7 +155,9 @@
                 </div>
             </li>
         </ul>
-        <div class="page"><a href="" title="上一页" class="page-prev">上一页</a><a href="" title="下一页" class="page-next">下一页</a></div>
+        <div class="page"><a href="" title="上一页" class="page-prev">上一页</a><a href="" title="下一页"
+                                                                             class="page-next">下一页</a>
+        </div>
     </div>
 </div>
 <div class="con recommend">
@@ -140,12 +185,49 @@
         </li>
     </ul>
 </div>
+
+<script charset="utf-8" src="/static/web/js/checkbox.js"></script>
 <script>
     var menu = 'house_menu';
     $(function () {
         $('.list-sort').find('a').click(function () {
             $(this).siblings().removeClass('sort-this');
             $(this).addClass('sort-this');
-        })
+        });
+        var filter_form = $('#filter_form');
+        $('.filter-area').find('a').click(function () {
+            var quxian_id = $(this).attr('tag');
+            filter_form.find('input[name=quxian_id]').val(quxian_id);
+            getList();
+        });
+        function getParams() {
+//            $loupan_name = $('input[name=loupan_name]').val().trim();
+//            $params = filter_form.serialize() + '&loupan_name=' + $loupan_name;
+            return filter_form.serialize();
+        }
+
+        $('.area').find('a').click(function () {
+            var area_id = $(this).attr('tag');
+            filter_form.find('input[name=area_id]').val(area_id);
+            getList();
+        });
+        $('.sale_price').click(function () {
+            var price_interval_checkbox = $(this).find('input:checkbox[name=price_interval]:checked');
+            var tag = getCheckBoxStr(price_interval_checkbox);
+            console.log(tag);
+            filter_form.find('input[name=price_interval]').val(tag);
+            getList();
+        });
+        $('.place_area').click(function () {
+            var area_interval_checkbox = $(this).find('input:checkbox[name=area_interval]:checked');
+            var tag = getCheckBoxStr(area_interval_checkbox);
+            console.log(tag);
+            filter_form.find('input[name=area_interval]').val(tag);
+            getList();
+        });
+        function getList() {
+            $params = getParams();
+            location.href = '/web/house/?' + $params;
+        }
     })
 </script>

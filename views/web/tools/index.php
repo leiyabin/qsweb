@@ -2,9 +2,9 @@
     <div class="con">
         <div class="calculator">
             <div class="list-sort">
-                <a href="#" class="sort-this" id="tab_1">房贷计算器</a>
-                <a href="#" id="tab_2">北京二手房税费计算器</a>
-                <a href="#" id="tab_3">新房税费计算器</a>
+                <a href="javascript:return false" class="sort-this" id="tab_1">房贷计算器</a>
+                <a href="javascript:return false" id="tab_2">北京二手房税费计算器</a>
+                <a href="javascript:return false" id="tab_3">新房税费计算器</a>
             </div>
             <div id='tab_1_div' class="calculator-con hiden" style="display:block;">
                 <form class="fl">

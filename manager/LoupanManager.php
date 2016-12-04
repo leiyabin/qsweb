@@ -76,6 +76,10 @@ class LoupanManager
             $tag_arr = explode(',', $res->tag);
             $res->tag_arr = $tag_arr;
             $res->tag = $this->getTag($res->tag);
+            foreach ($res->door_model_list as $key => $door_model) {
+                $res->door_model_list[$key]->img_url = Utils::getImgUrl($door_model->img);
+                $res->door_model_list[$key]->decoration_name = HouseConst::$decoration[$door_model->decoration];
+            }
             return $res;
         }
         return [];

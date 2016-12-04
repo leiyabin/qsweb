@@ -1,155 +1,108 @@
 <script src="/static/web/js/jquery-1.8.2.min.js"></script>
-<script  src="/static/web/js/jquery.fancybox.js"></script>
+<script src="/static/web/js/jquery.fancybox.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.house-type a').fancybox();
         $('.photo-show').fancybox();
     });
 </script>
+<?php
+use app\components\Utils;
+
+?>
 <div class="bg1 detail">
     <div class="con">
-        <p class="location"><a href="/">千氏地产</a> > <a href="/web/loupan/">新房</a> > <a href="#"><?=$loupan->name?></a>  </p>
-        <div class="new-banner hiden" style="background:url(<?=$loupan->banner_img_url?>) no-repeat;">
+        <p class="location"><a href="/">千氏地产</a> > <a href="/web/loupan/">新房</a> > <a href="#"><?= $loupan->name ?></a>
+        </p>
+        <div class="new-banner hiden" style="background:url(<?= $loupan->banner_img_url ?>) no-repeat;">
             <div class="new-info fl tc">
-                <h2 class="cf s24"><?=$loupan->name?></h2>
+                <h2 class="cf s24"><?= $loupan->name ?></h2>
                 <p class="list-mark s12">
                     <?php foreach ($loupan->tag as $tag): ?>
                         <span class="<?= $tag['color'] ?>"><?= $tag['name'] ?></span>
                     <?php endforeach; ?>
                 </p>
-                <p>均价：<b class="s18"><?=$loupan->average_price?></b>元/平</p>
+                <p>均价：<b class="s18"><?= $loupan->average_price ?></b>元/平</p>
                 <strong class="orange s30">010-5794236</strong>
                 <p>咨询电话</p>
             </div>
         </div>
         <h2 class="detail-title2">户型介绍</h2>
         <ul class="house-type">
+            <?php foreach ($loupan->door_model_list as $door_model): ?>
             <li>
-                <img src="/static/web/photo/new-img.jpg" class="fl">
+                <img src="<?=$door_model->img_url?>" class="fl">
                 <div class="fl">
-                    <p><b class="s18">4室2厅3卫 153.00</b> ㎡（南,北朝向）</p>
-                    <p>户型解读：布局流畅，通风采光一流，宣扬健康理念</p>
-                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
+                    <p><b class="s18"><?=$door_model->shitinwei?> <?=$door_model->build_area?></b> ㎡（<?=$door_model->face?>）</p>
+                    <p>户型解读：<?=$door_model->description?></p>
+                    <p class="list-mark s12">
+                        <span class="orange"><?=$door_model->tag_1?></span>
+                        <span class="green"><?=$door_model->tag_2?></span>
+                        <span class="blue"><?=$door_model->tag_3?></span>
+                    </p>
                 </div>
-                <a href="#type-1" data-fancybox-group="gallery" class="fr">查看</a>
+                <a href="#type-<?=$door_model->id?>" data-fancybox-group="gallery" class="fr">查看</a>
             </li>
-            <li>
-                <img src="/static/web/photo/new-img.jpg" class="fl">
-                <div class="fl">
-                    <p><b class="s18">4室2厅3卫 153.00</b> ㎡（南,北朝向）</p>
-                    <p>户型解读：布局流畅，通风采光一流，宣扬健康理念</p>
-                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
-                </div>
-                <a href="#type-2" data-fancybox-group="gallery" class="fr">查看</a>
-            </li>
-            <li>
-                <img src="/static/web/photo/new-img.jpg" class="fl">
-                <div class="fl">
-                    <p><b class="s18">4室2厅3卫 153.00</b> ㎡（南,北朝向）</p>
-                    <p>户型解读：布局流畅，通风采光一流，宣扬健康理念</p>
-                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
-                </div>
-                <a href="#type-3" data-fancybox-group="gallery" class="fr">查看</a>
-            </li>
+            <?php endforeach; ?>
         </ul>
 
         <!--户型弹出内容start-->
         <ul class="type-detail-ul">
-            <li id="type-1" class="type-detail">
-                <div class="fl bf"><img src="/static/web/photo/type-img.jpg"></div>
+            <?php foreach ($loupan->door_model_list as $door_model): ?>
+            <li id="type-<?=$door_model->id?>" class="type-detail">
+                <div class="fl bf"><img src="<?=$door_model->img_url?>"></div>
                 <div class="fr bg1">
-                    <h3 class="s18">万柳书院</h3>
-                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
+                    <h3 class="s18"><?= $loupan->name ?></h3>
+                    <p class="list-mark s12">
+                        <span class="orange"><?=$door_model->tag_1?></span>
+                        <span class="green"><?=$door_model->tag_2?></span>
+                        <span class="blue"><?=$door_model->tag_3?></span>
+                    </p>
                     <table>
                         <tr>
-                            <td>房屋朝向： 南,北 </td>
-                            <td>居室： 3室2厅3卫</td>
+                            <td></td>
                         </tr>
                         <tr>
-                            <td>装修标准： 精装修</td>
-                            <td>建筑面积： 169㎡</td>
+                            <td>房屋朝向： <?=$door_model->face?></td>
+                            <td>居室： <?=$door_model->shitinwei?></td>
                         </tr>
                         <tr>
-                            <td>建筑面积： 169㎡ </td>
+                            <td>装修标准： <?=$door_model->decoration_name?></td>
+                            <td>建筑面积： <?=$door_model->build_area?>㎡</td>
                         </tr>
                         <tr>
-                            <td>户型解读： 暂无</td>
+                            <td></td>
                         </tr>
                     </table>
                     <p class="tc mt20">联系电话</p>
                     <p class="b tc orange s30 mt10">010-5967832</p>
                 </div>
             </li>
-            <li id="type-2" class="type-detail">
-                <div class="fl bf"><img src="/static/web/photo/sea-img-1.jpg"></div>
-                <div class="fr bg1">
-                    <h3 class="s18">2万柳书院</h3>
-                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
-                    <table>
-                        <tr>
-                            <td>房屋朝向： 南,北 </td>
-                            <td>居室： 3室2厅3卫</td>
-                        </tr>
-                        <tr>
-                            <td>装修标准： 精装修</td>
-                            <td>建筑面积： 169㎡</td>
-                        </tr>
-                        <tr>
-                            <td>建筑面积： 169㎡ </td>
-                        </tr>
-                        <tr>
-                            <td>户型解读： 暂无</td>
-                        </tr>
-                    </table>
-                    <p class="tc mt20">联系电话</p>
-                    <p class="b tc orange s30 mt10">010-5967832</p>
-                </div>
-            </li>
-            <li id="type-3" class="type-detail">
-                <div class="fl bf"><img src="/static/web/photo/sea-img-2.jpg"></div>
-                <div class="fr bg1">
-                    <h3 class="s18">3万柳书院</h3>
-                    <p class="list-mark s12"><span class="orange">厨卫不对门</span><span class="green">户型方正</span><span class="blue">南北通透</span></p>
-                    <table>
-                        <tr>
-                            <td>房屋朝向： 南,北 </td>
-                            <td>居室： 3室2厅3卫</td>
-                        </tr>
-                        <tr>
-                            <td>装修标准： 精装修</td>
-                            <td>建筑面积： 169㎡</td>
-                        </tr>
-                        <tr>
-                            <td>建筑面积： 169㎡ </td>
-                        </tr>
-                        <tr>
-                            <td>户型解读： 暂无</td>
-                        </tr>
-                    </table>
-                    <p class="tc mt20">联系电话</p>
-                    <p class="b tc orange s30 mt10">010-5967832</p>
-                </div>
-            </li>
+            <?php endforeach; ?>
         </ul>
         <!--户型弹出内容end-->
 
         <h2 class="detail-title2">楼盘相册</h2>
         <ul class="house-photo mt20 hiden bd pb20">
             <li>
-                <a class="photo-show" href="<?=$loupan->img_1_url?>" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
+                <a class="photo-show" href="<?= $loupan->img_1_url ?>" data-fancybox-group="gallery"><img
+                        src="<?= $loupan->img_1_url ?>"></a>
                 <p class="tc">效果图（1）</p>
             </li>
             <li>
-                <a class="photo-show" href="<?=$loupan->img_2_url?>" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
+                <a class="photo-show" href="<?= $loupan->img_2_url ?>" data-fancybox-group="gallery"><img
+                        src="<?= $loupan->img_2_url ?>"></a>
                 <p class="tc">效果图（2）</p>
             </li>
             <li>
-                <a class="photo-show" href="<?=$loupan->img_3_url?>" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
+                <a class="photo-show" href="<?= $loupan->img_3_url ?>" data-fancybox-group="gallery"><img
+                        src="<?= $loupan->img_3_url ?>"></a>
                 <p class="tc">效果图（3）</p>
             </li>
             <li>
-                <a class="photo-show" href="<?=$loupan->img_4_url?>" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
+                <a class="photo-show" href="<?= $loupan->img_4_url ?>" data-fancybox-group="gallery"><img
+                        src="<?= $loupan->img_4_url ?>"></a>
                 <p class="tc">效果图（4）</p>
             </li>
         </ul>
@@ -167,7 +120,6 @@
                 <a href="javascript:return false">运动健身</a>
             </p>
             <div class="around-box" id="a">
-                <!--地图--><div class="around-map"><img src="/static/web/photo/map.jpg"></div>
             </div>
         </div>
         <div class="comment c6 bd">
@@ -208,7 +160,7 @@
                 <li>
                     <div class="comment-img fl tc">
                         <img src="/static/web/images/comment-1.png">
-                        <p class="mt5">111111111</p>
+                        <p class="mt5">千氏房友</p>
                     </div>
                     <div class="comment-box fl">
                         <div class="comment-detail">
@@ -224,55 +176,37 @@
             <h2 class="detail-title2">楼盘详情</h2>
             <table class="c6">
                 <tr>
-                    <td><span>项目地址：</span>新城白马路与通顺路交汇处向北1公里路西</td>
+                    <td><span>项目地址：</span><?= $loupan->address ?></td>
                 </tr>
                 <tr>
-                    <td><span>售楼处地址：</span>顺义新城白马路与通顺路交汇处向北1公里路西（接待时间 9:30 - 16:00）</td>
+                    <td><span>售楼处地址：</span><?= $loupan->sale_office_address ?></td>
                 </tr>
                 <tr>
-                    <td><span>开发商：</span>北京中铁润丰房地产开发有限公司</td>
+                    <td><span>开发商：</span><?= $loupan->developers ?></td>
                 </tr>
                 <tr>
-                    <td><span>物业公司：</span>开元国际物业管理公司</td>
+                    <td><span>物业公司：</span><?= $loupan->property_company ?></td>
                 </tr>
                 <tr>
-                    <td><span>最新开盘：</span>2016年03月24日</td>
+                    <td><span>最新开盘：</span><?= Utils::formatDateTime($loupan->opening_time, 'Y年m月d日') ?></td>
                 </tr>
                 <tr>
-                    <td><span>物业公司：</span>开元国际物业管理公司</td>
-                    <td><span>物业类型：</span>普通住宅</td>
+                    <td><span>物业类型：</span><?= $loupan->property_type ?></td>
+                    <td><span>面积：</span><?= $loupan->min_square ?>~<?= $loupan->max_square ?>平米</td>
                 </tr>
                 <tr>
-                    <td><span>最早交房：</span>待定</td>
-                    <td><span>容积率：</span>1.60</td>
+                    <td><span>产权年限：</span><?= $loupan->right_time ?>年</td>
+                    <td><span>均价：</span><?= $loupan->average_price ?>万元</td>
                 </tr>
                 <tr>
-                    <td><span>产权年限：</span>70年</td>
-                    <td><span>绿化率：</span>33%</td>
+                    <td><span>销售状态：</span><?= $loupan->sale_status_name ?></td>
+                    <td><span>特色：</span>
+                        <?php foreach ($loupan->tag as $tag): ?>
+                            <?= $tag['name'] ?>
+                        <?php endforeach; ?>
+                    </td>
                 </tr>
                 <tr>
-                    <td><span>规划户数：</span>1310</td>
-                    <td><span>物业费用：</span>2.8元/m²/月</td>
-                </tr>
-                <tr>
-                    <td><span>车位情况：</span>地上车位数495；地下车位数1100</td>
-                    <td><span>供暖方式：</span>集中供暖</td>
-                </tr>
-                <tr>
-                    <td><span>装修状况：</span>精装修</td>
-                    <td><span>水电燃气：</span>民水 民电</td>
-                </tr>
-                <tr>
-                    <td><span>建筑类型：</span>板楼</td>
-                    <td><span>嫌恶设施：</span>暂无</td>
-                </tr>
-                <tr>
-                    <td><span>占地面积：</span>精装修</td>
-                    <td><span>水电燃气：</span>民水 民电</td>
-                </tr>
-                <tr>
-                    <td><span>建筑类型：</span>101,646㎡</td>
-                    <td><span>建筑面积：</span>232,633㎡</td>
                 </tr>
             </table>
         </div>
@@ -371,16 +305,19 @@
         <h2 class="detail-title2">推荐楼盘</h2>
         <ul class="resource-list hiden">
             <?php foreach ($recommend_list as $item): ?>
-            <li>
-                <a href="/web/loupan/detail?id=<?=$item->id?>" title="<?=$item->name?>"><img src="<?=$item->img_url?>"></a>
-                <p class="s18"><b class="fl"><a href=""><?=$item->name?></a></b><span class="orange fr">><?=$item->average_price?>万/套</span></p>
-                <p class="c6"><span class="fl">><?=$item->min_square?>㎡-><?=$item->max_square?>㎡</span></p>
-            </li>
+                <li>
+                    <a href="/web/loupan/detail?id=<?= $item->id ?>" title="<?= $item->name ?>"><img
+                            src="<?= $item->img_url ?>"></a>
+                    <p class="s18"><b class="fl"><a href=""><?= $item->name ?></a></b><span
+                            class="orange fr">><?= $item->average_price ?>万/套</span></p>
+                    <p class="c6"><span class="fl">><?= $item->min_square ?>㎡-><?= $item->max_square ?>㎡</span></p>
+                </li>
             <?php endforeach; ?>
         </ul>
     </div>
 </div>
 <script type="text/javascript">
+    var menu = 'loupan_menu';
     $(function () {
         $('.around-nav').find('a').click(function () {
             $(this).addClass('around-nav-t');
@@ -390,7 +327,7 @@
         setMap('公交');
         function setMap($name) {
             var map = new BMap.Map("a");
-            map.centerAndZoom(new BMap.Point('<?=$loupan->lon?>', '<?=$loupan->lat?>'),16);
+            map.centerAndZoom(new BMap.Point('<?=$loupan->lon?>', '<?=$loupan->lat?>'), 16);
             var local = new BMap.LocalSearch(map, {
                 renderOptions: {map: map}
             });
