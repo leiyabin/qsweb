@@ -1,5 +1,6 @@
 <script src="/static/web/js/jquery-1.8.2.min.js"></script>
 <script  src="/static/web/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <script>
     $(document).ready(function() {
         $('.house-type a').fancybox();
@@ -9,7 +10,7 @@
 <div class="bg1 detail">
     <div class="con">
         <p class="location"><a href="/">千氏地产</a> > <a href="/web/loupan/">新房</a> > <a href="#"><?=$loupan->name?></a>  </p>
-        <div class="new-banner hiden">
+        <div class="new-banner hiden" style="background:url(<?=$loupan->banner_img_url?>) no-repeat;">
             <div class="new-info fl tc">
                 <h2 class="cf s24"><?=$loupan->name?></h2>
                 <p class="list-mark s12">
@@ -136,42 +137,37 @@
         <h2 class="detail-title2">楼盘相册</h2>
         <ul class="house-photo mt20 hiden bd pb20">
             <li>
-                <a class="photo-show" href="/static/web/photo/big-1.jpg" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
+                <a class="photo-show" href="<?=$loupan->img_1_url?>" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
                 <p class="tc">效果图（1）</p>
             </li>
             <li>
-                <a class="photo-show" href="/static/web/photo/big-2.jpg" data-fancybox-group="gallery"><img src="/static/web/photo/img-2.jpg"></a>
+                <a class="photo-show" href="<?=$loupan->img_2_url?>" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
                 <p class="tc">效果图（2）</p>
             </li>
             <li>
-                <a class="photo-show" href="/static/web/photo/big-1.jpg" data-fancybox-group="gallery"><img src="/static/web/photo/img-3.jpg"></a>
+                <a class="photo-show" href="<?=$loupan->img_3_url?>" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
                 <p class="tc">效果图（3）</p>
             </li>
             <li>
-                <a class="photo-show" href="/static/web/photo/big-3.jpg" data-fancybox-group="gallery"><img src="/static/web/photo/img-4.jpg"></a>
+                <a class="photo-show" href="<?=$loupan->img_4_url?>" data-fancybox-group="gallery"><img src="/static/web/photo/img-1.jpg"></a>
                 <p class="tc">效果图（4）</p>
             </li>
         </ul>
         <div class="around bd">
             <h2 class="detail-title2">周边配套</h2>
-            <p class="around-nav"><a href="#a" class="around-nav-t">公交</a><a href="#b">地铁</a><a href="">教育设施</a><a href="">医院</a><a href="">银行</a><a href="">休闲娱乐</a><a href="">购物</a><a href="">餐饮</a><a href="">运动健身</a></p>
+            <p class="around-nav">
+                <a href="javascript:return false" class="around-nav-t">公交</a>
+                <a href="javascript:return false">地铁</a>
+                <a href="javascript:return false">教育</a>
+                <a href="javascript:return false">医院</a>
+                <a href="javascript:return false">银行</a>
+                <a href="javascript:return false">休闲娱乐</a>
+                <a href="javascript:return false">购物</a>
+                <a href="javascript:return false">餐饮</a>
+                <a href="javascript:return false">运动健身</a>
+            </p>
             <div class="around-box" id="a">
                 <!--地图--><div class="around-map"><img src="/static/web/photo/map.jpg"></div>
-                <div class="around-con">
-                    <h3 class="s18 n cf tc">公 交</h3>
-                    <ul class="s12">
-                        <li class="around-1">
-                            <h4 class="n blue">花园公交站</h4>
-                            <p>地址：北京市朝阳区东坝中路</p>
-                            <p>公交：<font class="blue">433路，533路，1路，2路，3路，4路，5路</font></p>
-                        </li>
-                        <li class="around-2">
-                            <h4 class="n blue">花园公交站</h4>
-                            <p>地址：北京市朝阳区东坝中路</p>
-                            <p>公交：<font class="blue">433路，533路，1路，2路，3路，4路，5路</font></p>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
         <div class="comment c6 bd">
@@ -384,3 +380,22 @@
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('.around-nav').find('a').click(function () {
+            $(this).addClass('around-nav-t');
+            $(this).siblings('a').removeClass('around-nav-t');
+            setMap($(this).html());
+        });
+        setMap('公交');
+        function setMap($name) {
+            var map = new BMap.Map("a");
+            map.centerAndZoom(new BMap.Point('<?=$loupan->lon?>', '<?=$loupan->lat?>'),16);
+            var local = new BMap.LocalSearch(map, {
+                renderOptions: {map: map}
+            });
+            local.searchInBounds($name, map.getBounds());
+        }
+    })
+
+</script>
