@@ -33,4 +33,12 @@ class HouseRpc extends LRpc
         ];
         return LRpc::init()->post($params)->url('/house/list');
     }
+
+    public function getRecommend($size)
+    {
+        $params = [
+            'size'      => $size,
+        ];
+        return LRpc::init()->post($params)->url('/house/getrecommend');
+    }
 }

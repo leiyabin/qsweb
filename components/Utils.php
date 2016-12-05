@@ -33,6 +33,14 @@ class Utils
         return mb_strlen($value, 'utf-8');
     }
 
+    public static function subStr($content, $size)
+    {
+        if (self::getLength($content) > $size) {
+            return mb_substr($content, 0, $size - 2, "utf-8") . '...';
+        }
+        return $content;
+    }
+
     public static function formatDateTime($timestamp, $format = 'Y-m-d H:i:s')
     {
         return date($format, $timestamp);

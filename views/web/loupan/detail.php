@@ -23,7 +23,7 @@ use app\components\Utils;
                         <span class="<?= $tag['color'] ?>"><?= $tag['name'] ?></span>
                     <?php endforeach; ?>
                 </p>
-                <p>均价：<b class="s18"><?= $loupan->average_price ?></b>元/平</p>
+                <p>均价：<b class="s18"><?= $loupan->average_price ?></b>万元/平</p>
                 <strong class="orange s30">010-5794236</strong>
                 <p>咨询电话</p>
             </div>
@@ -31,54 +31,55 @@ use app\components\Utils;
         <h2 class="detail-title2">户型介绍</h2>
         <ul class="house-type">
             <?php foreach ($loupan->door_model_list as $door_model): ?>
-            <li>
-                <img src="<?=$door_model->img_url?>" class="fl">
-                <div class="fl">
-                    <p><b class="s18"><?=$door_model->shitinwei?> <?=$door_model->build_area?></b> ㎡（<?=$door_model->face?>）</p>
-                    <p>户型解读：<?=$door_model->description?></p>
-                    <p class="list-mark s12">
-                        <span class="orange"><?=$door_model->tag_1?></span>
-                        <span class="green"><?=$door_model->tag_2?></span>
-                        <span class="blue"><?=$door_model->tag_3?></span>
-                    </p>
-                </div>
-                <a href="#type-<?=$door_model->id?>" data-fancybox-group="gallery" class="fr">查看</a>
-            </li>
+                <li>
+                    <img src="<?= $door_model->img_url ?>" class="fl">
+                    <div class="fl">
+                        <p><b class="s18"><?= $door_model->shitinwei ?> <?= $door_model->build_area ?></b>
+                            ㎡（<?= $door_model->face ?>）</p>
+                        <p>户型解读：<?= $door_model->description ?></p>
+                        <p class="list-mark s12">
+                            <span class="orange"><?= $door_model->tag_1 ?></span>
+                            <span class="green"><?= $door_model->tag_2 ?></span>
+                            <span class="blue"><?= $door_model->tag_3 ?></span>
+                        </p>
+                    </div>
+                    <a href="#type-<?= $door_model->id ?>" data-fancybox-group="gallery" class="fr">查看</a>
+                </li>
             <?php endforeach; ?>
         </ul>
 
         <!--户型弹出内容start-->
         <ul class="type-detail-ul">
             <?php foreach ($loupan->door_model_list as $door_model): ?>
-            <li id="type-<?=$door_model->id?>" class="type-detail">
-                <div class="fl bf"><img src="<?=$door_model->img_url?>"></div>
-                <div class="fr bg1">
-                    <h3 class="s18"><?= $loupan->name ?></h3>
-                    <p class="list-mark s12">
-                        <span class="orange"><?=$door_model->tag_1?></span>
-                        <span class="green"><?=$door_model->tag_2?></span>
-                        <span class="blue"><?=$door_model->tag_3?></span>
-                    </p>
-                    <table>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>房屋朝向： <?=$door_model->face?></td>
-                            <td>居室： <?=$door_model->shitinwei?></td>
-                        </tr>
-                        <tr>
-                            <td>装修标准： <?=$door_model->decoration_name?></td>
-                            <td>建筑面积： <?=$door_model->build_area?>㎡</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </table>
-                    <p class="tc mt20">联系电话</p>
-                    <p class="b tc orange s30 mt10">010-5967832</p>
-                </div>
-            </li>
+                <li id="type-<?= $door_model->id ?>" class="type-detail">
+                    <div class="fl bf"><img src="<?= $door_model->img_url ?>"></div>
+                    <div class="fr bg1">
+                        <h3 class="s18"><?= $loupan->name ?></h3>
+                        <p class="list-mark s12">
+                            <span class="orange"><?= $door_model->tag_1 ?></span>
+                            <span class="green"><?= $door_model->tag_2 ?></span>
+                            <span class="blue"><?= $door_model->tag_3 ?></span>
+                        </p>
+                        <table>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>房屋朝向： <?= $door_model->face ?></td>
+                                <td>居室： <?= $door_model->shitinwei ?></td>
+                            </tr>
+                            <tr>
+                                <td>装修标准： <?= $door_model->decoration_name ?></td>
+                                <td>建筑面积： <?= $door_model->build_area ?>㎡</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="tc mt20">联系电话</p>
+                        <p class="b tc orange s30 mt10">010-5967832</p>
+                    </div>
+                </li>
             <?php endforeach; ?>
         </ul>
         <!--户型弹出内容end-->
@@ -308,9 +309,9 @@ use app\components\Utils;
                 <li>
                     <a href="/web/loupan/detail?id=<?= $item->id ?>" title="<?= $item->name ?>"><img
                             src="<?= $item->img_url ?>"></a>
-                    <p class="s18"><b class="fl"><a href=""><?= $item->name ?></a></b><span
-                            class="orange fr">><?= $item->average_price ?>万/套</span></p>
-                    <p class="c6"><span class="fl">><?= $item->min_square ?>㎡-><?= $item->max_square ?>㎡</span></p>
+                    <p class="s18"><b class="fl"><a href=""><?= Utils::subStr($item->name, 10) ?></a></b><span
+                            class="orange fr"><?= $item->average_price ?>万/套</span></p>
+                    <p class="c6"><span class="fl"><?= $item->min_square ?>㎡~<?= $item->max_square ?>㎡</span></p>
                 </li>
             <?php endforeach; ?>
         </ul>

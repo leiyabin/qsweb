@@ -100,33 +100,31 @@ use app\components\Utils;
             <div class="resource-new bgf fl">
                 <a href="/web/loupan/detail?id=<?=$item->id?>" title="<?=$item->name?>"><img src="<?=$item->img_url?>" class="fl"></a>
                 <h3 class="s18"><a href="/web/loupan/detail?id=<?=$item->id?>"><?=$item->name?></a></h3>
-                <p>均价：<font class="s18 orange"><?=$item->average_price?></font></p>
+                <p>均价：<font class="s18 orange"><?=$item->average_price?></font>万元</p>
                 <p>项目地址：<?=$item->address?></p>
                 <p>最新开盘：<?=Utils::formatDateTime($item->opening_time,'Y年m月d日')?></p>
             </div>
         <?php endforeach; ?>
         <div class="title bg1 clear"><h2>二手房</h2><span></span><a href="/web/house/">Read More</a></div>
         <ul class="resource-list hiden">
-            <li>
-                <a href="/web/house/" title="兴都苑"><img src="static/web/photo/img-1.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">兴都苑</a></b><span class="orange fr">380万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
-            </li>
-            <li>
-                <a href="/web/house/" title=""><img src="static/web/photo/img-2.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">华芳园</a></b><span class="orange fr">450万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
-            </li>
-            <li>
-                <a href="/web/house/" title=""><img src="static/web/photo/img-3.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">朝阳公园西里北区</a></b><span class="orange fr">380万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
-            </li>
-            <li>
-                <a href="/web/house/" title=""><img src="static/web/photo/img-4.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">天赐良园二期</a></b><span class="orange fr">580万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
-            </li>
+
+            <?php foreach ($house_recommend_list as $item): ?>
+                <li>
+                    <a href="/web/house/detail/?id=<?=$item->id?>" title=""><img src="<?=$item->house_img?>"></a>
+                    <p class="s18"><b class="fl"><a href="/web/house/detail/?id=<?=$item->id?>"><?=Utils::subStr($item->address,11)?></a></b><span class="orange fr"><?=$item->total_price?>万</span></p>
+                    <p class="c6"><span class="fl"><?=$item->jishi?>室<?=$item->jitin?>厅<?=$item->jiwei?>卫 <?=$item->build_area?> m²</span><span class="fr"><?=round($item->unit_price/10000,1)?>万/平</span></p>
+                </li>
+            <?php endforeach; ?>
+<!--            <li>-->
+<!--                <a href="/web/house/" title=""><img src="static/web/photo/img-3.jpg"></a>-->
+<!--                <p class="s18"><b class="fl"><a href="">朝阳公园西里北区</a></b><span class="orange fr">380万</span></p>-->
+<!--                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="/web/house/" title=""><img src="static/web/photo/img-4.jpg"></a>-->
+<!--                <p class="s18"><b class="fl"><a href="">天赐良园二期</a></b><span class="orange fr">580万</span></p>-->
+<!--                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>-->
+<!--            </li>-->
         </ul>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <?php
 use app\consts\HouseConst;
-
+use app\components\Utils;
 ?>
 <div class="bg1 inner-search">
     <input type="text" placeholder="请输入楼盘名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
@@ -117,9 +117,9 @@ use app\consts\HouseConst;
     <ul class="resource-list hiden">
         <?php foreach ($recommend_list as $item): ?>
             <li>
-                <a href="/web/loupan/detail/?id=<?=$item->id?>" title="<?=$item->name?>"><img src="<?=$item->img_url?>"></a>
-                <p class="s18"><b class="fl"><a href="/web/loupan/detail/?id=<?=$item->id?>"><?=$item->name?></a></b><span class="orange fr"><?=$item->average_price?>万/套</span></p>
-                <p class="c6"><span class="fl"><?=$item->min_square?>㎡-<?=$item->max_square?>㎡</span></p>
+                <a href="/web/house/detail/?id=<?=$item->id?>" title=""><img src="<?=$item->house_img?>"></a>
+                <p class="s18"><b class="fl"><a href="/web/house/detail/?id=<?=$item->id?>"><?=Utils::subStr($item->address,11)?></a></b><span class="orange fr"><?=$item->total_price?>万</span></p>
+                <p class="c6"><span class="fl"><?=$item->jishi?>室<?=$item->jitin?>厅<?=$item->jiwei?>卫 <?=$item->build_area?> m²</span><span class="fr"><?=round($item->unit_price/10000,1)?>万/平</span></p>
             </li>
         <?php endforeach; ?>
     </ul>

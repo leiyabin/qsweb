@@ -57,7 +57,7 @@ class HouseController extends LController
         //end get params
         $quxian_list = $this->getQuxian();
         //get recommend_list
-        $recommend_list = $this->getRecommend();
+        $recommend_list = $this->house_manager->getRecommend();
         //get area
         $area_list = $this->getArea($quxian_id);
         $price_interval = empty($price_interval) ? [] : explode(',', $price_interval);
@@ -103,7 +103,7 @@ class HouseController extends LController
             throw new RequestException('未找到页面，id=' . $id, ErrorCode::NOT_FOUND);
         }
         //get recommend_list
-        $recommend_list = $this->getRecommend();
+        $recommend_list = $this->house_manager->getRecommend();
         $this->getView()->title = '千氏地产-二手房';
         $data = [
             'recommend_list' => $recommend_list,
@@ -141,18 +141,6 @@ class HouseController extends LController
             $area_list = [];
         }
         return $area_list;
-    }
-
-    private function getRecommend()
-    {
-        $page_info = ['page' => 1, 'pre_page' => 4];
-        $list = $this->loupan_manager->getList($page_info, 0, '', 0, 0, 0, 1);
-        if (!empty($list)) {
-            $list = $list->loupan_list;
-        } else {
-            $list = [];
-        }
-        return $list;
     }
 
 }

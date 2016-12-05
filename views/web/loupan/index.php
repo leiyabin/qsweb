@@ -109,7 +109,7 @@ use app\components\Utils;
         <?php foreach ($recommend_list as $item): ?>
             <li>
                 <a href="/web/loupan/detail/?id=<?=$item->id?>" title="<?=$item->name?>"><img src="<?=$item->img_url?>"></a>
-                <p class="s18"><b class="fl"><a href="/web/loupan/detail/?id=<?=$item->id?>"><?=$item->name?></a></b><span class="orange fr"><?=$item->average_price?>万/套</span></p>
+                <p class="s18"><b class="fl"><a href="/web/loupan/detail/?id=<?=$item->id?>"><?= Utils::subStr($item->name, 10) ?></a></b><span class="orange fr"><?=$item->average_price?>万/套</span></p>
                 <p class="c6"><span class="fl"><?=$item->min_square?>㎡-<?=$item->max_square?>㎡</span></p>
             </li>
         <?php endforeach; ?>

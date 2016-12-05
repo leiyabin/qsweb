@@ -10,12 +10,17 @@ namespace app\controllers\web;
 
 use app\components\LController;
 use app\manager\NewsManager;
+use app\manager\HouseManager;
 use app\manager\LoupanManager;
 
 class IndexController extends LController
 {
     const NEWS_TAG_HOT = 1;
     const NEWS_TAG_RECOMMEND = 2;
+    /**
+     * @var HouseManager
+     */
+    public $house_manager;
     /**
      * @var NewsManager
      */
@@ -30,6 +35,7 @@ class IndexController extends LController
         parent::init();
         $this->news_manager = new NewsManager();
         $this->loupan_manager = new LoupanManager();
+        $this->house_manager = new HouseManager();
     }
 
     public function actionIndex()
@@ -46,11 +52,15 @@ class IndexController extends LController
         $news_help_list = $this->getInformation(self::NEWS_TAG_RECOMMEND, 2);
         //get recommend_list
         $recommend_list = $this->getRecommend();
+
+        //get house recommend_list
+        $house_recommend_list = $this->house_manager->getRecommend();
         $data = [
-            'news_hot_list'  => $news_hot_list,
-            'news_help_list' => $news_help_list,
-            'top_hot_news'   => $top_hot_news,
-            'recommend_list' => $recommend_list,
+            'news_hot_list'        => $news_hot_list,
+            'news_help_list'       => $news_help_list,
+            'top_hot_news'         => $top_hot_news,
+            'recommend_list'       => $recommend_list,
+            'house_recommend_list' => $house_recommend_list,
         ];
         $this->getView()->title = '千氏地产';
         return $this->render('index', $data);

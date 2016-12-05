@@ -1,10 +1,11 @@
 <?php
 use app\components\Utils;
+
 ?>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <div class="bg1 detail">
     <div class="con hiden">
-        <p class="location bd"><a href="">千氏地产</a> > <a href="">二手房</a></p>
+        <p class="location bd"><a href="/">千氏地产</a> > <a href="/web/house/">二手房</a></p>
         <h2 class="s18 detail-title mt10"><?= $house->address ?> <?= $house->jishi ?>室
             <?= $house->jitin ?>厅 <?= $house->total_price ?>万</h2>
         <div class="fl detail-img">
@@ -286,26 +287,13 @@ use app\components\Utils;
         </div>
         <h2 class="detail-title2">为您推荐</h2>
         <ul class="resource-list hiden">
-            <li>
-                <a href="" title="兴都苑"><img src="/static/web/photo/img-1.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">兴都苑</a></b><span class="orange fr">380万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
-            </li>
-            <li>
-                <a href="" title=""><img src="/static/web/photo/img-2.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">华芳园</a></b><span class="orange fr">450万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
-            </li>
-            <li>
-                <a href="" title=""><img src="/static/web/photo/img-3.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">朝阳公园西里北区</a></b><span class="orange fr">380万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
-            </li>
-            <li>
-                <a href="" title=""><img src="/static/web/photo/img-4.jpg"></a>
-                <p class="s18"><b class="fl"><a href="">天赐良园二期</a></b><span class="orange fr">580万</span></p>
-                <p class="c6"><span class="fl">3室2厅1卫 110 m²</span><span class="fr">3.5万/平</span></p>
-            </li>
+            <?php foreach ($recommend_list as $item): ?>
+                <li>
+                    <a href="/web/house/detail/?id=<?=$item->id?>" title=""><img src="<?=$item->house_img?>"></a>
+                    <p class="s18"><b class="fl"><a href="/web/house/detail/?id=<?=$item->id?>"><?=Utils::subStr($item->address,11)?></a></b><span class="orange fr"><?=$item->total_price?>万</span></p>
+                    <p class="c6"><span class="fl"><?=$item->jishi?>室<?=$item->jitin?>厅<?=$item->jiwei?>卫 <?=$item->build_area?> m²</span><span class="fr"><?=round($item->unit_price/10000,1)?>万/平</span></p>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>
