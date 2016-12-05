@@ -33,20 +33,11 @@ class HouseManager
         return [];
     }
 
-    private function getTag($tags)
-    {
-        $tag_keys = explode(',', $tags);
-        $tag_vals = [];
-        foreach ($tag_keys as $val) {
-            $tag_vals[] = HouseConst::$feature[$val];
-        }
-        return $tag_vals;
-    }
-
     public function get($id)
     {
         $res = $this->house_rpc->get($id);
         if (!empty($res->id)) {
+            $res->broker_img_url = Utils::getImgUrl($res->broker_img,'/static/web/images/broker.png');
             return $res;
         }
         return [];

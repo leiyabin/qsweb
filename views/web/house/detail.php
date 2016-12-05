@@ -1,10 +1,10 @@
 <?php
 use app\components\Utils;
-
 ?>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <div class="bg1 detail">
     <div class="con hiden">
-        <p class="location bd"><a href="">千氏地产</a> > <a href="">二手房</a> > <a href="">朝阳二手房</a></p>
+        <p class="location bd"><a href="">千氏地产</a> > <a href="">二手房</a></p>
         <h2 class="s18 detail-title mt10"><?= $house->address ?> <?= $house->jishi ?>室
             <?= $house->jitin ?>厅 <?= $house->total_price ?>万</h2>
         <div class="fl detail-img">
@@ -30,35 +30,34 @@ use app\components\Utils;
         <div class="fl detail-con">
             <div class="detail-price bd">
                 <span class="orange"><b><?= $house->total_price ?></b>万</span>
-                <span class="c6">单价<?=$house->unit_price?>元/平米</span>
+                <span class="c6">单价<?= $house->unit_price ?>元/平米</span>
             </div>
             <table class="bd">
                 <tr>
                     <td>
-                        <b class="s24"><?=$house->jishi?>室<?=$house->jitin?>厅</b>
-                        <p class="c6">位于<?=$house->in_floor?>层/共<?=$house->total_floor?>层</p>
+                        <b class="s24"><?= $house->jishi ?>室<?= $house->jitin ?>厅</b>
+                        <p class="c6">位于<?= $house->in_floor ?>层/共<?= $house->total_floor ?>层</p>
                     </td>
                     <td>
-                        <b class="s24"><?=$house->face?></b>
-                        <p class="c6">平层/<?=$house->decoration_name?></p>
+                        <b class="s24"><?= $house->face ?></b>
+                        <p class="c6">平层/<?= $house->decoration_name ?></p>
                     </td>
                     <td>
-                        <b class="s24"><?=$house->build_area?>平米</b>
-                        <p class="c6"><?php if(!empty($house->house_age)) echo $house->house_age.'年建'?></p>
+                        <b class="s24"><?= $house->build_area ?>平米</b>
+                        <p class="c6"><?php if (!empty($house->house_age)) echo $house->house_age . '年建' ?></p>
                     </td>
                 </tr>
             </table>
-            <ul>
-                <li>小区名称：<?=$house->property_company?></li>
-                <li>所在区域：<?=$house->property_company?> <?=$house->property_company?></li>
-                <li>对口学校：白家庄小学望京校区</li>
-                <li>所在区域：朝阳 望京 四至五环 近15号线望京站</li>
+            <ul style="margin-top:40px">
+                <li>小区名称：<?= $house->property_company ?></li>
+                <li>所在区域：<?= $house->quxian_name ?> <?= $house->area_name ?></li>
+                <li>具体地址：<?= $house->address ?></li>
                 <li>看房时间：提前预约随时可看</li>
             </ul>
-            <div class="detail-agent hiden">
-                <img src="/static/web/images/agent.png" class="fl">
-                <p class="mt10"><b class="s18">王艺茹</b> <span class="c6">我和房主签的专属委托，获得房主信赖</span></p>
-                <strong class="orange s30">010-5792045</strong>
+            <div class="detail-agent hiden" style="margin-top:20px">
+                <img src="<?= $house->broker_img_url ?>" class="fl">
+                <p class="mt10"><b class="s18"><?= $house->broker_name ?></b> <span class="c6"></span></p>
+                <strong class="orange s30"><?= $house->broker_phone ?></strong>
             </div>
         </div>
         <div class="detail-info clear">
@@ -68,19 +67,19 @@ use app\components\Utils;
                 <dd>
                     <table>
                         <tr>
-                            <td>房屋户型：3室2厅1厨2卫</td>
-                            <td>所在楼层：高楼层 (共25层) 建筑面积142.93㎡</td>
-                            <td>户型结构：平层 套内面积115.03㎡</td>
+                            <td>房屋户型：<?= $house->jishi ?>室<?= $house->jitin ?>厅<?= $house->jiwei ?>卫</td>
+                            <td>所在楼层：<?= $house->in_floor ?>层 (共<?= $house->total_floor ?>层)</td>
+                            <td>建筑面积：<?= $house->build_area ?>㎡</td>
                         </tr>
                         <tr>
-                            <td>建筑类型：板塔结合</td>
-                            <td>房屋朝向：东南</td>
-                            <td>建筑结构：钢混结构</td>
+                            <td>装修情况：<?= $house->decoration_name ?></td>
+                            <td>房屋朝向：<?= $house->face ?></td>
+                            <td>建筑时间：<?php if (empty($house->house_age)) echo '未知'; else echo $house->house_age; ?></td>
                         </tr>
                         <tr>
-                            <td>装修情况：精装</td>
-                            <td>梯户比例：两梯八户</td>
-                            <td>供暖方式：集中供暖 配备电梯有</td>
+                            <td>产权类型：<?= $house->right_type_name ?></td>
+                            <td>房屋设置：<?= $house->house_facility ?></td>
+                            <td>楼层单元：<?= $house->floor_unit ?></td>
                         </tr>
                     </table>
                 </dd>
@@ -153,34 +152,26 @@ use app\components\Utils;
         </div>
         <div class="house-img hiden bd">
             <h2 class="detail-title2 mb15">房源照片</h2>
-            <img src="/static/web/photo/img-1.jpg">
-            <img src="/static/web/photo/img-2.jpg">
-            <img src="/static/web/photo/img-3.jpg">
-            <img src="/static/web/photo/img-4.jpg">
+            <?php if (!empty($house->img_1)) echo '<img src="' . $house->img_1 . '">' ?>
+            <?php if (!empty($house->img_2)) echo '<img src="' . $house->img_2 . '">' ?>
+            <?php if (!empty($house->img_3)) echo '<img src="' . $house->img_3 . '">' ?>
+            <?php if (!empty($house->img_4)) echo '<img src="' . $house->img_4 . '">' ?>
+            <?php if (!empty($house->img_5)) echo '<img src="' . $house->img_5 . '">' ?>
         </div>
         <div class="around bd">
             <h2 class="detail-title2">周边配套</h2>
-            <p class="around-nav"><a href="#a" class="around-nav-t">公交</a><a href="#b">地铁</a><a href="">教育设施</a><a
-                    href="">医院</a><a href="">银行</a><a href="">休闲娱乐</a><a href="">购物</a><a href="">餐饮</a><a
-                    href="">运动健身</a></p>
+            <p class="around-nav">
+                <a href="javascript:return false" class="around-nav-t">公交</a>
+                <a href="javascript:return false">地铁</a>
+                <a href="javascript:return false">教育</a>
+                <a href="javascript:return false">医院</a>
+                <a href="javascript:return false">银行</a>
+                <a href="javascript:return false">休闲娱乐</a>
+                <a href="javascript:return false">购物</a>
+                <a href="javascript:return false">餐饮</a>
+                <a href="javascript:return false">运动健身</a>
+            </p>
             <div class="around-box" id="a">
-                <!--地图-->
-                <div class="around-map"><img src="/static/web/photo/map.jpg"></div>
-                <div class="around-con">
-                    <h3 class="s18 n cf tc">公 交</h3>
-                    <ul class="s12">
-                        <li class="around-1">
-                            <h4 class="n blue">花园公交站</h4>
-                            <p>地址：北京市朝阳区东坝中路</p>
-                            <p>公交：<font class="blue">433路，533路，1路，2路，3路，4路，5路</font></p>
-                        </li>
-                        <li class="around-2">
-                            <h4 class="n blue">花园公交站</h4>
-                            <p>地址：北京市朝阳区东坝中路</p>
-                            <p>公交：<font class="blue">433路，533路，1路，2路，3路，4路，5路</font></p>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
         <div class="school">
@@ -356,5 +347,24 @@ use app\components\Utils;
     json_encode($pic_list);
     ?>
     var picList = eval(<?=json_encode($pic_list, JSON_UNESCAPED_UNICODE)?>);
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('.around-nav').find('a').click(function () {
+            $(this).addClass('around-nav-t');
+            $(this).siblings('a').removeClass('around-nav-t');
+            setMap($(this).html());
+        });
+        setMap('公交');
+        function setMap($name) {
+            var map = new BMap.Map("a");
+            map.centerAndZoom(new BMap.Point('116.64276', '39.938604'), 16);
+            var local = new BMap.LocalSearch(map, {
+                renderOptions: {map: map}
+            });
+            local.searchInBounds($name, map.getBounds());
+        }
+    })
+
 </script>
 <script src="/static/web/js/picture.js"></script>
