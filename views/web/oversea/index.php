@@ -51,12 +51,9 @@
     <div class="sea-ask">
         <h2 class="tc s24 n">海外房产答疑</h2>
         <ul class="con hiden mt30">
-            <li><a href="">问：富力公主湾在哪里？</a></li>
-            <li><a href="">问：富力公主湾与森林城市的区别？公主湾具有什么优势</a></li>
-            <li><a href="">问：购买房产后，是否能更方便进出新加坡？</a></li>
-            <li><a href="">问：购买房产后，是否能更方便进出新加坡？</a></li>
-            <li><a href="">问：购买房产后，是否能更方便进出新加坡？</a></li>
-            <li><a href="">问：购买房产后，是否能更方便进出新加坡购买房产后，是否能更</a></li>
+            <?php foreach ($information_list as $item): ?>
+            <li><a href="/web/information/detail/?id=<?=$item->id?>"><?=$item->title?></a></li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>

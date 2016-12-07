@@ -17,6 +17,8 @@ class ConfigConst
     const OVERSEA_CLASS_CONST = 10;
     const FINANCIAL_CLASS_CONST = 11;
 
+    const FINANCIAL_NEWS_CLASS = 53;
+
 
     const OVERSEA_ID = 1;
 }

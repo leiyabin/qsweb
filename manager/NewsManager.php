@@ -23,16 +23,16 @@ class NewsManager
 
     public function getNewsList($page_info, $class_id = 0, $title = '', $tag = 0)
     {
-        $list = $this->news_rpc->getList($page_info, $class_id, $title,$tag);
-        if (!empty($list)) {
+        $list = $this->news_rpc->getList($page_info, $class_id, $title, $tag);
+        if (!empty($list->news_list)) {
             foreach ($list->news_list as $key => $item) {
                 $list->news_list[$key]->img_url = Utils::getImgUrl($item->img);
                 $list->news_list[$key]->hot_img_url = Utils::getImgUrl($item->hot_img);
                 $list->news_list[$key]->recommend_img_url = Utils::getImgUrl($item->recommend_img);
             }
-
+            return $list;
         }
-        return $list;
+        return [];
     }
 
 
