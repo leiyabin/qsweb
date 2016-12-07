@@ -57,7 +57,7 @@ class LRpc
      * @param null|string $value
      * @return self
      */
-    public function post($data, $value = null)
+    public function post($data = [], $value = null)
     {
         if (is_array($data)) {
             foreach ($data as $key => $val) {
