@@ -79,7 +79,7 @@ use app\components\Utils;
                         </tr>
                         <tr>
                             <td>产权类型：<?= $house->right_type_name ?></td>
-                            <td>房屋设置：<?= $house->house_facility ?></td>
+                            <td>房屋设施：<?= $house->house_facility ?></td>
                             <td>楼层单元：<?= $house->floor_unit ?></td>
                         </tr>
                     </table>
@@ -91,21 +91,13 @@ use app\components\Utils;
                     <table>
                         <tr>
                             <td>挂牌时间：2016-10-04</td>
-                            <td>交易权属：商品房</td>
                             <td>上次交易：2003-12-15</td>
-                        </tr>
-                        <tr>
-                            <td>房屋用途：普通住宅</td>
                             <td>房本年限：满五年</td>
-                            <td>产权所属：非共有</td>
                         </tr>
                         <tr>
                             <td>是否唯一：唯一</td>
-                            <td>住宅小区：类型商品房</td>
                             <td>抵押信息：无抵押</td>
-                        </tr>
-                        <tr>
-                            <td>房本备件：已上传房本照片</td>
+                            <td>产权所属：非共有</td>
                         </tr>
                     </table>
                 </dd>
@@ -173,33 +165,6 @@ use app\components\Utils;
                 <a href="javascript:return false">运动健身</a>
             </p>
             <div class="around-box" id="a">
-            </div>
-        </div>
-        <div class="school">
-            <h2 class="detail-title2">对口学校</h2>
-            <h3 class="s18 n mt15">北京市朝阳区白家庄小学望京新城分校</h3>
-            <div class="detail-info clear">
-                <dl class="hiden">
-                    <dt class="c6">交易属性</dt>
-                    <dd>
-                        <table>
-                            <tr>
-                                <td>办学性质：公立学校</td>
-                                <td>名额规定：无限制</td>
-                            </tr>
-                            <tr>
-                                <td>学区均价：43138元/平米 - 71178元/平米</td>
-                                <td>学校地址：北京市朝阳区望京西园四区408号楼</td>
-                            </tr>
-                        </table>
-                    </dd>
-                </dl>
-                <dl class="hiden">
-                    <dt class="c6">直升</dt>
-                    <dd>
-                        <p>首都师范大学附属实验学校望京新城校区</p>
-                    </dd>
-                </dl>
             </div>
         </div>
         <div class="calculator bd pb30">
