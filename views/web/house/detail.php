@@ -50,8 +50,10 @@ use app\components\Utils;
                 </tr>
             </table>
             <ul style="margin-top:40px">
-                <li>小区名称：<?= $house->property_company ?></li>
-                <li>所在区域：<?= $house->quxian_name ?> <?= $house->area_name ?></li>
+                <li>
+                    小区名称：<?= $house->property_company ?> <?= Utils::getValue($house->house_attach, 'community_name'); ?></li>
+                <li>
+                    所在区域：<?= $house->quxian_name ?> <?= $house->area_name ?> </li>
                 <li>具体地址：<?= $house->address ?></li>
                 <li>看房时间：提前预约随时可看</li>
             </ul>
@@ -90,14 +92,20 @@ use app\components\Utils;
                 <dd>
                     <table>
                         <tr>
-                            <td>挂牌时间：2016-10-04</td>
-                            <td>上次交易：2003-12-15</td>
-                            <td>房本年限：满五年</td>
+                            <td>
+                                挂牌时间：<?php if (!empty($house->house_attach->sale_time)) echo Utils::formatDateTime($house->house_attach->sale_time, 'Y-m-d') ?></td>
+                            <td>
+                                上次交易：<?php if (!empty($house->house_attach->last_sale_time)) echo Utils::formatDateTime($house->house_attach->last_sale_time, 'Y-m-d') ?></td>
+                            <td>
+                                房本年限：<?php if (!empty($house->house_attach->deed_year_name)) echo $house->house_attach->deed_year_name; ?></td>
                         </tr>
                         <tr>
-                            <td>是否唯一：唯一</td>
-                            <td>抵押信息：无抵押</td>
-                            <td>产权所属：非共有</td>
+                            <td>
+                                是否唯一：<?php if (!empty($house->house_attach->deed_year_name)) echo '唯一'; else '不唯一'; ?></td>
+                            <td>
+                                抵押信息：<?php if (!empty($house->house_attach->mortgage_info)) echo $house->house_attach->mortgage_info; ?></td>
+                            <td>
+                                产权所属：<?php if (!empty($house->house_attach->right_info)) echo $house->house_attach->right_info; ?></td>
                         </tr>
                     </table>
                 </dd>
@@ -106,40 +114,41 @@ use app\components\Utils;
             <dl class="hiden">
                 <dt class="c6">房源标签</dt>
                 <dd>
-                    <p class="list-mark s12"><span class="orange">白家庄小学望京校区</span><span
-                            class="yellow">距离15号线望京站517米</span><span class="green">满五唯一</span><span
-                            class="blue">随时看房</span></p>
+                    <p class="list-mark s12">
+                        <?php foreach ($house->tag as $tag): ?>
+                            <span class="<?= $tag['color'] ?>"><?= $tag['name'] ?></span>
+                        <?php endforeach; ?>
+                    </p>
                 </dd>
             </dl>
             <dl class="hiden">
                 <dt class="c6">户型介绍</dt>
                 <dd>
-                    <p>此房位于望京新城410号楼，可直通地下车库，非常方便； 三室一厅一厨两卫户型，主卧带卫生间，整体东向，楼层比较高
-                        没有任何遮挡，可远眺望京SOHO,视野很棒；户型进身短，采光面宽阳光充足，格局方正 居住非常舒服，适合一家三代人居住。</p>
+                    <p><?php if (!empty($house->house_attach->door_model_introduction)) echo $house->house_attach->door_model_introduction; ?></p>
                 </dd>
             </dl>
             <dl class="hiden">
                 <dt class="c6">税费解析</dt>
                 <dd>
-                    <p>此房满五年唯一，税费少，首套只有1.5%的契税和差额5.6%的增值税，很适合高贷款的客户。</p>
+                    <p><?php if (!empty($house->house_attach->tax_explain)) echo $house->house_attach->tax_explain; ?></p>
                 </dd>
             </dl>
             <dl class="hiden">
                 <dt class="c6">小区介绍</dt>
                 <dd>
-                    <p>望京新城位于整个望京最核心的位置，2000年左右建成，是第一批商品房示范点，建筑质量非常高，社区配套成熟，生活便利！</p>
+                    <p><?php if (!empty($house->house_attach->community_introduction)) echo $house->house_attach->community_introduction; ?></p>
                 </dd>
             </dl>
             <dl class="hiden">
                 <dt class="c6">教育配套</dt>
                 <dd>
-                    <p>望京新城幼儿园（公立，每月费用1200左右）、白家庄小学（朝阳区重点）和首师大附属中学；</p>
+                    <p><?php if (!empty($house->house_attach->school_info)) echo $house->house_attach->school_info; ?></p>
                 </dd>
             </dl>
             <dl class="hiden">
                 <dt class="c6">交通出行</dt>
                 <dd>
-                    <p>小区北门过马路就是地铁望京站（14、15号线）和南门不远处就是阜通站，双地铁小区；</p>
+                    <p><?php if (!empty($house->house_attach->traffic_info)) echo $house->house_attach->traffic_info; ?></p>
                 </dd>
             </dl>
         </div>
@@ -168,16 +177,19 @@ use app\components\Utils;
             </div>
         </div>
         <div class="calculator bd pb30">
-            <h2 class="detail-title2"><a href="" class="orange">税费计算器</a><a href="">房贷计算器</a></h2>
-            <div class="calculator-con hiden">
-                <form class="fl">
+            <h2 class="detail-title2" id="calculator_tab">
+                <a href="javascript:void(0);" class="orange" id="tax">税费计算器</a>
+                <a href="javascript:void(0);" id="loan">房贷计算器</a>
+            </h2>
+            <div class="calculator-con hiden" >
+                <form class="fl" id="tax_form">
                     <div>
                         <span class="c6 cal-label">住宅类型：</span>
                         <div class="select_box">
                             <span>普通住宅</span>
                             <ul>
                                 <li>普通住宅</li>
-                                <li>商业住宅</li>
+                                <li>非普通住宅</li>
                             </ul>
                         </div>
                     </div>
@@ -198,6 +210,7 @@ use app\components\Utils;
                             <ul>
                                 <li>满五年</li>
                                 <li>满两年</li>
+                                <li>不满两年</li>
                             </ul>
                         </div>
                     </div>
@@ -207,7 +220,7 @@ use app\components\Utils;
                             <span>首套</span>
                             <ul>
                                 <li>首套</li>
-                                <li>第二套</li>
+                                <li>二套</li>
                             </ul>
                         </div>
                     </div>
@@ -217,36 +230,131 @@ use app\components\Utils;
                             <span>总价</span>
                             <ul>
                                 <li>总价</li>
-                                <li>每月</li>
+                                <li>差价</li>
                             </ul>
                         </div>
                     </div>
                     <div>
                         <span class="c6 cal-label">房屋面积：</span>
-                        <div class="cal-text"><input type="text" placeholder="请输入房屋面积">平方米</div>
+                        <div class="cal-text"><input type="number" value="<?= $house->build_area ?>"
+                                                     placeholder="请输入房屋面积">平方米
+                        </div>
                     </div>
                     <div>
                         <span class="c6 cal-label">房屋总价：</span>
-                        <div class="cal-text"><input type="text" placeholder="请输入房屋价格">万元</div>
+                        <div class="cal-text"><input type="number" value="<?= $house->total_price ?>"
+                                                     placeholder="请输入房屋价格">万元
+                        </div>
                     </div>
                     <input type="button" value="开始计算" class="calculator-btn s16 cf">
                 </form>
-                <div class="calculator-result fr">
+                <form class="fl" id="loan_form" style="display: none;margin-bottom: 30px;">
+                    <div>
+                        <span class="c6 cal-label">贷款类型：</span>
+                        <div class="select_box">
+                            <span>商贷</span>
+                            <ul>
+                                <li>商贷</li>
+                                <li>公积金</li>
+                                <li>组合贷款</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label">贷款金额：</span>
+                        <div class="select_box" id="loan_select">
+                            <span>2成</span>
+                            <ul>
+                                <li tag ='2'>2成</li>
+                                <li tag ='3'>3成</li>
+                                <li tag ='4'>4成</li>
+                                <li tag ='5'>5成</li>
+                                <li tag ='6'>6成</li>
+                                <li tag ='7'>7成</li>
+                                <li tag ='8'>8成</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label"></span>
+                        <div class="cal-text">
+                            <input type="number" id= 'loan_money' value="<?=0.2*$house->total_price?>">万元
+                        </div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label">贷款期限：</span>
+                        <div class="select_box">
+                            <span>30年</span>
+                            <ul>
+                                <li>30年</li>
+                                <li>25年</li>
+                                <li>20年</li>
+                                <li>15年</li>
+                                <li>10年</li>
+                                <li>5年</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label">商贷年利率：</span>
+                        <div class="select_box">
+                            <span>1.05倍</span>
+                            <ul>
+                                <li>1.05倍</li>
+                                <li>1.1倍</li>
+                                <li>1.2倍</li>
+                                <li>1.3倍</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label"></span>
+                        <div class="cal-text"><input type="number" value="">%
+                        </div>
+                    </div>
+                    <input type="button" value="开始计算" class="calculator-btn s16 cf">
+                </form>
+                <div class="calculator-result fr" id="tax_result">
                     <p class="s18">合计：<strong class="s24">259500</strong> 元</p>
                     <p class="s16">契&nbsp;&nbsp;&nbsp;税： 259500 元</p>
                     <p class="s16">营业税： 免征</p>
                     <p class="s16">个&nbsp;&nbsp;&nbsp;税： 免征</p>
+                    <br/>
+                    <p class="s16" style="color: grey;font-size: small">税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
+                </div>
+                <div class="calculator-result fr" id="loan_result" style="display: none">
+                    <p  class="s18">等额本息还款</p>
+                    <p  class="s16">月&nbsp;&nbsp;&nbsp;供： 259500 元</p>
+                    <p  class="s16">还款月数： 300月</p>
+                    <p  class="s16">总利息： 2434元</p>
+                    <p  class="s16">本息合计： 123345677元</p>
+                    <br/>
+                    <br/>
+                    <p class="s16" style="color: grey;font-size: small">税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
                 </div>
             </div>
         </div>
         <div class="house-area hiden bd pb30">
-            <h2 class="detail-title2">望京新城简介</h2>
+            <h2 class="detail-title2"><?php if (!empty($house->house_attach->community_name)) echo $house->house_attach->community_name; ?>
+                简介</h2>
             <ul class="fl">
-                <li>小区均价：57618 元/m²</li>
-                <li>建筑年代：1997年</li>
-                <li>建筑类型：塔楼/板楼/塔板结合</li>
-                <li>楼栋总数：25栋</li>
-                <li>户型总数：82个</li>
+                <li>
+                    小区均价：<?php if (!empty($house->house_attach->community_average_price)) echo $house->house_attach->community_average_price; ?>
+                    元/m²
+                </li>
+                <li>建筑年代：<?php if (!empty($house->house_attach->build_year)) echo $house->house_attach->build_year; ?>
+                    年
+                </li>
+                <li>
+                    建筑类型：<?php if (!empty($house->house_attach->build_type_name)) echo $house->house_attach->build_type_name; ?></li>
+                <li>
+                    楼栋总数：<?php if (!empty($house->house_attach->total_building)) echo $house->house_attach->total_building; ?>
+                    栋
+                </li>
+                <li>
+                    户型总数：<?php if (!empty($house->house_attach->total_door_model)) echo $house->house_attach->total_door_model; ?>
+                    个
+                </li>
             </ul>
             <img src="/static/web/photo/img-2.jpg" class="fl">
         </div>
@@ -254,9 +362,13 @@ use app\components\Utils;
         <ul class="resource-list hiden">
             <?php foreach ($recommend_list as $item): ?>
                 <li>
-                    <a href="/web/house/detail/?id=<?=$item->id?>" title=""><img src="<?=$item->house_img?>"></a>
-                    <p class="s18"><b class="fl"><a href="/web/house/detail/?id=<?=$item->id?>"><?=Utils::subStr($item->address,11)?></a></b><span class="orange fr"><?=$item->total_price?>万</span></p>
-                    <p class="c6"><span class="fl"><?=$item->jishi?>室<?=$item->jitin?>厅<?=$item->jiwei?>卫 <?=$item->build_area?> m²</span><span class="fr"><?=round($item->unit_price/10000,1)?>万/平</span></p>
+                    <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= $item->house_img ?>"></a>
+                    <p class="s18"><b class="fl"><a
+                                href="/web/house/detail/?id=<?= $item->id ?>"><?= Utils::subStr($item->address, 11) ?></a></b><span
+                            class="orange fr"><?= $item->total_price ?>万</span></p>
+                    <p class="c6"><span class="fl"><?= $item->jishi ?>室<?= $item->jitin ?>厅<?= $item->jiwei ?>
+                            卫 <?= $item->build_area ?> m²</span><span
+                            class="fr"><?= round($item->unit_price / 10000, 1) ?>万/平</span></p>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -311,12 +423,27 @@ use app\components\Utils;
         setMap('公交');
         function setMap($name) {
             var map = new BMap.Map("a");
-            map.centerAndZoom(new BMap.Point('116.64276', '39.938604'), 16);
+            map.centerAndZoom(new BMap.Point('<?= $house->lon?>', '<?=$house->lat ?>'), 16);
             var local = new BMap.LocalSearch(map, {
                 renderOptions: {map: map}
             });
             local.searchInBounds($name, map.getBounds());
         }
+
+        $('#calculator_tab').find('a').click(function () {
+            $(this).addClass('orange');
+            $(this).siblings('a').removeClass('orange');
+            var form_id =  $(this).attr('id')+'_form';
+            var res_id = $(this).attr('id')+'_result';
+            $form = $('#' + form_id);
+            $result = $('#' + res_id);
+            $form.show();$result.show();
+            $form.siblings('form').hide();
+            $result.siblings('div').hide();
+        })
+        $('#loan_select').find('li').click(function () {
+            $('#loan_money').val(parseInt($(this).attr('tag'))*<?=$house->total_price?>/10)
+        })
     })
 
 </script>

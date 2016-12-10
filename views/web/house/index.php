@@ -94,6 +94,11 @@ use app\components\Utils;
                             <?php if (!empty($item->house_facility)) echo '<span class="orange"><?=$item->house_facility?></span>'; ?>
                             <?php if (!empty($item->house_description)) echo '<span class="yellow"><?=$item->house_description?></span>'; ?>
                         </p>
+                        <p class="list-mark s12">
+                            <?php foreach ($item->tag as $tag): ?>
+                                <span class="<?= $tag['color'] ?>"><?= $tag['name'] ?></span>
+                            <?php endforeach; ?>
+                        </p>
                     </div>
                     <div class="list-price fr">
                         <span class="orange"><b><?= $item->total_price ?></b>万</span>

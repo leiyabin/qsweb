@@ -43,10 +43,15 @@ class LoupanManager
 
     private function getTag($tags)
     {
+        if(empty($tags)){
+            return [];
+        }
         $tag_keys = explode(',', $tags);
         $tag_vals = [];
-        foreach ($tag_keys as $val) {
-            $tag_vals[] = HouseConst::$feature[$val];
+        if(!empty($tag_keys)&& is_array($tag_keys)){
+            foreach ($tag_keys as $val) {
+                $tag_vals[] = HouseConst::$feature[$val];
+            }
         }
         return $tag_vals;
     }

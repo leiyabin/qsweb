@@ -9,6 +9,7 @@
 namespace app\manager;
 
 use app\components\Utils;
+use app\consts\HouseConst;
 use app\rpc\HouseRpc;
 
 
@@ -27,6 +28,9 @@ class HouseManager
         $list = $this->house_rpc->getList($page_info, $area_id, $price_interval, $build_area,
             $property_type_id, $recommend, $order_by);
         if (isset($list->house_list)) {
+            foreach ($list->house_list as $key => $value) {
+                $list->house_list[$key]->tag = $this->getTag($value->tag);
+            }
             return $list;
         }
         return [];
@@ -36,6 +40,12 @@ class HouseManager
     {
         $res = $this->house_rpc->get($id);
         if (!empty($res->id)) {
+            if (!empty($res->house_attach)) {
+                $res->house_attach->deed_year_name = HouseConst::$deed_year[$res->house_attach->deed_year];
+                $res->house_attach->build_type_name = HouseConst::$build_type[$res->house_attach->build_type];
+
+            }
+            $res->tag = $this->getTag($res->tag);
             $res->broker_img_url = Utils::getImgUrl($res->broker_img, '/static/web/images/broker.png');
             return $res;
         }
@@ -49,5 +59,20 @@ class HouseManager
             return [];
         }
         return $list;
+    }
+
+    private function getTag($tags)
+    {
+        if(empty($tags)){
+            return [];
+        }
+        $tag_keys = explode(',', $tags);
+        $tag_vals = [];
+        if(!empty($tag_keys)&& is_array($tag_keys)){
+            foreach ($tag_keys as $val) {
+                $tag_vals[] = HouseConst::$feature[$val];
+            }
+        }
+        return $tag_vals;
     }
 }
