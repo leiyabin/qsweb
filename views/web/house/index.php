@@ -3,7 +3,8 @@ use app\consts\HouseConst;
 use app\components\Utils;
 ?>
 <div class="bg1 inner-search">
-    <input type="text" placeholder="请输入楼盘名称" class="search-text"><input type="button" value="开始找房" class="search-btn">
+    <input type="text" placeholder="请输入房屋地址" value="<?= $address ?>" name="search-text" class="search-text">
+    <input type="button" value="开始找房" class="search-btn">
 </div>
 <div class="con filter">
     <form id="filter_form">
@@ -12,6 +13,9 @@ use app\components\Utils;
         <input type="hidden" name="price_interval" value="<?= implode(',', $price_interval) ?>">
         <input type="hidden" name="area_interval" value="<?= implode(',', $area_interval) ?>">
         <input type="hidden" name="order_by" value="<?= $order_by ?>">
+        <input type="hidden" name="address" value="<?= $address ?>">
+        <input type="hidden" name="rs" value="<?= $rs ?>">
+        <input type="hidden" name="property_type_id" value="<?= $property_type_id ?>">
     </form>
     <div class="filter-1">
         <b class="fl">区域：</b>
@@ -156,7 +160,10 @@ use app\components\Utils;
             getList();
         });
         function getParams() {
-            return filter_form.serialize();
+            $address = $('input[name=search-text]').val().trim();
+            filter_form.find('input[name=address]').val($address);
+            $params = filter_form.serialize() ;
+            return $params;
         }
 
         $('.area').find('a').click(function () {
@@ -167,7 +174,6 @@ use app\components\Utils;
         $('.sale_price').click(function () {
             var price_interval_checkbox = $(this).find('input:checkbox[name=price_interval]:checked');
             var tag = getCheckBoxStr(price_interval_checkbox);
-            console.log(tag);
             filter_form.find('input[name=price_interval]').val(tag);
             getList();
         });
@@ -181,6 +187,9 @@ use app\components\Utils;
             $params = getParams();
             location.href = '/web/house/?' + $params;
         }
+        $('.search-btn').click(function () {
+            getList();
+        });
         var prev_href = $('.page-prev').attr('href');
         $('.page-prev').attr('href', prev_href + '&' + getParams());
         var next_href = $('.page-next').attr('href');

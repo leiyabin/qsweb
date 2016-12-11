@@ -23,10 +23,10 @@ class HouseManager
     }
 
     public function getList($page_info, $area_id = 0, $price_interval = [], $build_area = [],
-                            $property_type_id = 0, $recommend = 0, $order_by)
+                            $property_type_id = 0, $recommend = 0, $order_by = 'c_t', $rs= '', $address= '')
     {
         $list = $this->house_rpc->getList($page_info, $area_id, $price_interval, $build_area,
-            $property_type_id, $recommend, $order_by);
+            $property_type_id, $recommend, $order_by , $rs, $address);
         if (isset($list->house_list)) {
             foreach ($list->house_list as $key => $value) {
                 $list->house_list[$key]->tag = $this->getTag($value->tag);
@@ -63,12 +63,12 @@ class HouseManager
 
     private function getTag($tags)
     {
-        if(empty($tags)){
+        if (empty($tags)) {
             return [];
         }
         $tag_keys = explode(',', $tags);
         $tag_vals = [];
-        if(!empty($tag_keys)&& is_array($tag_keys)){
+        if (!empty($tag_keys) && is_array($tag_keys)) {
             foreach ($tag_keys as $val) {
                 $tag_vals[] = HouseConst::$feature[$val];
             }

@@ -54,6 +54,9 @@ class HouseController extends LController
         $price_interval = $this->getRequestParam('price_interval', '');
         $area_interval = $this->getRequestParam('area_interval', '');
         $order_by = $this->getRequestParam('order_by', '');
+        $property_type_id = $this->getRequestParam('property_type_id', '');
+        $address = $this->getRequestParam('address', '');
+        $rs = $this->getRequestParam('rs', '');
         //end get params
         $quxian_list = $this->getQuxian();
         //get recommend_list
@@ -67,7 +70,9 @@ class HouseController extends LController
         $pages = [];
         $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
         $page_info = ['page' => $page, 'pre_page' => $this->page_size];
-        $house_list = $this->house_manager->getList($page_info, $area_id, $price_interval, $area_interval, 0, 0, $order_by);
+        $house_list = $this->house_manager->getList(
+            $page_info, $area_id, $price_interval, $area_interval,
+            $property_type_id, 0, $order_by, $rs, $address);
         if (!empty($house_list->house_list)) {
             $total = $house_list->total;
             $pages = $this->getPage($page, $house_list->total_pages);
@@ -76,17 +81,20 @@ class HouseController extends LController
             $house_list = [];
         }
         $data = [
-            'total'          => $total,
-            'pages'          => $pages,
-            'order_by'       => $order_by,
-            'house_list'     => $house_list,
-            'quxian_list'    => $quxian_list,
-            'quxian_id'      => $quxian_id,
-            'area_list'      => $area_list,
-            'area_id'        => $area_id,
-            'price_interval' => $price_interval,
-            'recommend_list' => $recommend_list,
-            'area_interval'  => $area_interval,
+            'total'            => $total,
+            'pages'            => $pages,
+            'property_type_id' => $property_type_id,
+            'order_by'         => $order_by,
+            'rs'               => $rs,
+            'address'          => $address,
+            'house_list'       => $house_list,
+            'quxian_list'      => $quxian_list,
+            'quxian_id'        => $quxian_id,
+            'area_list'        => $area_list,
+            'area_id'          => $area_id,
+            'price_interval'   => $price_interval,
+            'recommend_list'   => $recommend_list,
+            'area_interval'    => $area_interval,
         ];
         $this->getView()->title = '千氏地产-二手房';
         return $this->render('index', $data);
@@ -107,7 +115,7 @@ class HouseController extends LController
         $this->getView()->title = '千氏地产-二手房';
         $data = [
             'recommend_list' => $recommend_list,
-            'house'         => $house
+            'house'          => $house
         ];
         return $this->render('detail', $data);
     }

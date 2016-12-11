@@ -4,7 +4,7 @@ use app\components\Utils;
 
 ?>
 <div class="bg1 inner-search">
-    <input type="text" placeholder="请输入楼盘名" name="loupan_name" class="search-text" value="<?= $loupan_name ?>">
+    <input type="text" placeholder="请输入楼盘名称" name="loupan_name" class="search-text" value="<?= $loupan_name ?>">
     <input type="button" value="开始找房" class="search-btn">
 </div>
 <div class="con filter">

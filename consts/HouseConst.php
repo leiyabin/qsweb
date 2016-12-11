@@ -73,7 +73,7 @@ class HouseConst
         self::FEATURE_1_CODE => ['name' => '精装修', 'color' => 'orange'],
         self::FEATURE_2_CODE => ['name' => '离地铁近', 'color' => 'green'],
         self::FEATURE_3_CODE => ['name' => '车位充足', 'color' => 'blue'],
-        self::FEATURE_4_CODE => ['name' => '老城区房', 'color' => 'yellow']
+        self::FEATURE_4_CODE => ['name' => '学区房', 'color' => 'yellow']
     ];
     //售价区间
     const PRICE_INTERVAL_1 = 1;

@@ -19,7 +19,7 @@ class HouseRpc extends LRpc
     }
 
     public function getList($page_info, $area_id = 0, $price_interval = 0, $build_area = [],
-                            $property_type_id = 0, $recommend = 0, $order_by)
+                            $property_type_id = 0, $recommend = 0, $order_by = 'c_t', $rs = '', $address = '')
     {
         $params = [
             'page'             => intval($page_info['page']),
@@ -29,7 +29,9 @@ class HouseRpc extends LRpc
             'build_area'       => $build_area,
             'property_type_id' => $property_type_id,
             'recommend'        => $recommend,
-            'order_by'         => $order_by
+            'order_by'         => $order_by,
+            'rs'               => $rs,
+            'address'          => $address
         ];
         return LRpc::init()->post($params)->url('/house/list');
     }
@@ -37,7 +39,7 @@ class HouseRpc extends LRpc
     public function getRecommend($size)
     {
         $params = [
-            'size'      => $size,
+            'size' => $size,
         ];
         return LRpc::init()->post($params)->url('/house/getrecommend');
     }
