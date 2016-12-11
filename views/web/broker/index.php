@@ -2,16 +2,37 @@
     <input type="text" placeholder="请输入经纪人姓名" value="<?= $name ?>" class="search-text">
     <input type="button" value="搜索" class="search-btn">
 </div>
+<div class="con filter">
+    <div class="filter-1 bb">
+        <b class="fl">筛选：</b>
+        <div class="fl filter-radio">
+            
+            <span><input type="checkbox" id ="radio_11" name="radio_1"><label for="radio_11"></label><em>房东信赖</em></span>
+            <span><input type="checkbox" id ="radio_12" name="radio_1"><label for="radio_12"></label><em>客户热评</em></span>
+            <span><input type="checkbox" id ="radio_13" name="radio_1"><label for="radio_13"></label><em>销售达人</em></span>
+            <span><input type="checkbox" id ="radio_14" name="radio_1"><label for="radio_14"></label><em>带看活跃</em></span>
+            <span><input type="checkbox" id ="radio_15" name="radio_1"><label for="radio_15"></label><em>法律顾问</em></span>
+            <span><input type="checkbox" id ="radio_16" name="radio_1"><label for="radio_16"></label><em>海外顾问</em></span>
+        </div>
+    </div>
+</div>
 <div class="bg1">
     <div class="con">
         <h2 class="list-title s18 n">共有 <font class="orange"><?= $total ?></font> 名经纪人</h2>
         <ul class="agent">
             <?php foreach ($broker_list as $item): ?>
-                <li>
+                <li style="height: 140px;">
                     <div class="agent-img fl">
                         <img src="<?= $item->img_url ?>" class="fl">
                         <h3 class="s18 mt15"><?= $item->name; ?></h3>
                         <p class="mt20">职位：<?= $item->position_name; ?></p>
+                        <p class="list-mark s12"  style="margin-top: 18px; width: 800px;">
+                            <?php foreach ($item->tag as $tag): ?>
+                                <span class="<?= $tag['color'] ?>"
+                                      style="border-radius:0px;padding: 0 10px;line-height:24px;">
+                                    <?= $tag['name'] ?></span>
+                            <?php endforeach; ?>
+                        </p>
                     </div>
                     <div class="agent-good fl tr">
                         <strong class="orange s30 mt10 db"><?= $item->code; ?>%</strong>

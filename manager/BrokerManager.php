@@ -10,6 +10,7 @@ namespace app\manager;
 
 use app\components\Utils;
 use app\rpc\BrokerRpc;
+use app\consts\HouseConst;
 
 class BrokerManager
 {
@@ -25,6 +26,7 @@ class BrokerManager
         $list = $this->broker_rpc->getList($page_info, $position_id, $name);
         if(isset($list->broker_list)){
             foreach ($list->broker_list as $key => $broker) {
+                $list->broker_list[$key]->tag = $this->getTag($broker->tag);
                 $list->broker_list[$key]->img_url = Utils::getImgUrl($broker->img, '/static/web/images/default_man.jpg');
             }
         }
@@ -44,5 +46,20 @@ class BrokerManager
     public function batchDel($ids)
     {
         return $this->broker_rpc->batchDel($ids);
+    }
+
+    private function getTag($tags)
+    {
+        if (empty($tags)) {
+            return [];
+        }
+        $tag_keys = explode(',', $tags);
+        $tag_vals = [];
+        if (!empty($tag_keys) && is_array($tag_keys)) {
+            foreach ($tag_keys as $val) {
+                $tag_vals[] = HouseConst::$broker_type[$val];
+            }
+        }
+        return $tag_vals;
     }
 }
