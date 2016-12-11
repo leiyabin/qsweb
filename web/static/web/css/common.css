@@ -84,7 +84,7 @@ body .orange{ color:#f75b1d;}
 .search-btn:hover{ background-image:url(../images/search-btn2.png);}
 .index-search-con{ display:none;}
 .head{ height:119px; background:#fff; border-bottom:1px solid #e8e8e8;}
-.head .con > a{ float:left; width:169px; height:99px; padding:20px 40px 0 190px; border-left:1px solid #efefef; text-decoration:none;} 
+.head .con > a{ float:left; width:169px; height:99px; padding:20px 40px 0 190px; border-left:1px solid #efefef; text-decoration:none;}
 .head .con > a:first-child{ border:none;}
 .head-1{ background:url(../images/index-top-1.png) 35px center no-repeat;}
 .head-2{ background:url(../images/index-top-2.png) 35px center no-repeat;}
@@ -170,7 +170,7 @@ body .orange{ color:#f75b1d;}
 .list-info h3{ padding:5px 0 10px;}
 .list-info p{ margin-top:15px;}
 .list-info .list-mark{ margin-top:20px;}
-.list-mark span{ display:inline-block; line-height:32px; padding:0 15px; border-radius:20px; margin:0 10px 10px 0;} 
+.list-mark span{ display:inline-block; line-height:32px; padding:0 15px; border-radius:20px; margin:0 10px 10px 0;}
 .list-mark .orange{ border:1px solid #f78557;}
 .list-mark .yellow{ border:1px solid #dcbd53; color:#dcbd53;}
 .list-mark .green{ border:1px solid #85c97d; color:#85c97d;}
@@ -191,7 +191,9 @@ body .orange{ color:#f75b1d;}
 .detail-title2{ border-bottom:1px solid #ddd; padding:40px 0 10px 0; font-size:18px;}
 .location{ padding-bottom:10px;}
 .detail-img{ width:600px; margin:0 30px 0 0;}
-.detail-photo{ width:600px; height:370px; margin-bottom:10px;}
+.detail-photo{ width:600px; height:370px; margin-bottom:10px; position:relative;}
+.detail-photo .prev{ position:absolute; width:40px; height:60px; background:url(../images/icon-focusimg-btn.png)  -44px -63px no-repeat; z-index:500; top:150px; left:0px; opacity:0; filter:alpha(opacity=0); cursor:pointer; }
+.detail-photo .next{ position:absolute; width:40px; height:60px; background:url(../images/icon-focusimg-btn.png) -74px -63px no-repeat; z-index:500; top:150px; right:0px; opacity:0; filter:alpha(opacity=0);cursor:pointer;}
 .detail-photo img{ width:600px; height:370px; display:block;}
 .detail-nav{ width:600px; height:80px; overflow:hidden;}
 .detail-nav .photo-left,.detail-nav .photo-right{ float:left; width:25px; height:80px; line-height:80px; background:#aaa; text-decoration:none; color:#fff; text-align:center; font-family:Verdana;}
@@ -251,7 +253,7 @@ body .orange{ color:#f75b1d;}
 .calculator-result p:first-child{ border-bottom:1px dashed #ddd; margin-bottom:10px;}
 .calculator-result2{ width:450px; border:1px solid #f78557; margin:20px 80px 0 0; padding-bottom:10px;}
 .calculator-result2 h3{ line-height:54px; background:#f78557;}
-.calculator-result2 h3 span{ display:inline-block; width:90px; padding:0 30px;}	
+.calculator-result2 h3 span{ display:inline-block; width:90px; padding:0 30px;}
 .calculator-result2 table{ width:440px; margin:0 auto;}
 .calculator-result2 td{ border-top:1px dotted #ddd; height:50px; padding:0 30px;}
 .calculator-result2 tr:first-child td{ border:none;}
@@ -313,7 +315,7 @@ body .orange{ color:#f75b1d;}
 .sea-case li img{ width:400px; height:230px;}
 .sea-case li p{ width:400px; height:40px; line-height:40px; overflow:hidden;}
 body .sea-more{ display:block; margin:30px auto 0; width:300px; line-height:44px; border:1px solid #333; font-size:18px; text-align:center; text-decoration:none; color:#333;}
-body .sea-more:hover{ color:#f75b1d; border-color:#f75b1d;} 
+body .sea-more:hover{ color:#f75b1d; border-color:#f75b1d;}
 .sea-ask{ padding:50px 0 210px; background:url(../images/sea-foot.jpg) center bottom no-repeat;}
 .sea-ask li{ float:left; width:33%; font-weight:bolder; height:30px; line-height:30px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#f75b1d;}
 .sea-ask a{ color:#f75b1d;}
@@ -331,7 +333,7 @@ body .sea-more:hover{ color:#f75b1d; border-color:#f75b1d;}
 .slide_nav{ display:none;}
 .slide_tabs{ position:absolute; z-index:3; bottom:0; right:40px; height:30px; text-align:center;}
 .slide_tabs li{ display:inline-block; width:10px; height:10px; margin-left:10px; border-radius:50%; background:#ddd;}
-.slide_tabs .slide_here{ background:#fff;} 
+.slide_tabs .slide_here{ background:#fff;}
 .slide_tabs li a{ display:block; text-indent:-9999px;}
 .hot-news{ width:455px; height:163px; position:relative; overflow:hidden;}
 .hot-news .hover-img{ width:455px; height:163px; position:absolute; z-index:1;}

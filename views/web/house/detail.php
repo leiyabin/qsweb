@@ -10,6 +10,8 @@ use app\components\Utils;
             <?= $house->jitin ?>厅 <?= $house->total_price ?>万</h2>
         <div class="fl detail-img">
             <div class="detail-photo">
+                <div class="prev" style="opacity:1"></div>
+                <div class="next" style="opacity:1"></div>
                 <img id="photo-box" src=" <?= Utils::getValue($house, 'img_1', ''); ?>">
             </div>
 
@@ -181,7 +183,7 @@ use app\components\Utils;
                 <a href="javascript:void(0);" class="orange" id="tax">税费计算器</a>
                 <a href="javascript:void(0);" id="loan">房贷计算器</a>
             </h2>
-            <div class="calculator-con hiden" >
+            <div class="calculator-con hiden">
                 <form class="fl" id="tax_form">
                     <div>
                         <span class="c6 cal-label">住宅类型：</span>
@@ -265,20 +267,20 @@ use app\components\Utils;
                         <div class="select_box" id="loan_select">
                             <span>2成</span>
                             <ul>
-                                <li tag ='2'>2成</li>
-                                <li tag ='3'>3成</li>
-                                <li tag ='4'>4成</li>
-                                <li tag ='5'>5成</li>
-                                <li tag ='6'>6成</li>
-                                <li tag ='7'>7成</li>
-                                <li tag ='8'>8成</li>
+                                <li tag='2'>2成</li>
+                                <li tag='3'>3成</li>
+                                <li tag='4'>4成</li>
+                                <li tag='5'>5成</li>
+                                <li tag='6'>6成</li>
+                                <li tag='7'>7成</li>
+                                <li tag='8'>8成</li>
                             </ul>
                         </div>
                     </div>
                     <div>
                         <span class="c6 cal-label"></span>
                         <div class="cal-text">
-                            <input type="number" id= 'loan_money' value="<?=0.2*$house->total_price?>">万元
+                            <input type="number" id='loan_money' value="<?= 0.2 * $house->total_price ?>">万元
                         </div>
                     </div>
                     <div>
@@ -323,11 +325,11 @@ use app\components\Utils;
                     <p class="s16" style="color: grey;font-size: small">税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
                 </div>
                 <div class="calculator-result fr" id="loan_result" style="display: none">
-                    <p  class="s18">等额本息还款</p>
-                    <p  class="s16">月&nbsp;&nbsp;&nbsp;供： 259500 元</p>
-                    <p  class="s16">还款月数： 300月</p>
-                    <p  class="s16">总利息： 2434元</p>
-                    <p  class="s16">本息合计： 123345677元</p>
+                    <p class="s18">等额本息还款</p>
+                    <p class="s16">月&nbsp;&nbsp;&nbsp;供： 259500 元</p>
+                    <p class="s16">还款月数： 300月</p>
+                    <p class="s16">总利息： 2434元</p>
+                    <p class="s16">本息合计： 123345677元</p>
                     <br/>
                     <br/>
                     <p class="s16" style="color: grey;font-size: small">税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
@@ -433,17 +435,40 @@ use app\components\Utils;
         $('#calculator_tab').find('a').click(function () {
             $(this).addClass('orange');
             $(this).siblings('a').removeClass('orange');
-            var form_id =  $(this).attr('id')+'_form';
-            var res_id = $(this).attr('id')+'_result';
+            var form_id = $(this).attr('id') + '_form';
+            var res_id = $(this).attr('id') + '_result';
             $form = $('#' + form_id);
             $result = $('#' + res_id);
-            $form.show();$result.show();
+            $form.show();
+            $result.show();
             $form.siblings('form').hide();
             $result.siblings('div').hide();
         })
         $('#loan_select').find('li').click(function () {
-            $('#loan_money').val(parseInt($(this).attr('tag'))*<?=$house->total_price?>/10)
+            $('#loan_money').val(parseInt($(this).attr('tag')) *<?=$house->total_price?>/ 10)
         })
+        $show_img = $('#photo-box');
+        $imgs = $('.photo-nav').find('img');
+        var img_count = $imgs.length;
+        $('.next').click(function () {
+            $imgs.each(function (index) {
+                if ($(this).attr('src').trim() == $show_img.attr('src').trim() && index <= img_count-1){
+                    var url = $($imgs[index+1]).attr('src');
+                    $show_img.attr('src',url);
+                    return false;
+                }
+            })
+        });
+        $('.prev').click(function () {
+            $imgs.each(function (index) {
+                if ($(this).attr('src').trim() == $show_img.attr('src').trim() && index >= 1){
+                    var url = $($imgs[index-1]).attr('src');
+                    $show_img.attr('src',url);
+                    return false;
+                }
+            })
+        })
+
     })
 
 </script>
