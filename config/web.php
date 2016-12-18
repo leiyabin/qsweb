@@ -48,7 +48,6 @@ $config = [
             'useFileTransport' => true,
         ],
         'log'           => require(__DIR__ . '/log.php'),
-        'db'            => require(__DIR__ . '/db.php'),
         'lsession'      => require(__DIR__ . '/lsession.php'),
         'session'       => [
             'class'        => 'yii\web\DbSession',
