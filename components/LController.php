@@ -36,57 +36,6 @@ class LController extends Controller
 
     public $enableCsrfValidation = false;
 
-    /**
-     * ajax错误信息
-     *
-     * @param $error_msg
-     * @param mixed $data
-     * @param $redirect
-     * @return mixed
-     */
-    public function error($error_msg = '', $data = [], $redirect = '')
-    {
-        $this->error_msg .= $error_msg;
-        $this->response_status = 0;
-        return $this->output($this->error_msg, $data, $redirect);
-    }
-
-    /**
-     * ajax成功信息
-     *
-     * @param mixed $msg
-     * @param mixed $data
-     * @param mixed $redirect
-     * @return mixed
-     */
-    public function success($data = [], $msg = '操作成功！', $redirect = '')
-    {
-        $this->response_status = 1;
-        return $this->output($msg, $data, $redirect);
-    }
-
-    public function output($msg = '', $data = [], $redirect = '')
-    {
-        header("Content-type:application/json;charset=utf-8");
-        $res = ['status' => $this->response_status];
-        if (!empty($msg)) {
-            $res['msg'] = $msg;
-        }
-        if (!empty($data)) {
-            $res['data'] = $data;
-        }
-        if (!empty($redirect)) {
-            $res['redirect'] = $redirect;
-        }
-        $res_json = json_encode($res, JSON_UNESCAPED_UNICODE);
-        $response = sprintf('【RESPONSE】 method: %s url: %s ; params: %s ; result: %s ',
-            Yii::$app->request->getMethod(), Yii::$app->request->getUrl(),
-            json_encode($this->params, JSON_UNESCAPED_UNICODE), $res_json);
-        Yii::info($response, LogConst::RESPONSE);
-        $res_json = htmlspecialchars_decode($res_json, ENT_QUOTES);
-        return $res_json;
-    }
-
     protected function getPage($current, $total_pages)
     {
         if ($total_pages <= 1) {
