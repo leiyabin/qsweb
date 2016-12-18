@@ -67,6 +67,7 @@ class LController extends Controller
 
     public function beforeAction($action)
     {
+        register_shutdown_function(array('app\components\LTask', 'run'));
         $request = sprintf('【REQUEST】 method: %s url: %s ; params: %s',
             Yii::$app->request->getMethod(), Yii::$app->request->getUrl(), json_encode($this->params, JSON_UNESCAPED_UNICODE));
         Yii::info($request, LogConst::REQUEST);
