@@ -36,7 +36,7 @@
     <?php $this->beginBody() ?>
     <?= $content ?>
     <?php $this->endBody() ?>
-    <div class="foot">北京千氏房地产经纪有限公司 | 网络经营许可证 京ICP备11024601号-12 | © Copyright©2010-2016 千氏网版权所有</div>
+    <div class="foot">千氏（北京）房地产经纪有限公司 | 网络经营许可证 京ICP备14049807号-5 | © Copyright©2016 千氏地产网版权所有</div>
     </body>
     </html>
 <?php $this->endPage() ?>
