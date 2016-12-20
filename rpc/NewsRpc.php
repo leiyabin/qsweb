@@ -47,4 +47,10 @@ class NewsRpc extends LRpc
         $params = ['id' => $id];
         return LRpc::init()->post($params)->url('/news/get');
     }
+
+    public function getFewList($limit, $tag, $class_id)
+    {
+        $params = ['tag' => $tag, 'limit' => $limit, 'class_id' => $class_id];
+        return LRpc::init()->post($params)->url('/news/fewlist');
+    }
 }

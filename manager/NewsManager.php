@@ -48,4 +48,18 @@ class NewsManager
         return [];
     }
 
+    public function getFewList($limit, $tag = 0, $class_id = 0)
+    {
+        $list = $this->news_rpc->getFewList($limit, $tag, $class_id);
+        if (!empty($list)) {
+            foreach ($list as $key => $item) {
+                $list[$key]->img_url = Utils::getImgUrl($item->img);
+                $list[$key]->hot_img_url = Utils::getImgUrl($item->hot_img);
+                $list[$key]->recommend_img_url = Utils::getImgUrl($item->recommend_img);
+            }
+            return $list;
+        }
+        return [];
+    }
+
 }

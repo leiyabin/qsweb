@@ -33,12 +33,10 @@ class OverseaController extends LController
 
     public function actionIndex()
     {
-        $page_info = ['page' => 1, 'pre_page' => 6];
-        $information = $this->news_manager->getNewsList($page_info, ConfigConst::FINANCIAL_NEWS_CLASS);
-
+        $information = $this->news_manager->getFewList(6, 0, ConfigConst::FINANCIAL_NEWS_CLASS);
         $this->getView()->title = '千氏地产-海外';
         $data = [
-            'information_list' => $information->news_list
+            'information_list' => $information
         ];
         return $this->render('index',$data);
     }

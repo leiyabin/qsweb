@@ -51,10 +51,8 @@ class InformationController extends LController
         }
         $top_img_list = $news_list;
         //查询总的top5
-        $page_info = ['page' => 1, 'pre_page' => 5];
-        $top_5_list = $this->news_manager->getNewsList($page_info);
+        $top_5_list = $this->news_manager->getFewList(5);
         if (!$this->hasError($top_5_list)) {
-            $top_5_list = $top_5_list->news_list;
             $top_img_list = $top_5_list;
         }
         //class

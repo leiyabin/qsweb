@@ -47,7 +47,7 @@ class IndexController extends LController
     public function actionIndex()
     {
         //楼市热点
-        $news_hot_list = $this->getInformation(self::NEWS_TAG_HOT, 5);
+        $news_hot_list = $this->getInformation(5, self::NEWS_TAG_HOT);
         //第一条新闻
         $top_hot_news = [];
         if (!empty($news_hot_list)) {
@@ -55,7 +55,7 @@ class IndexController extends LController
             array_shift($news_hot_list);
         }
         //帮你买房
-        $news_help_list = $this->getInformation(self::NEWS_TAG_RECOMMEND, 2);
+        $news_help_list = $this->getInformation(2, self::NEWS_TAG_RECOMMEND);
         //get recommend_list
         $recommend_list = $this->getRecommend();
 
@@ -75,13 +75,10 @@ class IndexController extends LController
         return $this->render('index', $data);
     }
 
-    private function getInformation($tag, $size)
+    private function getInformation($size, $tag)
     {
-        $page_info = ['page' => 1, 'pre_page' => $size];
-        $list = $this->news_manager->getNewsList($page_info, 0, '', $tag);
-        if (!$this->hasError($list)) {
-            $list = $list->news_list;
-        } else {
+        $list = $this->news_manager->getFewList($size, $tag);
+        if ($this->hasError($list)) {
             $list = [];
         }
         return $list;
