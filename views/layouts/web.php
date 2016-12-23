@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/static/web/css/common.css">
         <script src="/static/web/js/jquery-1.12.1.min.js"></script>
         <script src="/static/web/js/common.js"></script>
+        <script src="/static/web/js/baidu.tongji.js"></script>
         <!--[if lte IE 8]>
         <link rel="stylesheet" href="/static/web/css/ie8.css">
         <![endif]-->
