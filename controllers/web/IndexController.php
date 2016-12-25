@@ -71,7 +71,7 @@ class IndexController extends LController
             'house_recommend_list' => $house_recommend_list,
             'statistics_data'      => $statistics_data
         ];
-        $this->getView()->title = '千氏地产';
+        $this->getView()->title = '千氏地产官网';
         return $this->render('index', $data);
     }
 
