@@ -78,7 +78,9 @@ use app\components\Utils;
             <a href="javascript:return false" order_by="unit_price">房屋单价</a>
             <a href="javascript:return false" order_by="build_area">房屋面积</a>
         </div>
-        <h2 class="list-title s18 n">共找到 <font class="orange"><?= $total ?></font> 套北京二手房</h2>
+        <h2 class="list-title s18 n">共找到 <font class="orange"><?= $total ?></font> 套二手房
+            <a href="/web/house/"><font style="font-size:12px;float:right;margin-left:5px;">清空条件</font><span style="float:right;width:13px;height:13px;background-image:url(/static/web/images/clear.png)" ></span></a>
+        </h2>
         <ul class="house-list">
             <?php foreach ($house_list as $item): ?>
                 <li>

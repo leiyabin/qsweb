@@ -69,7 +69,9 @@ use app\components\Utils;
 </div>
 <div class="bg1">
     <div class="con">
-        <h2 class="list-title s18 n">共找到 <font class="orange"><?= $total ?></font> 套北京新房源</h2>
+        <h2 class="list-title s18 n">共找到 <font class="orange"><?= $total ?></font> 处楼盘
+            <a href="/web/house/"><font style="font-size:12px;float:right;margin-left:5px;">清空条件</font><span style="float:right;width:13px;height:13px;background-image:url(/static/web/images/clear.png)" ></span></a>
+        </h2>
         <ul class="house-list">
             <?php foreach ($loupan_list as $item): ?>
                 <li>
