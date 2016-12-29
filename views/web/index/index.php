@@ -97,7 +97,7 @@ use app\components\Utils;
         <li class="data-5">
             <b>
                 <?= Utils::getValue($statistics_data, 'yzfydkl', 0) ?>
-                <?php if (!empty($statistics_data->yzcjl_change))
+                <?php if (!empty($statistics_data->yzfydkl_change))
                     echo '<font class="' . $statistics_data->yzfydkl_change . '"></font>'
                 ?>
             </b>
