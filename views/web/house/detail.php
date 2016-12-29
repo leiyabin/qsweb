@@ -358,7 +358,7 @@ use app\components\Utils;
                     个
                 </li>
             </ul>
-            <img src="/static/web/photo/img-2.jpg" class="fl">
+            <img src="<?php if(!empty($house->house_attach->community_img_url)) echo $house->house_attach->community_img_url; ?>" class="fl">
         </div>
         <h2 class="detail-title2">为您推荐</h2>
         <ul class="resource-list hiden">

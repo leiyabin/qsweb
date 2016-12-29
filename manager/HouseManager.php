@@ -43,7 +43,7 @@ class HouseManager
             if (!empty($res->house_attach)) {
                 $res->house_attach->deed_year_name = HouseConst::$deed_year[$res->house_attach->deed_year];
                 $res->house_attach->build_type_name = HouseConst::$build_type[$res->house_attach->build_type];
-
+                $res->house_attach->community_img_url = Utils::getImgUrl($res->house_attach->community_img);
             }
             $res->tag = $this->getTag($res->tag);
             $res->broker_img_url = Utils::getImgUrl($res->broker_img, '/static/web/images/broker.png');
