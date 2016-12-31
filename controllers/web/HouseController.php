@@ -53,10 +53,12 @@ class HouseController extends LController
         $area_id = $this->getRequestParam('area_id', 0);
         $price_interval = $this->getRequestParam('price_interval', '');
         $area_interval = $this->getRequestParam('area_interval', '');
-        $order_by = $this->getRequestParam('order_by', '');
+        $order_by_field = $this->getRequestParam('order_by', '');
+        $sort = $this->getRequestParam('sort', SORT_DESC);
         $property_type_id = $this->getRequestParam('property_type_id', '');
+        $room_type = $this->getRequestParam('room_type', '');
         $address = $this->getRequestParam('address', '');
-        $rs = $this->getRequestParam('rs', '');
+        $tag = $this->getRequestParam('tag', '');
         //end get params
         $quxian_list = $this->getQuxian();
         //get recommend_list
@@ -65,18 +67,29 @@ class HouseController extends LController
         $area_list = $this->getArea($quxian_id);
         $price_interval = empty($price_interval) ? [] : explode(',', $price_interval);
         $area_interval = empty($area_interval) ? [] : explode(',', $area_interval);
+        $room_type = empty($room_type) ? [] : explode(',', $room_type);
+
         //get house
         $total = 0;
         $pages = [];
         $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
         $page_info = ['page' => $page, 'pre_page' => $this->page_size];
-        $house_list = $this->house_manager->getList(
-            $page_info, $area_id, $price_interval, $area_interval,
-            $property_type_id, 0, $order_by, $rs, $address);
-        if (!empty($house_list->house_list)) {
+        $condition = [
+            'area_id'          => $area_id,
+            'price_interval'   => $price_interval,
+            'build_area'       => $area_interval,
+            'property_type_id' => $property_type_id,
+            'room_type'        => $room_type,
+            'recommend'        => 0,
+            'tag'              => $tag,
+            'address'          => $address,
+        ];
+        $order_by = ['field' => $order_by_field, 'sort' => $sort];
+        $house_list = $this->house_manager->getPageList($page_info, $condition, $order_by);
+        if (!empty($house_list->list)) {
             $total = $house_list->total;
             $pages = $this->getPage($page, $house_list->total_pages);
-            $house_list = $house_list->house_list;
+            $house_list = $house_list->list;
         } else {
             $house_list = [];
         }
@@ -84,9 +97,10 @@ class HouseController extends LController
             'total'            => $total,
             'pages'            => $pages,
             'property_type_id' => $property_type_id,
-            'order_by'         => $order_by,
-            'rs'               => $rs,
+            'order_by'         => $order_by_field,
+            'tag'              => $tag,
             'address'          => $address,
+            'room_type'        => $room_type,
             'house_list'       => $house_list,
             'quxian_list'      => $quxian_list,
             'quxian_id'        => $quxian_id,

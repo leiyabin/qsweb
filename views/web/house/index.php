@@ -1,6 +1,7 @@
 <?php
 use app\consts\HouseConst;
 use app\components\Utils;
+
 ?>
 <div class="bg1 inner-search">
     <input type="text" placeholder="请输入房屋地址" value="<?= $address ?>" name="search-text" class="search-text">
@@ -14,7 +15,8 @@ use app\components\Utils;
         <input type="hidden" name="area_interval" value="<?= implode(',', $area_interval) ?>">
         <input type="hidden" name="order_by" value="<?= $order_by ?>">
         <input type="hidden" name="address" value="<?= $address ?>">
-        <input type="hidden" name="rs" value="<?= $rs ?>">
+        <input type="hidden" name="tag" value="<?= $tag ?>">
+        <input type="hidden" name="room_type" value="<?= implode(',', $room_type) ?>">
         <input type="hidden" name="property_type_id" value="<?= $property_type_id ?>">
     </form>
     <div class="filter-1">
@@ -52,7 +54,7 @@ use app\components\Utils;
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="filter-1">
+    <div class="filter-1 bb">
         <b class="fl">面积：</b>
         <div class="fl filter-radio place_area">
             <?php foreach (HouseConst::$area_interval as $key => $val): ?>
@@ -68,6 +70,30 @@ use app\components\Utils;
             <?php endforeach; ?>
         </div>
     </div>
+    <div class="filter-1 bb">
+        <b class="fl">房型：</b>
+        <div class="fl filter-radio room_type">
+            <?php foreach (HouseConst::$room_type as $key => $val): ?>
+                <span>
+                    <input value="<?= $key ?>" type="checkbox" id="room_type_<?= $key ?>"
+                        <?php
+                        if (in_array($key, $room_type)) {
+                            echo 'checked';
+                        }
+                        ?>
+                           name="room_type">
+                    <label for="room_type_<?= $key ?>"></label><em><?= $val ?></em></span>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="filter-1 property_type">
+        <b class="fl">类型：</b>
+        <?php foreach (HouseConst::$property_type as $key => $val): ?>
+            <a href="javascript:return false"
+                <?php if ($property_type_id == $key) echo 'class="orange"'; ?>
+               tag="<?= $key ?>"><?= $val ?></a>
+        <?php endforeach; ?>
+    </div>
 </div>
 <div class="bg1 bt">
     <div class="con">
@@ -79,7 +105,8 @@ use app\components\Utils;
             <a href="javascript:return false" order_by="build_area">房屋面积</a>
         </div>
         <h2 class="list-title s18 n">共找到 <font class="orange"><?= $total ?></font> 套二手房
-            <a href="/web/house/"><font style="font-size:12px;float:right;margin-left:5px;">清空条件</font><span style="float:right;width:13px;height:13px;background-image:url(/static/web/images/clear.png)" ></span></a>
+            <a href="/web/house/"><font style="font-size:12px;float:right;margin-left:5px;">清空条件</font><span
+                        style="float:right;width:13px;height:13px;background-image:url(/static/web/images/clear.png)"></span></a>
         </h2>
         <ul class="house-list">
             <?php foreach ($house_list as $item): ?>
@@ -128,9 +155,13 @@ use app\components\Utils;
     <ul class="resource-list hiden">
         <?php foreach ($recommend_list as $item): ?>
             <li>
-                <a href="/web/house/detail/?id=<?=$item->id?>" title=""><img src="<?=$item->house_img?>"></a>
-                <p class="s18"><b class="fl"><a href="/web/house/detail/?id=<?=$item->id?>"><?=Utils::subStr($item->address,11)?></a></b><span class="orange fr"><?=$item->total_price?>万</span></p>
-                <p class="c6"><span class="fl"><?=$item->jishi?>室<?=$item->jitin?>厅<?=$item->jiwei?>卫 <?=$item->build_area?> m²</span><span class="fr"><?=round($item->unit_price/10000,1)?>万/平</span></p>
+                <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= $item->house_img ?>"></a>
+                <p class="s18"><b class="fl"><a
+                                href="/web/house/detail/?id=<?= $item->id ?>"><?= Utils::subStr($item->address, 11) ?></a></b><span
+                            class="orange fr"><?= $item->total_price ?>万</span></p>
+                <p class="c6"><span class="fl"><?= $item->jishi ?>室<?= $item->jitin ?>厅<?= $item->jiwei ?>
+                        卫 <?= $item->build_area ?> m²</span><span class="fr"><?= round($item->unit_price / 10000, 1) ?>
+                        万/平</span></p>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -150,7 +181,7 @@ use app\components\Utils;
 
         });
         $a_list.each(function () {
-            if($(this).attr('order_by') == '<?=$order_by?>'){
+            if ($(this).attr('order_by') == '<?=$order_by?>') {
                 $(this).addClass('sort-this');
                 return false;
             }
@@ -164,10 +195,14 @@ use app\components\Utils;
         function getParams() {
             $address = $('input[name=search-text]').val().trim();
             filter_form.find('input[name=address]').val($address);
-            $params = filter_form.serialize() ;
+            $params = filter_form.serialize();
             return $params;
         }
-
+        $('.property_type').find('a').click(function () {
+            var property_type_id = $(this).attr('tag');
+            filter_form.find('input[name=property_type_id]').val(property_type_id);
+            getList();
+        });
         $('.area').find('a').click(function () {
             var area_id = $(this).attr('tag');
             filter_form.find('input[name=area_id]').val(area_id);
@@ -185,10 +220,17 @@ use app\components\Utils;
             filter_form.find('input[name=area_interval]').val(tag);
             getList();
         });
+        $('.room_type').click(function () {
+            var room_type_checkbox = $(this).find('input:checkbox[name=room_type]:checked');
+            var tag = getCheckBoxStr(room_type_checkbox);
+            filter_form.find('input[name=room_type]').val(tag);
+            getList();
+        });
         function getList() {
             $params = getParams();
             location.href = '/web/house/?' + $params;
         }
+
         $('.search-btn').click(function () {
             getList();
         });

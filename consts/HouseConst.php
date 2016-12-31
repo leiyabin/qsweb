@@ -182,4 +182,21 @@ class HouseConst
         self::BROKER_TYPE_6 => ['name' => '海外顾问', 'color' => 'green']
     ];
 
+    //房型
+    const ROOM_TYPE_1 = 1;
+    const ROOM_TYPE_2 = 2;
+    const ROOM_TYPE_3 = 3;
+    const ROOM_TYPE_4 = 4;
+    const ROOM_TYPE_5 = 5;
+    const ROOM_TYPE_6 = 6;
+
+    public static $room_type = [
+        self::ROOM_TYPE_1 => '1室',
+        self::ROOM_TYPE_2 => '2室',
+        self::ROOM_TYPE_3 => '3室',
+        self::ROOM_TYPE_4 => '4室',
+        self::ROOM_TYPE_5 => '5室',
+        self::ROOM_TYPE_6 => '5室以上',
+
+    ];
 }

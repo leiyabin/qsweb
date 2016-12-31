@@ -7,7 +7,7 @@ use app\components\Utils;
     <div class="index-search">
         <p><span class="search-this">学区房</span><span>商铺</span><span>写字楼</span></p>
         <div class="index-search-con">
-            <input type="text" placeholder="请输入学校地址" class="search-text"><input type="button" value="开始找房" tag="rs=4"
+            <input type="text" placeholder="请输入学校地址" class="search-text"><input type="button" value="开始找房" tag="tag=4"
                                                                                 class="search-btn">
         </div>
         <div class="index-search-con">
@@ -24,7 +24,7 @@ use app\components\Utils;
 </div>
 <div class="head">
     <div class="con hiden">
-        <a href="/web/house/?rs=4" class="head-1">
+        <a href="/web/house/?tag=4" class="head-1">
             <h2 class="s18">学区找房</h2>
             <p class="c6">助力您的孩子，跨入希望的起跑线</p>
         </a>

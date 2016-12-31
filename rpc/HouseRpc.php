@@ -18,20 +18,27 @@ class HouseRpc extends LRpc
         return LRpc::init()->post($params)->url('/house/get');
     }
 
-    public function getList($page_info, $area_id = 0, $price_interval = 0, $build_area = [],
-                            $property_type_id = 0, $recommend = 0, $order_by = 'c_t', $rs = '', $address = '')
+    /**
+     * @param $page_info
+     * @param $condition [area_id，price_interval，build_area，property_type_id，recommend，address，tag];
+     * @param $order_by
+     * @return LRpc
+     */
+    public function getPageList($page_info, $condition, $order_by)
     {
         $params = [
             'page'             => intval($page_info['page']),
             'per_page'         => intval($page_info['pre_page']),
-            'area_id'          => $area_id,
-            'price_interval'   => $price_interval,
-            'build_area'       => $build_area,
-            'property_type_id' => $property_type_id,
-            'recommend'        => $recommend,
-            'order_by'         => $order_by,
-            'rs'               => $rs,
-            'address'          => $address
+            'area_id'          => $condition['area_id'],
+            'price_interval'   => $condition['price_interval'],
+            'build_area'       => $condition['build_area'],
+            'property_type_id' => $condition['property_type_id'],
+            'room_type'        => $condition['room_type'],
+            'recommend'        => $condition['recommend'],
+            'tag'              => $condition['tag'],
+            'address'          => $condition['address'],
+            'order_by'         => $order_by['field'],
+            'sort'             => $order_by['sort'],
         ];
         return LRpc::init()->post($params)->url('/house/list');
     }
