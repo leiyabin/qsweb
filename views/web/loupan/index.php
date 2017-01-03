@@ -13,6 +13,7 @@ use app\components\Utils;
         <input type="hidden" name="area_id" value="<?= $area_id ?>">
         <input type="hidden" name="price_interval" value="<?= implode(',', $price_interval) ?>">
         <input type="hidden" name="property_type_id" value="<?= $property_type_id ?>">
+        <input type="hidden" name="room_type" value="<?= $room_type ?>">
         <input type="hidden" name="sale_status" value="<?= $sale_status ?>">
     </form>
     <div class="filter-1">
@@ -50,6 +51,14 @@ use app\components\Utils;
             <?php endforeach; ?>
         </div>
     </div>
+    <div class="filter-1 room_type">
+        <b class="fl">房型：</b>
+        <?php foreach (HouseConst::$room_type as $key => $val): ?>
+            <a href="javascript:return false"
+                <?php if ($key == $room_type) echo 'class="orange"'; ?>
+               tag="<?= $key ?>"><?= $val ?></a>
+        <?php endforeach; ?>
+    </div>
     <div class="filter-1 property_type">
         <b class="fl">类型：</b>
         <?php foreach (HouseConst::$property_type as $key => $val): ?>
@@ -70,7 +79,7 @@ use app\components\Utils;
 <div class="bg1">
     <div class="con">
         <h2 class="list-title s18 n">共找到 <font class="orange"><?= $total ?></font> 处楼盘
-            <a href="/web/house/"><font style="font-size:12px;float:right;margin-left:5px;">清空条件</font><span style="float:right;width:13px;height:13px;background-image:url(/static/web/images/clear.png)" ></span></a>
+            <a href="/web/loupan/"><font style="font-size:12px;float:right;margin-left:5px;">清空条件</font><span style="float:right;width:13px;height:13px;background-image:url(/static/web/images/clear.png)" ></span></a>
         </h2>
         <ul class="house-list">
             <?php foreach ($loupan_list as $item): ?>
@@ -141,6 +150,11 @@ use app\components\Utils;
         $('.property_type').find('a').click(function () {
             var property_type_id = $(this).attr('tag');
             filter_form.find('input[name=property_type_id]').val(property_type_id);
+            getList();
+        });
+        $('.room_type').find('a').click(function () {
+            var room_type_id = $(this).attr('tag');
+            filter_form.find('input[name=room_type]').val(room_type_id);
             getList();
         });
         $('.sale_status').find('a').click(function () {

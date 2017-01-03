@@ -48,24 +48,33 @@ class LoupanController extends LController
         $price_interval = $this->getRequestParam('price_interval', '');
         $property_type_id = $this->getRequestParam('property_type_id', 0);
         $sale_status = $this->getRequestParam('sale_status', 0);
+        $room_type = $this->getRequestParam('room_type', '');
         //end get params
         $quxian_list = $this->getQuxian();
         //get area
         $area_list = $this->getArea($quxian_id);
         //get recommend_list
-        $recommend_list = $this->getRecommend();
+        $recommend_list = $this->loupan_manager->getRecommend();
         //get loupan
         $total = 0;
         $pages = [];
         $page = empty($this->params['page']) ? $this->default_page : $this->params['page'];
         $page_info = ['page' => $page, 'pre_page' => $this->page_size];
         $price_interval = empty($price_interval) ? [] : explode(',', $price_interval);
-        $loupan_list = $this->loupan_manager->getList($page_info, $area_id, $loupan_name, $price_interval,
-            $property_type_id, $sale_status);
-        if (!$this->hasError($loupan_list)) {
+        $condition = [
+            'area_id'          => $area_id,
+            'price_interval'   => $price_interval,
+            'property_type_id' => $property_type_id,
+            'room_type'        => $room_type,
+            'sale_status'      => $sale_status,
+            'name'             => $loupan_name,
+        ];
+        $order_by = ['field' => 'id', 'sort' => SORT_DESC];
+        $loupan_list = $this->loupan_manager->getPageList($page_info, $condition, $order_by);
+        if (!empty($loupan_list->list)) {
             $total = $loupan_list->total;
             $pages = $this->getPage($page, $loupan_list->total_pages);
-            $loupan_list = $loupan_list->loupan_list;
+            $loupan_list = $loupan_list->list;
         } else {
             $loupan_list = [];
         }
@@ -77,6 +86,7 @@ class LoupanController extends LController
             'loupan_list'      => $loupan_list,
             'area_list'        => $area_list,
             'quxian_id'        => $quxian_id,
+            'room_type'        => $room_type,
             'area_id'          => $area_id,
             'price_interval'   => $price_interval,
             'property_type_id' => $property_type_id,
@@ -85,18 +95,6 @@ class LoupanController extends LController
         ];
         $this->getView()->title = '千氏地产-楼盘';
         return $this->render('index', $data);
-    }
-
-    private function getRecommend()
-    {
-        $page_info = ['page' => 1, 'pre_page' => 4];
-        $list = $this->loupan_manager->getList($page_info, 0, '', 0, 0, 0, 1);
-        if (!empty($list)) {
-            $list = $list->loupan_list;
-        } else {
-            $list = [];
-        }
-        return $list;
     }
 
     private function getQuxian()
@@ -141,7 +139,7 @@ class LoupanController extends LController
             throw new RequestException('未找到页面，id=' . $id, ErrorCode::NOT_FOUND);
         }
         //get recommend_list
-        $recommend_list = $this->getRecommend();
+        $recommend_list = $this->loupan_manager->getRecommend();
         $this->getView()->title = '千氏地产-楼盘';
         $data = [
             'recommend_list' => $recommend_list,

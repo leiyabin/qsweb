@@ -58,7 +58,7 @@ class HouseController extends LController
         $property_type_id = $this->getRequestParam('property_type_id', '');
         $room_type = $this->getRequestParam('room_type', '');
         $address = $this->getRequestParam('address', '');
-        $tag = $this->getRequestParam('tag', '');
+        $school_info = $this->getRequestParam('school_info', '');
         //end get params
         $quxian_list = $this->getQuxian();
         //get recommend_list
@@ -68,7 +68,6 @@ class HouseController extends LController
         $price_interval = empty($price_interval) ? [] : explode(',', $price_interval);
         $area_interval = empty($area_interval) ? [] : explode(',', $area_interval);
         $room_type = empty($room_type) ? [] : explode(',', $room_type);
-
         //get house
         $total = 0;
         $pages = [];
@@ -80,8 +79,7 @@ class HouseController extends LController
             'build_area'       => $area_interval,
             'property_type_id' => $property_type_id,
             'room_type'        => $room_type,
-            'recommend'        => 0,
-            'tag'              => $tag,
+            'school_info'      => $school_info,
             'address'          => $address,
         ];
         $order_by = ['field' => $order_by_field, 'sort' => $sort];
@@ -98,7 +96,7 @@ class HouseController extends LController
             'pages'            => $pages,
             'property_type_id' => $property_type_id,
             'order_by'         => $order_by_field,
-            'tag'              => $tag,
+            'school_info'      => $school_info,
             'address'          => $address,
             'room_type'        => $room_type,
             'house_list'       => $house_list,

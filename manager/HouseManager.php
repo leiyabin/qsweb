@@ -22,7 +22,7 @@ class HouseManager
         $this->house_rpc = new HouseRpc();
     }
 
-    // $condition [area_id，price_interval，build_area，property_type_id，recommend，address，tag。room_type];
+    // $condition [area_id，price_interval，build_area，property_type_id，address，school_info。room_type];
     public function getPageList($page_info, $condition, $order_by)
     {
         $list = $this->house_rpc->getPageList($page_info, $condition, $order_by);

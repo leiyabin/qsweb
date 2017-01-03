@@ -2,7 +2,6 @@
 use app\components\Utils;
 
 ?>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <div class="bg1 detail">
     <div class="con hiden">
         <p class="location bd"><a href="/">千氏地产</a> > <a href="/web/house/">二手房</a></p>
@@ -415,6 +414,7 @@ use app\components\Utils;
     ?>
     var picList = eval(<?=json_encode($pic_list, JSON_UNESCAPED_UNICODE)?>);
 </script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <script type="text/javascript">
     $(function () {
         $('.around-nav').find('a').click(function () {

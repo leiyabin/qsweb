@@ -26,15 +26,34 @@ class LoupanManager
     {
         $list = $this->loupan_rpc->getList($page_info, $area_id, $name, $average_price,
             $property_type_id, $sale_status, $recommend);
-        if (isset($list->loupan_list)) {
-            foreach ($list->loupan_list as $key => $value) {
-                $list->loupan_list[$key]->img_url = Utils::getImgUrl($value->img, '');
+        if (isset($list->list)) {
+            foreach ($list->list as $key => $value) {
+                $list->list[$key]->img_url = Utils::getImgUrl($value->img, '');
                 $jiju_arr = explode(',', $value->jiju);
                 foreach ($jiju_arr as $key_ => $val) {
                     $jiju_arr[$key_] = $val . '居';
                 }
-                $list->loupan_list[$key]->jiju = implode('/', $jiju_arr);
-                $list->loupan_list[$key]->tag = $this->getTag($value->tag);
+                $list->list[$key]->jiju = implode('/', $jiju_arr);
+                $list->list[$key]->tag = $this->getTag($value->tag);
+            }
+            return $list;
+        }
+        return [];
+    }
+
+    // $condition [area_id，price_interval，room_type，property_type_id，name，sale_status];
+    public function getPageList($page_info, $condition, $order_by)
+    {
+        $list = $this->loupan_rpc->getPageList($page_info, $condition, $order_by);
+        if (isset($list->list)) {
+            foreach ($list->list as $key => $value) {
+                $list->list[$key]->img_url = Utils::getImgUrl($value->img, '');
+                $jiju_arr = explode(',', $value->jiju);
+                foreach ($jiju_arr as $key_ => $val) {
+                    $jiju_arr[$key_] = $val . '居';
+                }
+                $list->list[$key]->jiju = implode('/', $jiju_arr);
+                $list->list[$key]->tag = $this->getTag($value->tag);
             }
             return $list;
         }
@@ -128,5 +147,17 @@ class LoupanManager
     public function active($id, $active)
     {
         return $this->loupan_rpc->active($id, $active);
+    }
+
+    public function getRecommend($size = 4)
+    {
+        $list = $this->loupan_rpc->getRecommend($size);
+        if (isset($list->error_code)) {
+            return [];
+        }
+        foreach ($list as $key => $value){
+            $list[$key]->img_url = Utils::getImgUrl($value->img, '');
+        }
+        return $list;
     }
 }

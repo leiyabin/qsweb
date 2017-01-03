@@ -7,7 +7,7 @@ use app\components\Utils;
     <div class="index-search">
         <p><span class="search-this">学区房</span><span>商铺</span><span>写字楼</span></p>
         <div class="index-search-con">
-            <input type="text" placeholder="请输入学校地址" class="search-text"><input type="button" value="开始找房" tag="tag=4"
+            <input type="text" placeholder="请输入学校地址" class="search-text"><input type="button" value="开始找房"
                                                                                 class="search-btn">
         </div>
         <div class="index-search-con">
@@ -51,7 +51,7 @@ use app\components\Utils;
             <ul>
                 <?php foreach ($news_hot_list as $item): ?>
                     <li><span><?= $item->class_name ?></span><a
-                            href="/web/information/detail/?id=<?= $item->id ?>"><?= $item->title ?></a></li>
+                                href="/web/information/detail/?id=<?= $item->id ?>"><?= $item->title ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -111,7 +111,7 @@ use app\components\Utils;
         <?php foreach ($recommend_list as $item): ?>
             <div class="resource-new bgf fl">
                 <a href="/web/loupan/detail?id=<?= $item->id ?>" title="<?= $item->name ?>"><img
-                        src="<?= $item->img_url ?>" class="fl"></a>
+                            src="<?= $item->img_url ?>" class="fl"></a>
                 <h3 class="s18"><a href="/web/loupan/detail?id=<?= $item->id ?>"><?= $item->name ?></a></h3>
                 <p>均价：<font class="s18 orange"><?= $item->average_price ?></font>万元</p>
                 <p>项目地址：<?= $item->address ?></p>
@@ -125,11 +125,11 @@ use app\components\Utils;
                 <li>
                     <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= $item->house_img ?>"></a>
                     <p class="s18"><b class="fl"><a
-                                href="/web/house/detail/?id=<?= $item->id ?>"><?= Utils::subStr($item->address, 11) ?></a></b><span
-                            class="orange fr"><?= $item->total_price ?>万</span></p>
+                                    href="/web/house/detail/?id=<?= $item->id ?>"><?= Utils::subStr($item->address, 11) ?></a></b><span
+                                class="orange fr"><?= $item->total_price ?>万</span></p>
                     <p class="c6"><span class="fl"><?= $item->jishi ?>室<?= $item->jitin ?>厅<?= $item->jiwei ?>
                             卫 <?= $item->build_area ?> m²</span><span
-                            class="fr"><?= round($item->unit_price / 10000, 1) ?>万/平</span></p>
+                                class="fr"><?= round($item->unit_price / 10000, 1) ?>万/平</span></p>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -165,6 +165,9 @@ use app\components\Utils;
             var address = $(this).siblings('input').val();
             if (address != '') {
                 var query_str = $(this).attr('tag');
+                if (query_str == undefined) {
+                    query_str = 'school_info=' + address;
+                }
                 location.href = '/web/house/?address=' + address + '&' + query_str;
             }
         })

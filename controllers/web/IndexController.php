@@ -57,7 +57,7 @@ class IndexController extends LController
         //帮你买房
         $news_help_list = $this->getInformation(2, self::NEWS_TAG_RECOMMEND);
         //get loupan recommend_list
-        $loupan_recommend_list = $this->getRecommend();
+        $loupan_recommend_list = $this->loupan_manager->getRecommend(2);
         //get house recommend_list
         $house_recommend_list = $this->house_manager->getRecommend();
         //get statistics data
@@ -78,18 +78,6 @@ class IndexController extends LController
     {
         $list = $this->news_manager->getFewList($size, $tag);
         if ($this->hasError($list)) {
-            $list = [];
-        }
-        return $list;
-    }
-
-    private function getRecommend()
-    {
-        $page_info = ['page' => 1, 'pre_page' => 2];
-        $list = $this->loupan_manager->getList($page_info, 0, '', 0, 0, 0, 1);
-        if (!empty($list)) {
-            $list = $list->loupan_list;
-        } else {
             $list = [];
         }
         return $list;

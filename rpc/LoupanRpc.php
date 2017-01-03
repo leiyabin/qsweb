@@ -37,6 +37,37 @@ class LoupanRpc extends LRpc
         return LRpc::init()->post($params)->url('/loupan/list');
     }
 
+    /**
+     * @param $page_info
+     * @param $condition [area_id，price_interval，room_type，property_type_id，name，sale_status];
+     * @param $order_by
+     * @return LRpc
+     */
+    public function getPageList($page_info, $condition, $order_by)
+    {
+        $params = [
+            'page'             => intval($page_info['page']),
+            'per_page'         => intval($page_info['pre_page']),
+            'area_id'          => $condition['area_id'],
+            'average_price'    => $condition['price_interval'],
+            'sale_status'      => $condition['sale_status'],
+            'property_type_id' => $condition['property_type_id'],
+            'room_type'        => $condition['room_type'],
+            'name'             => $condition['name'],
+            'order_by'         => $order_by['field'],
+            'sort'             => $order_by['sort'],
+        ];
+        return LRpc::init()->post($params)->url('/loupan/list');
+    }
+
+    public function getRecommend($size)
+    {
+        $params = [
+            'size' => $size,
+        ];
+        return LRpc::init()->post($params)->url('/loupan/getrecommend');
+    }
+
     public function add($loupan)
     {
         $params = $loupan;

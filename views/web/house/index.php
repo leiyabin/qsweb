@@ -15,7 +15,8 @@ use app\components\Utils;
         <input type="hidden" name="area_interval" value="<?= implode(',', $area_interval) ?>">
         <input type="hidden" name="order_by" value="<?= $order_by ?>">
         <input type="hidden" name="address" value="<?= $address ?>">
-        <input type="hidden" name="tag" value="<?= $tag ?>">
+        <input type="hidden" name="school_info" value="<?= $school_info ?>">
+        <input type="hidden" name="property_type_id" value="<?= $property_type_id ?>">
         <input type="hidden" name="room_type" value="<?= implode(',', $room_type) ?>">
         <input type="hidden" name="property_type_id" value="<?= $property_type_id ?>">
     </form>

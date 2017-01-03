@@ -1,6 +1,5 @@
 <script src="/static/web/js/jquery-1.8.2.min.js"></script>
 <script src="/static/web/js/jquery.fancybox.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <script>
     $(document).ready(function () {
         $('.house-type a').fancybox();
@@ -24,7 +23,7 @@ use app\components\Utils;
                     <?php endforeach; ?>
                 </p>
                 <p>均价：<b class="s18"><?= $loupan->average_price ?></b>万元/平</p>
-                <strong class="orange s30">010-5794236</strong>
+                <strong class="orange s30">010-52745670</strong>
                 <p>咨询电话</p>
             </div>
         </div>
@@ -88,22 +87,22 @@ use app\components\Utils;
         <ul class="house-photo mt20 hiden bd pb20">
             <li>
                 <a class="photo-show" href="<?= $loupan->img_1_url ?>" data-fancybox-group="gallery"><img
-                        src="<?= $loupan->img_1_url ?>"></a>
+                            src="<?= $loupan->img_1_url ?>"></a>
                 <p class="tc">效果图（1）</p>
             </li>
             <li>
                 <a class="photo-show" href="<?= $loupan->img_2_url ?>" data-fancybox-group="gallery"><img
-                        src="<?= $loupan->img_2_url ?>"></a>
+                            src="<?= $loupan->img_2_url ?>"></a>
                 <p class="tc">效果图（2）</p>
             </li>
             <li>
                 <a class="photo-show" href="<?= $loupan->img_3_url ?>" data-fancybox-group="gallery"><img
-                        src="<?= $loupan->img_3_url ?>"></a>
+                            src="<?= $loupan->img_3_url ?>"></a>
                 <p class="tc">效果图（3）</p>
             </li>
             <li>
                 <a class="photo-show" href="<?= $loupan->img_4_url ?>" data-fancybox-group="gallery"><img
-                        src="<?= $loupan->img_4_url ?>"></a>
+                            src="<?= $loupan->img_4_url ?>"></a>
                 <p class="tc">效果图（4）</p>
             </li>
         </ul>
@@ -308,15 +307,16 @@ use app\components\Utils;
             <?php foreach ($recommend_list as $item): ?>
                 <li>
                     <a href="/web/loupan/detail?id=<?= $item->id ?>" title="<?= $item->name ?>"><img
-                            src="<?= $item->img_url ?>"></a>
+                                src="<?= $item->img_url ?>"></a>
                     <p class="s18"><b class="fl"><a href=""><?= Utils::subStr($item->name, 10) ?></a></b><span
-                            class="orange fr"><?= $item->average_price ?>万/套</span></p>
+                                class="orange fr"><?= $item->average_price ?>万/套</span></p>
                     <p class="c6"><span class="fl"><?= $item->min_square ?>㎡~<?= $item->max_square ?>㎡</span></p>
                 </li>
             <?php endforeach; ?>
         </ul>
     </div>
 </div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <script type="text/javascript">
     var menu = 'loupan_menu';
     $(function () {

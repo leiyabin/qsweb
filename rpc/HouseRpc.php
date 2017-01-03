@@ -20,7 +20,7 @@ class HouseRpc extends LRpc
 
     /**
      * @param $page_info
-     * @param $condition [area_id，price_interval，build_area，property_type_id，recommend，address，tag];
+     * @param $condition [area_id，price_interval，build_area，property_type_id，address，school_info];
      * @param $order_by
      * @return LRpc
      */
@@ -34,8 +34,7 @@ class HouseRpc extends LRpc
             'build_area'       => $condition['build_area'],
             'property_type_id' => $condition['property_type_id'],
             'room_type'        => $condition['room_type'],
-            'recommend'        => $condition['recommend'],
-            'tag'              => $condition['tag'],
+            'school_info'      => $condition['school_info'],
             'address'          => $condition['address'],
             'order_by'         => $order_by['field'],
             'sort'             => $order_by['sort'],
