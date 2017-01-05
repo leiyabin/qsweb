@@ -183,73 +183,22 @@ use app\components\Utils;
                 <a href="javascript:void(0);" id="loan">房贷计算器</a>
             </h2>
             <div class="calculator-con hiden">
-                <form class="fl" id="tax_form">
-                    <div>
-                        <span class="c6 cal-label">住宅类型：</span>
-                        <div class="select_box">
-                            <span>普通住宅</span>
-                            <ul>
-                                <li>普通住宅</li>
-                                <li>非普通住宅</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">卖房家庭唯一：</span>
-                        <div class="select_box">
-                            <span>唯一住宅</span>
-                            <ul>
-                                <li>唯一住宅</li>
-                                <li>不唯一</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">距上次交易：</span>
-                        <div class="select_box">
-                            <span>满五年</span>
-                            <ul>
-                                <li>满五年</li>
-                                <li>满两年</li>
-                                <li>不满两年</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">买房家庭首套：</span>
-                        <div class="select_box">
-                            <span>首套</span>
-                            <ul>
-                                <li>首套</li>
-                                <li>二套</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">计征方式：</span>
-                        <div class="select_box">
-                            <span>总价</span>
-                            <ul>
-                                <li>总价</li>
-                                <li>差价</li>
-                            </ul>
-                        </div>
-                    </div>
+                <form class="fl" id="tax_form" style="margin-top: 30px;">
                     <div>
                         <span class="c6 cal-label">房屋面积：</span>
-                        <div class="cal-text"><input type="number" value="<?= $house->build_area ?>"
+                        <div class="cal-text"><input name="zzmj" type="number" value="<?= $house->build_area ?>"
                                                      placeholder="请输入房屋面积">平方米
                         </div>
                     </div>
                     <div>
-                        <span class="c6 cal-label">房屋总价：</span>
-                        <div class="cal-text"><input type="number" value="<?= $house->total_price ?>"
-                                                     placeholder="请输入房屋价格">万元
+                        <span class="c6 cal-label">房屋单价：</span>
+                        <div class="cal-text"><input name="fwzj" type="number" value="<?= $house->unit_price ?>"
+                                                     placeholder="请输入房屋单价">元/平米
                         </div>
                     </div>
-                    <input type="button" value="开始计算" class="calculator-btn s16 cf">
+                    <input type="button" value="开始计算" class="calculator-btn s16 cf" id="fs_jsq">
                 </form>
-                <form class="fl" id="loan_form" style="display: none;margin-bottom: 30px;">
+                <form class="fl" id="loan_form" style="margin-top: 30px;display: none;margin-bottom: 30px;">
                     <div>
                         <span class="c6 cal-label">贷款类型：</span>
                         <div class="select_box">
@@ -316,10 +265,12 @@ use app\components\Utils;
                     <input type="button" value="开始计算" class="calculator-btn s16 cf">
                 </form>
                 <div class="calculator-result fr" id="tax_result">
-                    <p class="s18">合计：<strong class="s24">259500</strong> 元</p>
-                    <p class="s16">契&nbsp;&nbsp;&nbsp;税： 259500 元</p>
-                    <p class="s16">营业税： 免征</p>
-                    <p class="s16">个&nbsp;&nbsp;&nbsp;税： 免征</p>
+                    <p class="s18" >合计：<strong class="s24" id="fs_total_amount">--</strong> 元</p>
+                    <p class="s16" >印花税：<span id="fs_yin_hua">--</span> 元</p>
+                    <p class="s16" >公证费：<span id="fs_gong_zheng">--</span> 元</p>
+                    <p class="s16" >契费：<span id="fs_qi_fee">--</span> 元</p>
+                    <p class="s16" >委托办理产权手续费：<span id="fs_shou_xv_1">--</span> 元</p>
+                    <p class="s16" >房屋买卖手续费：<span id="fs_shou_xv_2">--</span>元</p>
                     <br/>
                     <p class="s16" style="color: grey;font-size: small">税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
                 </div>
@@ -414,6 +365,7 @@ use app\components\Utils;
     ?>
     var picList = eval(<?=json_encode($pic_list, JSON_UNESCAPED_UNICODE)?>);
 </script>
+<script src="/static/web/js/calculator.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Ao1oS2kNAz4Okb3ytyGGGobMMtCz2Ef"></script>
 <script type="text/javascript">
     $(function () {
