@@ -215,90 +215,62 @@ use app\components\Utils;
             <div class="calculator-con hiden">
                 <form class="fl">
                     <div>
-                        <span class="c6 cal-label">选择户型：</span>
+                        <span class="c6 cal-label">贷款类型：</span>
                         <div class="select_box">
-                            <span>4室2厅3卫 153.00平</span>
+                            <span>商业贷款</span>
                             <ul>
-                                <li>4室2厅3卫 153.00平</li>
-                                <li>4室2厅3卫</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">估算总价：</span>
-                        <div class="cal-text"><input type="text" placeholder="请输入房屋面积">平方米</div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">首付成数：</span>
-                        <div class="select_box">
-                            <span>7成</span>
-                            <ul>
-                                <li>7成</li>
-                                <li>5成</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label">贷款类别：</span>
-                        <div class="select_box">
-                            <span>公积金贷款</span>
-                            <ul>
-                                <li>公积金贷款</li>
                                 <li>商业贷款</li>
+                                <li>公积金贷款</li>
                             </ul>
                         </div>
                     </div>
                     <div>
-                        <span class="c6 cal-label">贷款时间：</span>
-                        <div class="select_box">
-                            <span>30年（360期）</span>
-                            <ul>
-                                <li>30年（360期）</li>
-                                <li>20年</li>
-                            </ul>
-                        </div>
+                        <span class="c6 cal-label">贷款金额：</span>
+                        <div class="cal-text"><input type="number" id="load_amount">万元</div>
                     </div>
                     <div>
-                        <span class="c6 cal-label">买房家庭首套：</span>
+                        <span class="c6 cal-label">贷款年限：</span>
+                        <div class="cal-text"><input type="number" id="load_year">年</div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label">贷款利率：</span>
+                        <div class="cal-text"><input type="number" id="load_rate">%</div>
+                    </div>
+                    <div>
+                        <span class="c6 cal-label">还款方式：</span>
                         <i>
-                            <input type="radio" name="way" checked id="way1">
+                            <input type="radio" name="way" checked id="way1" value="1">
                             <label for="way1"></label><font>等额本息</font>
                         </i>
                         <i>
-                            <input type="radio" name="way" id="way2">
+                            <input type="radio" name="way" id="way2" value="2">
                             <label for="way2"></label><font>等额本金</font>
                         </i>
                     </div>
-                    <input type="button" value="开始计算" class="calculator-btn s16 cf">
+                    <input type="button" value="开始计算" id="jisuan" class="calculator-btn s16 cf">
                 </form>
                 <div class="calculator-result2 fr">
                     <h3 class="s18 tc cf">您的账单</h3>
                     <table class="c6">
                         <tr>
-                            <td>均价</td>
-                            <td class="tr">42000元／平米</td>
+                            <td>月供</td>
+                            <td class="tr"><span id="yuegong">--</span>元</td>
                         </tr>
                         <tr>
-                            <td>估算总价</td>
-                            <td class="tr">约500万</td>
+                            <td>还款月数</td>
+                            <td class="tr"><span id="hkys">--</span>月</td>
                         </tr>
                         <tr>
-                            <td>首付</td>
-                            <td class="tr">350万 7成</td>
+                            <td>总利息</td>
+                            <td class="tr"><span id="total_lx">--</span>元</td>
                         </tr>
                         <tr>
-                            <td>贷款金额</td>
-                            <td class="tr">150万</td>
-                        </tr>
-                        <tr>
-                            <td>偿还利息</td>
-                            <td class="tr">85万</td>
-                        </tr>
-                        <tr>
-                            <td>每月还款</td>
-                            <td class="tr"><strong class="s18">6528</strong> 万</td>
+                            <td>本息合计</td>
+                            <td class="tr"><span id="total_bj">--</span>元</td>
                         </tr>
                     </table>
+                    <p class="s16" style="margin-top:50px;color: grey;font-size: small;padding-left:50px;">
+                        注：税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
                 </div>
             </div>
         </div>
@@ -334,6 +306,49 @@ use app\components\Utils;
             });
             local.searchInBounds($name, map.getBounds());
         }
+
+        $('#jisuan').click(function () {
+            var tag = $('input[name=way]:checked').val();
+            var $load_rate = $('#load_rate').val().trim();
+            var $load_year = $('#load_year').val().trim();
+            var $load_amount = $('#load_amount').val().trim();
+            if ($load_rate == '' || $load_year == '' || $load_amount == '') {
+                alert('请填写完整信息！');
+                return;
+            }
+            var load_type = $(".select_box span").html();
+            if (load_type == '公积金贷款' || load_type == '商业贷款') {
+                var g = parseFloat($load_rate * 0.01);
+                var d = parseInt($load_year);
+                var e = d * 12;
+                var f = 10000 * parseInt($load_amount);
+                // 等额本息
+                var x_yjhk = g * f / 12 + (g * f / 12) / (Math.pow((1 + g / 12), e) - 1);
+                var x_hkze = x_yjhk * e;
+                var x_zflx = x_hkze - f;
+                // 等额本金
+                var j_lxzc = 0;
+                var x = 0;
+                for (i = 1; i <= e; i++) {
+                    j_lxzc += (f - x) * g / 12;
+                    x += f / e;
+                }
+                var j_hkze = j_lxzc + f;
+                //赋值
+                if (tag == 1) {
+                    $('#yuegong').html(x_yjhk.toFixed(2));
+                    $('#hkys').html(e);
+                    $('#total_lx').html(x_zflx.toFixed(2));
+                    $('#total_bj').html(x_hkze.toFixed(2));
+                } else {
+                    $('#yuegong').html('--');
+                    $('#hkys').html(e);
+                    $('#total_lx').html(j_lxzc.toFixed(2));
+                    $('#total_bj').html(j_hkze.toFixed(2));
+                }
+            }
+
+        })
     })
 
 </script>

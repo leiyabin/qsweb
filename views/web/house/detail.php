@@ -202,67 +202,31 @@ use app\components\Utils;
                     <div>
                         <span class="c6 cal-label">贷款类型：</span>
                         <div class="select_box">
-                            <span>商贷</span>
+                            <span>商业贷款</span>
                             <ul>
-                                <li>商贷</li>
-                                <li>公积金</li>
-                                <li>组合贷款</li>
+                                <li>商业贷款</li>
+                                <li>公积金贷款</li>
                             </ul>
                         </div>
                     </div>
                     <div>
                         <span class="c6 cal-label">贷款金额：</span>
-                        <div class="select_box" id="loan_select">
-                            <span>2成</span>
-                            <ul>
-                                <li tag='2'>2成</li>
-                                <li tag='3'>3成</li>
-                                <li tag='4'>4成</li>
-                                <li tag='5'>5成</li>
-                                <li tag='6'>6成</li>
-                                <li tag='7'>7成</li>
-                                <li tag='8'>8成</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="c6 cal-label"></span>
                         <div class="cal-text">
-                            <input type="number" id='loan_money' value="<?= 0.2 * $house->total_price ?>">万元
+                            <input type="number" id='load_amount' value="">万元
                         </div>
                     </div>
                     <div>
-                        <span class="c6 cal-label">贷款期限：</span>
-                        <div class="select_box">
-                            <span>30年</span>
-                            <ul>
-                                <li>30年</li>
-                                <li>25年</li>
-                                <li>20年</li>
-                                <li>15年</li>
-                                <li>10年</li>
-                                <li>5年</li>
-                            </ul>
+                        <span class="c6 cal-label">贷款年限：</span>
+                        <div class="cal-text">
+                            <input type="number" id="load_year" value="">年
                         </div>
                     </div>
                     <div>
-                        <span class="c6 cal-label">商贷年利率：</span>
-                        <div class="select_box">
-                            <span>1.05倍</span>
-                            <ul>
-                                <li>1.05倍</li>
-                                <li>1.1倍</li>
-                                <li>1.2倍</li>
-                                <li>1.3倍</li>
-                            </ul>
+                        <span class="c6 cal-label">贷款利率：</span>
+                        <div class="cal-text"><input type="number" id="load_rate" value="">%
                         </div>
                     </div>
-                    <div>
-                        <span class="c6 cal-label"></span>
-                        <div class="cal-text"><input type="number" value="">%
-                        </div>
-                    </div>
-                    <input type="button" value="开始计算" class="calculator-btn s16 cf">
+                    <input type="button" value="开始计算"  id="fd_jsq" class="calculator-btn s16 cf">
                 </form>
                 <div class="calculator-result fr" id="tax_result">
                     <p class="s18" >合计：<strong class="s24" id="fs_total_amount">--</strong> 元</p>
@@ -272,17 +236,32 @@ use app\components\Utils;
                     <p class="s16" >委托办理产权手续费：<span id="fs_shou_xv_1">--</span> 元</p>
                     <p class="s16" >房屋买卖手续费：<span id="fs_shou_xv_2">--</span>元</p>
                     <br/>
-                    <p class="s16" style="color: grey;font-size: small">税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
+                    <p class="s16" style="color: grey;font-size: small">注：税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
                 </div>
-                <div class="calculator-result fr" id="loan_result" style="display: none">
-                    <p class="s18">等额本息还款</p>
-                    <p class="s16">月&nbsp;&nbsp;&nbsp;供： 259500 元</p>
-                    <p class="s16">还款月数： 300月</p>
-                    <p class="s16">总利息： 2434元</p>
-                    <p class="s16">本息合计： 123345677元</p>
+                <div class="calculator-result fr" id="loan_result" style="display: none;">
+                    <div style="height: 40px;margin-top: 10px;border-bottom:1px dashed #ddd; font-size: 18px;">
+                        <span style="width: 200px;display: block;float: left;" >等额本息还款</span>
+                        <span style="margin-left: 100px;float: left;">等额本金还款</span>
+                    </div>
+                    <div style="height: 30px;margin-top: 5px; font-size: 16px;">
+                        <span style="width: 200px;display: block;float: left;" >月供： <span id="x_yuegong">--</span> 元</span>
+                        <span style="margin-left: 100px;float: left;">月供： -- 元</span>
+                    </div>
+                    <div style="height: 30px;margin-top: 5px; font-size: 16px;">
+                        <span style="width: 200px;display: block;float: left;" >还款月数： <span id="x_hkys">--</span> 月</span>
+                        <span style="margin-left: 100px;float: left;">还款月数： <span id="j_hkys">--</span> 月</span>
+                    </div>
+                    <div style="height: 30px;margin-top: 5px; font-size: 16px;">
+                        <span style="width: 200px;display: block;float: left;" >总利息： <span id="x_total_lx">--</span>元</span>
+                        <span style="margin-left: 100px;float: left;">总利息： <span id="j_total_lx">--</span>元</span>
+                    </div>
+                    <div style="height: 30px;margin-top: 5px; font-size: 16px;">
+                        <span style="width: 200px;display: block;float: left;" >本息合计： <span id="x_total_bj">--</span>元</span>
+                        <span style="margin-left: 100px;float: left;">本息合计： <span id="j_total_bj">--</span>元</span>
+                    </div>
                     <br/>
                     <br/>
-                    <p class="s16" style="color: grey;font-size: small">税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
+                    <p  class="s16" style="color: grey;font-size: small;padding-left:100px;">注：税费，房贷信息仅供参考，具体金额请以实际发生为准。</p>
                 </div>
             </div>
         </div>

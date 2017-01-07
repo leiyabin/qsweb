@@ -14,7 +14,6 @@
                             <ul>
                                 <li>商业贷款</li>
                                 <li>公积金贷款</li>
-                                <li>组合贷款</li>
                             </ul>
                         </div>
                     </div>
@@ -118,41 +117,6 @@
             div.show();
             div.siblings('div .calculator-con').hide();
         });
-        $('#fd_jsq').click(function () {
-            var $load_rate = $('#load_rate').val().trim();
-            var $load_year = $('#load_year').val().trim();
-            var $load_amount = $('#load_amount').val().trim();
-            if($load_rate == '' || $load_year == '' || $load_amount == ''){
-                alert('请填写完整信息！');
-            }
-            var load_type = $(".select_box span").html();
-            if (load_type == '公积金贷款' || load_type == '商业贷款') {
-                var g = parseFloat($load_rate* 0.01);
-                var d = parseInt($load_year);
-                var e = d * 12;
-                var f = 10000 * parseInt($load_amount);
-                // 等额本息
-                var x_yjhk = g * f / 12 + (g * f / 12) / (Math.pow((1 + g / 12), e) - 1);
-                var x_hkze = x_yjhk * e;
-                var x_zflx = x_hkze - f;
-                // 等额本金
-                var j_lxzc = 0;
-                var x = 0;
-                for (i = 1; i <= e; i++) {
-                    j_lxzc += (f - x) * g / 12;
-                    x += f / e;
-                }
-                var j_hkze = j_lxzc + f;
-                //赋值
-                $('#x_yuegong').html(x_yjhk.toFixed(2));
-                $('#x_hkys').html(e);
-                $('#x_total_lx').html(x_zflx.toFixed(2));
-                $('#x_total_bj').html(x_hkze.toFixed(2));
-                $('#j_hkys').html(e);
-                $('#j_total_lx').html(j_lxzc.toFixed(2));
-                $('#j_total_bj').html(j_hkze.toFixed(2));
-            }
-        })
     })
 </script>
 <script src="/static/web/js/calculator.js"></script>
