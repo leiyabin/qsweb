@@ -62,12 +62,12 @@ class LoupanManager
 
     private function getTag($tags)
     {
-        if(empty($tags)){
+        if (empty($tags)) {
             return [];
         }
         $tag_keys = explode(',', $tags);
         $tag_vals = [];
-        if(!empty($tag_keys)&& is_array($tag_keys)){
+        if (!empty($tag_keys) && is_array($tag_keys)) {
             foreach ($tag_keys as $val) {
                 $tag_vals[] = HouseConst::$feature[$val];
             }
@@ -149,13 +149,13 @@ class LoupanManager
         return $this->loupan_rpc->active($id, $active);
     }
 
-    public function getRecommend($size = 4)
+    public function getRecommend($is_trip_house = false, $size = 4)
     {
-        $list = $this->loupan_rpc->getRecommend($size);
+        $list = $this->loupan_rpc->getRecommend($size, $is_trip_house);
         if (isset($list->error_code)) {
             return [];
         }
-        foreach ($list as $key => $value){
+        foreach ($list as $key => $value) {
             $list[$key]->img_url = Utils::getImgUrl($value->img, '');
         }
         return $list;

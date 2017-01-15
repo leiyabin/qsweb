@@ -57,7 +57,7 @@ class IndexController extends LController
         //帮你买房
         $news_help_list = $this->getInformation(2, self::NEWS_TAG_RECOMMEND);
         //get loupan recommend_list
-        $loupan_recommend_list = $this->loupan_manager->getRecommend(2);
+        $loupan_recommend_list = $this->loupan_manager->getRecommend(false, 2);
         //get house recommend_list
         $house_recommend_list = $this->house_manager->getRecommend();
         //get statistics data

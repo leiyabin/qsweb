@@ -54,7 +54,7 @@ class TripController extends LController
         //get area
         $area_list = $this->getArea($quxian_id);
         //get recommend_list
-        $recommend_list = $this->loupan_manager->getRecommend();
+        $recommend_list = $this->loupan_manager->getRecommend(true);
         //get loupan
         $total = 0;
         $pages = [];
@@ -116,7 +116,7 @@ class TripController extends LController
     private function getArea($quxian_id)
     {
         $page_info = ['page' => 1, 'pre_page' => 9999];
-        $area_list = $this->area_manager->getList($page_info, $quxian_id,'', true);
+        $area_list = $this->area_manager->getList($page_info, $quxian_id, '', true);
         if (!$this->hasError($area_list)) {
             $area_list = $area_list->list;
             $obj = new \StdClass();
@@ -140,7 +140,7 @@ class TripController extends LController
             throw new RequestException('未找到页面，id=' . $id, ErrorCode::NOT_FOUND);
         }
         //get recommend_list
-        $recommend_list = $this->loupan_manager->getRecommend();
+        $recommend_list = $this->loupan_manager->getRecommend(true);
         $this->getView()->title = '千氏地产-楼盘';
         $data = [
             'recommend_list' => $recommend_list,

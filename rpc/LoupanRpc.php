@@ -61,10 +61,11 @@ class LoupanRpc extends LRpc
         return LRpc::init()->post($params)->url('/loupan/list');
     }
 
-    public function getRecommend($size)
+    public function getRecommend($size, $is_trip_house)
     {
         $params = [
-            'size' => $size,
+            'size'          => $size,
+            'is_trip_house' => $is_trip_house
         ];
         return LRpc::init()->post($params)->url('/loupan/getrecommend');
     }
