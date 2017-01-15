@@ -214,7 +214,7 @@ use app\components\Utils;
         <ul class="resource-list hiden">
             <?php foreach ($recommend_list as $item): ?>
                 <li>
-                    <a href="/web/loupan/detail?id=<?= $item->id ?>" title="<?= $item->name ?>"><img
+                    <a href="/web/trip/detail?id=<?= $item->id ?>" title="<?= $item->name ?>"><img
                                 src="<?= $item->img_url ?>"></a>
                     <p class="s18"><b class="fl"><a href=""><?= Utils::subStr($item->name, 10) ?></a></b><span
                                 class="orange fr"><?= $item->average_price ?>万/套</span></p>
