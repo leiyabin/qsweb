@@ -12,13 +12,14 @@ use app\components\LRpc;
 
 class AreaRpc extends LRpc
 {
-    public function getList($page_info, $class_id = 0, $name = '')
+    public function getList($page_info, $class_id = 0, $name = '', $is_trip_area)
     {
         $params = [
-            'page'     => intval($page_info['page']),
-            'per_page' => intval($page_info['pre_page']),
-            'class_id' => $class_id,
-            'name'    => $name
+            'page'         => intval($page_info['page']),
+            'per_page'     => intval($page_info['pre_page']),
+            'class_id'     => $class_id,
+            'name'         => $name,
+            'is_trip_area' => $is_trip_area
         ];
         return LRpc::init()->post($params)->url('/area/list');
     }

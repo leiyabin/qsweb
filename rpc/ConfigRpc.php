@@ -21,17 +21,6 @@ class ConfigRpc extends LRpc
         return LRpc::init()->post($params)->url('/config/classlist');
     }
 
-    public function addClass($class)
-    {
-        $params = $class;
-        return LRpc::init()->post($params)->url('/config/classadd');
-    }
-
-    public function editClass($class)
-    {
-        $params = $class;
-        return LRpc::init()->post($params)->url('/config/classedit');
-    }
 
     public function getClass($id)
     {
@@ -48,18 +37,6 @@ class ConfigRpc extends LRpc
             'value'    => $value
         ];
         return LRpc::init()->post($params)->url('/config/valuelist');
-    }
-
-    public function addInfo($info)
-    {
-        $params = $info;
-        return LRpc::init()->post($params)->url('/config/valueadd');
-    }
-
-    public function editInfo($info)
-    {
-        $params = $info;
-        return LRpc::init()->post($params)->url('/config/valueedit');
     }
 
     public function getInfo($id)

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: lyb
- * Date: 2016/11/29
- * Time: 9:43
+ * Date: 2017/1/11
+ * Time: 22:00
  */
 
 namespace app\controllers\web;
@@ -16,7 +16,7 @@ use app\manager\LoupanManager;
 use app\exception\RequestException;
 use app\consts\ErrorCode;
 
-class LoupanController extends LController
+class TripController extends LController
 {
     /**
      * @var ConfigManager
@@ -68,6 +68,7 @@ class LoupanController extends LController
             'room_type'        => $room_type,
             'sale_status'      => $sale_status,
             'name'             => $loupan_name,
+            'is_trip_house'    => 1
         ];
         $order_by = ['field' => 'id', 'sort' => SORT_DESC];
         $loupan_list = $this->loupan_manager->getPageList($page_info, $condition, $order_by);
@@ -101,7 +102,7 @@ class LoupanController extends LController
     {
         $quxian_list = [];
         $class_page_info = ['page' => 1, 'pre_page' => 9999];
-        $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::AREA_CLASS_CONST);
+        $res = $this->config_manager->getInfoList($class_page_info, ConfigConst::TRIP_AREA_CLASS_CONST);
         if (!$this->hasError($res)) {
             $quxian_list = $res->value_list;
             $obj = new \StdClass();
@@ -115,7 +116,7 @@ class LoupanController extends LController
     private function getArea($quxian_id)
     {
         $page_info = ['page' => 1, 'pre_page' => 9999];
-        $area_list = $this->area_manager->getList($page_info, $quxian_id);
+        $area_list = $this->area_manager->getList($page_info, $quxian_id,'', true);
         if (!$this->hasError($area_list)) {
             $area_list = $area_list->list;
             $obj = new \StdClass();

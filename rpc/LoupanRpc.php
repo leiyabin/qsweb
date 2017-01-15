@@ -39,7 +39,7 @@ class LoupanRpc extends LRpc
 
     /**
      * @param $page_info
-     * @param $condition [area_id，price_interval，room_type，property_type_id，name，sale_status];
+     * @param $condition [area_id，price_interval，room_type，property_type_id，is_trip_house, name，sale_status];
      * @param $order_by
      * @return LRpc
      */
@@ -49,6 +49,7 @@ class LoupanRpc extends LRpc
             'page'             => intval($page_info['page']),
             'per_page'         => intval($page_info['pre_page']),
             'area_id'          => $condition['area_id'],
+            'is_trip_house'    => empty($condition['is_trip_house']) ? 0 : 1,
             'average_price'    => $condition['price_interval'],
             'sale_status'      => $condition['sale_status'],
             'property_type_id' => $condition['property_type_id'],

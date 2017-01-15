@@ -26,6 +26,7 @@
             <li id="index_menu"><a href="/">首页</a></li>
             <li id="house_menu"><a href="/web/house/">二手房</a></li>
             <li id="loupan_menu"><a href="/web/loupan/">新房</a></li>
+            <li id="trip_menu"><a href="/web/trip/">旅居地产</a></li>
             <li id="oversea_menu"><a href="/web/oversea/">海外</a></li>
             <li id="information_menu"><a href="/web/information/">百科</a></li>
             <li id="broker_menu"><a href="/web/broker/">经纪人</a></li>

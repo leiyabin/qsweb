@@ -20,34 +20,9 @@ class AreaManager
         $this->area_rpc = new AreaRpc();
     }
 
-    public function getList($page_info, $class_id = 0, $name = '')
+    public function getList($page_info, $class_id = 0, $name = '', $is_trip_area = false)
     {
-        return $this->area_rpc->getList($page_info, $class_id, $name);
+        return $this->area_rpc->getList($page_info, $class_id, $name, $is_trip_area);
     }
 
-    public function add($area)
-    {
-        return $this->area_rpc->add($area);
-    }
-
-    public function edit($area)
-    {
-        return $this->area_rpc->edit($area);
-    }
-
-    public function get($id)
-    {
-        return $this->area_rpc->getOne($id);
-    }
-
-    public function batchDel($ids)
-    {
-        return $this->area_rpc->batchDel($ids);
-    }
-
-
-    public function getByClassId($class_id)
-    {
-        return $this->area_rpc->getByClassId($class_id);
-    }
 }

@@ -152,7 +152,7 @@ class HouseController extends LController
         $page_info = ['page' => 1, 'pre_page' => 9999];
         $area_list = $this->area_manager->getList($page_info, $quxian_id);
         if (!$this->hasError($area_list)) {
-            $area_list = $area_list->area_list;
+            $area_list = $area_list->list;
             $obj = new \StdClass();
             $obj->id = 0;
             $obj->name = '全部';

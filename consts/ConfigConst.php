@@ -16,6 +16,7 @@ class ConfigConst
     const BROKER_CLASS_CONST = 4;
     const OVERSEA_CLASS_CONST = 10;
     const FINANCIAL_CLASS_CONST = 11;
+    const TRIP_AREA_CLASS_CONST = 12;
 
     const FINANCIAL_NEWS_CLASS = 53;
 
