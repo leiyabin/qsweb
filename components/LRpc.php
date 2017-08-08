@@ -155,10 +155,8 @@ class LRpc
             'Content-Type:application/json;charset=UTF-8',
             'User-Agent:' . USER_AGENT
         ));
-        if ($this->post) {
-            $this->setOption('CURLOPT_POST', true);
-            $this->setOption('CURLOPT_POSTFIELDS', json_encode($this->post, JSON_UNESCAPED_UNICODE));
-        }
+        $this->setOption('CURLOPT_POST', true);
+        $this->setOption('CURLOPT_POSTFIELDS', json_encode($this->post, JSON_UNESCAPED_UNICODE));
         $option = array_merge($this->option, $this->custom);
         foreach ($option as $key => $val) {
             if (is_string($key)) {
