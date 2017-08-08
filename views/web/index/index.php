@@ -5,11 +5,7 @@ use app\components\Utils;
 <!-- content start -->
 <div class="index-search-wrap">
     <div class="index-search">
-        <p><span class="search-this">学区房</span><span>商铺</span><span>写字楼</span></p>
-        <div class="index-search-con">
-            <input type="text" placeholder="请输入学校地址" class="search-text"><input type="button" value="开始找房"
-                                                                                class="search-btn">
-        </div>
+        <p><span class="search-this">商铺</span><span>写字楼</span></p>
         <div class="index-search-con">
             <input type="text" placeholder="请输入商铺地址" class="search-text"><input type="button" value="开始找房"
                                                                                 tag="property_type_id=2"
@@ -24,9 +20,9 @@ use app\components\Utils;
 </div>
 <div class="head">
     <div class="con hiden">
-        <a href="/web/house/?tag=4" class="head-1">
-            <h2 class="s18">学区找房</h2>
-            <p class="c6">助力您的孩子，跨入希望的起跑线</p>
+        <a href="/web/loupan/" class="head-1">
+            <h2 class="s18">新房搜索</h2>
+            <p class="c6">全新房屋，全新生活，给您满意的优质新盘</p>
         </a>
         <a href="/web/information/" class="head-2">
             <h2 class="s18">房产问答</h2>
