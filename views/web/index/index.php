@@ -119,7 +119,7 @@ use app\components\Utils;
 
             <?php foreach ($house_recommend_list as $item): ?>
                 <li>
-                    <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= $item->house_img ?>"></a>
+                    <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= Utils::getImgUrl($item->house_img) ?>"></a>
                     <p class="s18"><b class="fl"><a
                                     href="/web/house/detail/?id=<?= $item->id ?>"><?= Utils::subStr($item->address, 11) ?></a></b><span
                                 class="orange fr"><?= $item->total_price ?>万</span></p>

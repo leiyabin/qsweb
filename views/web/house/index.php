@@ -1,7 +1,6 @@
 <?php
 use app\consts\HouseConst;
 use app\components\Utils;
-
 ?>
 <div class="bg1 inner-search">
     <input type="text" placeholder="请输入房屋地址" value="<?= $address ?>" name="search-text" class="search-text">
@@ -113,7 +112,7 @@ use app\components\Utils;
             <?php foreach ($house_list as $item): ?>
                 <li>
                     <a href="/web/house/detail/?id=<?= $item->id ?>" title="<?= $item->address ?>，<?= $item->jishi ?>室
-<?= $item->jitin ?>厅，<?= $item->total_price ?>万"><img src="<?= $item->house_img ?>"></a>
+<?= $item->jitin ?>厅，<?= $item->total_price ?>万"><img src="<?=Utils::getImgUrl($item->house_img)?>"></a>
                     <div class="list-info fl">
                         <h3 class="s18"><a href="/web/house/detail/?id=<?= $item->id ?>"><?= $item->address ?>
                                 ，<?= $item->jishi ?>室
@@ -124,10 +123,6 @@ use app\components\Utils;
                         <p>位于<?= $item->in_floor ?>层（共<?= $item->total_floor ?>层）
                             <?php if (!empty($item->house_age)) echo $item->house_age ?> - <?= $item->quxian_name ?></p>
                         <p><?= $item->floor_unit ?></p>
-                        <p class="list-mark s12">
-                            <?php if (!empty($item->house_facility)) echo '<span class="orange"><?=$item->house_facility?></span>'; ?>
-                            <?php if (!empty($item->house_description)) echo '<span class="yellow"><?=$item->house_description?></span>'; ?>
-                        </p>
                         <p class="list-mark s12">
                             <?php foreach ($item->tag as $tag): ?>
                                 <span class="<?= $tag['color'] ?>"><?= $tag['name'] ?></span>
@@ -156,7 +151,7 @@ use app\components\Utils;
     <ul class="resource-list hiden">
         <?php foreach ($recommend_list as $item): ?>
             <li>
-                <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= $item->house_img ?>"></a>
+                <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= Utils::getImgUrl($item->house_img) ?>"></a>
                 <p class="s18"><b class="fl"><a
                                 href="/web/house/detail/?id=<?= $item->id ?>"><?= Utils::subStr($item->address, 11) ?></a></b><span
                             class="orange fr"><?= $item->total_price ?>万</span></p>

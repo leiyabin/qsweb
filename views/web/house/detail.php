@@ -11,18 +11,18 @@ use app\components\Utils;
             <div class="detail-photo">
                 <div class="prev" style="opacity:1"></div>
                 <div class="next" style="opacity:1"></div>
-                <img id="photo-box" src=" <?= Utils::getValue($house, 'img_1', ''); ?>">
+                <img id="photo-box" src=" <?= Utils::getImgUrl($house->img_1); ?>">
             </div>
 
             <div class="detail-nav">
                 <a class="photo-left" href="javascript:void(0);"><</a>
                 <div class="detail-nav-box">
                     <ul class="photo-nav">
-                        <?php if (!empty($house->img_1)) echo '<li id="tu_1"><a href="javascript:void(0);"><img src="' . $house->img_1 . '"></a></li>' ?>
-                        <?php if (!empty($house->img_2)) echo '<li id="tu_2"><a href="javascript:void(0);"><img src="' . $house->img_2 . '"></a></li>' ?>
-                        <?php if (!empty($house->img_3)) echo '<li id="tu_3"><a href="javascript:void(0);"><img src="' . $house->img_3 . '"></a></li>' ?>
-                        <?php if (!empty($house->img_4)) echo '<li id="tu_4"><a href="javascript:void(0);"><img src="' . $house->img_4 . '"></a></li>' ?>
-                        <?php if (!empty($house->img_5)) echo '<li id="tu_5"><a href="javascript:void(0);"><img src="' . $house->img_5 . '"></a></li>' ?>
+                        <?php if (!empty($house->img_1)) echo '<li id="tu_1"><a href="javascript:void(0);"><img src="' . Utils::getImgUrl($house->img_1) . '"></a></li>' ?>
+                        <?php if (!empty($house->img_2)) echo '<li id="tu_2"><a href="javascript:void(0);"><img src="' . Utils::getImgUrl($house->img_2) . '"></a></li>' ?>
+                        <?php if (!empty($house->img_3)) echo '<li id="tu_3"><a href="javascript:void(0);"><img src="' . Utils::getImgUrl($house->img_3) . '"></a></li>' ?>
+                        <?php if (!empty($house->img_4)) echo '<li id="tu_4"><a href="javascript:void(0);"><img src="' . Utils::getImgUrl($house->img_4) . '"></a></li>' ?>
+                        <?php if (!empty($house->img_5)) echo '<li id="tu_5"><a href="javascript:void(0);"><img src="' . Utils::getImgUrl($house->img_5) . '"></a></li>' ?>
                     </ul>
                 </div>
                 <a class="photo-right" href="javascript:void(0);">></a>
@@ -155,11 +155,11 @@ use app\components\Utils;
         </div>
         <div class="house-img hiden bd">
             <h2 class="detail-title2 mb15">房源照片</h2>
-            <?php if (!empty($house->img_1)) echo '<img src="' . $house->img_1 . '">' ?>
-            <?php if (!empty($house->img_2)) echo '<img src="' . $house->img_2 . '">' ?>
-            <?php if (!empty($house->img_3)) echo '<img src="' . $house->img_3 . '">' ?>
-            <?php if (!empty($house->img_4)) echo '<img src="' . $house->img_4 . '">' ?>
-            <?php if (!empty($house->img_5)) echo '<img src="' . $house->img_5 . '">' ?>
+            <?php if (!empty($house->img_1)) echo '<img src="' . Utils::getImgUrl($house->img_1) . '">' ?>
+            <?php if (!empty($house->img_2)) echo '<img src="' . Utils::getImgUrl($house->img_2) . '">' ?>
+            <?php if (!empty($house->img_3)) echo '<img src="' . Utils::getImgUrl($house->img_3) . '">' ?>
+            <?php if (!empty($house->img_4)) echo '<img src="' . Utils::getImgUrl($house->img_4) . '">' ?>
+            <?php if (!empty($house->img_5)) echo '<img src="' . Utils::getImgUrl($house->img_5) . '">' ?>
         </div>
         <div class="around bd">
             <h2 class="detail-title2">周边配套</h2>
@@ -293,7 +293,7 @@ use app\components\Utils;
         <ul class="resource-list hiden">
             <?php foreach ($recommend_list as $item): ?>
                 <li>
-                    <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= $item->house_img ?>"></a>
+                    <a href="/web/house/detail/?id=<?= $item->id ?>" title=""><img src="<?= Utils::getImgUrl($item->house_img) ?>"></a>
                     <p class="s18"><b class="fl"><a
                                 href="/web/house/detail/?id=<?= $item->id ?>"><?= Utils::subStr($item->address, 11) ?></a></b><span
                             class="orange fr"><?= $item->total_price ?>万</span></p>

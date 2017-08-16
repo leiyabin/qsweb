@@ -96,7 +96,11 @@ class Utils
     public static function getImgUrl($img_name, $default_img = '')
     {
         if (!empty($img_name)) {
-            return IMG_HOST . $img_name;
+            if(strpos($img_name, 'http') !== false){
+                return $img_name;
+            }else{
+                return IMG_HOST . $img_name;
+            }
         }
         return $default_img;
     }
